@@ -19,7 +19,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 
 const MAX_STEPS = 3;
 
-const About: React.FC = () => {
+const MultistepForm: React.FC = () => {
   const navigate = useNavigate()
   const {
     register,
@@ -89,4 +89,4 @@ const About: React.FC = () => {
   );
 };
 
-export default About;
+export default MultistepForm;
