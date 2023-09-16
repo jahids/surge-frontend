@@ -16,19 +16,22 @@ const FormStep: React.FC<FormStepProps> = ({
   children,
 }) => {
   return (
-    <div className={isVisible ? 'block' : 'hidden'}>
-      <h2 className="font-semibold text-3xl mb-4">Step {stepNumber} of 3</h2>
-      {children}
-      <div className="mt-6 flex justify-between">
+    <div className={isVisible ? 'block' : 'hidden '}>
+      <div className="mx-5">
         {onPrevStep && (
           <button
             onClick={onPrevStep}
             type="button"
-            className="bg-green-400 text-white rounded px-4 py-2"
+            className="bg-green-400 text-white  px-3 py-2 rounded-full"
           >
-            Previous
+            Pr
           </button>
         )}
+      </div>
+
+      {/* <h2 className="font-semibold text-3xl mb-4">Step {stepNumber} of 3</h2> */}
+      {children}
+      <div className="mt-6 flex justify-between p-5">
         <button
           onClick={onNextStep}
           type="button"
