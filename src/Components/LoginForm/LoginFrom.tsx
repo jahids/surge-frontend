@@ -1,8 +1,10 @@
 import './login.css';
 import { BsArrowLeft } from 'react-icons/bs';
 import companyLogo from '../../assets/img/logo.svg';
+import { useNavigate } from 'react-router';
 
 const LoginFrom = () => {
+  const navigate = useNavigate();
   return (
     <div className="p-5">
       <div>
@@ -61,7 +63,12 @@ const LoginFrom = () => {
         <div className="mt-10 text-center">
           <small className="text-[12px]">
             Dont's have an account ?{' '}
-            <span className="text-[#1DCC98]">Sign Up</span>
+            <span
+              onClick={() => navigate('/registration')}
+              className="text-[#1DCC98]"
+            >
+              Sign Up
+            </span>
           </small>
         </div>
         {/* --- bottom text & link ---  */}

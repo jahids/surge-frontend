@@ -4,6 +4,9 @@ import companyLogo from '../../assets/img/logo.svg';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { Navigate, useNavigate } from 'react-router';
+import { useState } from 'react';
+import { HiEye, HiEyeOff } from 'react-icons/hi';
 
 const RegistrationFrom = () => {
   const schema = yup.object().shape({
@@ -14,6 +17,12 @@ const RegistrationFrom = () => {
       .oneOf([yup.ref('password'), null], 'Passwords must match'),
     agreement: yup.boolean().oneOf([true], 'You must agree to the terms'),
   });
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevShowPassword) => !prevShowPassword);
+  };
+
   const {
     control,
     handleSubmit,
@@ -21,6 +30,8 @@ const RegistrationFrom = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
+
+  const navigate= useNavigate()
 
   const onSubmit = (data: any) => {
     // Handle form submission here
@@ -77,19 +88,28 @@ const RegistrationFrom = () => {
           {/* ...Other input fields and error messages... */}
 
           <div className="form-control max-w-lg mb-5">
-            <Controller
+          <Controller
               name="password"
               control={control}
               defaultValue=""
               render={({ field }) => (
-                <input
-                  {...field}
-                  type="password"
-                  placeholder="Password"
-                  className="input input-bordered w-full max-w-lg rounded-[21px] focus:outline-none focus:ring-2 focus:ring-[#908FEC]"
-                />
+                <div className="relative">
+                  <input
+                    {...field}
+                    type={showPassword ? 'text' : 'password'}
+                    placeholder="Password"
+                    className="input input-bordered w-full max-w-lg rounded-[21px] focus:outline-none focus:ring-2 focus:ring-[#908FEC]"
+                  />
+                  <span
+                    className="absolute right-3 top-2 cursor-pointer"
+                    onClick={togglePasswordVisibility}
+                  >
+                    {showPassword ? <HiEyeOff /> : <HiEye />}
+                  </span>
+                </div>
               )}
             />
+             
             <p className="text-red-500 text-sm">{errors.password?.message}</p>
           </div>
 
@@ -107,6 +127,7 @@ const RegistrationFrom = () => {
                 />
               )}
             />
+         
             <p className="text-red-500 text-sm">
               {errors.confirmPassword?.message}
             </p>
@@ -153,7 +174,7 @@ const RegistrationFrom = () => {
         <div className="mt-10 text-center">
           <p className="text-[#03314B]">
             Already have an account ?{' '}
-            <span className="text-[#3500D4]">Sign in</span>
+            <span onClick={()=>navigate('/login')} className="text-[#3500D4]">Sign in</span>
           </p>
         </div>
       </div>
