@@ -5,11 +5,14 @@ module.exports = {
     extend: {
       colors: {
         TK: {
-          background: '#131921',
-          default: '#131921',
+          // background: '#131921',
+          // default: '#131921',
         },
       },
     },
   },
   plugins: [require('daisyui')],
+  daisyui: {
+    themes: ['light', 'dark', 'cupcake'],
+  },
 };
