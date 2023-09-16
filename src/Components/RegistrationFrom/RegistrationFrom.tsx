@@ -1,7 +1,32 @@
+/* eslint-disable  */
 import { BsArrowLeft } from 'react-icons/bs';
 import companyLogo from '../../assets/img/logo.svg';
+import { useForm, Controller } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 
-const LoginFrom = () => {
+const RegistrationFrom = () => {
+  const schema = yup.object().shape({
+    email: yup.string().required('Email is required').email('Invalid email'),
+    password: yup.string().required('Password is required'),
+    confirmPassword: yup
+      .string()
+      .oneOf([yup.ref('password'), null], 'Passwords must match'),
+    agreement: yup.boolean().oneOf([true], 'You must agree to the terms'),
+  });
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  const onSubmit = (data: any) => {
+    // Handle form submission here
+    console.log(data);
+  };
+
   return (
     <div className="p-5">
       <div>
@@ -32,36 +57,74 @@ const LoginFrom = () => {
         {/* --- getting end ---  */}
 
         {/* --- form area start --- */}
-        <form action="" className="mt-10">
+        <form onSubmit={handleSubmit(onSubmit)} className="mt-10">
           <div className="form-control w-full max-w-lg  mb-5">
-            <input
-              type="text"
-              placeholder="Full name"
-              className="input input-bordered rounded-[21px] focus:outline-none focus:ring-2 focus:ring-[#908FEC] w-100"
+            <Controller
+              name="email"
+              control={control}
+              defaultValue=""
+              render={({ field }) => (
+                <input
+                  {...field}
+                  type="email"
+                  placeholder="Email address"
+                  className="input input-bordered rounded-[21px] focus:outline-none focus:ring-2 focus:ring-[#908FEC] w-100"
+                />
+              )}
             />
+            <p className="text-red-500 text-sm">{errors.email?.message}</p>
           </div>
-          <div className="form-control max-w-lg mb-5 ">
-            <input
-              type="email"
-              placeholder="Email address"
-              className="input input-bordered w-full max-w-lg rounded-[21px] focus:outline-none focus:ring-2 focus:ring-[#908FEC]"
-            />
-          </div>
+          {/* ...Other input fields and error messages... */}
+
           <div className="form-control max-w-lg mb-5">
-            <input
-              type="password"
-              placeholder="Password"
-              className="input w-full input-bordered max-w-lg rounded-[21px] focus:outline-none focus:ring-2 focus:ring-[#908FEC]"
+            <Controller
+              name="password"
+              control={control}
+              defaultValue=""
+              render={({ field }) => (
+                <input
+                  {...field}
+                  type="password"
+                  placeholder="Password"
+                  className="input input-bordered w-full max-w-lg rounded-[21px] focus:outline-none focus:ring-2 focus:ring-[#908FEC]"
+                />
+              )}
             />
+            <p className="text-red-500 text-sm">{errors.password?.message}</p>
+          </div>
+
+          <div className="form-control max-w-lg mb-5">
+            <Controller
+              name="confirmPassword"
+              control={control}
+              defaultValue=""
+              render={({ field }) => (
+                <input
+                  {...field}
+                  type="password"
+                  placeholder="Confirm Password"
+                  className="input w-full input-bordered max-w-lg rounded-[21px] focus:outline-none focus:ring-2 focus:ring-[#908FEC]"
+                />
+              )}
+            />
+            <p className="text-red-500 text-sm">
+              {errors.confirmPassword?.message}
+            </p>
           </div>
 
           <div className="mb-5 flex justify-start items-center">
-            <input
-              type="checkbox"
-              checked={true}
-              className="checkbox checkbox-primary"
+            <Controller
+              name="agreement"
+              control={control}
+              defaultValue={false}
+              render={({ field }) => (
+                <input
+                  {...field}
+                  type="checkbox"
+                  className="checkbox checkbox-primary"
+                />
+              )}
             />
-
             <div className="mx-2">
               <small className="text-[12px]">
                 I agree to the{' '}
@@ -70,10 +133,15 @@ const LoginFrom = () => {
                 </span>
               </small>
             </div>
+            <p className="text-red-500 text-sm">{errors.agreement?.message}</p>
           </div>
 
           <div className="">
-            <button className="btn btn-active btn-primary w-full mt-5 rounded-[21px]">
+            <button
+              type="submit"
+              className="btn btn-active btn-primary w-full mt-5 rounded-[21px]"
+              disabled={!errors.agreement ? false : true}
+            >
               Registration
             </button>
           </div>
@@ -93,4 +161,4 @@ const LoginFrom = () => {
   );
 };
 
-export default LoginFrom;
+export default RegistrationFrom;
