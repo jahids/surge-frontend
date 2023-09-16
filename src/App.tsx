@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { Route, Routes } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
@@ -13,6 +13,19 @@ import MultistepForm from './Pages/MultistepForm/MultistepForm';
 const App: React.FC = () => {
   const [cookies] = useCookies(['mytoken']);
   const isAuthenticated = !!cookies.mytoken;
+
+
+
+
+useEffect(() => {
+  if(isAuthenticated){
+    console.log("persist data");
+    
+   }else {
+     console.log("no persist data");
+   }
+}, [isAuthenticated])
+
 
   return (
     <Routes>

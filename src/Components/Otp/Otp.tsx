@@ -42,7 +42,7 @@ const Otp = () => {
         />
       </div>
       <div className="text-center">
-        <button className="btn-sm btn-primary rounded shadow">Next</button>
+        <button className="btn-sm btn-primary rounded shadow">Submit</button>
       </div>
     </div>
   );

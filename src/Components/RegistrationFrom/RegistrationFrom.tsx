@@ -7,8 +7,11 @@ import * as yup from 'yup';
 import { Navigate, useNavigate } from 'react-router';
 import { useState } from 'react';
 import { HiEye, HiEyeOff } from 'react-icons/hi';
+import { useRegisterUserMutation } from '../../features/user/userApiSlice';
+import { useCookies } from 'react-cookie';
 
 const RegistrationFrom = () => {
+  const [, setCookie] = useCookies(['token']);
   const schema = yup.object().shape({
     email: yup.string().required('Email is required').email('Invalid email'),
     password: yup.string().required('Password is required'),
@@ -17,6 +20,7 @@ const RegistrationFrom = () => {
       .oneOf([yup.ref('password'), null], 'Passwords must match'),
     agreement: yup.boolean().oneOf([true], 'You must agree to the terms'),
   });
+  
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
@@ -32,11 +36,38 @@ const RegistrationFrom = () => {
   });
 
   const navigate= useNavigate()
+  const [registerUser, { isLoading,isError,isSuccess}]= useRegisterUserMutation();
 
-  const onSubmit = (data: any) => {
-    // Handle form submission here
-    console.log(data);
+  // console.log(responsedata)
+  const onSubmit = async (data : any) => {
+    try {
+      const response = await registerUser(data);
+      // console.log("my persist token is", )
+     
+      if(response?.data?.success === true){
+        navigate('/otp')
+      }
+      // setCookie('mytoken', response?.data?.data?.token, {
+      //   path: '/', 
+      //   secure: true, 
+      //   sameSite: 'none', 
+      // });
+      // navigate('/otp'); // Redirect to the login page
+    } catch (error) {
+      // Handle registration failure or validation errors here
+      console.error(error);
+      navigate('/registration')
+    }
   };
+
+  if(isLoading){
+return <p>loading...</p>
+  }
+
+  if(isError){
+    
+return <p>email already exist</p>
+  }
 
   return (
     <div className="p-5">
