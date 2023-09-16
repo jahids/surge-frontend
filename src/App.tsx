@@ -6,6 +6,9 @@ import { useCookies } from 'react-cookie';
 import LoginPage from './Pages/Login/LoginPage';
 import RegistrationPage from './Pages/Registration/RegistrationPage';
 
+import OtpPage from './Pages/OtpPage/OtpPage';
+import About from './Pages/About';
+
 const App: React.FC = () => {
   const [cookies] = useCookies(['mytoken']);
   const isAuthenticated = !!cookies.mytoken;
@@ -14,6 +17,7 @@ const App: React.FC = () => {
     <Routes>
       <Route path="/login" element={<LoginPage />} />
       <Route path="/registration" element={<RegistrationPage />} />
+      <Route path="/otp" element={<OtpPage />} />
       <Route path="/*" element={<p>no found page</p>} />
     </Routes>
   );
