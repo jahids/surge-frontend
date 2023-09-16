@@ -1,5 +1,5 @@
 function About() {
-  return <div>About</div>;
+  return <div>About Piyash</div>;
 }
 
 export default About;
