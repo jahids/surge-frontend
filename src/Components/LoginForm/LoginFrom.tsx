@@ -1,4 +1,3 @@
-import './login.css';
 import { BsArrowLeft } from 'react-icons/bs';
 import companyLogo from '../../assets/img/logo.svg';
 import { useNavigate } from 'react-router';
@@ -16,11 +15,7 @@ const LoginFrom = () => {
 
         {/* --- company logo start ---  */}
         <div className="mt-10">
-          <img
-            className="w-[150px] h-auto"
-            src={companyLogo}
-            alt="company_logo"
-          />
+          <img className="w-[150px]" src={companyLogo} alt="company_logo" />
         </div>
         {/* --- company logo end ---  */}
         {/* --- getting start --- */}

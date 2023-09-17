@@ -13,44 +13,44 @@ import quoteTen from '../../assets/starting-img/quote-10.png';
 
 const AppStarting = () => {
   return (
-    <div className="landing-animation">
-      <img className="base" src={baseImageTwo} alt="Base" />
-      <div className="slider bg-red-400">
-        <div className="slide-track">
-          <div className="slide">
-            <img src={quoteOne} alt="quote-1" height="300" />
+    <div className="landing_animation">
+      <img className="base_img" src={baseImageTwo} alt="Baseimage" />
+      <div className="slider_container">
+        <div className="slide_track">
+          <div className="slide_item">
+            <img src={quoteOne} alt="quote-1" height={300} />
           </div>
-          <div className="slide">
-            <img src={quoteTwo} alt="quote-2" height="300" />
+          <div className="slide_item">
+            <img src={quoteTwo} alt="quote-2" height={300} />
           </div>
-          <div className="slide">
-            <img src={quoteThree} alt="quote-3" height="300" />
+          <div className="slide_item">
+            <img src={quoteThree} alt="quote-3" height={300} />
           </div>
-          <div className="slide">
-            <img src={quoteFour} alt="quote-4" height="300" />
+          <div className="slide_item">
+            <img src={quoteFour} alt="quote-4" height={300} />
           </div>
-          <div className="slide">
-            <img src={quoteFive} alt="quote-5" height="300" />
+          <div className="slide_item">
+            <img src={quoteFive} alt="quote-5" height={300} />
           </div>
         </div>
       </div>
 
-      <div className="back-slider bg-green-400">
-        <div className="back-slide-track">
-          <div className="slide">
-            <img src={quoteSix} alt="quote-6" height="300" />
+      <div className="back_slider">
+        <div className="back_slide_track">
+          <div className="">
+            <img src={quoteSix} alt="quote-6" />
           </div>
-          <div className="slide">
-            <img src={quoteSeven} alt="quote-7" height="300" />
+          <div className="">
+            <img src={quoteSeven} alt="quote-7" />
           </div>
-          <div className="slide">
-            <img src={quoteEight} alt="quote-8" height="300" />
+          <div className="">
+            <img src={quoteEight} alt="quote-8" />
           </div>
-          <div className="slide">
-            <img src={quoteNine} alt="quote-9" height="300" />
+          <div className="">
+            <img src={quoteNine} alt="quote-9" />
           </div>
-          <div className="slide">
-            <img src={quoteTen} alt="quote-10" height="300" />
+          <div className="">
+            <img src={quoteTen} alt="quote-10" />
           </div>
         </div>
       </div>
