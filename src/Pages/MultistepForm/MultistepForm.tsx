@@ -17,11 +17,12 @@ import Lottie from 'lottie-react';
 import verifiedIcon from '../../assets/img/animation_lmnaixm0.json';
 import { notifySuccess } from '../../lib/Toastify';
 import { instance } from '../../lib/AxiosInstance';
+import Loader from '../../Components/Loader/Loader';
 
 const MAX_STEPS = 15;
 
 const MultistepForm: React.FC = () => {
-  const [apiStatus, setapiStatus] = useState(false)
+  const [apiStatus, setapiStatus] = useState(false);
   const [isLoading, setIsLoading] = useState(false); // Add loading state
   const navigate = useNavigate();
   const {
@@ -48,26 +49,26 @@ const MultistepForm: React.FC = () => {
 
   const handleFormCompletion: SubmitHandler<FormData> = values => {
     console.log('data', values);
-      if(values){
-        const otprequest = async () => {
-          setIsLoading(true);
-          try {
-            const createAccount = await instance.post(`/accounts`, {
-              ...values
-            });
-            console.log('create account', createAccount);
-            // const { success, message } = OtpRequestCall?.data;
-            if (createAccount?.status === 200) {
-                  setapiStatus(true)
-            }
-          } catch (error) {
-            console.log('otp error', error);
-            setapiStatus(false)
+    if (values) {
+      const otprequest = async () => {
+        setIsLoading(true);
+        try {
+          const createAccount = await instance.post(`/accounts`, {
+            ...values,
+          });
+          console.log('create account', createAccount);
+          // const { success, message } = OtpRequestCall?.data;
+          if (createAccount?.status === 200) {
+            setapiStatus(true);
           }
-          setIsLoading(false);
-        };
-        otprequest();
-      }
+        } catch (error) {
+          console.log('otp error', error);
+          setapiStatus(false);
+        }
+        setIsLoading(false);
+      };
+      otprequest();
+    }
     setFormStep(cur => cur + 1);
 
     console.log('complemete', formStep);
@@ -362,29 +363,33 @@ const MultistepForm: React.FC = () => {
         />
       </FormStep>
 
-      <FormStep stepNumber={13} isVisible={formStep === 12} onNextStep={handleNextStep}>
-  {isLoading ? ( // Show loading indicator while isLoading is true
-    <div className="text-center">
-      <p>Loading...</p>
-    </div>
-  ) : apiStatus === true ? (
-    <>
-      <div className="text-center">
-        <h2 className="font-semibold text-3xl mb-8 mt-[10px]">
-          Thank you for signing up!
-        </h2>
-        <p>You can now log in with your new account</p>
-      </div>
-      <div className="p-12">
-        <Lottie animationData={verifiedIcon} loop={true} />
-      </div>
-    </>
-  ) : (
-    <p>User not created</p>
-  )}
-</FormStep>
+      <FormStep
+        stepNumber={13}
+        isVisible={formStep === 12}
+        onNextStep={handleNextStep}
+      >
+        {isLoading ? ( // Show loading indicator while isLoading is true
+          <div className="">
+            <Loader />
+          </div>
+        ) : apiStatus === true ? (
+          <>
+            <div className="text-center">
+              <h2 className="font-semibold text-3xl mb-8 mt-[10px]">
+                Thank you for signing up!
+              </h2>
+              <p>You can now log in with your new account</p>
+            </div>
+            <div className="p-12">
+              <Lottie animationData={verifiedIcon} loop={true} />
+            </div>
+          </>
+        ) : (
+          <p>User not created</p>
+        )}
+      </FormStep>
 
-      <FormStep stepNumber={14} isVisible={formStep === 13} >
+      <FormStep stepNumber={14} isVisible={formStep === 13}>
         <div className="text-center">
           <h2 className="font-semibold text-3xl mb-8 mt-[10px]">
             Thank you for signing up!

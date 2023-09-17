@@ -10,36 +10,35 @@ import { ToastContainer } from 'react-toastify';
 import OtpPage from './Pages/OtpPage/OtpPage';
 
 import MultistepForm from './Pages/MultistepForm/MultistepForm';
+import MainPage from './Pages/MainPage/MainPage';
+import NotFoundPage from './Pages/NotFoundPage/NotFoundPage';
 
 const App: React.FC = () => {
   const [cookies] = useCookies(['mytoken']);
   const isAuthenticated = !!cookies.mytoken;
 
-useEffect(() => {
-  if(isAuthenticated){
-    console.log("persist data");
-    
-   }else {
-     console.log("no persist data");
-   }
-}, [isAuthenticated])
-
+  useEffect(() => {
+    if (isAuthenticated) {
+      console.log('persist data');
+    } else {
+      console.log('no persist data');
+    }
+  }, [isAuthenticated]);
 
   return (
     <>
-    <Routes>
-      <Route path="/" element={<AppStartingPage />} />
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/registration" element={<RegistrationPage />} />
-      <Route path="/otp" element={<OtpPage />} />
-      <Route path="/multistep" element={<MultistepForm />} />
-
-      <Route path="/*" element={<p>no found page</p>} />
-    </Routes>
-    <ToastContainer />
+      <Routes>
+        <Route path="/" element={<AppStartingPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/registration" element={<RegistrationPage />} />
+        <Route path="/otp" element={<OtpPage />} />
+        <Route path="/multistep" element={<MultistepForm />} />
+        <Route path="/main" element={<MainPage />} />
+        <Route path="/*" element={<NotFoundPage />} />
+      </Routes>
+      <ToastContainer />
     </>
   );
-  
 };
 
 export default App;
