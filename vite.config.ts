@@ -13,7 +13,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://192.168.68.51:4500', // Your backend server URL
+        target: 'http://192.168.68.56:4500', // Your backend server URL
         changeOrigin: true,
         // You can add other proxy options here if needed
         // For example, to rewrite the path:

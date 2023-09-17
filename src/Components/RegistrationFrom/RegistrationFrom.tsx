@@ -7,8 +7,13 @@ import * as yup from 'yup';
 import { Navigate, useNavigate } from 'react-router';
 import { useState } from 'react';
 import { HiEye, HiEyeOff } from 'react-icons/hi';
+import { useRegisterUserMutation } from '../../features/user/userApiSlice';
+import { useCookies } from 'react-cookie';
+import { instance } from '../../lib/AxiosInstance';
+import { notifyError, notifySuccess } from '../../lib/Toastify';
 
 const RegistrationFrom = () => {
+  const [, setCookie] = useCookies(['token']);
   const schema = yup.object().shape({
     email: yup.string().required('Email is required').email('Invalid email'),
     password: yup.string().required('Password is required'),
@@ -17,6 +22,7 @@ const RegistrationFrom = () => {
       .oneOf([yup.ref('password'), null], 'Passwords must match'),
     agreement: yup.boolean().oneOf([true], 'You must agree to the terms'),
   });
+  
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
@@ -32,11 +38,41 @@ const RegistrationFrom = () => {
   });
 
   const navigate= useNavigate()
+  // const [registerUser, { isLoading,isError,isSuccess}]= useRegisterUserMutation();
 
-  const onSubmit = (data: any) => {
-    // Handle form submission here
-    console.log(data);
+  // console.log(responsedata)
+  const onSubmit = async (data : any) => {
+    const payload = {
+      email : data?.email,
+      password : data?.password
+     }
+    try {
+
+      const response = await instance.post(`/signup/exist`, {
+        email: data.email,
+      });
+      console.log(response?.data);
+      notifyError(response?.data?.message)
+    } catch (error) {
+      console.error(error?.response?.data);
+     
+      if(error?.response?.data?.success === false){
+        //notifySuccess("Группа успешно создана!");
+         navigate('/otp', {state : payload} )
+        
+        
+      }
+    }
   };
+
+//   if(isLoading){
+// return <p>loading...</p>
+//   }
+
+//   if(isError){
+    
+// return <p>email already exist</p>
+//   }
 
   return (
     <div className="p-5">

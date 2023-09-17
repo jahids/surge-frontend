@@ -2,6 +2,8 @@
 import React from 'react';
 import { IoIosArrowBack } from 'react-icons/io';
 import { AiOutlineRight } from 'react-icons/ai';
+import { useNavigate } from 'react-router';
+
 
 // AiOutlineRight;
 interface FormStepProps {
@@ -18,6 +20,13 @@ const FormStep: React.FC<FormStepProps> = ({
   onPrevStep,
   children,
 }) => {
+
+  const navigate = useNavigate()
+  console.log("is visible", isVisible, "stepNumber", stepNumber)
+  if(isVisible === true &&  stepNumber === 14){
+    navigate('/login')
+  }
+
   return (
     <div className="">
       <div className={isVisible ? 'block ' : 'hidden'}>
