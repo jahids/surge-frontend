@@ -1,6 +1,11 @@
 /* eslint-disable  */
 import React from 'react';
+import { IoIosArrowBack } from 'react-icons/io';
+import { AiOutlineRight } from 'react-icons/ai';
+import { useNavigate } from 'react-router';
 
+
+// AiOutlineRight;
 interface FormStepProps {
   stepNumber: number;
   isVisible: boolean;
@@ -15,27 +20,41 @@ const FormStep: React.FC<FormStepProps> = ({
   onPrevStep,
   children,
 }) => {
+
+  const navigate = useNavigate()
+  console.log("is visible", isVisible, "stepNumber", stepNumber)
+  if(isVisible === true &&  stepNumber === 14){
+    navigate('/login')
+  }
+
   return (
-    <div className={isVisible ? 'block' : 'hidden'}>
-      <h2 className="font-semibold text-3xl mb-4">Step {stepNumber} of 3</h2>
-      {children}
-      <div className="mt-6 flex justify-between">
-        {onPrevStep && (
+    <div className="">
+      <div className={isVisible ? 'block ' : 'hidden'}>
+        <div className="pt-10">
+          {onPrevStep && (
+            <button
+              onClick={onPrevStep}
+              type="button"
+              className="text-white rounded-full px-2 cursor-pointer"
+            >
+              <IoIosArrowBack className="text-[#A0A0A0] text-2xl" />
+            </button>
+          )}
+        </div>
+
+        {/* --- main content --- */}
+        <div className="px-3 mt-[15%]">{children}</div>
+        {/* --- main content --- */}
+
+        <div className="px-3 py-3 first-line:mt-[60%] absolute bottom-0 right-0 ">
           <button
-            onClick={onPrevStep}
+            onClick={onNextStep}
             type="button"
-            className="bg-green-400 text-white rounded px-4 py-2"
+            className="w-[50px] h-[50px] bg-[#5A4FF4] text-white rounded-full flex items-center justify-center cursor-pointer"
           >
-            Previous
+            <AiOutlineRight className="text-white text-2xl" />
           </button>
-        )}
-        <button
-          onClick={onNextStep}
-          type="button"
-          className="bg-green-600 text-white rounded px-4 py-2"
-        >
-          Next
-        </button>
+        </div>
       </div>
     </div>
   );
