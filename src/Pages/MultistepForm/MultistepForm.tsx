@@ -12,8 +12,11 @@ import TextInput from '../../Components/formstep/TextInput';
 import FormCheckbox from '../../Components/formstep/FormCheckbox';
 import { FormData } from '../../Types/User';
 import { Navigate, useNavigate } from 'react-router-dom';
+import FormCalender from '../../Components/formstep/FormCalender';
+import Lottie from 'lottie-react';
+import verifiedIcon from '../../assets/img/animation_lmnaixm0.json';
 
-const MAX_STEPS = 11;
+const MAX_STEPS = 14;
 
 const MultistepForm: React.FC = () => {
   const navigate = useNavigate();
@@ -28,29 +31,34 @@ const MultistepForm: React.FC = () => {
 
   const handleNextStep = () => {
     setFormStep(cur => cur + 1);
+    console.log('next form step', formStep);
+    // if (formStep === 10) {
+    //   navigate('/login');
+    // }
   };
 
   const handlePrevStep = () => {
     setFormStep(cur => cur - 1);
+    console.log('prev form step', formStep);
   };
 
   const handleFormCompletion: SubmitHandler<FormData> = values => {
-    window.alert(JSON.stringify(values, null, 2));
     console.log('data', values);
-    if (values) {
-      navigate('/');
-    }
+
     setFormStep(cur => cur + 1);
+
+    console.log('complemete', formStep);
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-start text-gray-900 antialiased relative mt-10">
+    <div className="min-h-screen relative">
+      {/* --- given name --- */}
       <FormStep
         stepNumber={1}
         isVisible={formStep === 0}
         onNextStep={handleNextStep}
       >
-        <div className="p-5">
+        <div className="pt-[30px] mb-10">
           <h5 className="font-semibold text-3xl mb-2">What's your name?</h5>
           <p className="">
             <small className="text-inherit text-slate-500">
@@ -59,20 +67,22 @@ const MultistepForm: React.FC = () => {
           </p>
         </div>
         <TextInput
-          name="username"
+          type="text"
+          name="given_name"
           placeholder="John Doe"
           register={register}
           required
         />
       </FormStep>
 
+      {/* --- family name --- */}
       <FormStep
         stepNumber={2}
         isVisible={formStep === 1}
         onNextStep={handleNextStep}
         onPrevStep={handlePrevStep}
       >
-        <div className="p-5 mt-5">
+        <div className="mt-10 mb-10">
           <h5 className="font-semibold text-3xl mb-2">Family Name?</h5>
           <p className="">
             <small className="text-inherit text-slate-500">
@@ -81,20 +91,40 @@ const MultistepForm: React.FC = () => {
           </p>
         </div>
         <TextInput
-          placeholder="Family Name"
+          type="text"
           name="family_name"
+          placeholder="Family Name"
           register={register}
           required
         />
       </FormStep>
 
+      {/* --- date of birth --- */}
       <FormStep
         stepNumber={3}
         isVisible={formStep === 2}
         onNextStep={handleNextStep}
         onPrevStep={handlePrevStep}
       >
-        <div className="p-5 mt-24">
+        <div className="mt-10 mb-10">
+          <h5 className="font-semibold text-3xl mb-2">Date of Birth</h5>
+          <p className="">
+            <small className="text-inherit text-slate-500">
+              This will be shown on your profile
+            </small>
+          </p>
+        </div>
+        <FormCalender name="date_of_birth" register={register} required />
+      </FormStep>
+
+      {/* --- email --- */}
+      <FormStep
+        stepNumber={4}
+        isVisible={formStep === 3}
+        onNextStep={handleNextStep}
+        onPrevStep={handlePrevStep}
+      >
+        <div className="mt-10 mb-10">
           <h5 className="font-semibold text-3xl mb-2">Email</h5>
           <p className="">
             <small className="text-inherit text-slate-500">
@@ -103,20 +133,22 @@ const MultistepForm: React.FC = () => {
           </p>
         </div>
         <TextInput
+          type="email"
+          name="email_address"
           placeholder="Email"
-          name="email"
           register={register}
           required
         />
       </FormStep>
 
+      {/* --- phone --- */}
       <FormStep
-        stepNumber={4}
-        isVisible={formStep === 3}
+        stepNumber={5}
+        isVisible={formStep === 4}
         onNextStep={handleNextStep}
         onPrevStep={handlePrevStep}
       >
-        <div className="p-5 mt-24">
+        <div className="mt-10 mb-10">
           <h5 className="font-semibold text-3xl mb-2">Phone</h5>
           <p className="">
             <small className="text-inherit text-slate-500">
@@ -125,20 +157,22 @@ const MultistepForm: React.FC = () => {
           </p>
         </div>
         <TextInput
+          type="number"
+          name="phone_number"
           placeholder="Phone"
-          name="number"
           register={register}
           required
         />
       </FormStep>
 
+      {/* --- street --- */}
       <FormStep
-        stepNumber={5}
-        isVisible={formStep === 4}
+        stepNumber={6}
+        isVisible={formStep === 5}
         onNextStep={handleNextStep}
         onPrevStep={handlePrevStep}
       >
-        <div className="p-5 mt-24">
+        <div className="mt-10 mb-10">
           <h5 className="font-semibold text-3xl mb-2">Street</h5>
           <p className="">
             <small className="text-inherit text-slate-500">
@@ -147,20 +181,22 @@ const MultistepForm: React.FC = () => {
           </p>
         </div>
         <TextInput
+          type="text"
+          name="street_address"
           placeholder="Street"
-          name="street"
           register={register}
           required
         />
       </FormStep>
 
+      {/* --- city --- */}
       <FormStep
-        stepNumber={6}
-        isVisible={formStep === 5}
+        stepNumber={7}
+        isVisible={formStep === 6}
         onNextStep={handleNextStep}
         onPrevStep={handlePrevStep}
       >
-        <div className="p-5 mt-24">
+        <div className="mt-10 mb-10">
           <h5 className="font-semibold text-3xl mb-2">City</h5>
           <p className="">
             <small className="text-inherit text-slate-500">
@@ -169,21 +205,23 @@ const MultistepForm: React.FC = () => {
           </p>
         </div>
         <TextInput
+          type="text"
+          name="city"
           placeholder="City"
-          name="street"
           register={register}
           required
         />
       </FormStep>
 
+      {/* --- state --- */}
       <FormStep
-        stepNumber={7}
-        isVisible={formStep === 6}
+        stepNumber={8}
+        isVisible={formStep === 7}
         onNextStep={handleNextStep}
         onPrevStep={handlePrevStep}
       >
-        <div className="p-5 mt-24">
-          <h5 className="font-semibold text-3xl mb-2">Country</h5>
+        <div className="mt-10 mb-10">
+          <h5 className="font-semibold text-3xl mb-2">State</h5>
           <p className="">
             <small className="text-inherit text-slate-500">
               This will be shown on your profile
@@ -191,20 +229,22 @@ const MultistepForm: React.FC = () => {
           </p>
         </div>
         <TextInput
-          placeholder="Country"
-          name="street"
+          type="text"
+          name="state"
+          placeholder="State"
           register={register}
           required
         />
       </FormStep>
 
+      {/* --- postal code --- */}
       <FormStep
-        stepNumber={8}
-        isVisible={formStep === 7}
+        stepNumber={9}
+        isVisible={formStep === 8}
         onNextStep={handleNextStep}
         onPrevStep={handlePrevStep}
       >
-        <div className="p-5 mt-24">
+        <div className="mt-10 mb-10">
           <h5 className="font-semibold text-3xl mb-2">Postal Code</h5>
           <p className="">
             <small className="text-inherit text-slate-500">
@@ -213,19 +253,22 @@ const MultistepForm: React.FC = () => {
           </p>
         </div>
         <TextInput
+          type="number"
+          name="postal_code"
           placeholder="Postal Code"
-          name="street"
           register={register}
           required
         />
       </FormStep>
+
+      {/* --- country --- */}
       <FormStep
-        stepNumber={9}
-        isVisible={formStep === 8}
+        stepNumber={10}
+        isVisible={formStep === 9}
         onNextStep={handleNextStep}
         onPrevStep={handlePrevStep}
       >
-        <div className="p-5 mt-24">
+        <div className="mt-10 mb-10">
           <h5 className="font-semibold text-3xl mb-2">Country</h5>
           <p className="">
             <small className="text-inherit text-slate-500">
@@ -234,19 +277,22 @@ const MultistepForm: React.FC = () => {
           </p>
         </div>
         <TextInput
+          type="text"
+          name="country"
           placeholder="Country"
-          name="street"
           register={register}
           required
         />
       </FormStep>
+
+      {/* --- tax ID --- */}
       <FormStep
-        stepNumber={10}
-        isVisible={formStep === 9}
+        stepNumber={11}
+        isVisible={formStep === 10}
         onNextStep={handleNextStep}
         onPrevStep={handlePrevStep}
       >
-        <div className="p-5 mt-24">
+        <div className="mt-10 mb-10">
           <h5 className="font-semibold text-3xl mb-2">Tax ID</h5>
           <p className="">
             <small className="text-inherit text-slate-500">
@@ -255,20 +301,23 @@ const MultistepForm: React.FC = () => {
           </p>
         </div>
         <TextInput
+          type="number"
+          name="tax_id"
           placeholder="Tax ID"
-          name="street"
           register={register}
           required
         />
       </FormStep>
 
+      {/* --- agreement --- */}
       <FormStep
-        stepNumber={11}
-        isVisible={formStep === 10}
-        onNextStep={handleNextStep}
+        stepNumber={12}
+        isVisible={formStep === 11}
+        // onNextStep={handleNextStep}
         onPrevStep={handlePrevStep}
+        onNextStep={handleSubmit(handleFormCompletion)}
       >
-        <div className="p-5 mt-24">
+        <div className="mt-10 mb-10">
           <h5 className="font-semibold text-3xl mb-2">Agreement</h5>
           <p className="">
             <small className="text-inherit text-slate-500">
@@ -277,45 +326,29 @@ const MultistepForm: React.FC = () => {
           </p>
         </div>
         <FormCheckbox
-          name="toc"
+          name="terms_conditions"
           label="Terms and Conditions"
           register={register}
           required
         />
         <FormCheckbox
-          name="pp"
+          name="privacy_policy"
           label="Privacy Policy"
           register={register}
           required
         />
       </FormStep>
 
-      {/* <FormStep
-        stepNumber={3}
-        isVisible={formStep === 2}
-        onNextStep={handleSubmit(handleFormCompletion)}
-        onPrevStep={handlePrevStep}
-      >
-        <h2 className="font-semibold text-3xl mb-8">Legal Information</h2>
-        <FormCheckbox
-          name="toc"
-          label="Terms and Conditions"
-          register={register}
-          required
-        />
-        <FormCheckbox
-          name="pp"
-          label="Privacy Policy"
-          register={register}
-          required
-        />
-      </FormStep> */}
-
-      <FormStep stepNumber={12} isVisible={formStep === 11}>
-        <h2 className="font-semibold text-3xl mb-8">
-          Thank you for signing up!
-        </h2>
-        <p>You can now log in with your new account</p>
+      <FormStep stepNumber={13} isVisible={formStep === 12}>
+        <div className="text-center">
+          <h2 className="font-semibold text-3xl mb-8 mt-[10px]">
+            Thank you for signing up!
+          </h2>
+          <p>You can now log in with your new account</p>
+        </div>
+        <div className="p-12">
+          <Lottie animationData={verifiedIcon} loop={true} />
+        </div>
       </FormStep>
     </div>
   );

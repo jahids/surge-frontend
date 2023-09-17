@@ -1,0 +1,60 @@
+.landing-animation {
+  position: relative;
+}
+
+.base {
+  width: 95vw;
+  max-width: 500px;
+  margin-top: 10rem;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+}
+
+.slider {
+  margin: auto;
+  overflow: hidden;
+  position: absolute;
+  width: 95vw;
+  max-width: 500px;
+  z-index: 2;
+  top: 40vh;
+  left: 0;
+}
+
+.back-slider {
+  margin: auto;
+  overflow: hidden;
+  position: absolute;
+  width: 95vw;
+  max-width: 500px;
+  z-index: 0;
+  top: 50px;
+  left: 0;
+}
+
+
+.slide-track {
+  animation: scroll 40s linear infinite;
+  display: flex;
+}
+
+.back-slide-track {
+  animation: scroll-reverse 40s linear infinite;
+  display: flex;
+}
+
+.slide {
+  background-color: red;
+}
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-250px * 5))}
+}
+
+/* @keyframes scroll-reverse {
+  0% { transform: translateX(calc(-250px * 5)); }
+  100% { transform: translateX(0)}
+} */
