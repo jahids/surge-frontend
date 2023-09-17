@@ -9,6 +9,8 @@ import { useState } from 'react';
 import { HiEye, HiEyeOff } from 'react-icons/hi';
 import { useRegisterUserMutation } from '../../features/user/userApiSlice';
 import { useCookies } from 'react-cookie';
+import { instance } from '../../lib/AxiosInstance';
+import { notifyError, notifySuccess } from '../../lib/Toastify';
 
 const RegistrationFrom = () => {
   const [, setCookie] = useCookies(['token']);
@@ -36,38 +38,41 @@ const RegistrationFrom = () => {
   });
 
   const navigate= useNavigate()
-  const [registerUser, { isLoading,isError,isSuccess}]= useRegisterUserMutation();
+  // const [registerUser, { isLoading,isError,isSuccess}]= useRegisterUserMutation();
 
   // console.log(responsedata)
   const onSubmit = async (data : any) => {
+    const payload = {
+      email : data?.email,
+      password : data?.password
+     }
     try {
-      const response = await registerUser(data);
-      // console.log("my persist token is", )
-     
-      if(response?.data?.success === true){
-        navigate('/otp')
-      }
-      // setCookie('mytoken', response?.data?.data?.token, {
-      //   path: '/', 
-      //   secure: true, 
-      //   sameSite: 'none', 
-      // });
-      // navigate('/otp'); // Redirect to the login page
+
+      const response = await instance.post(`/signup/exist`, {
+        email: data.email,
+      });
+      console.log(response?.data);
+      notifyError(response?.data?.message)
     } catch (error) {
-      // Handle registration failure or validation errors here
-      console.error(error);
-      navigate('/registration')
+      console.error(error?.response?.data);
+     
+      if(error?.response?.data?.success === false){
+        //notifySuccess("Группа успешно создана!");
+         navigate('/otp', {state : payload} )
+        
+        
+      }
     }
   };
 
-  if(isLoading){
-return <p>loading...</p>
-  }
+//   if(isLoading){
+// return <p>loading...</p>
+//   }
 
-  if(isError){
+//   if(isError){
     
-return <p>email already exist</p>
-  }
+// return <p>email already exist</p>
+//   }
 
   return (
     <div className="p-5">

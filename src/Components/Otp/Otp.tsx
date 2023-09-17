@@ -1,12 +1,68 @@
-import { useState } from 'react';
+/* eslint-disable no-unsafe-optional-chaining */
+import { useState, useEffect, SetStateAction } from 'react';
 import OtpInput from 'react-otp-input';
-
+import { useLocation } from 'react-router';
+import { instance } from '../../lib/AxiosInstance';
+import { useCookies } from 'react-cookie';
+import { notifyError, notifySuccess } from '../../lib/Toastify';
 const Otp = () => {
+  const [, setCookie] = useCookies(['token']);
+  const location = useLocation();
   const [otp, setOtp] = useState('');
+  console.log('cred', location.state);
 
-  const handleChange = code => {
+  useEffect(() => {
+    const otprequest = async () => {
+      try {
+        const OtpRequestCall = await instance.post(`/otp/send`, {
+          email: location.state.email,
+        });
+        console.log('otp send', OtpRequestCall);
+        const { success, message } = OtpRequestCall?.data;
+        if (success === true) {
+          notifySuccess(message);
+        }
+      } catch (error) {
+        console.log('otp error', error);
+      }
+    };
+    otprequest();
+  }, []);
+
+  const handleChange = (code: SetStateAction<string>) => {
     setOtp(code);
     console.log(code);
+  };
+
+  const otpSubmit = async () => {
+    console.log('otp code', otp);
+    if (otp) {
+      try {
+        const OtpVerify = await instance.post(`/otp/verify`, {
+          email: location.state.email,
+          otp,
+        });
+        if (OtpVerify?.data?.success === true) {
+          const signupCall = await instance.post(`/signup/user`, {
+            email: location.state.email,
+            password: location.state.password,
+          });
+          console.log('signupCall', signupCall);
+          setCookie('mytoken', signupCall?.data?.data?.token, {
+            path: '/',
+            secure: true,
+            sameSite: 'none',
+          });
+        } else {
+          console.log('signup not working');
+        }
+
+        console.log('verfied', OtpVerify);
+      } catch (error) {
+        console.log('otp error', error);
+        notifyError(error?.response?.data?.error);
+      }
+    }
   };
 
   return (
@@ -42,7 +98,12 @@ const Otp = () => {
         />
       </div>
       <div className="text-center">
-        <button className="btn-sm btn-primary rounded shadow">Submit</button>
+        <button
+          onClick={otpSubmit}
+          className="btn-sm btn-primary rounded shadow"
+        >
+          Submit
+        </button>
       </div>
     </div>
   );
