@@ -1,0 +1,7 @@
+.card_wrapper .card_item {
+  min-width: 280px;
+}
+
+.card_wrapper::-webkit-scrollbar {
+  display: none;
+}

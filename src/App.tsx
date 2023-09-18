@@ -8,10 +8,10 @@ import LoginPage from './Pages/Login/LoginPage';
 import RegistrationPage from './Pages/Registration/RegistrationPage';
 import { ToastContainer } from 'react-toastify';
 import OtpPage from './Pages/OtpPage/OtpPage';
-
 import MultistepForm from './Pages/MultistepForm/MultistepForm';
 import MainPage from './Pages/MainPage/MainPage';
 import NotFoundPage from './Pages/NotFoundPage/NotFoundPage';
+import CompleteProfilePage from './Pages/CompleteProfilePage/CompleteProfilePage';
 
 const App: React.FC = () => {
   const [cookies] = useCookies(['mytoken']);
@@ -34,6 +34,7 @@ const App: React.FC = () => {
         <Route path="/otp" element={<OtpPage />} />
         <Route path="/multistep" element={<MultistepForm />} />
         <Route path="/main" element={<MainPage />} />
+        <Route path="/profile" element={<CompleteProfilePage />} />
         <Route path="/*" element={<NotFoundPage />} />
       </Routes>
       <ToastContainer />

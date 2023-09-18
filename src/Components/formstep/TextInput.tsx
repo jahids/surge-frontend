@@ -20,7 +20,7 @@ const TextInput: React.FC<TextInputProps> = ({
   error = '',
 }) => {
   return (
-    <div className="text-center">
+    <div className="text-center bg-green-400">
       <input
         type={type}
         id={name}

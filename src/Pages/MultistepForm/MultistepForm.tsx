@@ -6,6 +6,7 @@
 // }
 
 import React, { useState } from 'react';
+
 import { useForm, SubmitHandler } from 'react-hook-form';
 import FormStep from '../../Components/formstep/FormStep';
 import TextInput from '../../Components/formstep/TextInput';
@@ -18,6 +19,8 @@ import verifiedIcon from '../../assets/img/animation_lmnaixm0.json';
 import { notifySuccess } from '../../lib/Toastify';
 import { instance } from '../../lib/AxiosInstance';
 import Loader from '../../Components/Loader/Loader';
+import UserNotCreated from '../../Components/UserNotCreated/UserNotCreated';
+import Country from '../../Components/formstep/Country';
 
 const MAX_STEPS = 15;
 
@@ -25,6 +28,7 @@ const MultistepForm: React.FC = () => {
   const [apiStatus, setapiStatus] = useState(false);
   const [isLoading, setIsLoading] = useState(false); // Add loading state
   const navigate = useNavigate();
+  
   const {
     register,
     watch,
@@ -41,7 +45,7 @@ const MultistepForm: React.FC = () => {
     //   navigate('/login');
     // }
   };
-
+   
   const handlePrevStep = () => {
     setFormStep(cur => cur - 1);
     console.log('prev form step', formStep);
@@ -300,13 +304,14 @@ const MultistepForm: React.FC = () => {
             </small>
           </p>
         </div>
-        <TextInput
+        {/* <TextInput
           type="text"
           name="country"
-          placeholder="Country"
+          placeholder="USA"
           register={register}
           required
-        />
+        /> */}
+        <Country name="country" register={register} required />
       </FormStep>
 
       {/* --- tax ID --- */}
@@ -317,7 +322,7 @@ const MultistepForm: React.FC = () => {
         onPrevStep={handlePrevStep}
       >
         <div className="mt-10 mb-10">
-          <h5 className="font-semibold text-3xl mb-2">Tax ID</h5>
+          <h5 className="font-semibold text-3xl mb-2">Income Source</h5>
           <p className="">
             <small className="text-inherit text-slate-500">
               This will be shown on your profile
@@ -327,7 +332,7 @@ const MultistepForm: React.FC = () => {
         <TextInput
           type="number"
           name="tax_id"
-          placeholder="Tax ID"
+          placeholder="Income Source"
           register={register}
           required
         />
@@ -380,12 +385,12 @@ const MultistepForm: React.FC = () => {
               </h2>
               <p>You can now log in with your new account</p>
             </div>
-            <div className="p-12">
+            <div className="">
               <Lottie animationData={verifiedIcon} loop={true} />
             </div>
           </>
         ) : (
-          <p>User not created</p>
+          <UserNotCreated />
         )}
       </FormStep>
 
