@@ -5,6 +5,7 @@ import earthIcon from '../../../assets/img/earth.png';
 
 const News = () => {
   const [isOpen, setOpen] = useState(false);
+
   return (
     <div className="mt-10">
       <h1 className="text-xl font-bold">News</h1>

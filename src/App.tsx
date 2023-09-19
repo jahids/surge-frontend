@@ -42,8 +42,6 @@ const App: React.FC = () => {
         <Route path="/friend-list" element={<FriendListsPage />} />
         <Route path="/friend-list" element={<FriendListsPage />} />
         <Route path="/top-movers" element={<TopMoversPage />} />
-        <Route path="/modal" element={<ModalSheet />} />
-
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <ToastContainer />
