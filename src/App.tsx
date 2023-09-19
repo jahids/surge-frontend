@@ -13,6 +13,8 @@ import NotFoundPage from './Pages/NotFoundPage/NotFoundPage';
 import CompleteProfilePage from './Pages/CompleteProfilePage/CompleteProfilePage';
 import AllAssetsPage from './Pages/AllAssetsPage/AllAssetsPage';
 import FriendListsPage from './Pages/FriendListsPage/FriendListsPage';
+import TopMoversPage from './Pages/TopMoversPage/TopMoversPage';
+import ModalSheet from './Pages/ModalSheet/ModalSheet';
 
 const App: React.FC = () => {
   const [cookies] = useCookies(['mytoken']);
@@ -38,7 +40,11 @@ const App: React.FC = () => {
         <Route path="/profile" element={<CompleteProfilePage />} />
         <Route path="/assets" element={<AllAssetsPage />} />
         <Route path="/friend-list" element={<FriendListsPage />} />
-        <Route path="/*" element={<NotFoundPage />} />
+        <Route path="/friend-list" element={<FriendListsPage />} />
+        <Route path="/top-movers" element={<TopMoversPage />} />
+        <Route path="/modal" element={<ModalSheet />} />
+
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <ToastContainer />
     </>
