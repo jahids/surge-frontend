@@ -1,5 +1,6 @@
 import rocketPharma from '../../../assets/movers-img/rocket-pharma-logo-2016-outline@2x.webp';
 import ptc from '../../../assets/movers-img/ptcLogo.webp';
+
 const TopMovers = () => {
   return (
     <div className="mt-10">
@@ -51,6 +52,14 @@ const TopMovers = () => {
         </div>
       </div>
       {/* --- top movers company --- */}
+
+      {/* --- see all btn --- */}
+      <div className="text-center mt-5">
+        <button className="bg-gray-200 px-3 py-2 rounded-full text-[13px] font-bold">
+          See all
+        </button>
+      </div>
+      {/* --- see all btn --- */}
     </div>
   );
 };

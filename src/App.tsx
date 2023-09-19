@@ -1,6 +1,5 @@
 /* eslint-disable */
 import React, { useEffect } from 'react';
-
 import { Route, Routes } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import AppStartingPage from './Pages/AppStartingPage/AppStartingPage';
@@ -12,6 +11,8 @@ import MultistepForm from './Pages/MultistepForm/MultistepForm';
 import MainPage from './Pages/MainPage/MainPage';
 import NotFoundPage from './Pages/NotFoundPage/NotFoundPage';
 import CompleteProfilePage from './Pages/CompleteProfilePage/CompleteProfilePage';
+import AllAssetsPage from './Pages/AllAssetsPage/AllAssetsPage';
+import FriendListsPage from './Pages/FriendListsPage/FriendListsPage';
 
 const App: React.FC = () => {
   const [cookies] = useCookies(['mytoken']);
@@ -35,6 +36,8 @@ const App: React.FC = () => {
         <Route path="/multistep" element={<MultistepForm />} />
         <Route path="/main" element={<MainPage />} />
         <Route path="/profile" element={<CompleteProfilePage />} />
+        <Route path="/assets" element={<AllAssetsPage />} />
+        <Route path="/friend-list" element={<FriendListsPage />} />
         <Route path="/*" element={<NotFoundPage />} />
       </Routes>
       <ToastContainer />

@@ -6,7 +6,6 @@
 // }
 
 import React, { useState } from 'react';
-
 import { useForm, SubmitHandler } from 'react-hook-form';
 import FormStep from '../../Components/formstep/FormStep';
 import TextInput from '../../Components/formstep/TextInput';
@@ -28,7 +27,7 @@ const MultistepForm: React.FC = () => {
   const [apiStatus, setapiStatus] = useState(false);
   const [isLoading, setIsLoading] = useState(false); // Add loading state
   const navigate = useNavigate();
-  
+
   const {
     register,
     watch,
@@ -45,7 +44,7 @@ const MultistepForm: React.FC = () => {
     //   navigate('/login');
     // }
   };
-   
+
   const handlePrevStep = () => {
     setFormStep(cur => cur - 1);
     console.log('prev form step', formStep);

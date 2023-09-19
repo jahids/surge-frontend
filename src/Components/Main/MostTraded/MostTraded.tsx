@@ -52,6 +52,13 @@ const MostTraded = () => {
         </div>
       </div>
       {/* --- top movers company --- */}
+      {/* --- see all btn --- */}
+      <div className="text-center mt-5">
+        <button className="bg-gray-200 px-3 py-2 rounded-full text-[13px] font-bold">
+          See all
+        </button>
+      </div>
+      {/* --- see all btn --- */}
     </div>
   );
 };
