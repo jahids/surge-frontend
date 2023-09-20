@@ -1,3 +1,4 @@
+import AllStocks from './AllStocks/AllStocks';
 import FriendList from './FriendList/FriendList';
 import Invest from './Invest/Invest';
 import MostTraded from './MostTraded/MostTraded';
@@ -12,8 +13,12 @@ const MainContainer = () => {
         <Invest />
       </section>
       <section>
+        <AllStocks />
+      </section>
+      <section>
         <News />
       </section>
+
       <section>
         <WatchList />
       </section>

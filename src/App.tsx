@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
@@ -14,7 +13,6 @@ import CompleteProfilePage from './Pages/CompleteProfilePage/CompleteProfilePage
 import AllAssetsPage from './Pages/AllAssetsPage/AllAssetsPage';
 import FriendListsPage from './Pages/FriendListsPage/FriendListsPage';
 import TopMoversPage from './Pages/TopMoversPage/TopMoversPage';
-import ModalSheet from './Pages/ModalSheet/ModalSheet';
 
 const App: React.FC = () => {
   const [cookies] = useCookies(['mytoken']);
@@ -39,7 +37,6 @@ const App: React.FC = () => {
         <Route path="/main" element={<MainPage />} />
         <Route path="/profile" element={<CompleteProfilePage />} />
         <Route path="/assets" element={<AllAssetsPage />} />
-        <Route path="/friend-list" element={<FriendListsPage />} />
         <Route path="/friend-list" element={<FriendListsPage />} />
         <Route path="/top-movers" element={<TopMoversPage />} />
         <Route path="*" element={<NotFoundPage />} />

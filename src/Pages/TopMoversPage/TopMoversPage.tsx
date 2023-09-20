@@ -1,7 +1,9 @@
+import TopMoversAllList from '../../Components/TopMoversAllList/TopMoversAllList';
+
 const TopMoversPage = () => {
   return (
     <div>
-      <h1>Top Movers</h1>
+      <TopMoversAllList />
     </div>
   );
 };
