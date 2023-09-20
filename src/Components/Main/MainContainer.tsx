@@ -18,7 +18,6 @@ const MainContainer = () => {
       <section>
         <News />
       </section>
-
       <section>
         <WatchList />
       </section>

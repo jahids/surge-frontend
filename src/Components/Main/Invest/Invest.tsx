@@ -24,9 +24,11 @@ const Invest = () => {
 
         {/* --- invest right part start --- */}
         <div className="flex items-center">
-          <div className="w-10 h-10 bg-[#dfe0e2] flex items-center justify-center rounded-full">
-            <BsBellFill className="text-xl" />
-          </div>
+          <Link to="/notification">
+            <div className="w-10 h-10 bg-[#dfe0e2] flex items-center justify-center rounded-full">
+              <BsBellFill className="text-xl" />
+            </div>
+          </Link>
         </div>
         {/* --- invest right part end --- */}
       </div>

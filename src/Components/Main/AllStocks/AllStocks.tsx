@@ -1,5 +1,6 @@
 import Lottie from 'lottie-react';
 import allStock from '../../../assets/img/all_stock.json';
+import { Link } from 'react-router-dom';
 
 const AllStocks = () => {
   return (
@@ -19,9 +20,11 @@ const AllStocks = () => {
             </small>
           </div>
           <div>
-            <button className="bg-[#fff] rounded-full px-3 py-2 text-xs font-bold">
-              See all stocks
-            </button>
+            <Link to="/all-stock">
+              <button className="bg-[#fff] rounded-full px-3 py-2 text-xs font-bold">
+                See all stocks
+              </button>
+            </Link>
           </div>
         </div>
       </div>

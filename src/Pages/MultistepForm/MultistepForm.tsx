@@ -19,7 +19,8 @@ import { notifySuccess } from '../../lib/Toastify';
 import { instance } from '../../lib/AxiosInstance';
 import Loader from '../../Components/Loader/Loader';
 import UserNotCreated from '../../Components/UserNotCreated/UserNotCreated';
-import Country from '../../Components/formstep/Country';
+import IncomeSource from '../../Components/formstep/IncomeSource';
+import UsaState from '../../Components/formstep/usaState';
 
 const MAX_STEPS = 15;
 
@@ -86,7 +87,7 @@ const MultistepForm: React.FC = () => {
         onNextStep={handleNextStep}
       >
         <div className="pt-[30px] mb-10">
-          <h5 className="font-semibold text-3xl mb-2">What's your name?</h5>
+          <h5 className="font-semibold text-3xl mb-2">First Name ?</h5>
           <p className="">
             <small className="text-inherit text-slate-500">
               This will be shown on your profile
@@ -96,7 +97,7 @@ const MultistepForm: React.FC = () => {
         <TextInput
           type="text"
           name="given_name"
-          placeholder="John Doe"
+          placeholder="John"
           register={register}
           required
         />
@@ -144,34 +145,10 @@ const MultistepForm: React.FC = () => {
         <FormCalender name="date_of_birth" register={register} required />
       </FormStep>
 
-      {/* --- email --- */}
+      {/* --- phone --- */}
       <FormStep
         stepNumber={4}
         isVisible={formStep === 3}
-        onNextStep={handleNextStep}
-        onPrevStep={handlePrevStep}
-      >
-        <div className="mt-10 mb-10">
-          <h5 className="font-semibold text-3xl mb-2">Email</h5>
-          <p className="">
-            <small className="text-inherit text-slate-500">
-              This will be shown on your profile
-            </small>
-          </p>
-        </div>
-        <TextInput
-          type="email"
-          name="email_address"
-          placeholder="Email"
-          register={register}
-          required
-        />
-      </FormStep>
-
-      {/* --- phone --- */}
-      <FormStep
-        stepNumber={5}
-        isVisible={formStep === 4}
         onNextStep={handleNextStep}
         onPrevStep={handlePrevStep}
       >
@@ -194,8 +171,8 @@ const MultistepForm: React.FC = () => {
 
       {/* --- street --- */}
       <FormStep
-        stepNumber={6}
-        isVisible={formStep === 5}
+        stepNumber={5}
+        isVisible={formStep === 4}
         onNextStep={handleNextStep}
         onPrevStep={handlePrevStep}
       >
@@ -218,8 +195,8 @@ const MultistepForm: React.FC = () => {
 
       {/* --- city --- */}
       <FormStep
-        stepNumber={7}
-        isVisible={formStep === 6}
+        stepNumber={6}
+        isVisible={formStep === 5}
         onNextStep={handleNextStep}
         onPrevStep={handlePrevStep}
       >
@@ -242,8 +219,8 @@ const MultistepForm: React.FC = () => {
 
       {/* --- state --- */}
       <FormStep
-        stepNumber={8}
-        isVisible={formStep === 7}
+        stepNumber={7}
+        isVisible={formStep === 6}
         onNextStep={handleNextStep}
         onPrevStep={handlePrevStep}
       >
@@ -255,19 +232,13 @@ const MultistepForm: React.FC = () => {
             </small>
           </p>
         </div>
-        <TextInput
-          type="text"
-          name="state"
-          placeholder="State"
-          register={register}
-          required
-        />
+        <UsaState name="country" register={register} required />
       </FormStep>
 
       {/* --- postal code --- */}
       <FormStep
-        stepNumber={9}
-        isVisible={formStep === 8}
+        stepNumber={8}
+        isVisible={formStep === 7}
         onNextStep={handleNextStep}
         onPrevStep={handlePrevStep}
       >
@@ -289,7 +260,7 @@ const MultistepForm: React.FC = () => {
       </FormStep>
 
       {/* --- country --- */}
-      <FormStep
+      {/* <FormStep
         stepNumber={10}
         isVisible={formStep === 9}
         onNextStep={handleNextStep}
@@ -303,20 +274,14 @@ const MultistepForm: React.FC = () => {
             </small>
           </p>
         </div>
-        {/* <TextInput
-          type="text"
-          name="country"
-          placeholder="USA"
-          register={register}
-          required
-        /> */}
-        <Country name="country" register={register} required />
-      </FormStep>
 
-      {/* --- tax ID --- */}
+        <Country name="country" register={register} required />
+      </FormStep> */}
+
+      {/* --- Income Source --- */}
       <FormStep
-        stepNumber={11}
-        isVisible={formStep === 10}
+        stepNumber={9}
+        isVisible={formStep === 8}
         onNextStep={handleNextStep}
         onPrevStep={handlePrevStep}
       >
@@ -328,19 +293,20 @@ const MultistepForm: React.FC = () => {
             </small>
           </p>
         </div>
-        <TextInput
+        {/* <TextInput
           type="number"
           name="tax_id"
           placeholder="Income Source"
           register={register}
           required
-        />
+        /> */}
+        <IncomeSource name="country" register={register} required />
       </FormStep>
 
       {/* --- agreement --- */}
       <FormStep
-        stepNumber={12}
-        isVisible={formStep === 11}
+        stepNumber={10}
+        isVisible={formStep === 9}
         // onNextStep={handleNextStep}
         onPrevStep={handlePrevStep}
         onNextStep={handleSubmit(handleFormCompletion)}
@@ -368,8 +334,8 @@ const MultistepForm: React.FC = () => {
       </FormStep>
 
       <FormStep
-        stepNumber={13}
-        isVisible={formStep === 12}
+        stepNumber={11}
+        isVisible={formStep === 10}
         onNextStep={handleNextStep}
       >
         {isLoading ? ( // Show loading indicator while isLoading is true
@@ -393,7 +359,7 @@ const MultistepForm: React.FC = () => {
         )}
       </FormStep>
 
-      <FormStep stepNumber={14} isVisible={formStep === 13}>
+      <FormStep stepNumber={12} isVisible={formStep === 11}>
         <div className="text-center">
           <h2 className="font-semibold text-3xl mb-8 mt-[10px]">
             Thank you for signing up!
