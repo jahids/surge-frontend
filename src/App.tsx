@@ -18,6 +18,7 @@ import MostTradedOnSharesPage from './Pages/MostTradedOnSharesPage/MostTradedOnS
 import NotificationPage from './Pages/NotificationPage/NotificationPage';
 import SocialPage from './Pages/SocialPage/SocialPage';
 import ExplorePage from './Pages/ExplorePage/ExplorePage';
+import StockBuyPage from './Pages/StockBuyPage/StockBuyPage';
 
 const App: React.FC = () => {
   const [cookies] = useCookies(['mytoken']);
@@ -47,6 +48,7 @@ const App: React.FC = () => {
         <Route path="/friend-list" element={<FriendListsPage />} />
         <Route path="/top-movers" element={<TopMoversPage />} />
         <Route path="/all-stock" element={<AllStockPage />} />
+        <Route path="/buy-stock" element={<StockBuyPage />} />
         <Route path="/most-traded-share" element={<MostTradedOnSharesPage />} />
         <Route path="/notification" element={<NotificationPage />} />
         <Route path="*" element={<NotFoundPage />} />

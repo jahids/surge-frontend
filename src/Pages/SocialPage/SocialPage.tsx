@@ -1,9 +1,10 @@
 import BottomNav from '../../Components/BottomNav/BottomNav';
+import SocialContainer from '../../Components/Social/SocialContainer';
 
 const SocialPage = () => {
   return (
     <div>
-      <h1>Social Page</h1>
+      <SocialContainer />
       <BottomNav />
     </div>
   );
