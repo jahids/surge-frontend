@@ -2,6 +2,7 @@
 import rocketPharma from '../../../assets/movers-img/rocket-pharma-logo-2016-outline@2x.webp';
 import ptc from '../../../assets/movers-img/ptcLogo.webp';
 import { useGetTopMoversQuery } from '../../../features/movers/moversApiSlice';
+import { Link } from 'react-router-dom';
 
 const TopMovers = () => {
   console.log('helllo ');
@@ -74,9 +75,11 @@ const TopMovers = () => {
 
       {/* --- see all btn --- */}
       <div className="text-center mt-5">
-        <button className="bg-gray-200 px-3 py-2 rounded-full text-[13px] font-bold">
-          See all
-        </button>
+        <Link to="/top-movers">
+          <button className="bg-gray-200 px-3 py-2 rounded-full text-[13px] font-bold">
+            See all
+          </button>
+        </Link>
       </div>
       {/* --- see all btn --- */}
     </div>

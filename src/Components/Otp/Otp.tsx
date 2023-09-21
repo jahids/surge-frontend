@@ -1,7 +1,7 @@
 /* eslint-disable no-unsafe-optional-chaining */
 import { useState, useEffect, SetStateAction } from 'react';
 import OtpInput from 'react-otp-input';
-import { useLocation } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import { instance } from '../../lib/AxiosInstance';
 import { useCookies } from 'react-cookie';
 import { notifyError, notifySuccess } from '../../lib/Toastify';
@@ -10,6 +10,8 @@ const Otp = () => {
   const location = useLocation();
   const [otp, setOtp] = useState('');
   console.log('cred', location.state);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const otprequest = async () => {
@@ -53,6 +55,8 @@ const Otp = () => {
             secure: true,
             sameSite: 'none',
           });
+
+          navigate('/multistep', { state: signupCall?.data?.data?.email });
         } else {
           console.log('signup not working');
         }

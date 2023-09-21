@@ -1,6 +1,7 @@
 /* eslint-disable  */
 import { useGetSpecificNewsQuery, useGetallNewsQuery } from '../../features/news/newsApiSlice';
 import Loader from '../Loader/Loader';
+import AllStocks from './AllStocks/AllStocks';
 import FriendList from './FriendList/FriendList';
 import Invest from './Invest/Invest';
 import MostTraded from './MostTraded/MostTraded';
@@ -20,6 +21,9 @@ const MainContainer = () => {
     <div className="px-5 pb-[100px] min-h-screen">
       <section>
         <Invest />
+      </section>
+      <section>
+        <AllStocks />
       </section>
       <section>
         <News />

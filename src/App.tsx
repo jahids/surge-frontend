@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
@@ -13,6 +12,12 @@ import NotFoundPage from './Pages/NotFoundPage/NotFoundPage';
 import CompleteProfilePage from './Pages/CompleteProfilePage/CompleteProfilePage';
 import AllAssetsPage from './Pages/AllAssetsPage/AllAssetsPage';
 import FriendListsPage from './Pages/FriendListsPage/FriendListsPage';
+import TopMoversPage from './Pages/TopMoversPage/TopMoversPage';
+import AllStockPage from './Pages/AllStockPage/AllStockPage';
+import MostTradedOnSharesPage from './Pages/MostTradedOnSharesPage/MostTradedOnSharesPage';
+import NotificationPage from './Pages/NotificationPage/NotificationPage';
+import SocialPage from './Pages/SocialPage/SocialPage';
+import ExplorePage from './Pages/ExplorePage/ExplorePage';
 
 const App: React.FC = () => {
   const [cookies] = useCookies(['mytoken']);
@@ -35,10 +40,16 @@ const App: React.FC = () => {
         <Route path="/otp" element={<OtpPage />} />
         <Route path="/multistep" element={<MultistepForm />} />
         <Route path="/main" element={<MainPage />} />
+        <Route path="/social" element={<SocialPage />} />
+        <Route path="/explore" element={<ExplorePage />} />
         <Route path="/profile" element={<CompleteProfilePage />} />
         <Route path="/assets" element={<AllAssetsPage />} />
         <Route path="/friend-list" element={<FriendListsPage />} />
-        <Route path="/*" element={<NotFoundPage />} />
+        <Route path="/top-movers" element={<TopMoversPage />} />
+        <Route path="/all-stock" element={<AllStockPage />} />
+        <Route path="/most-traded-share" element={<MostTradedOnSharesPage />} />
+        <Route path="/notification" element={<NotificationPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <ToastContainer />
     </>

@@ -6,20 +6,20 @@
 // }
 
 import React, { useState } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm, SubmitHandler, Controller, useWatch } from 'react-hook-form';
 import FormStep from '../../Components/formstep/FormStep';
 import TextInput from '../../Components/formstep/TextInput';
 import FormCheckbox from '../../Components/formstep/FormCheckbox';
 import { FormData } from '../../Types/User';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import FormCalender from '../../Components/formstep/FormCalender';
 import Lottie from 'lottie-react';
 import verifiedIcon from '../../assets/img/animation_lmnaixm0.json';
-import { notifySuccess } from '../../lib/Toastify';
 import { instance } from '../../lib/AxiosInstance';
 import Loader from '../../Components/Loader/Loader';
 import UserNotCreated from '../../Components/UserNotCreated/UserNotCreated';
-import Country from '../../Components/formstep/Country';
+import Select from 'react-select';
+import { incomeSourceOptions, usaAllState } from '../../Utils/useState';
 
 const MAX_STEPS = 15;
 
@@ -27,13 +27,20 @@ const MultistepForm: React.FC = () => {
   const [apiStatus, setapiStatus] = useState(false);
   const [isLoading, setIsLoading] = useState(false); // Add loading state
   const navigate = useNavigate();
+  const { state } = useLocation();
 
   const {
     register,
-    watch,
     handleSubmit,
+    control,
     formState: { errors, isValid },
   } = useForm<FormData>({ mode: 'all' });
+
+  const formStepState = useWatch({
+    control,
+    name: 'state',
+    name : 'incomeSource'
+  });
 
   const [formStep, setFormStep] = useState<number>(0);
 
@@ -50,19 +57,28 @@ const MultistepForm: React.FC = () => {
     console.log('prev form step', formStep);
   };
 
+  // const watchedState = useWatch({
+  //   control,
+  //   name: 'state',
+  // });
+
   const handleFormCompletion: SubmitHandler<FormData> = values => {
-    console.log('data', values);
+    // console.log('data', {...values, email_addres : "hello@gmail.com"});
+    console.log("email", state)
+    const payload = {...values, email_address: state}
+    console.log('State value:', formStepState);
     if (values) {
       const otprequest = async () => {
         setIsLoading(true);
         try {
           const createAccount = await instance.post(`/accounts`, {
-            ...values,
+            ...payload
           });
           console.log('create account', createAccount);
           // const { success, message } = OtpRequestCall?.data;
           if (createAccount?.status === 200) {
             setapiStatus(true);
+            navigate("/main")
           }
         } catch (error) {
           console.log('otp error', error);
@@ -77,6 +93,17 @@ const MultistepForm: React.FC = () => {
     console.log('complemete', formStep);
   };
 
+  const options = usaAllState?.map(state => ({
+    value: state.abbreviation,
+    label: state.name,
+  }));
+
+  const ALlincomeSource = incomeSourceOptions?.map(state => ({
+    value: state.value,
+    label: state.label,
+  }));
+
+
   return (
     <div className="min-h-screen relative">
       {/* --- given name --- */}
@@ -86,7 +113,7 @@ const MultistepForm: React.FC = () => {
         onNextStep={handleNextStep}
       >
         <div className="pt-[30px] mb-10">
-          <h5 className="font-semibold text-3xl mb-2">What's your name?</h5>
+          <h5 className="font-semibold text-3xl mb-2">First Name ?</h5>
           <p className="">
             <small className="text-inherit text-slate-500">
               This will be shown on your profile
@@ -96,7 +123,7 @@ const MultistepForm: React.FC = () => {
         <TextInput
           type="text"
           name="given_name"
-          placeholder="John Doe"
+          placeholder="John"
           register={register}
           required
         />
@@ -144,34 +171,10 @@ const MultistepForm: React.FC = () => {
         <FormCalender name="date_of_birth" register={register} required />
       </FormStep>
 
-      {/* --- email --- */}
+      {/* --- phone --- */}
       <FormStep
         stepNumber={4}
         isVisible={formStep === 3}
-        onNextStep={handleNextStep}
-        onPrevStep={handlePrevStep}
-      >
-        <div className="mt-10 mb-10">
-          <h5 className="font-semibold text-3xl mb-2">Email</h5>
-          <p className="">
-            <small className="text-inherit text-slate-500">
-              This will be shown on your profile
-            </small>
-          </p>
-        </div>
-        <TextInput
-          type="email"
-          name="email_address"
-          placeholder="Email"
-          register={register}
-          required
-        />
-      </FormStep>
-
-      {/* --- phone --- */}
-      <FormStep
-        stepNumber={5}
-        isVisible={formStep === 4}
         onNextStep={handleNextStep}
         onPrevStep={handlePrevStep}
       >
@@ -194,8 +197,8 @@ const MultistepForm: React.FC = () => {
 
       {/* --- street --- */}
       <FormStep
-        stepNumber={6}
-        isVisible={formStep === 5}
+        stepNumber={5}
+        isVisible={formStep === 4}
         onNextStep={handleNextStep}
         onPrevStep={handlePrevStep}
       >
@@ -218,8 +221,8 @@ const MultistepForm: React.FC = () => {
 
       {/* --- city --- */}
       <FormStep
-        stepNumber={7}
-        isVisible={formStep === 6}
+        stepNumber={6}
+        isVisible={formStep === 5}
         onNextStep={handleNextStep}
         onPrevStep={handlePrevStep}
       >
@@ -242,8 +245,8 @@ const MultistepForm: React.FC = () => {
 
       {/* --- state --- */}
       <FormStep
-        stepNumber={8}
-        isVisible={formStep === 7}
+        stepNumber={7}
+        isVisible={formStep === 6}
         onNextStep={handleNextStep}
         onPrevStep={handlePrevStep}
       >
@@ -255,19 +258,27 @@ const MultistepForm: React.FC = () => {
             </small>
           </p>
         </div>
-        <TextInput
-          type="text"
+        <Controller
           name="state"
-          placeholder="State"
-          register={register}
-          required
+          control={control}
+          defaultValue=""
+          render={({ field }) => (
+            <Select
+              inputRef={field.ref}
+              options={options}
+              value={options.find(option => option.value === field.value)}
+              onChange={selectedOption =>
+                field.onChange(selectedOption?.value || '')
+              }
+            />
+          )}
         />
       </FormStep>
 
       {/* --- postal code --- */}
       <FormStep
-        stepNumber={9}
-        isVisible={formStep === 8}
+        stepNumber={8}
+        isVisible={formStep === 7}
         onNextStep={handleNextStep}
         onPrevStep={handlePrevStep}
       >
@@ -288,35 +299,11 @@ const MultistepForm: React.FC = () => {
         />
       </FormStep>
 
-      {/* --- country --- */}
-      <FormStep
-        stepNumber={10}
-        isVisible={formStep === 9}
-        onNextStep={handleNextStep}
-        onPrevStep={handlePrevStep}
-      >
-        <div className="mt-10 mb-10">
-          <h5 className="font-semibold text-3xl mb-2">Country</h5>
-          <p className="">
-            <small className="text-inherit text-slate-500">
-              This will be shown on your profile
-            </small>
-          </p>
-        </div>
-        {/* <TextInput
-          type="text"
-          name="country"
-          placeholder="USA"
-          register={register}
-          required
-        /> */}
-        <Country name="country" register={register} required />
-      </FormStep>
 
-      {/* --- tax ID --- */}
+      {/* --- Income Source --- */}
       <FormStep
-        stepNumber={11}
-        isVisible={formStep === 10}
+        stepNumber={9}
+        isVisible={formStep === 8}
         onNextStep={handleNextStep}
         onPrevStep={handlePrevStep}
       >
@@ -328,19 +315,50 @@ const MultistepForm: React.FC = () => {
             </small>
           </p>
         </div>
-        <TextInput
-          type="number"
-          name="tax_id"
-          placeholder="Income Source"
-          register={register}
-          required
-        />
+        {/* <IncomeSource allcontroler ={Controller, control} required /> */}
+        {/* <Controller
+          name="incomeSource"
+          control={control}
+          defaultValue=""
+          render={({ field }) => (
+            <Select
+              inputRef={field.ref}
+              options={ALlincomeSource}
+              value={ALlincomeSource.find(option => option.value === field.value)}
+              onChange={selectedOption =>
+                field.onChange(selectedOption?.value || '')
+              }
+              isMulti
+            />
+          )}
+        /> */}
+
+
+<Controller
+  name="funding_source"
+  control={control}
+  defaultValue={[]}
+  render={({ field }) => (
+    <Select
+      inputRef={field.ref}
+      options={ALlincomeSource}
+      value={ALlincomeSource.filter(option =>
+        field.value.includes(option.value)
+      )}
+      onChange={selectedOptions =>
+        field.onChange(selectedOptions.map(option => option.value))
+      }
+      isMulti
+    />
+  )}
+/>
+
       </FormStep>
 
       {/* --- agreement --- */}
       <FormStep
-        stepNumber={12}
-        isVisible={formStep === 11}
+        stepNumber={10}
+        isVisible={formStep === 9}
         // onNextStep={handleNextStep}
         onPrevStep={handlePrevStep}
         onNextStep={handleSubmit(handleFormCompletion)}
@@ -368,8 +386,8 @@ const MultistepForm: React.FC = () => {
       </FormStep>
 
       <FormStep
-        stepNumber={13}
-        isVisible={formStep === 12}
+        stepNumber={11}
+        isVisible={formStep === 10}
         onNextStep={handleNextStep}
       >
         {isLoading ? ( // Show loading indicator while isLoading is true
@@ -393,7 +411,7 @@ const MultistepForm: React.FC = () => {
         )}
       </FormStep>
 
-      <FormStep stepNumber={14} isVisible={formStep === 13}>
+      <FormStep stepNumber={12} isVisible={formStep === 11}>
         <div className="text-center">
           <h2 className="font-semibold text-3xl mb-8 mt-[10px]">
             Thank you for signing up!
