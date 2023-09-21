@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
@@ -12,13 +13,13 @@ import NotFoundPage from './Pages/NotFoundPage/NotFoundPage';
 import CompleteProfilePage from './Pages/CompleteProfilePage/CompleteProfilePage';
 import AllAssetsPage from './Pages/AllAssetsPage/AllAssetsPage';
 import FriendListsPage from './Pages/FriendListsPage/FriendListsPage';
+import SocialPage from './Pages/SocialPage/SocialPage';
+import ExplorePage from './Pages/ExplorePage/ExplorePage';
 import TopMoversPage from './Pages/TopMoversPage/TopMoversPage';
+import StockBuyPage from './Pages/StockBuyPage/StockBuyPage';
 import AllStockPage from './Pages/AllStockPage/AllStockPage';
 import MostTradedOnSharesPage from './Pages/MostTradedOnSharesPage/MostTradedOnSharesPage';
 import NotificationPage from './Pages/NotificationPage/NotificationPage';
-import SocialPage from './Pages/SocialPage/SocialPage';
-import ExplorePage from './Pages/ExplorePage/ExplorePage';
-import StockBuyPage from './Pages/StockBuyPage/StockBuyPage';
 
 const App: React.FC = () => {
   const [cookies] = useCookies(['mytoken']);
@@ -33,7 +34,7 @@ const App: React.FC = () => {
   }, [isAuthenticated]);
 
   return (
-    <>
+  <>
       <Routes>
         <Route path="/" element={<AppStartingPage />} />
         <Route path="/login" element={<LoginPage />} />

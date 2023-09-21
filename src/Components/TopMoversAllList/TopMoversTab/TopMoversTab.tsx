@@ -3,6 +3,7 @@ import { MdOutlineArrowBackIos } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import GainerMovers from '../GainerMovers/GainerMovers';
 import LoserMovers from '../LoserMovers/LoserMovers';
+import { useGetTopMoversQuery } from '../../../features/movers/moversApiSlice';
 
 const TopMoversTab = () => {
   const [activeTab, setActiveTab] = useState(1);
@@ -10,6 +11,33 @@ const TopMoversTab = () => {
   const handleTabClick = (tabNumber: number) => {
     setActiveTab(tabNumber);
   };
+
+  // Use the generated hooks to make API requests
+  const {
+    data: topmoverData,
+    isLoading: isLoadingtopmover,
+    isSuccess: isSuccesstopmover,
+    isError: isErrortopmover,
+    error: errortopmover,
+  } = useGetTopMoversQuery({ length: 10 });
+
+  // Handle loading state or errors here
+  if (isLoadingtopmover) {
+    return <div>Loading...</div>;
+  }
+
+  if (isErrortopmover) {
+    // Handle API error here
+    return <div>Error: {errortopmover?.message || errortopmover?.message}</div>;
+  }
+
+  if (isSuccesstopmover) {
+    // Handle specific news success here
+    // Use specificNewsData
+  }
+
+  console.log('topmoverData', topmoverData);
+
   return (
     <div>
       <div>
@@ -54,8 +82,10 @@ const TopMoversTab = () => {
       {/* --- tab button end --- */}
       {/* --- content area --- */}
       <div>
-        {activeTab === 1 && <GainerMovers />}
-        {activeTab === 2 && <LoserMovers />}
+        {activeTab === 1 && (
+          <GainerMovers gainers={topmoverData?.data?.gainers} />
+        )}
+        {activeTab === 2 && <LoserMovers losers={topmoverData?.data?.losers} />}
       </div>
       {/* --- content area --- */}
     </div>
