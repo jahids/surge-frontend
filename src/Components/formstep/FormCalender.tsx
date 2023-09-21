@@ -1,8 +1,4 @@
-const FormCalender = ({
-  name,
-  register,
-  required = false,
-}) => {
+const FormCalender = ({ name, register, required = false }) => {
   return (
     <div>
       <input

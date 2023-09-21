@@ -10,6 +10,8 @@ interface FormStepProps {
   isVisible: boolean;
   onNextStep: () => void;
   onPrevStep?: () => void;
+  Status ?: any
+  // customerror?: any
 }
 
 const FormStep: React.FC<FormStepProps> = ({
@@ -18,12 +20,17 @@ const FormStep: React.FC<FormStepProps> = ({
   onNextStep,
   onPrevStep,
   children,
+  Status
+  // customerror
 }) => {
   const navigate = useNavigate();
   console.log('is visible', isVisible, 'stepNumber', stepNumber);
   if (isVisible === true && stepNumber === 14) {
     navigate('/login');
   }
+
+   console.log("custtom", Status);
+  
 
   return (
     <div className="">
@@ -42,10 +49,14 @@ const FormStep: React.FC<FormStepProps> = ({
 
         {/* --- main content --- */}
         <div className="px-3 mt-[15%]">{children}</div>
+        {/* {customerror?.given_name && (
+          <p className="text-red-500">{customerror?.given_name.message}</p>
+        )} */}
         {/* --- main content --- */}
 
         <div className="px-3 py-3 first-line:mt-[60%] absolute bottom-0 right-0 ">
           <button
+            disabled={Status === false}
             onClick={onNextStep}
             type="button"
             className="w-[50px] h-[50px] bg-[#5A4FF4] text-white rounded-full flex items-center justify-center cursor-pointer"

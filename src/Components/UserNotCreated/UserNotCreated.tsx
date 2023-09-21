@@ -6,11 +6,11 @@ import { IoIosArrowBack } from 'react-icons/io';
 const UserNotCreated = () => {
   return (
     <div className="p-5">
-      <Link to="/registration">
+      {/* <Link to="/registration">
         <button className="bg-blue-600 p-4 rounded-full text-white">
           <IoIosArrowBack className="text-xl" />
         </button>
-      </Link>
+      </Link> */}
       <div className="mt-28">
         <Lottie animationData={userNotCreated} loop={true} />
       </div>
