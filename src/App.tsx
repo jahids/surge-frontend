@@ -21,6 +21,7 @@ import AllStockPage from './Pages/AllStockPage/AllStockPage';
 import MostTradedOnSharesPage from './Pages/MostTradedOnSharesPage/MostTradedOnSharesPage';
 import NotificationPage from './Pages/NotificationPage/NotificationPage';
 import  PlaidInit  from './Components/plaid/plaidinit';
+import OrderReview from './Components/orderReview/OrderReview';
 
 const App: React.FC = () => {
   const [cookies] = useCookies(['mytoken']);
@@ -55,6 +56,7 @@ const App: React.FC = () => {
         <Route path="/all-stock" element={<AllStockPage />} />
         <Route path="/buy-stock" element={<StockBuyPage />} />
         <Route path="/most-traded-share" element={<MostTradedOnSharesPage />} />
+        <Route path="/order-review" element={<OrderReview />} />
         <Route path="/notification" element={<NotificationPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

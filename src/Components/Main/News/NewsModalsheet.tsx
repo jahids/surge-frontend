@@ -93,7 +93,7 @@ const NewsModalsheet: React.FC<NewsModalsheetProps> = ({ onClose, news }) => {
     return <p>loading..</p>;
   }
 
-  console.log('any type', specificNewsData?.data?.news[0]);
+  console.log('any type', specificNewsData?.data?.news);
 
   const {
     author = '',

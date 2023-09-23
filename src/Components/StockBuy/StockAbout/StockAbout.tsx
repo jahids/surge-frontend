@@ -2,17 +2,16 @@ import Sheet from 'react-modal-sheet';
 import { useState } from 'react';
 
 import { BsFillArrowUpRightCircleFill } from 'react-icons/bs';
+import { truncateText } from '../../../Utils/converter';
 
-const StockAbout = () => {
+const StockAbout = ({ allspecificdata }: any) => {
   const [isOpen, setOpen] = useState(false);
   return (
     <div className="my-6">
       <p className="text-xl font-bold">About</p>
       <div className="my-4">
         <p className="text-justify">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ullam,
-          sapiente minus maxime architecto iusto voluptatibus quibusdam suscipit
-          temporibus nesciunt voluptatem{' '}
+          {truncateText(allspecificdata?.description, 230)}
           <button
             onClick={() => setOpen(true)}
             className="text-blue-500 font-medium"
@@ -27,12 +26,9 @@ const StockAbout = () => {
           <Sheet.Content>
             <Sheet.Scroller>
               <div className="px-5 ">
-                <p className="text-xl font-bold">About AAPL</p>
+                <p className="text-xl font-bold">{allspecificdata?.name}</p>
                 <p className="mt-10 mb-8 text-justify">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                  Voluptates et quaerat exercitationem deserunt in fugiat
-                  impedit, accusamus mollitia repellat debitis ex ipsa officiis
-                  maxime laborum iste saepe laboriosam excepturi cum!
+                  {truncateText(allspecificdata?.description, 300)}
                 </p>
                 <div>
                   <ul>
@@ -46,12 +42,19 @@ const StockAbout = () => {
                     </li>
                     <li className="flex items-center justify-between my-4">
                       <p className="text-gray-400">Sector</p>
-                      <p className="font-bold">Consumer Goods, Technology</p>
+                      <p className="font-bold">{allspecificdata?.ysector}</p>
                     </li>
                     <li className="flex items-center justify-between my-4">
                       <p className="text-gray-400">links</p>
                       <button className="flex items-center space-x-1 font-bold text-sm text-indigo-600 bg-indigo-100 p-1 rounded-md">
-                        <span>Website</span> <BsFillArrowUpRightCircleFill />
+                        <a
+                          href={allspecificdata?.weburl}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          Website
+                        </a>{' '}
+                        <BsFillArrowUpRightCircleFill />
                       </button>
                     </li>
                   </ul>

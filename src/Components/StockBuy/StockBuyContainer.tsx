@@ -2,31 +2,50 @@ import { MdOutlineArrowBackIos } from 'react-icons/md';
 import { useState } from 'react';
 import News from '../Main/News/News';
 import StockAbout from './StockAbout/StockAbout';
-import StockBuyButton from './StockBuyButton/StockBuyButton';
 import StockBuyChart from './StockBuyChart/StockBuyChart';
-import StockBuyHeader from './StockBuyHeader/StockBuyHeader';
-import StockCurrentPrice from './StockCurrentPrice/StockCurrentPrice';
-import StockFeatured from './StockFeatured/StockFeatured';
 import technology from '../../assets/img/technology.png';
 import virtualReality from '../../assets/img/virtual_reality.png';
-
 import { AiFillPlusCircle } from 'react-icons/ai';
 import { BsFillCheckCircleFill } from 'react-icons/bs';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useGetSpecificStockQuery } from '../../features/stock/allStockApiSlice';
+import StockBuy from '../sellbuy/StockBuy';
 
 const StockBuyContainer = () => {
-  // --- btn toggle state ---
   const [isPlusIcon, setIsPlusIcon] = useState(true);
-  //   // --- btn toggle ---
+  const [isOpen, setOpen] = useState(false);
+  const { state } = useLocation();
+  const navigate = useNavigate();
+  console.log('state lcoation', state);
+
+  // Use the useGetSpecificStockQuery hook to fetch specific stock data
+  const {
+    data: specificStockData,
+    isLoading: isSpecificStockLoading,
+    // isSuccess: isSpecificStockSuccess,
+    // isError: isSpecificStockError,
+  } = useGetSpecificStockQuery({ symbolname: state });
+
+  if (isSpecificStockLoading) {
+    return <p>loading..</p>;
+  }
+  // if (isSpecificStockError) {
+  //   return <p>Error</p>;
+  // }
+  console.log('specificStockData', specificStockData);
+
   const handleClick = () => {
     setIsPlusIcon(prevState => !prevState);
   };
+
+  // Watch the selected option
+
   return (
     <div className="px-5 pb-10 relative">
       {/* -- top bar start --- */}
       <section>
         <div className="flex items-center justify-between py-5">
-          <Link to="/main">
+          <Link onClick={() => navigate(-1)}>
             <div>
               <MdOutlineArrowBackIos className="text-2xl text-gray-500" />
             </div>
@@ -51,17 +70,17 @@ const StockBuyContainer = () => {
       <section>
         <div className="flex items-center justify-between">
           <div className="space-y-2">
-            <p className="text-sm font-semibold">AAPL</p>
+            <p className="text-sm font-semibold">{specificStockData?.symbol}</p>
             <p className="text-3xl font-bold">
               {/* Revance <br /> Therapeutics */}
-              Apple
+              {specificStockData?.name}
             </p>
             <p className="text-3xl font-bold">$175.48</p>
           </div>
           <div className="bg-gray-100 rounded-full">
             <img
               className="w-12 h-12 rounded-full object-contain"
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYmBKxL0Gti8rMPYegHYJ5wKqX6niYWb8hFvBwuEeAM9tCypmuRHlAQFUgpdwSwzxPPVY&usqp=CAU"
+              src={specificStockData?.logo}
               alt="revance"
             />
           </div>
@@ -77,7 +96,7 @@ const StockBuyContainer = () => {
 
       {/* --- stock details start --- */}
       <section>
-        <StockAbout />
+        <StockAbout allspecificdata={specificStockData || []} />
       </section>
       {/* --- stock details end --- */}
 
@@ -129,10 +148,16 @@ const StockBuyContainer = () => {
       {/* --- buy button start --- */}
       <section className="fixed bottom-0 right-0 mb-10 mr-5">
         <div>
-          <button className="bg-indigo-600 px-14 py-3 text-white rounded-full">
+          <button
+            onClick={() => setOpen(true)}
+            className="bg-indigo-600 px-14 py-3 text-white rounded-full"
+          >
             Buy
           </button>
         </div>
+
+        {/* buy component */}
+        <StockBuy isOpen={isOpen} setOpen={setOpen} />
       </section>
       {/* --- buy button end --- */}
     </div>
