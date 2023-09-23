@@ -3,8 +3,10 @@ import { ImClock2 } from 'react-icons/im';
 import { FaAddressBook } from 'react-icons/fa';
 import { MdDarkMode } from 'react-icons/md';
 import { BsQuestionOctagonFill } from 'react-icons/bs';
+import { useNavigate } from 'react-router-dom';
 
 const NavigateListItem = () => {
+  const navigate = useNavigate();
   return (
     // BiSolidUser
     <div className="mt-8">
@@ -14,6 +16,16 @@ const NavigateListItem = () => {
           <li className="flex items-center mb-4">
             <BiSolidUser className="text-xl" />{' '}
             <span className="mx-3 text-md font-bold">Profile</span>
+          </li>
+
+          <li className="flex items-center mb-4">
+            <BiSolidUser className="text-xl" />{' '}
+            <span
+              className="mx-3 text-md font-bold"
+              onClick={() => navigate('/addfund')}
+            >
+              Addfund
+            </span>
           </li>
           <li className="flex items-center mb-4">
             <ImClock2 className="text-xl" />

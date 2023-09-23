@@ -20,8 +20,10 @@ import StockBuyPage from './Pages/StockBuyPage/StockBuyPage';
 import AllStockPage from './Pages/AllStockPage/AllStockPage';
 import MostTradedOnSharesPage from './Pages/MostTradedOnSharesPage/MostTradedOnSharesPage';
 import NotificationPage from './Pages/NotificationPage/NotificationPage';
-import  PlaidInit  from './Components/plaid/plaidinit';
 import OrderReview from './Components/orderReview/OrderReview';
+import  PlaidInit  from './Components/plaid/plaidinit';
+import StockBuy from './Components/sellbuy/StockBuy';
+import Addfund from './Pages/AddFund/Addfund';
 
 const App: React.FC = () => {
   const [cookies] = useCookies(['mytoken']);
@@ -51,6 +53,8 @@ const App: React.FC = () => {
         <Route path="/explore" element={<ExplorePage />} />
         <Route path="/profile" element={<CompleteProfilePage />} />
         <Route path="/assets" element={<AllAssetsPage />} />
+        <Route path="/addfund" element={<Addfund />} />
+        <Route path="/buy/:symbol" element={<StockBuy />} />
         <Route path="/friend-list" element={<FriendListsPage />} />
         <Route path="/top-movers" element={<TopMoversPage />} />
         <Route path="/all-stock" element={<AllStockPage />} />

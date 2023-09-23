@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 export const truncateText = (text: string, maxLength: number) => {
-  if (text.length <= maxLength) {
+  if (text?.length <= maxLength) {
     return text;
   }
   const truncatedText = text.substring(0, maxLength);
@@ -14,18 +14,27 @@ export const truncateText = (text: string, maxLength: number) => {
   return truncatedText + '...';
 };
 
+//
 
-export const qtyToNotional = (perSharePrice : string | number , qty: string | number,balance  : string | number)=>{
-  let notionalValue =  Number(perSharePrice) * Number(qty) ;
-  if(notionalValue > Number(balance)){
-    notionalValue = Number(balance)/ Number(perSharePrice);
+export const qtyToNotional = (
+  perSharePrice: string | number,
+  qty: string | number,
+  balance: string | number
+) => {
+  let notionalValue = Number(perSharePrice) * Number(qty);
+  if (notionalValue > Number(balance)) {
+    notionalValue = Number(balance) / Number(perSharePrice);
   }
   return notionalValue;
-}
-export const notionalToQty = (perSharePrice : string | number , notionalValue: string | number , balance : string | number)=>{
-  if(notionalValue > balance){
+};
+export const notionalToQty = (
+  perSharePrice: string | number,
+  notionalValue: string | number,
+  balance: string | number
+) => {
+  if (notionalValue > balance) {
     notionalValue = balance;
   }
-  const quantity =   Number(notionalValue)/Number(perSharePrice) ;
+  const quantity = Number(notionalValue) / Number(perSharePrice);
   return quantity;
-}
+};
