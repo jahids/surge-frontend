@@ -5,7 +5,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
     // get specific news
     getSpecificStock: builder.query({
       query: ({ symbolname }) => ({
-        url: `/news/${symbolname}`,
+        url: `symbol?name=${symbolname}`,
         method: 'GET',
         headers: {
           'content-type': 'Application/json',
