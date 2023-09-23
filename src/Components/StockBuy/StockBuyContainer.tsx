@@ -93,7 +93,18 @@ const StockBuyContainer = () => {
         <StockBuyChart />
       </section>
       {/* --- stock chart end --- */}
+      <div className="flex justify-center gap-2 mt-2 mb-5">
+        <button className="bg-indigo-600 px-14 py-3 text-white rounded-full">
+          Sell
+        </button>
 
+        <button
+          onClick={() => navigate('/buy')}
+          className="bg-indigo-600 px-14 py-3 text-white rounded-full"
+        >
+          Buy
+        </button>
+      </div>
       {/* --- stock details start --- */}
       <section>
         <StockAbout allspecificdata={specificStockData || []} />
@@ -148,16 +159,16 @@ const StockBuyContainer = () => {
       {/* --- buy button start --- */}
       <section className="fixed bottom-0 right-0 mb-10 mr-5">
         <div>
-          <button
+          {/* <button
             onClick={() => setOpen(true)}
             className="bg-indigo-600 px-14 py-3 text-white rounded-full"
           >
             Buy
-          </button>
+          </button> */}
         </div>
 
         {/* buy component */}
-        <StockBuy isOpen={isOpen} setOpen={setOpen} />
+        {/* <StockBuy isOpen={isOpen} setOpen={setOpen} /> */}
       </section>
       {/* --- buy button end --- */}
     </div>
