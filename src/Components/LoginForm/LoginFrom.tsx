@@ -1,9 +1,36 @@
+/* eslint-disable  */
 import { BsArrowLeft } from 'react-icons/bs';
 import companyLogo from '../../assets/img/logo.svg';
 import { useNavigate } from 'react-router';
+import { useState } from 'react';
+import { instance } from '../../lib/AxiosInstance';
+import { notifyError } from '../../lib/Toastify';
 
 const LoginFrom = () => {
   const navigate = useNavigate();
+  const [email, setemail] = useState('');
+  const [password, setpassword] = useState('');
+
+  const handlelogin = async (e) => {
+    e.preventDefault()
+    const payload = {
+      email,
+      password,
+    };
+    try {
+      const data = await instance.post(`signin`, {
+        ...payload,
+      });
+
+      navigate('/main')
+
+      console.log('data', data);
+    } catch (error) {
+      console.log('error', error);
+      notifyError(error?.response?.data?.error)
+    }
+  };
+
   return (
     <div className="p-5">
       <div>
@@ -33,6 +60,7 @@ const LoginFrom = () => {
         <form action="" className="mt-16">
           <div className="form-control max-w-lg mb-5 ">
             <input
+              onChange={e => setemail(e.target.value)}
               type="email"
               placeholder="Email address"
               className="input input-bordered w-full max-w-lg rounded-[21px] focus:outline-none focus:ring-2 focus:ring-[#908FEC]"
@@ -40,6 +68,7 @@ const LoginFrom = () => {
           </div>
           <div className="form-control max-w-lg mb-5">
             <input
+              onChange={e => setpassword(e.target.value)}
               type="password"
               placeholder="Password"
               className="input w-full input-bordered max-w-lg rounded-[21px] focus:outline-none focus:ring-2 focus:ring-[#908FEC]"
@@ -47,7 +76,10 @@ const LoginFrom = () => {
           </div>
 
           <div className="mt-16">
-            <button className="btn btn-active btn-primary w-full mt-5 rounded-[21px]">
+            <button
+              onClick={(e)=>handlelogin(e)}
+              className="btn btn-active btn-primary w-full mt-5 rounded-[21px]"
+            >
               Login
             </button>
           </div>

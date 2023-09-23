@@ -24,6 +24,7 @@ import OrderReview from './Components/orderReview/OrderReview';
 import  PlaidInit  from './Components/plaid/plaidinit';
 import StockBuy from './Components/sellbuy/StockBuy';
 import Addfund from './Pages/AddFund/Addfund';
+import Statement from './Pages/statement/Statement';
 
 const App: React.FC = () => {
   const [cookies] = useCookies(['mytoken']);
@@ -55,6 +56,7 @@ const App: React.FC = () => {
         <Route path="/assets" element={<AllAssetsPage />} />
         <Route path="/addfund" element={<Addfund />} />
         <Route path="/buy" element={<StockBuy />} />
+        <Route path="/statement" element={<Statement />} />
         <Route path="/friend-list" element={<FriendListsPage />} />
         <Route path="/top-movers" element={<TopMoversPage />} />
         <Route path="/all-stock" element={<AllStockPage />} />
