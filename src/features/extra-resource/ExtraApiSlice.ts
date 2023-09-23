@@ -3,7 +3,7 @@ import { apiSlice } from '../api/apiSlice';
 export const userApiSlice = apiSlice.injectEndpoints({
   endpoints: builder => ({
     // get specific news
-    getSpecificStock: builder.query({
+    getSpecificSymboldata: builder.query({
       query: ({ symbolname }) => ({
         url: `symbol?name=${symbolname}`,
         method: 'GET',
@@ -14,18 +14,8 @@ export const userApiSlice = apiSlice.injectEndpoints({
       }),
     }),
 
-    // get All news
-    getAllStock: builder.query({
-      query: ({ limit }) => ({
-        url: `stock?limit=${limit}`,
-        method: 'GET',
-        headers: {
-          'content-type': 'Application/json',
-        },
-        credentials: 'include',
-      }),
-    }),
+    // another
   }),
 });
 
-export const { useGetAllStockQuery, useGetSpecificStockQuery } = userApiSlice;
+export const { useGetSpecificSymboldataQuery } = userApiSlice;

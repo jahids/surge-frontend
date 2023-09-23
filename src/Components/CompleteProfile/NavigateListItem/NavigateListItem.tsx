@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import { BiSolidUser, BiLogOutCircle } from 'react-icons/bi';
 import { ImClock2 } from 'react-icons/im';
 import { FaAddressBook } from 'react-icons/fa';
@@ -33,7 +35,12 @@ const NavigateListItem = () => {
           </li>
           <li className="flex items-center mb-4">
             <FaAddressBook className="text-xl" />
-            <span className="mx-3 text-md font-bold">Statements</span>
+            <span
+              className="mx-3 text-md font-bold"
+              onClick={() => navigate('/statement')}
+            >
+              Statements
+            </span>
           </li>
           <li className="flex items-center mb-4">
             <MdDarkMode className="text-2xl" />

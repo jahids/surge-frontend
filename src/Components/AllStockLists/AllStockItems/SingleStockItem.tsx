@@ -4,14 +4,17 @@ import { useEffect, useState } from 'react';
 import { truncateText } from '../../../Utils/converter';
 import { instance } from '../../../lib/AxiosInstance';
 import { useNavigate } from 'react-router-dom';
-
 const defaultlogo = `https://images2.imgbox.com/52/06/7xFpAH04_o.png`;
 
 function SingleStockItem({ data }: any) {
   const [extradata, setextradata] = useState(null);
   const [marketparcentage, setmarketparcentage] = useState(null);
+console.log('data', data);
 
   const navigate = useNavigate();
+
+
+  
 
   useEffect(() => {
     const findExtraDes = async () => {
@@ -53,7 +56,9 @@ function SingleStockItem({ data }: any) {
               </p>
             </div>
           </div>
+
           <div>
+
             <div>
               <button className="bg-green-200 py-2 px-2 rounded-full text-green-500 text-xs font-semibold">
                 {`${marketparcentage || '3.98'}%`}

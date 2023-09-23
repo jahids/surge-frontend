@@ -25,7 +25,7 @@ export const qtyToNotional = (
   if (notionalValue > Number(balance)) {
     notionalValue = Number(balance) / Number(perSharePrice);
   }
-  return notionalValue;
+  return notionalValue.toFixed(2);
 };
 export const notionalToQty = (
   perSharePrice: string | number,
@@ -36,5 +36,5 @@ export const notionalToQty = (
     notionalValue = balance;
   }
   const quantity = Number(notionalValue) / Number(perSharePrice);
-  return quantity;
+  return quantity.toFixed(2);
 };

@@ -75,7 +75,7 @@ const StockBuyContainer = () => {
               {/* Revance <br /> Therapeutics */}
               {specificStockData?.name}
             </p>
-            <p className="text-3xl font-bold"> ${specificStockData?.price.price} </p>
+            <p className="text-3xl font-bold"> ${specificStockData?.price?.price} </p>
           </div>
           <div className="bg-gray-100 rounded-full">
             <img
@@ -99,7 +99,7 @@ const StockBuyContainer = () => {
         </button>
 
         <button
-          onClick={() => navigate(`/buy/${specificStockData?.symbol}`)}
+          onClick={() => navigate(`/buy/${specificStockData?.symbol}`,{state:{data : specificStockData}})}
           className="bg-indigo-600 px-14 py-3 text-white rounded-full"
         >
           Buy

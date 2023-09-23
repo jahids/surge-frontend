@@ -1,8 +1,8 @@
 /* eslint-disable */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { MdOutlineArrowBackIos } from 'react-icons/md';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { notionalToQty, qtyToNotional } from '../../Utils/converter';
 
 type FormData = {
@@ -17,27 +17,58 @@ function StockBuy() {
   const {symbol : shareSymbol} = useParams();
   const { handleSubmit, control, watch, setValue } = useForm<FormData>();
   const [selectedOption, setSelectedOption] = useState('market'); // Default to 'Market'
-  const [singleSharePrice, setSingleSharePrice] = useState(8);
+  const [singleSharePrice, setSingleSharePrice] = useState(0);
   const [buyingPrice, setBuyingPrice] = useState('');
   const [buyingQuantity, setBuyingQuantity] = useState('');
   const [limitPrice, setLimitPrice] = useState('');
   const [balance, setBalance] = useState(45);
   const [symbol, setSymbol] = useState(shareSymbol);
 
+  const [post,setPost] = useState('');
+
   const [available, setAvailable] = useState(234234);
 
   const selected = watch('orderType', selectedOption);
 
+  const {state} = useLocation();
+
+  useEffect(()=>{
+    if(state?.data){
+
+      const stockData = state.data;
+
+      setSingleSharePrice(stockData?.price?.price);
+      setAvailable(stockData?.price.volume);
+      console.log('🎈',state);
+    }
+  },[]);
+
   const onSubmit = (ev: any) => {
     ev.preventDefault();
 
-    console.log(`per share price : ${singleSharePrice}`);
 
-    console.log('buying quantity: ', buyingQuantity);
-    console.log('buying price : ', buyingPrice);
-    console.log(`limit price:`, limitPrice);
+    const orderData = {
+        symbol : shareSymbol,
+        singlePrice : singleSharePrice,
+        quantity : buyingQuantity,
+        totalPrice : buyingPrice,
+        limitPrice : limitPrice,
+        post : post,
+        type : selectedOption,
+        _data : state?.data
+    };
+    console.log(`🎗🎀🎁`,orderData);
 
-    // navigate('/order-review', { state: data });
+    // console.log(`per share price : ${singleSharePrice}`);
+
+    // console.log('buying quantity: ', buyingQuantity);
+    // console.log('buying price : ', buyingPrice);
+    // console.log(`limit price:`, limitPrice);
+    // console.log(`🎉 post=`,post);
+    // console.log(`type=`,selectedOption);
+    
+
+    navigate('/order-review', { state: orderData });
   };
 
   //   const handleOptionChange = (option: string) => {
@@ -149,7 +180,7 @@ function StockBuy() {
 
           <div className="flex justify-center">
             {/* <div> */}
-            <textarea style={{width:'80%'}} className="textarea" placeholder="Share your thoughts"></textarea>
+            <textarea style={{width:'80%'}} value={post} onChange={(ev) => setPost(ev.target.value)} className="textarea" placeholder="Share your thoughts"></textarea>
               {/* <span>gif</span> */}
             {/* </div> */}
             {/* <div>
