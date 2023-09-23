@@ -13,3 +13,28 @@ export const truncateText = (text: string, maxLength: number) => {
   // If there are no spaces in the truncated text, simply add ellipsis
   return truncatedText + '...';
 };
+
+//
+
+export const qtyToNotional = (
+  perSharePrice: string | number,
+  qty: string | number,
+  balance: string | number
+) => {
+  let notionalValue = Number(perSharePrice) * Number(qty);
+  if (notionalValue > Number(balance)) {
+    notionalValue = Number(balance) / Number(perSharePrice);
+  }
+  return notionalValue;
+};
+export const notionalToQty = (
+  perSharePrice: string | number,
+  notionalValue: string | number,
+  balance: string | number
+) => {
+  if (notionalValue > balance) {
+    notionalValue = balance;
+  }
+  const quantity = Number(notionalValue) / Number(perSharePrice);
+  return quantity;
+};
