@@ -13,7 +13,7 @@ const LoginFrom = () => {
   const [email, setemail] = useState('');
   const [password, setpassword] = useState('');
 
-  const handlelogin = async (e) => {
+  const handlelogin = async (e : any) => {
     e.preventDefault()
     const payload = {
       email,
