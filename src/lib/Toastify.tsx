@@ -15,10 +15,10 @@ import 'react-toastify/dist/ReactToastify.css';
 //     type: 'success',
 //   });
 
-export const notifySuccess = (message: string) => {
+export const notifySuccess = (message: string, autoClose : number = 5000) => {
   toast(message, {
     position: 'top-right',
-    autoClose: 5000,
+    autoClose: autoClose,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,

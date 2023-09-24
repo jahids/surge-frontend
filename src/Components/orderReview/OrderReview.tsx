@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 // import React from 'react';
 
 // function OrderReview() {
@@ -48,6 +49,7 @@ import React, { useEffect, useState } from 'react';
 import { BiImage } from 'react-icons/bi';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { instance } from '../../lib/AxiosInstance';
+import { notifySuccess } from '../../lib/Toastify';
 
 function OrderReview() {
   const navigate = useNavigate();
@@ -57,17 +59,22 @@ function OrderReview() {
   const handleConfirm = () => {
     console.log(`firing order : `, state);
     const orderObj = {
-      ...state
+      ...state,
     };
     delete orderObj['_data'];
-    instance.post(`/order/`,orderObj).then(res =>{
-      console.log(res);
-    }).catch(er => console.log(er));
-  }
+
+    // console.log(orderObj);
+    instance
+      .post(`/order/`, orderObj)
+      .then(res => {
+        console.log(res);
+        notifySuccess(`Successfully placed order for ${state.symbol}`,3000);
+      })
+      .catch(er => console.log(er));
+  };
 
   useEffect(() => {
     console.log(state);
-
   }, []);
 
   return (
@@ -87,11 +94,10 @@ function OrderReview() {
           <div>
             <h3 className="text-lg font-bold">Buy {state?._data?.name} </h3>
             <p> {state?._data?.symbol} </p>
-
           </div>
           <div className="w-16 h-16">
             <img
-              src={state?._data.logo ?? "https://via.placeholder.com/48"}
+              src={state?._data.logo ?? 'https://via.placeholder.com/48'}
               alt="Stock Image"
               className="w-full h-full rounded-md"
             />
@@ -101,7 +107,12 @@ function OrderReview() {
 
       <div className="mt-4 p-2 bg-white rounded-md shadow-md">
         {/* <span className="text-white flex items-center"> */}
-        <textarea className="textarea w-full text-lg font-bold" placeholder="Bio" value={state.post} disabled></textarea>
+        <textarea
+          className="textarea w-full text-lg font-bold"
+          placeholder="Bio"
+          value={state.post}
+          disabled
+        ></textarea>
         {/* <BiImage className="mr-2" /> */}
         {/* Another Image */}
 
@@ -116,7 +127,9 @@ function OrderReview() {
             <h1 className="text-lg py-2 font-bold">Quantity</h1>
 
             <h1 className="text-lg py-2 font-bold">Amount</h1>
-            {state?.type == 'limit' ? <h1 className="text-lg py-2 font-bold">Limit Price</h1> : null}
+            {state?.type == 'limit' ? (
+              <h1 className="text-lg py-2 font-bold">Limit Price</h1>
+            ) : null}
             <h1 className="text-lg py-2 font-bold">Type</h1>
           </div>
           <div>
@@ -124,7 +137,9 @@ function OrderReview() {
             <h1 className="text-lg py-2 font-bold"> {state.singlePrice} </h1>
             <h1 className="text-lg py-2 font-bold"> {state.quantity} </h1>
             <h1 className="text-lg py-2 font-bold"> ${state.totalPrice} </h1>
-            {state?.type == 'limit' ? <h1 className="text-lg py-2 font-bold"> {state.limitPrice} </h1> : null}
+            {state?.type == 'limit' ? (
+              <h1 className="text-lg py-2 font-bold"> {state.limitPrice} </h1>
+            ) : null}
             <h1 className="text-lg py-2 font-bold"> {state.type} </h1>
           </div>
         </div>
@@ -133,7 +148,10 @@ function OrderReview() {
         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       </h1> */}
       <div className="mt-10 flex w-full items-center justify-center">
-        <button onClick={handleConfirm} className="bg-blue-500 w-full text-white px-6 py-3 rounded-lg shadow-">
+        <button
+          onClick={handleConfirm}
+          className="bg-blue-500 w-full text-white px-6 py-3 rounded-lg shadow-"
+        >
           Confirm
         </button>
       </div>
@@ -142,7 +160,6 @@ function OrderReview() {
 }
 
 export default OrderReview;
-
 
 /*
 {
