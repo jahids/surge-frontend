@@ -65,14 +65,7 @@ const RegistrationFrom = () => {
     }
   };
 
-//   if(isLoading){
-// return <p>loading...</p>
-//   }
 
-//   if(isError){
-    
-// return <p>email already exist</p>
-//   }
 
   return (
     <div className="p-5">

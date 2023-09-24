@@ -56,17 +56,34 @@ import { useNavigate } from 'react-router-dom';
 const defaultlogo = `https://images2.imgbox.com/52/06/7xFpAH04_o.png`;
 import { BiPlus, BiCheck } from 'react-icons/bi';
 
-function AssetsList({ data }: any) {
+function AssetsList({ data , add , remove}: any) {
   const [extradata, setextradata] = useState(null);
   const [marketparcentage, setmarketparcentage] = useState(null);
+  const [selectedItems, setSelectedItems] = useState<string[]>([]);
   const [isPlusIcon, setIsPlusIcon] = useState(true);
   //   // --- btn toggle ---
-  const handleClick = () => {
-    setIsPlusIcon(prevState => !prevState);
-  };
-console.log('data', data);
 
-  const navigate = useNavigate();
+let myarr  = []
+  const handleClick = () => {
+    myarr.push(data?.symbol);
+    // add(data?.symbol);
+
+
+    // console.log('arr',myarr);
+    if(isPlusIcon){
+      add(data?.symbol);
+    }else{
+      remove(data?.symbol);
+    }
+    setIsPlusIcon((prevState) => !prevState);
+
+  };
+
+  const handleDoneClick = () => {
+    // Log the selected items when the "Done" button is clicked
+    console.log('Selected Items:', selectedItems?.symbol);
+
+  };
 
 
   
@@ -127,6 +144,11 @@ console.log('data', data);
           </div>
         </div>
       </>
+      <div className="fixed w-[90%] bottom-0 py-5">
+      <button onClick={handleDoneClick} className="bg-indigo-600 w-full rounded-full py-3 text-white font-bold">
+        Done
+      </button>
+    </div>
     </>
   );
 }
