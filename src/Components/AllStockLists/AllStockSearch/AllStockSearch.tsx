@@ -1,7 +1,6 @@
 import { MdOutlineArrowBackIos } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 // import { useGetAllStockQuery } from '../../../features/stock/allStockApiSlice';
-import Loader from '../../Loader/Loader';
 
 const AllStockSearch = () => {
   return (

@@ -1,8 +1,11 @@
+import { useState } from 'react';
 import { useGetAllStockQuery } from '../../features/stock/allStockApiSlice';
 import Loader from '../Loader/Loader';
 import AssetsList from './AssetsList/AssetsList';
 import AssetsSearch from './AssetsSearch/AssetsSearch';
 import DoneBtn from './DoneBtn/DoneBtn';
+
+const selected = new Set();
 
 const AllAssets = () => {
   const {
@@ -12,6 +15,14 @@ const AllAssets = () => {
     isError: isAllStockError,
   } = useGetAllStockQuery({ limit: 30 });
 
+  const addToList = (symbol: string) => {
+    selected.add(symbol);
+    console.log(selected);
+  };
+  const removeFromList = (symbol: string) => {
+    selected.delete(symbol);
+    console.log(selected);
+  };
   console.log('stock item assets', allStockData);
 
   // Use the useGetSpecificStockQuery hook to fetch specific stock data
@@ -34,13 +45,16 @@ const AllAssets = () => {
         {allStockData?.data?.map((item: any) => (
           <>
             {/* <SingleStockItem key={Math.random()} data={item} /> */}
-            <AssetsList key={Math.random()} data={item} />
+            <AssetsList
+              key={Math.random()}
+              add={addToList}
+              remove={removeFromList}
+              data={item}
+            />
           </>
         ))}
       </section>
-      <section className="">
-        <DoneBtn />
-      </section>
+      <section className="">{/* <DoneBtn /> */}</section>
     </div>
   );
 };
