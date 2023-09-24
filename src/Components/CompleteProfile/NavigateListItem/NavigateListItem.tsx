@@ -6,9 +6,19 @@ import { FaAddressBook } from 'react-icons/fa';
 import { MdDarkMode } from 'react-icons/md';
 import { BsQuestionOctagonFill } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
+import { instance } from '../../../lib/AxiosInstance';
 
 const NavigateListItem = () => {
   const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      const data = await instance.get(`/signout`);
+      console.log('data', data);
+    } catch (error) {
+      console.log('error', error);
+    }
+  };
   return (
     // BiSolidUser
     <div className="mt-8">
@@ -57,7 +67,10 @@ const NavigateListItem = () => {
         <ul>
           <li className="flex mb-4 items-center">
             <BiLogOutCircle className="text-3xl text-red-500" />{' '}
-            <span className="mx-3 text-md text-red-500 font-bold ">
+            <span
+              onClick={handleLogout}
+              className="mx-3 text-md text-red-500 font-bold "
+            >
               Log out
             </span>
           </li>

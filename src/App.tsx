@@ -44,12 +44,14 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<AppStartingPage />} />
 
-        <Route path="/plaid" element={<PlaidInit />} />
+       
 
         <Route path="/login" element={<LoginPage />} />
         <Route path="/registration" element={<RegistrationPage />} />
         <Route path="/otp" element={<OtpPage />} />
+
         <Route path="/multistep" element={<MultistepForm />} />
+        <Route path="/plaid" element={<PlaidInit />} />
         <Route path="/main" element={<MainPage />} />
         <Route path="/social" element={<SocialPage />} />
         <Route path="/explore" element={<ExplorePage />} />
@@ -67,6 +69,7 @@ const App: React.FC = () => {
         <Route path="/most-traded-share" element={<MostTradedOnSharesPage />} />
         <Route path="/order-review" element={<OrderReview />} />
         <Route path="/notification" element={<NotificationPage />} />
+        
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
       <ToastContainer />
