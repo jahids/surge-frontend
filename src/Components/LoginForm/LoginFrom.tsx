@@ -5,8 +5,10 @@ import { useNavigate } from 'react-router';
 import { useState } from 'react';
 import { instance } from '../../lib/AxiosInstance';
 import { notifyError } from '../../lib/Toastify';
+import { useCookies } from 'react-cookie';
 
 const LoginFrom = () => {
+  const [, setCookie] = useCookies(['token']);
   const navigate = useNavigate();
   const [email, setemail] = useState('');
   const [password, setpassword] = useState('');
@@ -21,10 +23,16 @@ const LoginFrom = () => {
       const data = await instance.post(`signin`, {
         ...payload,
       });
+      console.log('data', data);
+      setCookie('mytoken', data?.data?.data?.token, {
+        path: '/',
+        secure: true,
+        sameSite: 'none',
+      });
 
       navigate('/main')
 
-      console.log('data', data);
+    
     } catch (error) {
       console.log('error', error);
       notifyError(error?.response?.data?.error)
