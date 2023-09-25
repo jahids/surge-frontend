@@ -3,20 +3,21 @@ import SocialPostBadge from './SocialPostBadge/SocialPostBadge';
 import SocialPostText from './SocialPostText/SocialPostText';
 import SocialUserInfo from './SocialUserInfo/SocialUserInfo';
 
-const SocialPost = () => {
+const SocialPost = ({postData }: any) => {
+  console.log(postData)
   return (
-    <div className="mt-3">
+    <div className="mt-3 mb-3 bg-white-500" >
       <div>
-        <SocialUserInfo />
+        <SocialUserInfo user={postData?.user[0]} />
       </div>
       <div>
-        <SocialPostBadge />
+        <SocialPostBadge  />
       </div>
       <div>
-        <SocialPostText />
+        <SocialPostText text ={postData?.text}/>
       </div>
       <div>
-        <SocialLikeCommentsBtn />
+        <SocialLikeCommentsBtn likeCount={postData?.like.length} commentCount = {postData?.comments.length} />
       </div>
     </div>
   );

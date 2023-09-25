@@ -1,4 +1,5 @@
 /* eslint-disable  */
+import { useEffect, useState } from 'react';
 import { useGetSpecificNewsQuery, useGetallNewsQuery } from '../../features/news/newsApiSlice';
 import Loader from '../Loader/Loader';
 import AllStocks from './AllStocks/AllStocks';
@@ -8,12 +9,22 @@ import MostTraded from './MostTraded/MostTraded';
 import News from './News/News';
 import TopMovers from './TopMovers/TopMovers';
 import WatchList from './WatchList/WatchList';
+import { getSelfData } from '../../Services/User.service';
 
 const MainContainer = () => {
   // Use the generated hooks to make API requests
   // 
  
+  const [selfData,setSelfData] = useState();
 
+ useEffect(()=>{
+  const dataCall  = async ()=>{
+      const {data : _data} = await getSelfData();
+      console.log(_data);
+      setSelfData(_data);
+  };
+  dataCall();
+ },[]);
 
 
  
@@ -32,7 +43,7 @@ const MainContainer = () => {
         <WatchList />
       </section>
       <section>
-        <FriendList />
+        <FriendList selfData = {selfData} />
       </section>
       <section>
         <TopMovers />

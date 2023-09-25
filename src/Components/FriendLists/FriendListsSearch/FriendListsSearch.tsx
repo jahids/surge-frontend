@@ -1,7 +1,15 @@
+import { useState } from 'react';
 import { MdOutlineArrowBackIos } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 
-const FriendListsSearch = () => {
+const FriendListsSearch = ({searchFn} : any) => {
+
+  const [searchText ,SetSearchText] = useState('');
+
+  const handleSubmit = (ev : any)=>{
+    ev.preventDefault();
+    searchFn(searchText);
+  }
   return (
     <div className="">
       <Link to="/main">
@@ -10,11 +18,11 @@ const FriendListsSearch = () => {
         </div>
       </Link>
       <div className="mt-5">
-        <h1 className="text-3xl font-bold">All friends</h1>
+        <h1 className="text-3xl font-bold">All Users</h1>
       </div>
       {/* --- search assets --- */}
       <div className="mt-5">
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="relative">
             <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
               <svg
@@ -35,6 +43,9 @@ const FriendListsSearch = () => {
             </div>
             <input
               type="search"
+              name='search'
+              value={searchText}
+              onChange={(ev)=> SetSearchText(ev.target.value)}
               id="default-search"
               className="block w-full p-3 pl-10 text-sm text-gray-900 border border-gray-300 rounded-full bg-gray-50 outline-none"
               placeholder="Search"

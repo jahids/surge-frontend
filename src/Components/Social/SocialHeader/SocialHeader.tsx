@@ -13,9 +13,9 @@ const SocialHeader = () => {
           </div>
         </div>
         <div>
-          <div className="flex items-center justify-center w-10 h-10 bg-gray-200 rounded-full">
+          {/* <div className="flex items-center justify-center w-10 h-10 bg-gray-200 rounded-full">
             <BiSolidMessageRounded className="text-2xl" />
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

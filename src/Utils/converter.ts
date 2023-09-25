@@ -1,3 +1,5 @@
+import moment from "moment";
+
 /* eslint-disable @typescript-eslint/no-unused-vars */
 export const truncateText = (text: string, maxLength: number) => {
   if (text?.length <= maxLength) {
@@ -38,3 +40,36 @@ export const notionalToQty = (
   const quantity = Number(notionalValue) / Number(perSharePrice);
   return quantity.toFixed(2);
 };
+
+
+
+export function calculateAccountAge(creationDateString : Date  | string | number) {
+  
+  const accountCreationDate = moment(creationDateString);
+
+  
+  const today = moment(); 
+  const years = today.diff(accountCreationDate, 'years');
+  accountCreationDate.add(years, 'years'); // Increment the creation date by years
+  const months = today.diff(accountCreationDate, 'months');
+  accountCreationDate.add(months, 'months'); // Increment the creation date by months
+  const days = today.diff(accountCreationDate, 'days');
+
+  // Build the result based on non-zero components
+  let result = '';
+  if (years > 0) {
+    result += `${years} ${years === 1 ? 'year' : 'years'}`;
+  }
+  if (months > 0) {
+    result += `${result.length > 0 ? ' ' : ''}${months} ${months === 1 ? 'month' : 'months'}`;
+  }
+  if (days > 0 && !months && !years) {
+    result += `${result.length > 0 ? ' ' : ''}${days} ${days === 1 ? 'day' : 'days'}`;
+  }
+
+  return result;
+}
+
+// Example usage:
+const accountAge = calculateAccountAge('2021-08-15'); // Replace with the actual creation date
+console.log(`Account Age: ${accountAge}`);
