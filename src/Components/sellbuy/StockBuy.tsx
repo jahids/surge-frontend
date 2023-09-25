@@ -4,17 +4,16 @@ import { useForm } from 'react-hook-form';
 import { MdOutlineArrowBackIos } from 'react-icons/md';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { notionalToQty, qtyToNotional } from '../../Utils/converter';
-
+import GifPicker, { TenorImage } from 'gif-picker-react';
 type FormData = {
   orderType: string;
   limitPrice: number;
   quantity: number;
 };
-
+const TENOR_API_KEY = 'AIzaSyDnZRuJZLLnuminKP4zkIqPPT10noYsDzo';
 function StockBuy() {
   const navigate = useNavigate();
-
-  const {symbol : shareSymbol} = useParams();
+  const { symbol: shareSymbol } = useParams();
   const { handleSubmit, control, watch, setValue } = useForm<FormData>();
   const [selectedOption, setSelectedOption] = useState('market'); // Default to 'Market'
   const [singleSharePrice, setSingleSharePrice] = useState(0);
@@ -23,60 +22,51 @@ function StockBuy() {
   const [limitPrice, setLimitPrice] = useState('');
   const [balance, setBalance] = useState(45);
   const [symbol, setSymbol] = useState(shareSymbol);
-
-  const [post,setPost] = useState('');
-
+  const [post, setPost] = useState('');
   const [available, setAvailable] = useState(234234);
+  const [gifSelected, setGifSelected] = useState(null);
+  const [isGifPickerVisible, setIsGifPickerVisible] = useState(false);
+
+  const toggleGifPicker = e => {
+    e.preventDefault();
+    setIsGifPickerVisible(!isGifPickerVisible);
+  };
+
+  const handleGifClick = (selectedGif: any) => {
+    setGifSelected(selectedGif);
+    setIsGifPickerVisible(false); // Close the GIF picker
+  };
+  console.log('--->', gifSelected);
 
   const selected = watch('orderType', selectedOption);
+  const { state } = useLocation();
+  console.log('state', state);
 
-  const {state} = useLocation();
-
-  useEffect(()=>{
-    if(state?.data){
-
-      const stockData = state.data;
-
+  useEffect(() => {
+    if (state?.data?.data) {
+      const stockData = state?.data?.data;
       setSingleSharePrice(stockData?.price?.price);
       setAvailable(stockData?.price.volume);
-      console.log('🎈',state);
+      console.log('🎈', state);
     }
-  },[]);
+  }, []);
 
   const onSubmit = (ev: any) => {
     ev.preventDefault();
 
-
     const orderData = {
-        symbol : shareSymbol,
-        singlePrice : singleSharePrice,
-        quantity : buyingQuantity,
-        totalPrice : buyingPrice,
-        limitPrice : limitPrice,
-        post : post,
-        type : selectedOption,
-        _data : state?.data
+      symbol: shareSymbol,
+      singlePrice: singleSharePrice,
+      quantity: buyingQuantity,
+      totalPrice: buyingPrice,
+      limitPrice: limitPrice,
+      post: post,
+      type: selectedOption,
+      _data: state?.data,
     };
-    console.log(`🎗🎀🎁`,orderData);
-
-    // console.log(`per share price : ${singleSharePrice}`);
-
-    // console.log('buying quantity: ', buyingQuantity);
-    // console.log('buying price : ', buyingPrice);
-    // console.log(`limit price:`, limitPrice);
-    // console.log(`🎉 post=`,post);
-    // console.log(`type=`,selectedOption);
-    
-
+    console.log(`🎗🎀🎁`, orderData);
     navigate('/order-review', { state: orderData });
   };
-
-  //   const handleOptionChange = (option: string) => {
-  //     setSelectedOption(option);
-  //     setValue('limitPrice', 0);
-  //     setValue('quantity', 0);
-  //   };
-
   const handlePriceChange = (ev: any) => {
     const value = ev.target?.value ?? 0;
     // console.log(`ev`, ev.target.value);
@@ -96,16 +86,6 @@ function StockBuy() {
     setSelectedOption(selectedOption === 'market' ? 'limit' : 'market');
     setValue('limitPrice', 0);
     setValue('quantity', 0);
-  };
-
-  const isReviewButtonDisabled = () => {
-    if (selected === 'limit') {
-      // Check if all limit fields are filled
-      return !watch('limitPrice') || !watch('quantity') || !watch('price');
-    } else {
-      // Check if all market fields are filled
-      return !watch('marketPrice') || !watch('quantity');
-    }
   };
 
   // console.log(`🔥`,shar);
@@ -153,7 +133,7 @@ function StockBuy() {
               value={buyingQuantity}
               onChange={handleQuantityChange}
               placeholder="Quantity"
-              className="w-1/2 text-5xl font-extrabold m-5 text-center border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:border-blue-500"
+              className="w-full text-5xl font-extrabold m-5 text-center border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:border-blue-500"
               type="number"
               // min={0}
             />
@@ -162,8 +142,8 @@ function StockBuy() {
               value={buyingPrice}
               onChange={handlePriceChange}
               placeholder="Price"
-              className="w-1/2 text-5xl font-extrabold m-5 text-center border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:border-blue-500"
-              type="number"
+              className="w-full text-5xl font-extrabold m-5 text-center border border-blue-500 rounded-lg py-3 px-4 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-200"
+  type="number"
             />
 
             {selected === 'limit' ? (
@@ -171,25 +151,63 @@ function StockBuy() {
                 value={limitPrice}
                 onChange={ev => setLimitPrice(ev.target.value)}
                 placeholder="Limit Price"
-                className="w-1/2 text-5xl font-extrabold m-5 text-center border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:border-blue-500"
+                className="w-full text-5xl font-extrabold m-5 text-center border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:border-gray-200"
                 type="number"
               />
             ) : null}
             <span className="text-gray-600"> {available} available</span>
           </div>
 
+          <div className="show-gif">
+                {gifSelected ? (
+                  <div onClick={e => toggleGifPicker(e)}  className="w-full text-5xl  bg-orange-500 font-extrabold m-5 text-center border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:border-gray-200" >
+                  <img
+                      src={gifSelected?.url}
+                      className="gif-preview w-10 h-10 "
+                      alt="Selected GIF"
+                    />
+                  </div>
+                    
+                  
+                ) : (
+               
+                  <div onClick={e => toggleGifPicker(e)} className="w-full text-5xl  bg-orange-500 font-extrabold m-5 text-center border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:border-gray-200" >
+                  <h2>image preview</h2>
+                  </div>
+                    
+                  
+                )
+              
+              } 
+              </div>
+
+
           <div className="flex justify-center">
             {/* <div> */}
-            <textarea style={{width:'80%'}} value={post} onChange={(ev) => setPost(ev.target.value)} className="textarea" placeholder="Share your thoughts"></textarea>
-              {/* <span>gif</span> */}
-            {/* </div> */}
-            {/* <div>
-              <span>public</span>
-            </div> */}
+            <textarea
+              style={{ width: '80%' }}
+              value={post}
+              onChange={ev => setPost(ev.target.value)}
+              className="textarea"
+              placeholder="Share your thoughts"
+            ></textarea>
+          
+            
           </div>
+
+          {/* gi=f */}
+          <div className="App">
+          
+              {isGifPickerVisible && (
+                <GifPicker
+                  tenorApiKey={TENOR_API_KEY}
+                  onGifClick={handleGifClick}
+                />
+              )}
+            </div>
+            {/* gif end */}
           <div className="mt-5 text-center">
             <button
-              //disabled={!isReviewButtonDisabled}
               type="submit"
               className="bg-blue-200 text-blue-800 py-2 px-4 rounded-lg font-semibold hover:bg-blue-300 focus:outline-none focus:bg-blue-300"
             >

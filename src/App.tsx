@@ -25,7 +25,7 @@ import  PlaidInit  from './Components/plaid/plaidinit';
 import StockBuy from './Components/sellbuy/StockBuy';
 import Addfund from './Pages/AddFund/Addfund';
 import Statement from './Pages/statement/Statement';
-import Portfolio from './Components/portfolio/Portfolio';
+import Portfolio from './Components/StockBuy/StockBuyChart/HistoricalChart';
 
 const App: React.FC = () => {
   const [cookies] = useCookies(['mytoken']);
@@ -57,7 +57,7 @@ const App: React.FC = () => {
         <Route path="/explore" element={<ExplorePage />} />
         <Route path="/profile" element={<CompleteProfilePage />} />
         <Route path="/assets" element={<AllAssetsPage />} />
-        <Route path="/portfolio" element={<Portfolio />} />
+        <Route path="/portfolio" element={<p>hello portfolio</p>} />
         <Route path="/addfund" element={<Addfund />} />
         <Route path="/buy/:symbol" element={<StockBuy />} />
         {/* <Route path="/buy" element={<StockBuy />} /> */}

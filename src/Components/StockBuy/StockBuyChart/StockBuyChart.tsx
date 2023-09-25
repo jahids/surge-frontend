@@ -1,7 +1,10 @@
-const StockBuyChart = () => {
+import HistoricalChart from './HistoricalChart';
+
+const StockBuyChart = ({ symbol }: any) => {
+  console.log('symbol--', symbol);
   return (
-    <div className="bg-red-100 mt-6 py-[80px] rounded-md">
-      <h1 className="text-center">Stock Buy Chart</h1>
+    <div className=" mt-6 rounded-md">
+      <HistoricalChart Symbol={symbol} />
     </div>
   );
 };

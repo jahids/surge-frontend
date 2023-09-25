@@ -15,8 +15,3 @@ export const instance = axios.create({
   //   Authorization: `Bearer ${cookies.mytoken || ''}`,
   // },
 });
-
-//   return instance;
-// };
-
-// export default AxiosInstance;

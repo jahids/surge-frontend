@@ -1,8 +1,10 @@
+import { useState } from 'react';
 import { MdOutlineArrowBackIos } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 // import { useGetAllStockQuery } from '../../../features/stock/allStockApiSlice';
 
-const AllStockSearch = () => {
+const AllStockSearch = ({ handlesearch }: any) => {
+  const [getSearch, setgetSearch] = useState('');
   return (
     <>
       <div className="">
@@ -40,10 +42,15 @@ const AllStockSearch = () => {
                 id="default-search"
                 className="block w-full p-3 pl-10 text-sm text-gray-900 border border-gray-300 rounded-full bg-gray-50 outline-none"
                 placeholder="Search"
+                onChange={e => setgetSearch(e.target.value)}
                 required
               />
               <button
-                type="submit"
+                onClick={e => {
+                  e.preventDefault();
+                  handlesearch(getSearch);
+                }}
+                // type="submit"
                 className="text-white text-xs absolute right-2.5 bottom-1.5 bg-indigo-500 rounded-full px-4 py-2"
               >
                 Search

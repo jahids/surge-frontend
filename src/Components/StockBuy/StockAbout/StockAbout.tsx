@@ -42,13 +42,15 @@ const StockAbout = ({ allspecificdata }: any) => {
                     </li>
                     <li className="flex items-center justify-between my-4">
                       <p className="text-gray-400">Sector</p>
-                      <p className="font-bold">{allspecificdata?.ysector}</p>
+                      <p className="font-bold">
+                        {allspecificdata?.data?.ysector}
+                      </p>
                     </li>
                     <li className="flex items-center justify-between my-4">
                       <p className="text-gray-400">links</p>
                       <button className="flex items-center space-x-1 font-bold text-sm text-indigo-600 bg-indigo-100 p-1 rounded-md">
                         <a
-                          href={allspecificdata?.weburl}
+                          href={allspecificdata?.data?.weburl}
                           target="_blank"
                           rel="noreferrer"
                         >
