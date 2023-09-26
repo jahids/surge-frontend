@@ -49,7 +49,7 @@ const App: React.FC = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/registration" element={<RegistrationPage />} />
         <Route path="/otp" element={<OtpPage />} />
-
+{/* 🔏🔏🔏🔏 private route */}
         <Route path="/multistep" element={<MultistepForm />} />
         <Route path="/plaid" element={<PlaidInit />} />
         <Route path="/main" element={<MainPage />} />
