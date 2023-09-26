@@ -205,7 +205,6 @@ import { AiFillPlusCircle } from 'react-icons/ai';
 import { BsFillCheckCircleFill } from 'react-icons/bs';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useGetSpecificStockQuery } from '../../features/stock/allStockApiSlice';
-import StockBuy from '../sellbuy/StockBuy';
 
 const StockBuyContainer = () => {
   const [isPlusIcon, setIsPlusIcon] = useState(true);
@@ -266,20 +265,24 @@ const StockBuyContainer = () => {
       <section>
         <div className="flex items-center justify-between">
           <div className="space-y-2">
-            <p className="text-sm font-semibold">{specificStockData?.symbol}</p>
+            <p className="text-sm font-semibold">
+              {specificStockData?.data?.symbol || specificStockData?.symbol}
+            </p>
             <p className="text-3xl font-bold">
               {/* Revance <br /> Therapeutics */}
-              {specificStockData?.name}
+              {specificStockData?.data?.name || specificStockData?.name}
             </p>
             <p className="text-3xl font-bold">
               {' '}
-              ${specificStockData?.price?.price}{' '}
+              $
+              {specificStockData?.data?.price?.price ||
+                specificStockData?.price?.price}{' '}
             </p>
           </div>
           <div className="bg-gray-100 rounded-full">
             <img
               className="w-12 h-12 rounded-full object-contain"
-              src={specificStockData?.logo}
+              src={specificStockData?.data?.logo || specificStockData?.logo}
               alt="revance"
             />
           </div>
@@ -289,7 +292,9 @@ const StockBuyContainer = () => {
 
       {/* --- stock chart start --- */}
       <section>
-        <StockBuyChart />
+        <StockBuyChart
+          symbol={specificStockData?.data?.symbol || specificStockData?.symbol}
+        />
       </section>
       {/* --- stock chart end --- */}
       <div className="flex justify-between gap-2 mt-2 mb-5">
@@ -299,9 +304,14 @@ const StockBuyContainer = () => {
 
         <button
           onClick={() =>
-            navigate(`/buy/${specificStockData?.symbol}`, {
-              state: { data: specificStockData },
-            })
+            navigate(
+              `/buy/${
+                specificStockData?.data?.symbol || specificStockData?.symbol
+              }`,
+              {
+                state: { data: specificStockData },
+              }
+            )
           }
           className="bg-indigo-600 px-14 py-3 text-white rounded-full"
         >

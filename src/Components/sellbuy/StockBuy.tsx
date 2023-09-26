@@ -20,7 +20,7 @@ function StockBuy() {
   const [buyingPrice, setBuyingPrice] = useState('');
   const [buyingQuantity, setBuyingQuantity] = useState('');
   const [limitPrice, setLimitPrice] = useState('');
-  const [balance, setBalance] = useState(45);
+  const [balance, setBalance] = useState(1000);
   const [symbol, setSymbol] = useState(shareSymbol);
   const [post, setPost] = useState('');
   const [available, setAvailable] = useState(234234);
@@ -40,11 +40,13 @@ function StockBuy() {
 
   const selected = watch('orderType', selectedOption);
   const { state } = useLocation();
-  console.log('state', state);
+  console.log('state', state?.data?.price?.price);
 
   useEffect(() => {
-    if (state?.data?.data) {
-      const stockData = state?.data?.data;
+    if (state?.data || state?.data?.data) {
+      const stockData = state?.data || state?.data?.data;
+      console.log("stock buy tsx",stockData);
+      
       setSingleSharePrice(stockData?.price?.price);
       setAvailable(stockData?.price.volume);
       console.log('🎈', state);

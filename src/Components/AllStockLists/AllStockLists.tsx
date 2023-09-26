@@ -19,7 +19,6 @@ const AllStockLists = () => {
   });
 
   const handlesearch = (data: any) => {
-    // e.preventDefault();
     setsearch(data);
     console.log('data', data);
   };

@@ -1,49 +1,49 @@
-// import { useState } from 'react';
-// import axios, { AxiosInstance, AxiosResponse, AxiosError } from 'axios';
+import { useState } from 'react';
+import axios, { AxiosInstance, AxiosResponse, AxiosError } from 'axios';
 
-// interface ApiResponse<T> {
-//   data: T | null;
-//   loading: boolean;
-//   error: string | null;
-// }
+interface ApiResponse<T> {
+  data: T | null;
+  loading: boolean;
+  error: string | null;
+}
 
-// const useApi = (): [AxiosInstance, ApiResponse<any>] => {
-//   const api = axios.create({
-//     baseURL: '/api', // Use the hardcoded base URL
-//     timeout: 10000,
-//     withCredentials: true,
-//   });
+const useApi = (): [AxiosInstance, ApiResponse<any>] => {
+  const api = axios.create({
+    baseURL: '/api', // Use the hardcoded base URL
+    timeout: 10000,
+    withCredentials: true,
+  });
 
-//   const [response, setResponse] = useState<ApiResponse<any>>({
-//     data: null,
-//     loading: false,
-//     error: null,
-//   });
+  const [response, setResponse] = useState<ApiResponse<any>>({
+    data: null,
+    loading: false,
+    error: null,
+  });
 
-//   api.interceptors.request.use(config => {
-//     setResponse({ data: null, loading: true, error: null });
-//     return config;
-//   });
+  api.interceptors.request.use(config => {
+    setResponse({ data: null, loading: true, error: null });
+    return config;
+  });
 
-//   api.interceptors.response.use(
-//     (res: AxiosResponse<any>) => {
-//       setResponse({ data: res.data, loading: false, error: null });
-//       return res.data;
-//     },
-//     (error: AxiosError) => {
-//       setResponse({
-//         data: null,
-//         loading: false,
-//         error: error?.response?.data || 'Error occured',
-//       });
-//       return Promise.reject(error);
-//     }
-//   );
+  api.interceptors.response.use(
+    (res: AxiosResponse<any>) => {
+      setResponse({ data: res.data, loading: false, error: null });
+      return res.data;
+    },
+    (error: AxiosError) => {
+      setResponse({
+        data: null,
+        loading: false,
+        error: error?.response?.data || 'Error occured',
+      });
+      return Promise.reject(error);
+    }
+  );
 
-//   return [api, response];
-// };
+  return [api, response];
+};
 
-// export default useApi;
+export default useApi;
 
 // //
 
