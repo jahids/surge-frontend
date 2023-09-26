@@ -91,12 +91,14 @@ function StockBuy() {
   // console.log(`🔥`,shar);
   return (
     <div>
+
       <Link onClick={() => navigate(-1)}>
         <div className="py-4 w-[30px]">
           <MdOutlineArrowBackIos className="text-[30px] text-gray-500" />
         </div>
       </Link>
 
+      
       <div className="bg-gray-100 p-5">
         <div className="flex justify-between mx-5">
           <div>
@@ -125,6 +127,16 @@ function StockBuy() {
               </label>
             </div>
           </div>
+        </div>
+
+        <div className="App">
+          
+          {isGifPickerVisible && (
+            <GifPicker
+              tenorApiKey={TENOR_API_KEY}
+              onGifClick={handleGifClick}
+            />
+          )}
         </div>
 
         <form onSubmit={ev => onSubmit(ev)}>
@@ -158,6 +170,24 @@ function StockBuy() {
             <span className="text-gray-600"> {available} available</span>
           </div>
 
+          
+
+
+          <div className="flex justify-center">
+            {/* <div> */}
+            <textarea
+              style={{ width: '80%' }}
+              value={post}
+              onChange={ev => setPost(ev.target.value)}
+              className="textarea"
+              placeholder="Share your thoughts"
+            ></textarea>
+          
+            
+          </div>
+
+          {/* gi=f */}
+
           <div className="show-gif">
                 {gifSelected ? (
                   <div onClick={e => toggleGifPicker(e)}  className="w-full text-5xl  bg-orange-500 font-extrabold m-5 text-center border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:border-gray-200" >
@@ -179,32 +209,9 @@ function StockBuy() {
                 )
               
               } 
-              </div>
-
-
-          <div className="flex justify-center">
-            {/* <div> */}
-            <textarea
-              style={{ width: '80%' }}
-              value={post}
-              onChange={ev => setPost(ev.target.value)}
-              className="textarea"
-              placeholder="Share your thoughts"
-            ></textarea>
-          
-            
           </div>
 
-          {/* gi=f */}
-          <div className="App">
-          
-              {isGifPickerVisible && (
-                <GifPicker
-                  tenorApiKey={TENOR_API_KEY}
-                  onGifClick={handleGifClick}
-                />
-              )}
-            </div>
+        
             {/* gif end */}
           <div className="mt-5 text-center">
             <button

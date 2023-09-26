@@ -1,7 +1,10 @@
 import { HiUsers } from 'react-icons/hi';
 import { MdVerified } from 'react-icons/md';
+import { calculateAccountAge } from '../../../../Utils/converter';
 
-const SocialUserInfo = () => {
+
+const SocialUserInfo = ({user}) => {
+  console.log(`🥽🦺🎪🎪🎭`,calculateAccountAge(new Date(user.createdAt)));
   return (
     <div className="flex items-center space-x-2">
       <div className="rounded-full flex items-center justify-center ">
@@ -13,12 +16,12 @@ const SocialUserInfo = () => {
       </div>
       <div>
         <div className="flex items-center space-x-2">
-          <p className="text-sm font-semibold">Quentin Wirtz</p>
-          <MdVerified className="text-blue-500" />
-          <p className="text-xs font-semibold text-gray-400">@quentinwirtz</p>
+          <p className="text-sm font-semibold"> {user.email} </p>
+          {/* <MdVerified className="text-blue-500" /> */}
+          {/* <p className="text-xs font-semibold text-gray-400">@quentinwirtz</p> */}
         </div>
         <div className="flex items-center space-x-1">
-          <p className="text-sm text-gray-400">2d .</p>
+          <p className="text-sm text-gray-400"> {calculateAccountAge(user.created_at) =='' ?'Today': 'result'} </p>
           <HiUsers className="text-gray-400" />
         </div>
       </div>
