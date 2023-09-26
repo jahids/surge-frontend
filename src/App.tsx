@@ -26,6 +26,7 @@ import StockBuy from './Components/sellbuy/StockBuy';
 import Addfund from './Pages/AddFund/Addfund';
 import Statement from './Pages/statement/Statement';
 import Portfolio from './Components/StockBuy/StockBuyChart/HistoricalChart';
+import PostDetails from './Pages/PostDetails/PostDetails';
 
 const App: React.FC = () => {
   const [cookies] = useCookies(['mytoken']);
@@ -54,6 +55,7 @@ const App: React.FC = () => {
         <Route path="/plaid" element={<PlaidInit />} />
         <Route path="/main" element={<MainPage />} />
         <Route path="/social" element={<SocialPage />} />
+        <Route path="/post/:id" element={<PostDetails />} />
         <Route path="/explore" element={<ExplorePage />} />
         <Route path="/profile" element={<CompleteProfilePage />} />
         <Route path="/assets" element={<AllAssetsPage />} />

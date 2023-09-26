@@ -3,8 +3,10 @@ import { MdVerified } from 'react-icons/md';
 import { calculateAccountAge } from '../../../../Utils/converter';
 
 
-const SocialUserInfo = ({user}) => {
-  console.log(`🥽🦺🎪🎪🎭`,calculateAccountAge(new Date(user.createdAt)));
+const SocialUserInfo = ({user,postDate}) => {
+  // console.log(`🥽🦺🎪🎪🎭`,calculateAccountAge(new Date(postDate)));
+  console.log(user)
+  const dayCount = calculateAccountAge(new Date(postDate));
   return (
     <div className="flex items-center space-x-2">
       <div className="rounded-full flex items-center justify-center ">
@@ -21,7 +23,7 @@ const SocialUserInfo = ({user}) => {
           {/* <p className="text-xs font-semibold text-gray-400">@quentinwirtz</p> */}
         </div>
         <div className="flex items-center space-x-1">
-          <p className="text-sm text-gray-400"> {calculateAccountAge(user.created_at) =='' ?'Today': 'result'} </p>
+          <p className="text-sm text-gray-400"> {dayCount =='' ?'Today': dayCount} ago</p>
           <HiUsers className="text-gray-400" />
         </div>
       </div>
