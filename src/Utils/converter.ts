@@ -1,4 +1,4 @@
-import moment from "moment";
+import moment from 'moment';
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 export const truncateText = (text: string, maxLength: number) => {
@@ -41,14 +41,12 @@ export const notionalToQty = (
   return quantity.toFixed(2);
 };
 
-
-
-export function calculateAccountAge(creationDateString : Date  | string | number) {
-  
+export function calculateAccountAge(
+  creationDateString: Date | string | number
+) {
   const accountCreationDate = moment(creationDateString);
 
-  
-  const today = moment(); 
+  const today = moment();
   const years = today.diff(accountCreationDate, 'years');
   accountCreationDate.add(years, 'years'); // Increment the creation date by years
   const months = today.diff(accountCreationDate, 'months');
@@ -63,10 +61,14 @@ export function calculateAccountAge(creationDateString : Date  | string | number
     result += `${years} ${years === 1 ? 'year' : 'years'}`;
   }
   if (months > 0) {
-    result += `${result.length > 0 ? ' ' : ''}${months} ${months === 1 ? 'month' : 'months'}`;
+    result += `${result.length > 0 ? ' ' : ''}${months} ${
+      months === 1 ? 'month' : 'months'
+    }`;
   }
   if (days > 0 && !months && !years) {
-    result += `${result.length > 0 ? ' ' : ''}${days} ${days === 1 ? 'day' : 'days'}`;
+    result += `${result.length > 0 ? ' ' : ''}${days} ${
+      days === 1 ? 'day' : 'days'
+    }`;
   }
   if (!days ) {
     result = `${result.length > 0 ? ' ' : ''}${hours} ${hours === 1 ? 'hour' : 'hours'}`;

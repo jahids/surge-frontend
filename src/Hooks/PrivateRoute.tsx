@@ -1,58 +1,37 @@
-// import React from 'react';
-// import { Route, Redirect, RouteProps } from 'react-router-dom';
+/* eslint-disable  */
+import { useEffect } from 'react';
+import { useCookies } from 'react-cookie';
+import { Navigate } from 'react-router-dom';
 
-// interface PrivateRouteProps extends RouteProps {
-//   isAuthenticated: boolean;
-//   // Add any other props you need, e.g., component, render, etc.
-// }
 
-// const PrivateRoute: React.FC<PrivateRouteProps> = ({
-//   isAuthenticated,
-//   children,
-//   ...rest
-// }) => {
-//   return (
-//     <Route
-//       {...rest}
-//       render={({ location }) =>
-//         isAuthenticated ? (
-//           children
-//         ) : (
-//           <Redirect
-//             to={{
-//               pathname: '/login',
-//               state: { from: location },
-//             }}
-//           />
-//         )
-//       }
-//     />
-//   );
-// };
-
-// export default PrivateRoute;
-
-// updated code
-
-import React from 'react';
-import { Route, Navigate } from 'react-router-dom';
-
-interface PrivateRouteProps {
-  isAuthenticated: boolean;
-  path: string;
-  element: React.ReactNode;
+interface Props {
+  component: React.ComponentType
 }
 
-const PrivateRoute: React.FC<PrivateRouteProps> = ({
-  isAuthenticated,
-  path,
-  element,
+export const PrivateRoute: React.FC<Props> = ({
+  component: RouteComponent,
 }) => {
+  const [cookies] = useCookies(['mytoken']);
+const isAuthenticated = !!cookies.mytoken;
+
+useEffect(() => {
+  if (isAuthenticated) {
+    console.log('persist data');
+  } else {
+    console.log('no persist data');
+  }
+}, [isAuthenticated]);
+
   if (!isAuthenticated) {
-    return <Navigate to="/login" />;
+    return (
+      <>
+          <RouteComponent />
+        </>
+     
+    );
   }
 
-  return <Route path={path} element={element} />;
+  // if (!isAuthenticated) {
+  //   return <Navigate to="/login" />;
+  // }
 };
-
-export default PrivateRoute;

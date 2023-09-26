@@ -8,7 +8,8 @@ import { notifyError } from '../../lib/Toastify';
 import { useCookies } from 'react-cookie';
 
 const LoginFrom = () => {
-  const [, setCookie] = useCookies(['token']);
+  const [, setCookie] = useCookies();
+  
   const navigate = useNavigate();
   const [email, setemail] = useState('');
   const [password, setpassword] = useState('');
@@ -23,14 +24,32 @@ const LoginFrom = () => {
       const data = await instance.post(`signin`, {
         ...payload,
       });
-      console.log('data', data);
-      setCookie('mytoken', data?.data?.data?.token, {
-        path: '/',
-        secure: true,
-        sameSite: 'none',
-      });
 
-      navigate('/main')
+      console.log("data api", data?.data);
+     
+      console.log('data', data?.data?.data?.multiStepCompleted);
+      if(data?.data?.data?.token){
+        setCookie('mytoken', data?.data?.data?.token, {
+          path: '/',
+          secure: true,
+          sameSite: 'none',
+        });
+        setCookie('email', data?.data?.data?.email, {
+          path: '/',
+          secure: true,
+          sameSite: 'none',
+        });
+        setCookie('dbid', data?.data?.data?.dbId, {
+          path: '/',
+          secure: true,
+          sameSite: 'none',
+        });
+  
+        navigate('/main')
+      }else {
+        navigate('/multistep')
+      }
+      
 
     
     } catch (error) {

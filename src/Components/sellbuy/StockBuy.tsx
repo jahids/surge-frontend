@@ -20,7 +20,7 @@ function StockBuy() {
   const [buyingPrice, setBuyingPrice] = useState('');
   const [buyingQuantity, setBuyingQuantity] = useState('');
   const [limitPrice, setLimitPrice] = useState('');
-  const [balance, setBalance] = useState(45);
+  const [balance, setBalance] = useState(1000);
   const [symbol, setSymbol] = useState(shareSymbol);
   const [post, setPost] = useState('');
   const [available, setAvailable] = useState(234234);
@@ -40,11 +40,13 @@ function StockBuy() {
 
   const selected = watch('orderType', selectedOption);
   const { state } = useLocation();
-  console.log('state', state);
+  console.log('state', state?.data?.price?.price);
 
   useEffect(() => {
-    if (state?.data?.data) {
-      const stockData = state?.data?.data;
+    if (state?.data || state?.data?.data) {
+      const stockData = state?.data || state?.data?.data;
+      console.log("stock buy tsx",stockData);
+      
       setSingleSharePrice(stockData?.price?.price);
       setAvailable(stockData?.price.volume);
       console.log('🎈', state);
@@ -90,26 +92,15 @@ function StockBuy() {
 
   // console.log(`🔥`,shar);
   return (
-    <div>
-
-      <Link onClick={() => navigate(-1)}>
+    <div className=''>
+      {/* <div className='flex justify-between'>
+        <div><Link onClick={() => navigate(-1)}>
         <div className="py-4 w-[30px]">
           <MdOutlineArrowBackIos className="text-[30px] text-gray-500" />
         </div>
-      </Link>
-
-      
-      <div className="bg-gray-100 p-5">
-        <div className="flex justify-between mx-5">
-          <div>
-            <h2 className="text-2xl font-bold">BUY {symbol}</h2>
-            <span className="text-gray-600">
-              Stock price ${singleSharePrice}
-            </span>
-          </div>
-          <div>
-            <div className="flex space-x-2">
-              <label
+      </Link></div>
+        <div className='flex space-x-2'>
+        <label
                 className={`toggle ${
                   selectedOption === 'market'
                     ? 'toggle-primary'
@@ -125,12 +116,61 @@ function StockBuy() {
                 <span className="toggle-mark"></span>
                 {selectedOption === 'market' ? 'Market' : 'Limit'}
               </label>
+        </div>
+      </div> */}
+
+      {/* top code added */}
+      <div className="flex">
+  <div className="flex-1  p-4">
+  <div><Link onClick={() => navigate(-1)}>
+        <div className="py-4 w-[30px]">
+          <MdOutlineArrowBackIos className="text-[30px] text-gray-500" />
+        </div>
+      </Link></div>
+  </div>
+  <div className="flex-none justify-center items-center mt-5 p-4 text-xl font-bold">
+  {selectedOption === 'market' ? 'Market' : 'Limit'}
+  </div>
+  <div className="flex-1   p-4">
+  <div className='flex mt-5 justify-end items-end '>
+        <label
+                className={`toggle ${
+                  selectedOption === 'market'
+                    ? 'toggle-primary'
+                    : 'toggle-secondary'
+                }`}
+              >
+                <input
+                  type="checkbox"
+                  className="toggle"
+                  checked={selectedOption === 'limit'}
+                  onChange={handleToggle}
+                />
+                <span className="toggle-mark"></span>
+              
+              </label>
+        </div>
+  </div>
+</div>
+      {/* top code end */}
+
+      <div className="p-5">
+        <div className="flex justify-between ">
+          <div>
+            <h2 className="text-2xl font-bold">BUY {symbol}</h2>
+            <span className="text-gray-600 block">
+              Stock price ${singleSharePrice}
+            </span>
+            <span className="text-gray-600"> available {available} </span>
+          </div>
+          <div>
+            <div className="flex space-x-2">
+             <h2>Logo</h2>
             </div>
           </div>
         </div>
 
         <div className="App">
-          
           {isGifPickerVisible && (
             <GifPicker
               tenorApiKey={TENOR_API_KEY}
@@ -145,17 +185,16 @@ function StockBuy() {
               value={buyingQuantity}
               onChange={handleQuantityChange}
               placeholder="Quantity"
-              className="w-full text-5xl font-extrabold m-5 text-center border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:border-blue-500"
+              className="w-full text-5xl bg-gray-100 font-extrabold m-5 text-center rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-blue-200 transition duration-300 ease-in-out transform hover:scale-105"
               type="number"
-              // min={0}
             />
 
             <input
               value={buyingPrice}
               onChange={handlePriceChange}
               placeholder="Price"
-              className="w-full text-5xl font-extrabold m-5 text-center border border-blue-500 rounded-lg py-3 px-4 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-200"
-  type="number"
+              className="w-full text-5xl bg-gray-100 font-extrabold m-5 text-center rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-blue-200 transition duration-300 ease-in-out transform hover:scale-105"
+              type="number"
             />
 
             {selected === 'limit' ? (
@@ -163,60 +202,51 @@ function StockBuy() {
                 value={limitPrice}
                 onChange={ev => setLimitPrice(ev.target.value)}
                 placeholder="Limit Price"
-                className="w-full text-5xl font-extrabold m-5 text-center border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:border-gray-200"
+                className="w-full text-5xl bg-gray-100 font-extrabold m-5 text-center rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-blue-200 transition duration-300 ease-in-out transform hover:scale-105"
                 type="number"
               />
             ) : null}
-            <span className="text-gray-600"> {available} available</span>
           </div>
-
-          
-
 
           <div className="flex justify-center">
             {/* <div> */}
             <textarea
-              style={{ width: '80%' }}
               value={post}
               onChange={ev => setPost(ev.target.value)}
-              className="textarea"
-              placeholder="Share your thoughts"
+              className="w-[100%] mb-5 bg-gray-100 text-xl font-extrabold  text-center rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-blue-200 transition duration-300 ease-in-out transform hover:scale-105"
+              placeholder="Share"
             ></textarea>
-          
-            
           </div>
 
           {/* gi=f */}
 
-          <div className="show-gif">
-                {gifSelected ? (
-                  <div onClick={e => toggleGifPicker(e)}  className="w-full text-5xl  bg-orange-500 font-extrabold m-5 text-center border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:border-gray-200" >
-                  <img
-                      src={gifSelected?.url}
-                      className="gif-preview w-10 h-10 "
-                      alt="Selected GIF"
-                    />
-                  </div>
-                    
-                  
-                ) : (
-               
-                  <div onClick={e => toggleGifPicker(e)} className="w-full text-5xl  bg-orange-500 font-extrabold m-5 text-center border border-gray-300 rounded-lg py-2 px-4 focus:outline-none focus:border-gray-200" >
-                  <h2>image preview</h2>
-                  </div>
-                    
-                  
-                )
-              
-              } 
+          <div className="show-gif flex justify-center">
+            {gifSelected ? (
+              <div
+                onClick={e => toggleGifPicker(e)}
+                className="w-full mb-5 bg-gray-100 text-xl font-extrabold  text-center rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-blue-200 transition duration-300 ease-in-out transform hover:scale-105"
+              >
+                <img
+                  src={gifSelected?.url}
+                  className="gif-preview w-20 h-20 mx-auto rounded-md"
+                  alt="Selected GIF"
+                />
+              </div>
+            ) : (
+              <div
+                onClick={e => toggleGifPicker(e)}
+                className="w-[100%] mb-5 bg-gray-100 text-xl font-extrabold  text-center rounded-lg py-5 px-4 focus:outline-none focus:ring-2 focus:ring-blue-200 transition duration-300 ease-in-out transform hover:scale-105"
+              >
+                <h2>Selected GIF</h2>
+              </div>
+            )}
           </div>
 
-        
-            {/* gif end */}
-          <div className="mt-5 text-center">
+          {/* gif end */}
+          <div className="mt-5 text-center  absulate">
             <button
               type="submit"
-              className="bg-blue-200 text-blue-800 py-2 px-4 rounded-lg font-semibold hover:bg-blue-300 focus:outline-none focus:bg-blue-300"
+              className="bg-blue-500 w-full text-white py-2 px-4 rounded-lg font-semibold hover:bg-blue-300 focus:outline-none focus:bg-blue-300"
             >
               Review
             </button>
