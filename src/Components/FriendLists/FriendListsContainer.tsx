@@ -25,7 +25,7 @@ const FriendListsContainer = () => {
         const result = _list?.filter(v => v.dbId!= myData.db._id);
 
         // console.log(result);
-        // console.log(`👨`,myData);
+        console.log(`👨`,result);
         if(result){
 
           setUsers(result);
@@ -46,7 +46,7 @@ const FriendListsContainer = () => {
           userList ?
           (
             userList.map( v =>{
-             return <FriendListsItems key={Math.random()} id={v.dbId}  isFriend={followlist?.includes(v.dbId)} name={v.name}  platfromAge={v.created_at} />
+             return <FriendListsItems key={Math.random()} id={v.dbId}  isFriend={followlist?.includes(v.dbId)} imgSrc={v.pfp} name={v.name}  platfromAge={v.created_at} />
             })
           )
           : null

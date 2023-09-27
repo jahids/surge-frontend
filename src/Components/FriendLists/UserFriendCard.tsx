@@ -22,6 +22,7 @@ const UserFriendCard = ({dbId}: any) => {
       const {alpaca :{identity},db} = myData;
       setName(identity.given_name + " " + identity.family_name);
         console.log(`⚽`,myData)
+        setPfp(db?.pfp || defaultImg);
     };
     dataCall();
   },[]);

@@ -22,7 +22,7 @@ useEffect(() => {
   }
 }, [isAuthenticated]);
 
-  if (!isAuthenticated) {
+  if (isAuthenticated) {
     return (
       <>
           <RouteComponent />

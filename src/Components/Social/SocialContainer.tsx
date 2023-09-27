@@ -4,14 +4,15 @@ import SocialPost from './SocialPost/SocialPost';
 import { instance } from '../../lib/AxiosInstance';
 
 const SocialContainer = () => {
-  const [postList,setPostList] = useState([]);
-  useEffect(()=>{
-    const dataCall = async ()=>{
-        const {data:{data}} =  await instance.get(`/social/posts/following`)
-        setPostList(data)
+  const [postList, setPostList] = useState([]);
+  useEffect(() => {
+    const dataCall = async () => {
+      const { data: { data } } = await instance.get(`/social/posts/following`)
+      setPostList(data);
+      console.log(`all data : `, postList);
     };
     dataCall();
-  },[postList.length]);
+  }, [postList.length]);
   return (
     <div className="px-5 pb-[100px] min-h-screen">
       <section>
@@ -19,11 +20,11 @@ const SocialContainer = () => {
       </section>
       <section>
         {
-          postList.map(v =>{
-            return <SocialPost key={Math.random()} postData = {v} />
+          postList.length && postList?.map(v => {
+            return <SocialPost key={Math.random()} postData={v} />
           })
         }
-        
+
       </section>
     </div>
   );

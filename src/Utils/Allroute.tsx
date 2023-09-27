@@ -11,10 +11,13 @@ import MainPage from '../Pages/MainPage/MainPage';
 import MostTradedOnSharesPage from '../Pages/MostTradedOnSharesPage/MostTradedOnSharesPage';
 import MultistepForm from '../Pages/MultistepForm/MultistepForm';
 import NotificationPage from '../Pages/NotificationPage/NotificationPage';
+import PostDetails from '../Pages/PostDetails/PostDetails';
 import SocialPage from '../Pages/SocialPage/SocialPage';
 import StockBuyPage from '../Pages/StockBuyPage/StockBuyPage';
 import TopMoversPage from '../Pages/TopMoversPage/TopMoversPage';
 import Statement from '../Pages/statement/Statement';
+
+
 
 export const allRoute = [
   {
@@ -32,6 +35,10 @@ export const allRoute = [
   {
     path: '/social',
     component: SocialPage,
+  },
+  {
+    path: '/post/:id',
+    component:PostDetails,
   },
   {
     path: '/explore',

@@ -29,20 +29,21 @@ const LoginFrom = () => {
      
       console.log('data', data?.data?.data?.multiStepCompleted);
       if(data?.data?.data?.token){
+        
         setCookie('mytoken', data?.data?.data?.token, {
-          path: '/',
-          secure: true,
-          sameSite: 'none',
+          
+          secure: false,
+        
         });
         setCookie('email', data?.data?.data?.email, {
-          path: '/',
-          secure: true,
-          sameSite: 'none',
+          
+          secure: false,
+          
         });
         setCookie('dbid', data?.data?.data?.dbId, {
-          path: '/',
-          secure: true,
-          sameSite: 'none',
+          
+          secure:false,
+          
         });
   
         navigate('/main')
