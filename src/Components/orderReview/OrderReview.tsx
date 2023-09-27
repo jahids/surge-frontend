@@ -55,11 +55,13 @@ function OrderReview() {
   const navigate = useNavigate();
 
   const { state } = useLocation();
+  console.log('state ->>', state);
 
   const handleConfirm = () => {
     console.log(`firing order : `, state);
     const orderObj = {
       ...state,
+      links: [state?.gif],
     };
     delete orderObj['_data'];
 
@@ -68,7 +70,7 @@ function OrderReview() {
       .post(`/order/`, orderObj)
       .then(res => {
         console.log(res);
-        notifySuccess(`Successfully placed order for ${state.symbol}`,3000);
+        notifySuccess(`Successfully placed order for ${state.symbol}`, 3000);
       })
       .catch(er => console.log(er));
   };
@@ -117,6 +119,14 @@ function OrderReview() {
         {/* Another Image */}
 
         {/* </span> */}
+      </div>
+
+      <div className="mt-4 p-2 bg-white rounded-md shadow-md">
+        <img
+          src={state?.gif || ''}
+          className="gif-preview w-20 h-20 mx-auto rounded-md"
+          alt="Selected GIF"
+        />
       </div>
 
       <div className="mt-4 p-4 bg-white rounded-md shadow-md">

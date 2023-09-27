@@ -444,6 +444,7 @@ import Loader from '../../Components/Loader/Loader';
 import UserNotCreated from '../../Components/UserNotCreated/UserNotCreated';
 import Select from 'react-select';
 import { incomeSourceOptions, usaAllState } from '../../Utils/useState';
+import { getemail } from '../../Services/Cookie.service';
 
 const MAX_STEPS = 15;
 
@@ -495,8 +496,10 @@ const MultistepForm: React.FC = () => {
     setFormStep(cur => cur - 1);
   };
 
+  const email  = getemail()
+
   const handleFormCompletion: SubmitHandler<FormData> = values => {
-    const payload = { ...values, email_address: state };
+    const payload = { ...values, email_address: email };
 
     if (values) {
       const otprequest = async () => {

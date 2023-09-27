@@ -3,6 +3,7 @@ import rocketPharma from '../../../assets/movers-img/rocket-pharma-logo-2016-out
 import ptc from '../../../assets/movers-img/ptcLogo.webp';
 import { useGetTopMoversQuery } from '../../../features/movers/moversApiSlice';
 import { Link } from 'react-router-dom';
+import Loader from '../../Loader/Loader';
 
 const TopMovers = () => {
   console.log('helllo ');
@@ -19,7 +20,7 @@ const TopMovers = () => {
 
     // Handle loading state or errors here
     if (isLoadingtopmover) {
-      return <div>Loading...</div>;
+      return <Loader/>;
     }
   
     if (isErrortopmover) {

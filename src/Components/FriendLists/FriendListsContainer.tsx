@@ -1,8 +1,10 @@
+/* eslint-disable  */
 import { useEffect, useState } from 'react';
 import FriendDoneBtn from './FriendDoneBtn/FriendDoneBtn';
 import FriendListsItems from './FriendListsItems/FriendListsItems';
 import FriendListsSearch from './FriendListsSearch/FriendListsSearch';
 import { IFriendListItem, getSelfData, getUserList } from '../../Services/User.service';
+import Loader from '../Loader/Loader';
 
 const FriendListsContainer = () => {
 
@@ -10,6 +12,7 @@ const FriendListsContainer = () => {
   const [userList , setUsers] = useState<IFriendListItem[] | null>(null);
   const [myPaca,setMyPaca] = useState('');
   const [followlist,setFollowList]  = useState<[string]>();
+  const [isloading, setisloading] = useState(true)
 
   const handleSearch = (value)=>{
     console.log(`searching 🔎 : ${value}`)
@@ -23,16 +26,18 @@ const FriendListsContainer = () => {
         }
         const _list = await getUserList();
         const result = _list?.filter(v => v.dbId!= myData.db._id);
-
-        // console.log(result);
-        // console.log(`👨`,myData);
         if(result){
 
           setUsers(result);
+          setisloading(false)
         }
     };
     dataCall();
   },[]);
+
+  if(isloading){
+return < Loader/>
+  }
   return (
     <div className="p-5">
       

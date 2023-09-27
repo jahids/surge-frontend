@@ -36,11 +36,11 @@ function StockBuy() {
     setGifSelected(selectedGif);
     setIsGifPickerVisible(false); // Close the GIF picker
   };
-  console.log('--->', gifSelected);
+  console.log('--->', gifSelected?.url);
 
   const selected = watch('orderType', selectedOption);
   const { state } = useLocation();
-  console.log('state', state?.data?.price?.price);
+  console.log('state ✔✔✔', state?.data?.logo);
 
   useEffect(() => {
     if (state?.data || state?.data?.data) {
@@ -65,6 +65,7 @@ function StockBuy() {
       post: post,
       type: selectedOption,
       _data: state?.data,
+      gif : gifSelected?.url
     };
     console.log(`🎗🎀🎁`, orderData);
     navigate('/order-review', { state: orderData });
@@ -93,31 +94,7 @@ function StockBuy() {
   // console.log(`🔥`,shar);
   return (
     <div className=''>
-      {/* <div className='flex justify-between'>
-        <div><Link onClick={() => navigate(-1)}>
-        <div className="py-4 w-[30px]">
-          <MdOutlineArrowBackIos className="text-[30px] text-gray-500" />
-        </div>
-      </Link></div>
-        <div className='flex space-x-2'>
-        <label
-                className={`toggle ${
-                  selectedOption === 'market'
-                    ? 'toggle-primary'
-                    : 'toggle-secondary'
-                }`}
-              >
-                <input
-                  type="checkbox"
-                  className="toggle"
-                  checked={selectedOption === 'limit'}
-                  onChange={handleToggle}
-                />
-                <span className="toggle-mark"></span>
-                {selectedOption === 'market' ? 'Market' : 'Limit'}
-              </label>
-        </div>
-      </div> */}
+    
 
       {/* top code added */}
       <div className="flex">
@@ -165,7 +142,13 @@ function StockBuy() {
           </div>
           <div>
             <div className="flex space-x-2">
-             <h2>Logo</h2>
+            <div className="bg-gray-100 rounded-full">
+            <img
+              className="w-12 h-12 rounded-full object-contain"
+              src={state?.data?.logo}
+              alt="revance"
+            />
+          </div>
             </div>
           </div>
         </div>

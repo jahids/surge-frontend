@@ -22,7 +22,7 @@ useEffect(() => {
   }
 }, [isAuthenticated]);
 
-  if (!isAuthenticated) {
+  if (isAuthenticated) {
     return (
       <>
           <RouteComponent />
@@ -31,7 +31,7 @@ useEffect(() => {
     );
   }
 
-  // if (!isAuthenticated) {
-  //   return <Navigate to="/login" />;
-  // }
+  if (!isAuthenticated) {
+    return <Navigate to="/login" />;
+  }
 };

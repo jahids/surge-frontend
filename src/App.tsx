@@ -9,6 +9,7 @@ import OtpPage from './Pages/OtpPage/OtpPage';
 
 import { allRoute } from './Utils/Allroute';
 import { PrivateRoute } from './Hooks/PrivateRoute';
+import Tindercard from './Components/explore/TinderCard';
 
 const App: React.FC = () => {
   
@@ -20,6 +21,7 @@ const App: React.FC = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/registration" element={<RegistrationPage />} />
         <Route path="/otp" element={<OtpPage />} />
+        <Route path="/tinder" element={<Tindercard />} />
         {/* <Route path="/multistep" element={<MultistepForm />}/> */}
          {/* <Route path="*" element={<NotFoundPage />} /> */}
 {/* 🔏🔏🔏🔏 private route */}

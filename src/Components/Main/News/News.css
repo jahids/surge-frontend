@@ -1,6 +1,9 @@
 .card_wrapper .card_item {
   min-width: 280px;
 }
+.explore_wraper .card_item {
+  min-width: 150px;
+}
 
 .card_wrapper::-webkit-scrollbar {
   display: none;

@@ -28,23 +28,16 @@ const LoginFrom = () => {
       console.log("data api", data?.data);
      
       console.log('data', data?.data?.data?.multiStepCompleted);
-      if(data?.data?.data?.token){
-        setCookie('mytoken', data?.data?.data?.token, {
-          path: '/',
-          secure: true,
-          sameSite: 'none',
-        });
-        setCookie('email', data?.data?.data?.email, {
-          path: '/',
-          secure: true,
-          sameSite: 'none',
-        });
-        setCookie('dbid', data?.data?.data?.dbId, {
-          path: '/',
-          secure: true,
-          sameSite: 'none',
-        });
-  
+      setCookie('mytoken', data?.data?.data?.token, {
+        secure: false,
+      });
+      setCookie('email', data?.data?.data?.email, {
+        secure: false,
+      });
+      setCookie('dbid', data?.data?.data?.dbId, {
+        secure: false,
+      });
+      if(data?.data?.data?.multiStepCompleted === true){
         navigate('/main')
       }else {
         navigate('/multistep')
