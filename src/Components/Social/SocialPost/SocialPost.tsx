@@ -30,7 +30,7 @@ const SocialPost = ({ postData }: any) => {
       <Link to={`/post/${postData._id}`} state={{ userId: postData?.user[0]._id }} >
         <div>
           {/* stock info */}
-          <SocialPostBadge symbolData={postData?.symbol[0]} order_type={postData?.order_type} order_id={postData.order_id} buyer_id={postData.buyer_id} dbPrice={postData.buying_price} />
+          <SocialPostBadge order_side={postData?.order_side} symbolData={postData?.symbol[0]} order_type={postData?.order_type} order_id={postData.order_id} buyer_id={postData.buyer_id} dbPrice={postData.buying_price} />
         </div>
         <div style={{ width: '80%', margin: '0px auto', marginTop: '8px' }}>
           <img style={{ borderRadius: '12px' }} src={postData?.links?.pop()} />

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { instance } from "../../../../lib/AxiosInstance";
 const defaultLogo = "https://s3.amazonaws.com/cdn.designcrowd.com/blog/100-Famous-Brand%20Logos-From-The-Most-Valuable-Companies-of-2020/apple-logo.png";
-const SocialPostBadge = ({ order_id, buyer_id, dbPrice, symbolData, order_type }: any) => {
+const SocialPostBadge = ({ order_side, order_id, buyer_id, dbPrice, symbolData, order_type }: any) => {
 
   const [symbol, setSymbol] = useState('');
   const [price, setPrice] = useState(dbPrice ?? 0);
@@ -33,7 +33,7 @@ const SocialPostBadge = ({ order_id, buyer_id, dbPrice, symbolData, order_type }
           />
         </div>
         <div>
-          <p className="text-sm">Bought</p>
+          <p className="text-sm">{order_side == 'sell' ? 'sold' : 'Bought'}</p>
           <p className="text-sm">
 
             <span className="font-bold">{symbol}</span> at ${price}
