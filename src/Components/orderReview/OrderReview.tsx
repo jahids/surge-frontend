@@ -49,7 +49,7 @@ import React, { useEffect, useState } from 'react';
 import { BiImage } from 'react-icons/bi';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { instance } from '../../lib/AxiosInstance';
-import { notifySuccess } from '../../lib/Toastify';
+import { notifyError, notifySuccess } from '../../lib/Toastify';
 
 function OrderReview() {
   const navigate = useNavigate();
@@ -66,18 +66,30 @@ function OrderReview() {
     delete orderObj['_data'];
 
     // console.log(orderObj);
-    instance
-      .post(`/order/`, orderObj)
-      .then(res => {
-        console.log(res);
-        notifySuccess(`Successfully placed order for ${state.symbol}`, 3000);
-      })
-      .catch(er => console.log(er));
+    if (state?.sell === true) {
+      instance
+        .post(`/order/sell`, orderObj)
+        .then(res => {
+          console.log(res);
+          notifySuccess(
+            `Successfully placed sell order for ${state.symbol}`,
+            3000
+          );
+        })
+        .catch(er => {
+          console.error('err', er);
+          notifyError(`sell order not placed  ${state.symbol}`, 3000);
+        });
+    } else {
+      instance
+        .post(`/order/`, orderObj)
+        .then(res => {
+          console.log(res);
+          notifySuccess(`Successfully placed order for ${state.symbol}`, 3000);
+        })
+        .catch(er => console.log(er));
+    }
   };
-
-  useEffect(() => {
-    console.log(state);
-  }, []);
 
   return (
     <div className=" h-screen p-4">

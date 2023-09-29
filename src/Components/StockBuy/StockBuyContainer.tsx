@@ -51,7 +51,7 @@ const StockBuyContainer = () => {
             </div>
           </Link>
           <div>
-            <button
+            {/* <button
               onClick={handleClick}
               className="py-2 px-2 rounded-full text-3xl font-extrabold"
             >
@@ -60,7 +60,7 @@ const StockBuyContainer = () => {
               ) : (
                 <BsFillCheckCircleFill className="text-gray-500 text-3xl" />
               )}
-            </button>
+            </button> */}
           </div>
         </div>
       </section>
@@ -103,7 +103,19 @@ const StockBuyContainer = () => {
       </section>
       {/* --- stock chart end --- */}
       <div className="flex justify-between gap-2 mt-2 mb-5">
-        <button className="bg-indigo-600 px-14 py-3 text-white rounded-full">
+        <button
+          onClick={() =>
+            navigate(
+              `/sell/${
+                specificStockData?.data?.symbol || specificStockData?.symbol
+              }`,
+              {
+                state: { data: specificStockData },
+              }
+            )
+          }
+          className="bg-indigo-600 px-14 py-3 text-white rounded-full"
+        >
           Sell
         </button>
 

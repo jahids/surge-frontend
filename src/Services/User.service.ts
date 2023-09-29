@@ -7,15 +7,17 @@ export interface IFriendListItem {
   city: string;
   email: string;
   dbId: string;
+  pfp : string;
   following: [string];
 }
+const defaultImg = `https://www.gravatar.com/avatar/00000000000000000000000000000000?d=retro&f=y`;
 
 export const getUserList = async () => {
   try {
     const {
       data: { data: result },
     } = await instance.get(`/social/people`);
-    // console.log(result);
+    console.log(`💎💍`,result);
     const filteredResult: [IFriendListItem] = result.map((v: any) => {
       const item: IFriendListItem = {
         alpaca_id: v.id as string,
@@ -26,6 +28,7 @@ export const getUserList = async () => {
         city: v?.contact.city as string,
         email: v?.contact.email_address as string,
         dbId: v.dbId,
+        pfp : v?.pfp || defaultImg,
         following: v.following,
       };
       return item;

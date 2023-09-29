@@ -75,6 +75,8 @@ import earthIcon from '../../../assets/img/earth.png';
 import { useGetSpecificNewsQuery } from '../../../features/news/newsApiSlice';
 import Loader from '../../Loader/Loader';
 
+const tempUrl = `https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dHJhZGluZ3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60`;
+
 interface NewsModalsheetProps {
   onClose: () => void;
   news: any;
@@ -93,19 +95,23 @@ const NewsModalsheet: React.FC<NewsModalsheetProps> = ({ onClose, news }) => {
     return <p>loading..</p>;
   }
 
-  console.log('any type', specificNewsData?.data?.news);
+  console.log('any type 🎁', specificNewsData?.data?.news[0]);
 
   const {
     author = '',
     headline,
     source,
     symbols,
+    images ,
     url,
+    summary
   } = specificNewsData?.data?.news[0];
 
   const handleCloseModal = () => {
     onClose();
   };
+
+  
 
   return (
     <>
@@ -118,7 +124,7 @@ const NewsModalsheet: React.FC<NewsModalsheetProps> = ({ onClose, news }) => {
                 <div>
                   <img
                     className="rounded-3xl"
-                    src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dHJhZGluZ3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60"
+                    src={tempUrl}
                     alt="news_image"
                   />
                 </div>
@@ -140,7 +146,7 @@ const NewsModalsheet: React.FC<NewsModalsheetProps> = ({ onClose, news }) => {
                     </div>
                   </div>
                   <div>
-                    <p className="my-5 text-justify">{headline}</p>
+                    <p className="my-5 text-justify">{ summary?.length ? summary :   headline}</p>
                   </div>
                   <div className="flex items-center justify-center mt-8 pb-[100px]">
                     <a href={url} target="_blank" rel="noreferrer">

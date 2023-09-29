@@ -22,15 +22,13 @@ const UserFriendCard = ({ dbId }: any) => {
 
 
   //'65115b678407c2a27a906b33', '650be13378a5d532229f3b2e'
-  useEffect(() => {
-    const dataCall = async () => {
-      const { data: myData } = await getSingleUser(dbId);
-      const {
-        alpaca: { identity },
-        db,
-      } = myData;
-      setName(identity.given_name + ' ' + identity.family_name);
-      console.log(`⚽`, myData);
+  useEffect(()=>{
+    const dataCall = async ()=>{
+      const {data : myData} = await getSingleUser(dbId);
+      const {alpaca :{identity},db} = myData;
+      setName(identity.given_name + " " + identity.family_name);
+        console.log(`⚽`,myData)
+        setPfp(db?.pfp || defaultImg);
     };
     dataCall();
   }, []);
