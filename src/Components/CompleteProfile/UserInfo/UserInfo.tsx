@@ -3,8 +3,12 @@ const UserInfo = ({ userdata }: any) => {
 
   return (
     <div className="mt-5">
-      <div className="w-24 h-24 bg-gray-300 flex items-center justify-center rounded-full">
-        <h1 className="text-2xl font-bold ">PH</h1>
+      <div>
+        <img
+          className="w-24 h-24 rounded-full bg-gray-300 flex items-center justify-center"
+          src={userdata?.db?.pfp}
+          alt=""
+        />
       </div>
       <div>
         {/* --- name start --- */}

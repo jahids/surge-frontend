@@ -55,9 +55,9 @@ const LoginFrom = () => {
     <div className="p-5">
       <div>
         {/* -- back btn start --- */}
-        <div className="w-10 h-10 bg-white border-2 rounded-full  flex items-center justify-center">
+        {/* <div className="w-10 h-10 bg-white border-2 rounded-full  flex items-center justify-center">
           <BsArrowLeft className="text-red-600 font-medium" />
-        </div>
+        </div> */}
         {/* -- back btn end --- */}
 
         {/* --- company logo start ---  */}

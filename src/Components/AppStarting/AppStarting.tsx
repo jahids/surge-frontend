@@ -1,79 +1,101 @@
-import './appStarting.css';
-import { Link } from 'react-router-dom'
-
-
-import baseImageTwo from '../../assets/starting-img/base-image-2.png';
-import quoteOne from '../../assets/starting-img/quote-1.png';
-import quoteTwo from '../../assets/starting-img/quote-2.png';
-import quoteThree from '../../assets/starting-img/quote-3.png';
-import quoteFour from '../../assets/starting-img/quote-4.png';
-import quoteFive from '../../assets/starting-img/quote-5.png';
-import quoteSix from '../../assets/starting-img/quote-6.png';
-import quoteSeven from '../../assets/starting-img/quote-7.png';
-import quoteEight from '../../assets/starting-img/quote-8.png';
-import quoteNine from '../../assets/starting-img/quote-9.png';
-import quoteTen from '../../assets/starting-img/quote-10.png';
+import Lottie from 'lottie-react';
+// import loader from '../../assets/img/loader.json';
+import stockgif from '../../assets/img/stockgif.json';
+import phonestock from '../../assets/img/phonestock.json';
+import { Link } from 'react-router-dom';
 
 const AppStarting = () => {
   return (
-    <div className="landing_animation">
-      <img className="base_img" src={baseImageTwo} alt="Baseimage" />
-      <div className="slider_container">
-        <div className="slide_track">
-          <div className="slide_item">
-            <img src={quoteOne} alt="quote-1" height={300} />
-          </div>
-          <div className="slide_item">
-            <img src={quoteTwo} alt="quote-2" height={300} />
-          </div>
-          <div className="slide_item">
-            <img src={quoteThree} alt="quote-3" height={300} />
-          </div>
-          <div className="slide_item">
-            <img src={quoteFour} alt="quote-4" height={300} />
-          </div>
-          <div className="slide_item">
-            <img src={quoteFive} alt="quote-5" height={300} />
-          </div>
+    <div>
+      <section>
+        <h1
+          // style={{ lineHeight: '1.5', color: 'rgb(33 206 153)' }}
+          className=" mt-20 text-4xl text-center font-bold text-indigo-600 "
+        >
+          Discover Your <br /> Stock here
+        </h1>
+
+        <p
+          style={{
+            lineHeight: '1.5',
+            // textAlign: 'center',
+            // textJustify: 'inter-word',
+          }}
+          className="line-clamp-3 mt-8 text-center"
+        >
+          Explore all the existing job roles based on your interest and study
+          major
+        </p>
+      </section>
+      <div className="flex items-center justify-center mt-20 ">
+        <div>
+          <Lottie animationData={phonestock} loop={true} />
         </div>
       </div>
 
-      <div className="back_slider">
-        <div className="back_slide_track">
-          <div className="">
-            <img src={quoteSix} alt="quote-6" />
-          </div>
-          <div className="">
-            <img src={quoteSeven} alt="quote-7" />
-          </div>
-          <div className="">
-            <img src={quoteEight} alt="quote-8" />
-          </div>
-          <div className="">
-            <img src={quoteNine} alt="quote-9" />
-          </div>
-          <div className="">
-            <img src={quoteTen} alt="quote-10" />
-          </div>
-        </div>
-      </div>
-
-      <div>
+      <section className="flex justify-center items-center gap-6 mb-4 align-center  bottom-0 fixed  w-full">
         <Link to="/login">
-          <button className='className="btn btn-active btn-primary px-16 py-4 rounded-md mt-5 ml-8'>
-            Login
+          <button
+            type="button"
+            className="py-4 px-10 focus:outline-none text-white btn-active btn-primary hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-200 font-medium rounded-lg text-sm  mb-2 dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-200"
+          >
+            Sign in
           </button>
         </Link>
-
         <Link to="/registration">
-          <button className='className="btn btn-active btn-primary px-16 py-4 mt-5 rounded-md ml-8'>
-            Registration
+          <button
+            type="button"
+            className="py-4 px-10  focus:outline-none text-white   btn-active btn-primary  hover:bg-indigo-800 focus:ring-4 focus:ring-indigo-200 font-medium rounded-lg text-sm  mb-2 dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:ring-indigo-200"
+          >
+            Sign Up
           </button>
         </Link>
-      </div>
-
+      </section>
     </div>
   );
 };
 
 export default AppStarting;
+
+// <div className="landing_animation">
+//   <img className="base_img" src={baseImageTwo} alt="Baseimage" />
+//   <div className="slider_container">
+//     <div className="slide_track">
+//       <div className="slide_item">
+//         <img src={quoteOne} alt="quote-1" height={300} />
+//       </div>
+//       <div className="slide_item">
+//         <img src={quoteTwo} alt="quote-2" height={300} />
+//       </div>
+//       <div className="slide_item">
+//         <img src={quoteThree} alt="quote-3" height={300} />
+//       </div>
+//       <div className="slide_item">
+//         <img src={quoteFour} alt="quote-4" height={300} />
+//       </div>
+//       <div className="slide_item">
+//         <img src={quoteFive} alt="quote-5" height={300} />
+//       </div>
+//     </div>
+//   </div>
+
+//   <div className="back_slider">
+//     <div className="back_slide_track">
+//       <div className="">
+//         <img src={quoteSix} alt="quote-6" />
+//       </div>
+//       <div className="">
+//         <img src={quoteSeven} alt="quote-7" />
+//       </div>
+//       <div className="">
+//         <img src={quoteEight} alt="quote-8" />
+//       </div>
+//       <div className="">
+//         <img src={quoteNine} alt="quote-9" />
+//       </div>
+//       <div className="">
+//         <img src={quoteTen} alt="quote-10" />
+//       </div>
+//     </div>
+//   </div>
+// </div>

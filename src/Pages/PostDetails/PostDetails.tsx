@@ -1,3 +1,4 @@
+/* eslint-disable  */
 import { Link, useLocation } from "react-router-dom";
 import SocialUserInfo from "../../Components/Social/SocialPost/SocialUserInfo/SocialUserInfo";
 import SocialPostBadge from "../../Components/Social/SocialPost/SocialPostBadge/SocialPostBadge";
@@ -7,6 +8,7 @@ import { useEffect, useState } from "react";
 import { instance } from "../../lib/AxiosInstance";
 import CommentBox from "./CommentBox";
 import CommentContainer from "./CommentContainer";
+import BackButton from "../../Components/globalBackButton/BackButton";
 
 
 type DetailsProps = {
@@ -44,11 +46,7 @@ export default function PostDetails() {
             }
 
             // const realPost = reqPost[0].comments.sort
-
             setPostData(reqPost[0]);
-
-
-
             console.log(`🎇🎇🔥🚒👨‍🚒👨‍🚒👨‍🚒👨‍🚒🔥 🔥🚒🚒👩‍🚒`, reqPost[0]);
         };
         dbCall();
@@ -58,7 +56,7 @@ export default function PostDetails() {
     return (
 
         postData ? <div className="mt-3 mb-3 bg-white-500 p-2 rounded-md"  >
-
+            <BackButton/>
             <div>
                 <SocialUserInfo name={postUserName} user={postData?.user[0]} postDate={postData?.createdAt} />
             </div>

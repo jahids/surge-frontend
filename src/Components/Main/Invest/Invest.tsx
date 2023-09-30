@@ -180,7 +180,7 @@ useEffect(() => {
           <div>
             {/* <button
               onClick={() => navigate('/plaid')} */}
-              <button onClick={() => open()} disabled={!ready}
+              <button onClick={()=>navigate('/portfolio')}
               className="bg-[#fff] mt-2 rounded-full px-3 py-2 text-xs font-bold"
             >
               Check your portfolio

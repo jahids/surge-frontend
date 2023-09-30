@@ -28,7 +28,7 @@ function Trades({ data }: any) {
   return (
     <div
       onClick={() => navigate('/buy-stock', { state: data?.symbol })}
-      className="relative rounded-lg border items-center  border-gray-200 shadow-sm m-3"
+      className="relative rounded-lg border items-center  border-gray-200 shadow-sm m-3 "
     >
       <div className="flex items-center justify-between gap-4 p-4">
         <img

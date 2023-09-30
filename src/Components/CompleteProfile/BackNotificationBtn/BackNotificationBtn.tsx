@@ -1,5 +1,4 @@
 import { MdOutlineArrowBackIos } from 'react-icons/md';
-import { FaUserPlus } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 const BackNotificationBtn = () => {
@@ -10,9 +9,6 @@ const BackNotificationBtn = () => {
           <MdOutlineArrowBackIos className="text-2xl text-gray-500" />
         </div>
       </Link>
-      <div>
-        <FaUserPlus className="text-2xl text-gray-500" />
-      </div>
     </div>
   );
 };
