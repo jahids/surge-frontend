@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { FaRegClock, FaMoneyBillAlt } from 'react-icons/fa'; // Import icons as needed
 import { instance } from '../../lib/AxiosInstance';
 import { truncateText } from '../../Utils/converter';
+import BackButton from '../../Components/globalBackButton/BackButton';
 
 function Statement() {
   const [transactions, setTransactions] = useState([]);
@@ -22,6 +23,9 @@ function Statement() {
 
   return (
     <div className="bg-gray-100 h-screen p-4">
+
+      <BackButton />
+
       <h1 className="text-3xl font-bold mb-6">Statement</h1>
 
       {transactions?.map(transaction => (

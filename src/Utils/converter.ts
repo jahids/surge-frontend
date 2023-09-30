@@ -52,8 +52,8 @@ export function calculateAccountAge(
   const months = today.diff(accountCreationDate, 'months');
   accountCreationDate.add(months, 'months'); // Increment the creation date by months
   const days = today.diff(accountCreationDate, 'days');
-  const hours = today.diff(accountCreationDate,'hours');
-  const mins = today.diff(accountCreationDate,'minutes');
+  const hours = today.diff(accountCreationDate, 'hours');
+  const mins = today.diff(accountCreationDate, 'minutes');
 
   // Build the result based on non-zero components
   let result = '';
@@ -70,13 +70,16 @@ export function calculateAccountAge(
       days === 1 ? 'day' : 'days'
     }`;
   }
-  if (!days ) {
-    result = `${result.length > 0 ? ' ' : ''}${hours} ${hours === 1 ? 'hour' : 'hours'}`;
+  if (!days) {
+    result = `${result.length > 0 ? ' ' : ''}${hours} ${
+      hours === 1 ? 'hour' : 'hours'
+    }`;
   }
   if (!hours) {
-    result = `${result.length > 0 ? ' ' : ''}${mins} ${mins === 1 ? 'minute' : 'minutes'}`;
+    result = `${result.length > 0 ? ' ' : ''}${mins} ${
+      mins === 1 ? 'minute' : 'minutes'
+    }`;
   }
-  
 
   return result;
 }

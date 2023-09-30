@@ -1,6 +1,7 @@
 import OrderReview from '../Components/orderReview/OrderReview';
 import PlaidInit from '../Components/plaid/plaidinit';
 import StockBuy from '../Components/sellbuy/StockBuy';
+import StockSell from '../Components/sellbuy/StockSell';
 import Addfund from '../Pages/AddFund/Addfund';
 import AllAssetsPage from '../Pages/AllAssetsPage/AllAssetsPage';
 import AllStockPage from '../Pages/AllStockPage/AllStockPage';
@@ -16,8 +17,6 @@ import SocialPage from '../Pages/SocialPage/SocialPage';
 import StockBuyPage from '../Pages/StockBuyPage/StockBuyPage';
 import TopMoversPage from '../Pages/TopMoversPage/TopMoversPage';
 import Statement from '../Pages/statement/Statement';
-
-
 
 export const allRoute = [
   {
@@ -38,7 +37,7 @@ export const allRoute = [
   },
   {
     path: '/post/:id',
-    component:PostDetails,
+    component: PostDetails,
   },
   {
     path: '/explore',
@@ -52,10 +51,10 @@ export const allRoute = [
     path: '/assets',
     component: AllAssetsPage,
   },
-  {
-    path: '/portfolio',
-    component: () => <p>hello portfolio</p>, // If you need to render JSX with a function component
-  },
+  // {
+  //   path: '/portfolio',
+  //   component: () => <p>hello portfolio</p>, // If you need to render JSX with a function component
+  // },
   {
     path: '/addfund',
     component: Addfund,
@@ -63,6 +62,10 @@ export const allRoute = [
   {
     path: '/buy/:symbol',
     component: StockBuy,
+  },
+  {
+    path: '/sell/:symbol',
+    component: StockSell,
   },
   {
     path: '/statement',

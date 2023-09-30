@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState } from 'react';
-import { truncateText } from '../../../Utils/converter';
 import { instance } from '../../../lib/AxiosInstance';
 
 const defaultlogo = `https://images2.imgbox.com/52/06/7xFpAH04_o.png`;

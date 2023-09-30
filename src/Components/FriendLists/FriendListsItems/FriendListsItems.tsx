@@ -4,7 +4,13 @@ import { calculateAccountAge } from '../../../Utils/converter';
 import { instance } from '../../../lib/AxiosInstance';
 
 const defaultImg = `https://www.gravatar.com/avatar/00000000000000000000000000000000?d=retro&f=y`;
-export default function FriendListsItem  ({isFriend = false ,imgSrc = defaultImg , name  = "First Last", platfromAge = '2021-01-02',id } : any)  {
+export default function FriendListsItem({
+  isFriend = false,
+  imgSrc = defaultImg,
+  name = 'First Last',
+  platfromAge = '2021-01-02',
+  id,
+}: any) {
   // --- btn toggle state ---
   const [isPlusIcon, setIsPlusIcon] = useState(isFriend);
   const accountAge = calculateAccountAge(new Date(platfromAge).getTime());
@@ -12,7 +18,7 @@ export default function FriendListsItem  ({isFriend = false ,imgSrc = defaultImg
   const handleClick = () => {
     setIsPlusIcon(prevState => !prevState);
     // console.log(`follow this nigga : `,id);
-    instance.get(`/social/new-following/${id}`).catch(er =>{
+    instance.get(`/social/new-following/${id}`).catch(er => {
       console.log(er);
       setIsPlusIcon(prevState => !prevState);
     });
@@ -42,7 +48,7 @@ export default function FriendListsItem  ({isFriend = false ,imgSrc = defaultImg
             >
               {isPlusIcon ? (
                 <BiCheck className="text-green-400" />
-                ) : (
+              ) : (
                 <BiPlus className="text-indigo-600" />
               )}
             </button>
@@ -51,6 +57,4 @@ export default function FriendListsItem  ({isFriend = false ,imgSrc = defaultImg
       </div>
     </div>
   );
-};
-
-
+}

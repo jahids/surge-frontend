@@ -1,4 +1,7 @@
 import './appStarting.css';
+import { Link } from 'react-router-dom'
+
+
 import baseImageTwo from '../../assets/starting-img/base-image-2.png';
 import quoteOne from '../../assets/starting-img/quote-1.png';
 import quoteTwo from '../../assets/starting-img/quote-2.png';
@@ -54,6 +57,21 @@ const AppStarting = () => {
           </div>
         </div>
       </div>
+
+      <div>
+        <Link to="/login">
+          <button className='className="btn btn-active btn-primary px-16 py-4 rounded-md mt-5 ml-8'>
+            Login
+          </button>
+        </Link>
+
+        <Link to="/registration">
+          <button className='className="btn btn-active btn-primary px-16 py-4 mt-5 rounded-md ml-8'>
+            Registration
+          </button>
+        </Link>
+      </div>
+
     </div>
   );
 };

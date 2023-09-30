@@ -7,13 +7,19 @@ import { MdDarkMode } from 'react-icons/md';
 import { BsQuestionOctagonFill } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 import { instance } from '../../../lib/AxiosInstance';
+import { useCookies } from 'react-cookie';
 
 const NavigateListItem = () => {
+  const [, , removeCookie] = useCookies();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
       const data = await instance.get(`/signout`);
+      // Remove cookies using the removeCookie function
+      removeCookie('mytoken', { path: '/' });
+      removeCookie('email', { path: '/' });
+      removeCookie('dbid', { path: '/' });
       console.log('data', data);
     } catch (error) {
       console.log('error', error);

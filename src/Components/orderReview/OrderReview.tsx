@@ -49,33 +49,47 @@ import React, { useEffect, useState } from 'react';
 import { BiImage } from 'react-icons/bi';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { instance } from '../../lib/AxiosInstance';
-import { notifySuccess } from '../../lib/Toastify';
+import { notifyError, notifySuccess } from '../../lib/Toastify';
 
 function OrderReview() {
   const navigate = useNavigate();
 
   const { state } = useLocation();
+  console.log('state ->>', state);
 
   const handleConfirm = () => {
     console.log(`firing order : `, state);
     const orderObj = {
       ...state,
+      links: [state?.gif],
     };
     delete orderObj['_data'];
 
     // console.log(orderObj);
-    instance
-      .post(`/order/`, orderObj)
-      .then(res => {
-        console.log(res);
-        notifySuccess(`Successfully placed order for ${state.symbol}`,3000);
-      })
-      .catch(er => console.log(er));
+    if (state?.sell === true) {
+      instance
+        .post(`/order/sell`, orderObj)
+        .then(res => {
+          console.log(res);
+          notifySuccess(
+            `Successfully placed sell order for ${state.symbol}`,
+            3000
+          );
+        })
+        .catch(er => {
+          console.error('err', er);
+          notifyError(`sell order not placed  ${state.symbol}`, 3000);
+        });
+    } else {
+      instance
+        .post(`/order/`, orderObj)
+        .then(res => {
+          console.log(res);
+          notifySuccess(`Successfully placed order for ${state.symbol}`, 3000);
+        })
+        .catch(er => console.log(er));
+    }
   };
-
-  useEffect(() => {
-    console.log(state);
-  }, []);
 
   return (
     <div className=" h-screen p-4">
@@ -117,6 +131,14 @@ function OrderReview() {
         {/* Another Image */}
 
         {/* </span> */}
+      </div>
+
+      <div className="mt-4 p-2 bg-white rounded-md shadow-md">
+        <img
+          src={state?.gif || ''}
+          className="gif-preview w-20 h-20 mx-auto rounded-md"
+          alt="Selected GIF"
+        />
       </div>
 
       <div className="mt-4 p-4 bg-white rounded-md shadow-md">

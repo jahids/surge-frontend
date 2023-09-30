@@ -3,7 +3,7 @@ import { BsBellFill } from 'react-icons/bs';
 import circular_economy from '../../../assets/main/circular-economy.png';
 import { Link, useNavigate } from 'react-router-dom';
 import axios, { AxiosError, AxiosResponse } from 'axios';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
   usePlaidLink,
   PlaidLinkOnSuccess,
@@ -12,11 +12,32 @@ import {
   PlaidLinkOptions,
 } from 'react-plaid-link';
 import { instance } from '../../../lib/AxiosInstance';
+import ReactApexChart from 'react-apexcharts';
+import { getSingleUser } from '../../../Services/User.service';
+import { getdbId } from '../../../Services/Cookie.service';
 
 
 const Invest = () => {
   const [token, setToken] = useState<string | null>(null);
   const navigate = useNavigate();
+  const [achcheck, setachcheck] = useState('')
+
+
+  
+const dbId : string = getdbId()
+useEffect(() => {
+  const dataCall = async () => {
+    const { data: myData } = await getSingleUser(dbId);
+    const {
+      db : {ach},
+    } = myData;
+    // setName(identity.given_name + ' ' + identity.family_name);
+    console.log(`⚽`, ach);
+  };
+  dataCall();
+}, []);
+
+
   // get a link_token from your API when component mounts
   React.useEffect(() => {
     const createLinkToken = async () => {
@@ -30,6 +51,9 @@ const Invest = () => {
     };
     createLinkToken();
   }, []);
+
+
+
 
   const onSuccess = useCallback<PlaidLinkOnSuccess>((publicToken, metadata) => {
     try {
@@ -56,6 +80,31 @@ const Invest = () => {
     open,
     ready,
   } = usePlaidLink(config);
+
+
+  const chartData = {
+    series: [
+      {
+        name: 'Sparkline Chart',
+        data: [30, 40, 25, 50, 49, 21, 70, 51, 60, 28, 60, 40],
+      },
+    ],
+    options: {
+      chart: {
+        type: 'line',
+        sparkline: {
+          enabled: true,
+        },
+      },
+      xaxis: {
+        categories: [
+          'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+          'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
+        ],
+      },
+      colors: ['#008FFB'],
+    },
+  };
 
 
   return (
@@ -88,8 +137,11 @@ const Invest = () => {
         {/* --- invest right part end --- */}
       </div>
       {/* --- INVEST --- */}
+      
       {/* ---  ENABLE CARD --- */}
-      <div className="bg-[#ECECEC] rounded-2xl flex items-center justify-between p-4 space-x-3 shadow">
+
+      { achcheck?.length && achcheck?.length > 2 ?
+      (<div className="bg-[#ECECEC] rounded-2xl flex items-center justify-between p-4 space-x-3 shadow">
         <div className="">
           <div>
             <small>
@@ -113,8 +165,39 @@ const Invest = () => {
             alt="circular_economy"
           />
         </div>
-      </div>
-      {/* ---  ENABLE CARD --- */}
+      </div>) :
+(<div className="mt-5 bg-[#ECECEC] rounded-2xl flex items-center justify-between p-4 space-x-3 shadow">
+        <div className="">
+          <div>
+            <small>
+            Your total asset portfolio
+           
+            </small>
+            <h1 className='text-xl py-2'>
+            $ 2.240.559
+            </h1>
+          </div>
+          <div>
+            {/* <button
+              onClick={() => navigate('/plaid')} */}
+              <button onClick={() => open()} disabled={!ready}
+              className="bg-[#fff] mt-2 rounded-full px-3 py-2 text-xs font-bold"
+            >
+              Check your portfolio
+            </button>
+          </div>
+        </div>
+        <div className="">
+        <ReactApexChart
+        options={chartData.options}
+        series={chartData.series}
+        type="line"
+        width={150}
+        height={50}
+      />
+        </div>
+  </div>
+)}
     </div>
   );
 };
