@@ -92,7 +92,7 @@ const NewsModalsheet: React.FC<NewsModalsheetProps> = ({ onClose, news }) => {
   } = useGetSpecificNewsQuery({ symbolname: news?.symbols });
 
   if (isLoadingSpecificNews) {
-    return <p>loading..</p>;
+    return <Loader />;
   }
 
   console.log('any type 🎁', specificNewsData?.data?.news[0]);
@@ -102,16 +102,14 @@ const NewsModalsheet: React.FC<NewsModalsheetProps> = ({ onClose, news }) => {
     headline,
     source,
     symbols,
-    images ,
+    images,
     url,
-    summary
+    summary,
   } = specificNewsData?.data?.news[0];
 
   const handleCloseModal = () => {
     onClose();
   };
-
-  
 
   return (
     <>
@@ -122,11 +120,7 @@ const NewsModalsheet: React.FC<NewsModalsheetProps> = ({ onClose, news }) => {
             <Sheet.Scroller>
               <div className="px-5 h-screen">
                 <div>
-                  <img
-                    className="rounded-3xl"
-                    src={tempUrl}
-                    alt="news_image"
-                  />
+                  <img className="rounded-3xl" src={tempUrl} alt="news_image" />
                 </div>
                 <div className="px-2">
                   <div>
@@ -146,7 +140,9 @@ const NewsModalsheet: React.FC<NewsModalsheetProps> = ({ onClose, news }) => {
                     </div>
                   </div>
                   <div>
-                    <p className="my-5 text-justify">{ summary?.length ? summary :   headline}</p>
+                    <p className="my-5 text-justify">
+                      {summary?.length ? summary : headline}
+                    </p>
                   </div>
                   <div className="flex items-center justify-center mt-8 pb-[100px]">
                     <a href={url} target="_blank" rel="noreferrer">

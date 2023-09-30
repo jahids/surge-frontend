@@ -95,7 +95,7 @@ const UserProfile = () => {
   }
   return (
     <div className="container">
-      <BackButton nav="/main" />
+      <BackButton nav="/social" />
       <section className="stats flex py-4 px-4">
         <div className="stats__img-holder w-20 h-20 rounded-full border border-gray-200">
           <img
@@ -192,9 +192,19 @@ const UserProfile = () => {
         </div>
         <div>
           {activeTab === 1 && <>
-          <div>
+          {/* <div>
             <h1>Market value is {marketvalue}</h1>
-          </div>
+          </div> */}
+          <div className="mt-8 m-2">
+      <div className="bg-gray-100 p-5 rounded-2xl">
+        <div className="flex text-2xl justify-center  items-center text-center font-bold">
+        Portfolio Value : <span className='font-bold text-2xl text-indigo-700 ml-2'>${ marketvalue?.toFixed(2)}</span> 
+        </div>
+        <p className="mt-3 text-sm">
+     
+        </p>
+      </div>
+    </div>
           {
             porfoliodata?.length > 0 && porfoliodata?.map((item)=>(<Trades data={item}/>))
           }

@@ -1,3 +1,4 @@
+/* eslint-disable  */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import { HiUsers } from 'react-icons/hi';
 import { MdVerified } from 'react-icons/md';

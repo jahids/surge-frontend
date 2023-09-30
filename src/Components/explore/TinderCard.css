@@ -30,31 +30,23 @@
   /* dasfjalsdkjfd */
 
   .card {
-    /* position: relative;
-    background-color: #fff;
-    width: 400px;
+    position: relative;
+    width: 600px;
     padding: 20px;
     max-width: 85vw;
     height: 50vh;
-     box-shadow: 0px 18px 53px 0px rgba(0, 0, 0, 0.3); 
     border-radius: 20px;
     background-size: cover;
     background-position: center;
-    padding-bottom: 20px; */
-    border:5px solid red;
-    position: relative;
-    width: 300px;
-    padding: 20px;
-    /* max-width: 85vw; */
-    max-width: 300px;
-    min-height: 200px;
-    height: fit-content;
-    border-radius: 20px;
-    background-size: cover;
-    background-position: center;
+    -ms-overflow-style: none; /* for Internet Explorer, Edge */
+    scrollbar-width: none; /* for Firefox */
+    overflow-y: scroll; 
     /* box-shadow: 0px 18px 53px 0px rgba(0, 0, 0, 0.3);  */
-    overflow-x: hidden;
   }
+
+  .card::-webkit-scrollbar {
+    display: none; /* for Chrome, Safari, and Opera */
+}
   
   .tinderCards__cardContainer {
     display: flex;

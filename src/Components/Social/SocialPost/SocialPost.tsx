@@ -63,7 +63,7 @@ const SocialPost = ({ postData, links }: any) => {
         </div>
       </Link>
       <div>
-        <SocialLikeCommentsBtn postId={postId} data={postData} />
+        <SocialLikeCommentsBtn postId={postId} data={postData} userdata={postData?.user[0]._id } />
       </div>
     </div>
   );

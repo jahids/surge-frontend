@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { instance } from '../../lib/AxiosInstance';
 import { Link, useNavigate } from 'react-router-dom';
 import { MdOutlineArrowBackIos } from 'react-icons/md';
+import BackButton from '../../Components/globalBackButton/BackButton';
+import { notifyError, notifySuccess } from '../../lib/Toastify';
 // You can import other icons as needed
 
 function Addfund() {
@@ -31,22 +33,19 @@ function Addfund() {
       });
       console.log('data come form api', data);
       setgetamount('');
+      notifySuccess('Transfer request Successfull');
     } catch (error) {
       console.log(error);
+      notifyError('Transfer request Failed');
     }
   };
 
   return (
     <div className="">
       <div className="flex-1  p-4">
-        <div>
-          <Link onClick={() => navigate('/profile')}>
-            <div className="py-4 w-[30px]">
-              <MdOutlineArrowBackIos className="text-[30px] text-gray-500" />
-            </div>
-          </Link>
-        </div>
+        <BackButton />
       </div>
+
       <div className="text-center ">
         {/* <FaRegMoneyBillAlt className="text-8xl text-blue-500" /> */}
         <h1 className="text-3xl font-bold ">Add Funds</h1>
