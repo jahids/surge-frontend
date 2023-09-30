@@ -10,6 +10,7 @@ import Trades from '../../Components/userprofileComponent/Trades';
 import BottomNav from '../../Components/BottomNav/BottomNav';
 // import { ShimmerText  } from "react-shimmer-effects";
 import Loader from '../../Components/Loader/Loader';
+const defaultimage = "https://images.unsplash.com/photo-1621416894569-0f39ed31d247?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Yml0Y29pbnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
 
 const UserProfile = () => {
   const [activeTab, setActiveTab] = useState(1);
@@ -99,7 +100,7 @@ const UserProfile = () => {
       <section className="stats flex py-4 px-4">
         <div className="stats__img-holder w-20 h-20 rounded-full border border-gray-200">
           <img
-            src="https://images.unsplash.com/photo-1621416894569-0f39ed31d247?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Yml0Y29pbnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
+            src={dbdata?.pfp || defaultimage}
             alt="User Profile"
             className="w-full h-full rounded-full object-cover"
           />
@@ -214,7 +215,7 @@ const UserProfile = () => {
           {activeTab === 3 && <p>hello 3</p>}
         </div>
       </section>
-      <BottomNav/>
+      
     </div>
   );
 };
