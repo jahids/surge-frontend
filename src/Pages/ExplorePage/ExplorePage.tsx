@@ -13,19 +13,49 @@ import { useNavigate } from 'react-router-dom';
 import Lottie from 'lottie-react';
 // import './News.css';
 import loader from '../../assets/img/loader.json';
-import stockgif from '../../assets/img/stockgif.json';
+import Biotechnologygif from '../../assets/img/biotexh.json';
+import BanksRegionalgif from '../../assets/img/bank.json';
+import AssetManagementgif from '../../assets/img/assetmanagement.json';
+import MedicalDevicesgif from '../../assets/img/Medical Devices.json';
+import ShellCompaniesgif from '../../assets/img/sellcompany.json';
+import BackButton from '../../Components/globalBackButton/BackButton';
+import Categories from '../../Components/explore/Categories';
+import Investor from '../../Components/explore/Investor';
+
+interface ICategories {
+  category: string;
+  lottie: any;
+}
+
+interface Iinvestor {
+  name : string;
+  username : string;
+  parcentage : number;
+  image : string
+
+}
+
+
 const ExplorePage = () => {
   const [isOpen, setOpen] = useState<boolean>(false);
   const [selectedNews, setSelectedNews] = useState<NewsItem | null>(null);
   const [getcategory, setcategory] = useState([]);
   const navigate = useNavigate()
+  
 
-const categories = [
-  {category : "Biotechnology", lottie : loader},
-  {category : "Banks—Regional", lottie : stockgif},
-  // {category : "Asset Management", lottie : "09"},
-  // {category : "Shell Companies", lottie : "09"},
-  // {category : "Medical Devices", lottie : "09"},
+const categories :ICategories[]  = [
+  {category : "Bio Technology", lottie : Biotechnologygif },
+  {category : "Banks Regional", lottie : BanksRegionalgif },
+  {category : "Asset Management", lottie : AssetManagementgif},
+  {category : "Shell Companies", lottie : ShellCompaniesgif},
+  {category : "Medical Devices", lottie : MedicalDevicesgif},
+]
+
+const premiumInvestor : Iinvestor[] = [
+  {name :"helowin", username : "@dlfk", parcentage : 324, image : "https://cdn-icons-png.flaticon.com/512/187/187488.png"},
+  {name :"df", username : "@dlfk", parcentage : 324, image : "https://cdn-icons-png.flaticon.com/512/187/187488.png"},
+  {name :"adf", username : "@dlfk", parcentage : 324, image : "https://cdn-icons-png.flaticon.com/512/187/187488.png"},
+  {name :"akdfadfja", username : "@dlfk", parcentage : 324, image : "https://cdn-icons-png.flaticon.com/512/187/187488.png"},
 ]
   useEffect(() => {
 
@@ -48,11 +78,6 @@ const categories = [
   
 
 
-
-
-
-
-
   const handleCardClick = (item : any) => {
     console.log("item", item?.symbols);
     navigate('/tinder', {state : item})
@@ -60,79 +85,29 @@ const categories = [
     // setOpen(true);
   };
   return (
-   <div className="mt-10">
-    <h1 className="text-2xl font-bold mb-2">All Categories</h1>
+    <> 
+    <BackButton/>
+    {/* all category */}
+   <div className="mt-10 m-5">
+    <h1 className="text-2xl font-bold ">All Categories</h1>
     <p className="text-sm text-gray-400 mb-5">
       Explore the latest categories
     </p>
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 m-2">
-      {getcategory.map((item, index) => (
-        <motion.div
-          key={index}
-          className="relative group"
-          // whileHover={{ scale: 1.05 }}
-          style={{ width: "180px", height: "150px" }} // Set fixed dimensions
-        >
-          <div
-            className="card_item p-4 rounded-lg bg-purple-600 opacity-70  text-white shadow-md hover:shadow-lg cursor-pointer transition-transform duration-300 transform hover:scale-105 h-full"
-            onClick={() => handleCardClick(item)}
-          >
-            <p className="text-xl  font-medium mb-2">
-              {/* {truncateText(item.category, 10) || "Other"} */}
-              {truncateText(item.category, 10) || "Other"}
-            </p>
-          </div>
-          <button
-            onClick={() => handleCardClick(item)}
-            className="text-white hover:underline flex items-center justify-center absolute bottom-2 left-0 right-0"
-            style={{ margin: "0 auto" }}
-          >
-            View Details{" "}
-            <BsFillArrowRightCircleFill className="ml-2" />
-          </button>
-        </motion.div>
-      ))}
-    </div>
+    <Categories categorie={categories} />
+
+  {/* investment */}
+    <h1 className="text-2xl font-bold mt-10">Premium Investors</h1>
+    <p className="text-sm text-gray-400 mb-5">
+      Explore the latest categories
+    </p>
+    <Investor Investordata={premiumInvestor} />
+
+
     <BottomNav/>
   </div>
+  </>
 
   );
 };
 
 export default ExplorePage;
-
-  //   <div className="mt-10">
-  //   <h1 className="text-2xl font-bold mb-2">All Categories</h1>
-  //   <p className="text-sm text-gray-400 mb-5">
-  //     Explore the latest categories
-  //   </p>
-  //   <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 m-2">
-  //     {getcategory.map((item, index) => (
-  //       <motion.div
-  //         key={index}
-  //         className="relative group"
-  //         // whileHover={{ scale: 1.05 }}
-  //         style={{ width: "180px", height: "150px" }} // Set fixed dimensions
-  //       >
-  //         <div
-  //           className="card_item p-4 rounded-lg bg-purple-600 opacity-70  text-white shadow-md hover:shadow-lg cursor-pointer transition-transform duration-300 transform hover:scale-105 h-full"
-  //           onClick={() => handleCardClick(item)}
-  //         >
-  //           <p className="text-xl  font-medium mb-2">
-  //             {/* {truncateText(item.category, 10) || "Other"} */}
-  //             {truncateText(item.category, 10) || "Other"}
-  //           </p>
-  //         </div>
-  //         <button
-  //           onClick={() => handleCardClick(item)}
-  //           className="text-white hover:underline flex items-center justify-center absolute bottom-2 left-0 right-0"
-  //           style={{ margin: "0 auto" }}
-  //         >
-  //           View Details{" "}
-  //           <BsFillArrowRightCircleFill className="ml-2" />
-  //         </button>
-  //       </motion.div>
-  //     ))}
-  //   </div>
-  //   <BottomNav/>
-  // </div>

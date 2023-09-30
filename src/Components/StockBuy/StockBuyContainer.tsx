@@ -10,8 +10,10 @@ import { BsFillCheckCircleFill } from 'react-icons/bs';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useGetSpecificStockQuery } from '../../features/stock/allStockApiSlice';
 import Loader from '../Loader/Loader';
+import BackButton from '../globalBackButton/BackButton';
 
 const StockBuyContainer = () => {
+  const checkdtaa = ['TSLA', 'BTO', 'Esq'];
   const [isPlusIcon, setIsPlusIcon] = useState(true);
   const [isOpen, setOpen] = useState(false);
   const { state } = useLocation();
@@ -39,29 +41,16 @@ const StockBuyContainer = () => {
   };
 
   // Watch the selected option
+  // const isDisabled = !checkdtaa.some(
+  //   i => i === specificStockData?.data?.symbol
+  // );
 
   return (
     <div className="px-5 pb-10 relative">
       {/* -- top bar start --- */}
       <section>
         <div className="flex items-center justify-between py-5">
-          <Link onClick={() => navigate(-1)}>
-            <div>
-              <MdOutlineArrowBackIos className="text-2xl text-gray-500" />
-            </div>
-          </Link>
-          <div>
-            {/* <button
-              onClick={handleClick}
-              className="py-2 px-2 rounded-full text-3xl font-extrabold"
-            >
-              {isPlusIcon ? (
-                <AiFillPlusCircle className="text-3xl text-gray-500" />
-              ) : (
-                <BsFillCheckCircleFill className="text-gray-500 text-3xl" />
-              )}
-            </button> */}
-          </div>
+          <BackButton />
         </div>
       </section>
       {/* -- top bar end --- */}
@@ -104,6 +93,7 @@ const StockBuyContainer = () => {
       {/* --- stock chart end --- */}
       <div className="flex justify-between gap-2 mt-2 mb-5">
         <button
+          // disabled={isDisabled}
           onClick={() =>
             navigate(
               `/sell/${

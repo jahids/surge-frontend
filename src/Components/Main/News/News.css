@@ -8,3 +8,21 @@
 .card_wrapper::-webkit-scrollbar {
   display: none;
 }
+
+.custom .card_item {
+  min-width: 150px;
+  min-height: 180px;
+}
+
+
+.customexplore_wraper .card_item {
+  min-width: 150px;
+}
+
+.Investor .card_item {
+  min-width: 550px;
+  min-height: 250px;
+}
+.Investor .card_item {
+  min-width: 550px;
+}
