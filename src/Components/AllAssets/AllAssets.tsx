@@ -5,8 +5,6 @@ import AssetsList from './AssetsList/AssetsList';
 import AssetsSearch from './AssetsSearch/AssetsSearch';
 import DoneBtn from './DoneBtn/DoneBtn';
 
-const selected = new Set();
-
 const AllAssets = () => {
   const {
     data: allStockData,
@@ -15,15 +13,6 @@ const AllAssets = () => {
     isError: isAllStockError,
   } = useGetAllStockQuery({ limit: 30 });
 
-  const addToList = (symbol: string) => {
-    selected.add(symbol);
-    console.log(selected);
-  };
-  const removeFromList = (symbol: string) => {
-    selected.delete(symbol);
-    console.log(selected);
-  };
-  console.log('stock item assets', allStockData);
 
   // Use the useGetSpecificStockQuery hook to fetch specific stock data
   // const {
@@ -41,20 +30,18 @@ const AllAssets = () => {
       <section>
         <AssetsSearch />
       </section>
-      <section>
+      <section className='mt-4'>
         {allStockData?.data?.map((item: any) => (
-          <>
+          <div key={Math.random()}>
             {/* <SingleStockItem key={Math.random()} data={item} /> */}
             <AssetsList
               key={Math.random()}
-              add={addToList}
-              remove={removeFromList}
               data={item}
             />
-          </>
+          </ div>
         ))}
       </section>
-      <section className="">{/* <DoneBtn /> */}</section>
+      {/* <section className=""> <DoneBtn /> </section> */}
     </div>
   );
 };

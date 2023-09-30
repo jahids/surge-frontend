@@ -1,27 +1,55 @@
+import { useEffect, useState } from 'react';
 import { BiPlus } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
+import { instance } from '../../../lib/AxiosInstance';
+import Loader from '../../Loader/Loader';
+import NoDataWatchlist from './NoDataWatchList';
+import { SingleWatchlistItem } from './SingleWatchlistItem';
+
 const Watchlist = () => {
+
+  const [watchlistData, setWatchlistData] = useState<string[]>();
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    const dbCall = async () => {
+      const { data } = await instance.get(`/watchlist`);
+      // console.log(`🙈👹👹👺`, data);
+      if (data?.data) {
+
+        setWatchlistData(data.data.splice(0, 3));
+        setLoading(false);
+      }
+    };
+    dbCall();
+  }, []);
+  if (loading) {
+    return <Loader />
+  }
   return (
     <div className="mt-10">
       <h1 className="text-xl font-bold">Watchlist</h1>
       <p className="mt-1 text-sm text-gray-400">
         Start tracking your next opportunity
       </p>
-      {/* --- watchlist start --- */}
-      <Link to="/assets">
-        <div className="flex items-center mt-7">
-          <div className="w-10 h-10 bg-indigo-100 flex items-center justify-center rounded-full ml-1">
-            <BiPlus className="text-2xl text-blue-800" />
+
+      {
+        watchlistData?.length ? (
+
+          <div key={Math.random()}>
+
+            {watchlistData.map((v: any) => (<SingleWatchlistItem symbolName={v} />))}
+            <div className="text-center mt-2">
+              <Link to="/assets">
+                <button className="bg-gray-200 px-3 py-2 rounded-full text-[13px] font-bold">
+                  See all
+                </button>
+              </Link>
+            </div>
           </div>
-          <div className="mx-3">
-            <p className="font-bold text-sm">Build your watchlist</p>
-            <p className="text-sm text-gray-400 mt-1">
-              Select which stocks to track
-            </p>
-          </div>
-        </div>
-      </Link>
-      {/* --- watchlist end --- */}
+
+        ) : < NoDataWatchlist />
+      }
+
     </div>
   );
 };
