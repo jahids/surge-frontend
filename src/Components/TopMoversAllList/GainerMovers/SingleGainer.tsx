@@ -57,7 +57,9 @@ function SingleGainer({ data }: any) {
                 } text-xs font-semibold`}
               >
                 {/* {`${marketparcentage || '3.98'}%`} */}
-                {`${data?.percent_change || marketparcentage}%`}
+                {`${
+                  data?.percent_change.toFixed(2) || marketparcentage.toFixed(2)
+                }%`}
               </button>
             </div>
           </div>

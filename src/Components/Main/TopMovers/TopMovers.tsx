@@ -4,6 +4,7 @@ import ptc from '../../../assets/movers-img/ptcLogo.webp';
 import { useGetTopMoversQuery } from '../../../features/movers/moversApiSlice';
 import { Link } from 'react-router-dom';
 import Loader from '../../Loader/Loader';
+import GainerMovers from '../../TopMoversAllList/GainerMovers/GainerMovers';
 
 const TopMovers = () => {
   console.log('helllo ');
@@ -42,7 +43,7 @@ const TopMovers = () => {
       <h1 className="text-xl font-bold">Top movers</h1>
       <p className="mt-1 text-sm text-gray-400 mb-7">By weekly </p>
       {/* --- top movers company --- */}
-      {topmoverData?.data?.gainers.map((item)=>(
+      {/* {topmoverData?.data?.gainers.map((item)=>(
         <>
           <div className="flex items-center justify-between mb-4">
         <div className="flex items-center">
@@ -62,7 +63,7 @@ const TopMovers = () => {
         <div>
           <div>
             <button className="bg-green-200 py-2 px-2 rounded-full text-green-500 text-xs font-semibold">
-             {`+${item?.price.toFixed(2)}`}
+             {`+${item?.percent_change.toFixed(2)}`}
             </button>
           </div>
         </div>
@@ -70,7 +71,9 @@ const TopMovers = () => {
         </>
       ))
 
-      }
+      } */}
+
+        <GainerMovers gainers={topmoverData?.data?.gainers} />
     
       {/* --- top movers company --- */}
 

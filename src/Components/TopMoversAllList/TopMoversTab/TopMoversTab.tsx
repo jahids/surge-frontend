@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import GainerMovers from '../GainerMovers/GainerMovers';
 import LoserMovers from '../LoserMovers/LoserMovers';
 import { useGetTopMoversQuery } from '../../../features/movers/moversApiSlice';
+import Loader from '../../Loader/Loader';
 
 const TopMoversTab = () => {
   const [activeTab, setActiveTab] = useState(1);
@@ -23,7 +24,7 @@ const TopMoversTab = () => {
 
   // Handle loading state or errors here
   if (isLoadingtopmover) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   if (isErrortopmover) {
@@ -36,7 +37,7 @@ const TopMoversTab = () => {
     // Use specificNewsData
   }
 
-  console.log('topmoverData', topmoverData);
+  console.log('topmoverData 10', topmoverData);
 
   return (
     <div>

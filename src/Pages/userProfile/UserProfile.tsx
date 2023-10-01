@@ -63,23 +63,20 @@ const UserProfile = () => {
         trades()
     }
 
-    // if(tabNumber === 1){
-    //     const  trades =  async() => {
-    //         try {
-    //             const {data : portfoliodata} = await instance(`portfolio?dbId=${id}`)
-    //             const {data : positonsdata} = await instance(`portfolio/open-positions?dbId=${id}`)
-    //             console.log('🍗🍖', portfoliodata?.data?.market_value);
-    //             console.log('✔😒✔', positonsdata);
-    //             setmarketvalue(portfoliodata?.data?.market_value)
-    //             setporfoliodata(positonsdata?.data)
-    //             // settradesdata(data?.data)
+    if(tabNumber === 3){
+        const  trades =  async() => {
+            try {
+                const {data : postData} = await instance(`social/post/user/${id}`)
+               console.log('postdata', postData);
+               
+                // settradesdata(data?.data)
                 
-    //         } catch (error) {
-    //             console.log('🍗🍖', error);
-    //         }
-    //     }
-    //     trades()
-    // }
+            } catch (error) {
+                console.log('🍗🍖', error);
+            }
+        }
+        trades()
+    }
     setActiveTab(tabNumber);
 
 

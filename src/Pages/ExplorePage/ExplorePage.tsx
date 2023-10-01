@@ -21,6 +21,7 @@ import ShellCompaniesgif from '../../assets/img/sellcompany.json';
 import BackButton from '../../Components/globalBackButton/BackButton';
 import Categories from '../../Components/explore/Categories';
 import Investor from '../../Components/explore/Investor';
+import TopMovers from '../../Components/Main/TopMovers/TopMovers';
 
 interface ICategories {
   category: string;
@@ -103,6 +104,7 @@ const premiumInvestor : Iinvestor[] = [
     </p>
     <Investor Investordata={premiumInvestor} />
 
+    <TopMovers/>
 
     <BottomNav/>
   </div>
