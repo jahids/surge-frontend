@@ -85,7 +85,8 @@ const premiumInvestor : Iinvestor[] = [
     // setOpen(true);
   };
   return (
-    <> 
+    //style={{height : "calc(80 dvh)", border : "5px solid red", overflow : "scroll"}}
+    <div >
     <BackButton/>
     {/* all category */}
    <div className="mt-10 m-5">
@@ -96,7 +97,7 @@ const premiumInvestor : Iinvestor[] = [
     <Categories categorie={categories} />
 
   {/* investment */}
-    <h1 className="text-2xl font-bold mt-10">Premium Investors</h1>
+    <h1 className="text-2xl font-bold mt-5">Premium Investors</h1>
     <p className="text-sm text-gray-400 mb-5">
       Explore the latest categories
     </p>
@@ -105,7 +106,7 @@ const premiumInvestor : Iinvestor[] = [
 
     <BottomNav/>
   </div>
-  </>
+  </div>
 
   );
 };

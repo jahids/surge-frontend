@@ -10,14 +10,14 @@ export interface Iinvestor {
 
 function Investor({ Investordata }: { Investordata: Iinvestor[] }) {
   return (
-    <div className="investor mt-5 max-h-full flex overflow-x-auto">
+    <div className="investor mt-5  flex overflow-x-auto">
       {Investordata?.map((item, index) => (
         <div
           key={index}
-          className="card_item   p-5 rounded-3xl bg-[#F5F5F5] mr-[20px] shadow-sm cursor-pointer"
+          className="p-5 rounded-3xl bg-[#F5F5F5] mr-[20px] shadow-sm cursor-pointer"
           // onClick={() => handleCardClick(item)}
         >
-          <div className="h-[200px] w-[300px]">
+          <div className="h-[200px] w-[300px] ">
             <img
               className="mx-auto w-[100px] h-[100px]"
               src={item?.image}
