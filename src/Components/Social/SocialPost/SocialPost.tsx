@@ -52,6 +52,7 @@ const SocialPost = ({ postData, links }: any) => {
             order_id={postData.order_id}
             buyer_id={postData.buyer_id}
             dbPrice={postData.buying_price}
+            order_side={postData.order_side}
           />
         </div>
         <div style={{ width: '80%', margin: '0px auto', marginTop: '8px' }}>

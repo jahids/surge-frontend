@@ -7,7 +7,7 @@ function BackButton({ nav }: any) {
   const navigate = useNavigate();
   return (
     <section>
-      <div className="flex items-center justify-between py-5">
+      <div className="flex items-center justify-between  py-5">
         <div onClick={() => navigate(nav ? nav : -1)}>
           <div>
             <MdOutlineArrowBackIos className="text-2xl text-gray-500" />

@@ -1,40 +1,48 @@
 import { MdOutlineArrowBackIos } from 'react-icons/md';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useGetSpecificStockQuery } from '../../features/stock/allStockApiSlice';
 import Loader from '../../Components/Loader/Loader';
 import BackButton from '../../Components/globalBackButton/BackButton';
 import PortfolioChart from '../../Components/portfolioComponent/PortfolioChart';
+import { instance } from '../../lib/AxiosInstance';
+import SingleStockItem from '../../Components/AllStockLists/AllStockItems/SingleStockItem';
 
 const defaultlogo = `https://images2.imgbox.com/52/06/7xFpAH04_o.png`;
 const PortfolioPage = () => {
   const [isPlusIcon, setIsPlusIcon] = useState(true);
   const [isOpen, setOpen] = useState(false);
-  const { state } = useLocation();
-  const navigate = useNavigate();
-  console.log('state lcoation', state);
+  const [portfoliodtaa, setportfoliodtaa] = useState([]);
+  const [portfoliostock, setportfoliostock] = useState([]);
+  const [loader, setloader] = useState(true);
+  // const { state } = useLocation();
+  // const navigate = useNavigate();
 
-  // Use the useGetSpecificStockQuery hook to fetch specific stock data
-  const {
-    data: specificStockData,
-    isLoading: isSpecificStockLoading,
-    // isSuccess: isSpecificStockSuccess,
-    // isError: isSpecificStockError,
-  } = useGetSpecificStockQuery({ symbolname: state });
+  useEffect(() => {
+    const dataload = async () => {
+      try {
+        const { data } = await instance.get(`portfolio`);
+        const { data: portfoliostockitem } = await instance.get(
+          `portfolio/open-positions`
+        );
+        // console.log('dataload', data);
+        setportfoliostock(portfoliostockitem?.data);
+        setportfoliodtaa(data?.data);
+        setloader(false);
+      } catch (error) {
+        console.log('error');
+        setloader(false);
+      }
+    };
+    dataload();
+  }, []);
 
-  if (isSpecificStockLoading) {
+  console.log('--portfoliodtaa', portfoliodtaa);
+  console.log('--portfoliostock', portfoliostock);
+
+  if (loader) {
     return <Loader />;
   }
-  // if (isSpecificStockError) {
-  //   return <p>Error</p>;
-  // }
-  console.log('specificStockData', specificStockData);
-
-  //   const handleClick = () => {
-  //     setIsPlusIcon(prevState => !prevState);
-  //   };
-
-  // Watch the selected option
 
   return (
     <div className="px-5 pb-10 relative">
@@ -50,7 +58,7 @@ const PortfolioPage = () => {
               {/* Revance <br /> Therapeutics */}
               {'investing'}
             </p>
-            <p className="text-3xl font-bold"> ${'4543'}</p>
+            <p className="text-3xl font-bold"> ${portfoliodtaa?.value}</p>
           </div>
         </div>
       </section>
@@ -64,22 +72,29 @@ const PortfolioPage = () => {
         <div className="flex justify-between items-center mt-3 m-2">
           <div>
             <span className="text-xl text-gray-500">Total Invested</span>
-            <h1 className="text-xl font-bold">${'4800050'}</h1>
+            <h1 className="text-xl font-bold">
+              ${portfoliodtaa?.cost_basis?.toFixed(2)}
+            </h1>
           </div>
           <div>
             <span className="text-xl text-gray-500">Total Gain</span>
-            <h1 className="text-xl font-bold">${'4800050'}</h1>
+            <h1 className="text-xl font-bold">
+              ${portfoliodtaa?.unrealized_pl?.toFixed(2)}
+            </h1>
           </div>
         </div>
       </section>
       <section>
         <div className="mt-10 ">
           <h1 className="text-2xl font-bold">Portfolio</h1>
-          <p className="mt-1 text-sm text-gray-400">
+          <p className="mt-1 text-sm text-gray-400 mb-5">
             Keep track of you positions
           </p>
         </div>
-        <div className="flex items-center justify-between mb-4 mt-5">
+        {portfoliostock?.map((item, index) => (
+          <SingleStockItem data={item} />
+        ))}
+        {/* <div className="flex items-center justify-between mb-4 mt-5">
           <div className="flex items-center">
             <div>
               <img
@@ -101,7 +116,9 @@ const PortfolioPage = () => {
               </button>
             </div>
           </div>
-        </div>
+
+        
+        </div> */}
       </section>
     </div>
   );

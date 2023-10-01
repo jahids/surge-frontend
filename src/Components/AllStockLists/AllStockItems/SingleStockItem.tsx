@@ -7,6 +7,8 @@ import { useNavigate } from 'react-router-dom';
 const defaultlogo = `https://images2.imgbox.com/52/06/7xFpAH04_o.png`;
 
 function SingleStockItem({ data }: any) {
+  console.log("user protfolio", data);
+  
   const [extradata, setextradata] = useState(null);
   const [marketparcentage, setmarketparcentage] = useState(null);
 console.log('data', data);
@@ -34,6 +36,8 @@ console.log('data', data);
     findExtraDes();
   }, []);
 
+  console.log("extradta", extradata);
+  
   return (
     <>
       <>
@@ -52,7 +56,8 @@ console.log('data', data);
             <div className="mx-5">
               <p className="font-bold">{data?.symbol}</p>
               <p className="text-gray-400 text-sm">
-                {truncateText(data?.name, 15)}
+                {/* {truncateText(data?.name, 15) || extradata?.name} */}
+                {truncateText(extradata?.name, 15)}
               </p>
             </div>
           </div>

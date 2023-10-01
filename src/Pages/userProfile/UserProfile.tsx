@@ -10,6 +10,7 @@ import Trades from '../../Components/userprofileComponent/Trades';
 import BottomNav from '../../Components/BottomNav/BottomNav';
 // import { ShimmerText  } from "react-shimmer-effects";
 import Loader from '../../Components/Loader/Loader';
+import UserPost from '../../Components/userprofileComponent/UserPost';
 const defaultimage = "https://images.unsplash.com/photo-1621416894569-0f39ed31d247?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Yml0Y29pbnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
 
 const UserProfile = () => {
@@ -23,6 +24,7 @@ const UserProfile = () => {
   const { id } = useParams();
   console.log('id found', id);
   const [postiondataloader, setpostiondataloader] = useState(true)
+  const [userpostdata, setuserpostdata] = useState([])
 
   useEffect(() => {
     const loadData = async () => {
@@ -68,7 +70,7 @@ const UserProfile = () => {
             try {
                 const {data : postData} = await instance(`social/post/user/${id}`)
                console.log('postdata', postData);
-               
+               setuserpostdata(postData?.data)
                 // settradesdata(data?.data)
                 
             } catch (error) {
@@ -142,8 +144,8 @@ const UserProfile = () => {
               onClick={() => handleTabClick(1)}
               aria-hidden="true"
             >
-              <a
-                href="#tab1"
+              <p
+                // href="#tab1"
                 className={`${
                   activeTab === 1
                     ? 'flex justify-center bg-indigo-400 rounded-full shadow text-white py-2 transition-[.5s]'
@@ -151,15 +153,15 @@ const UserProfile = () => {
                 }`}
               >
                 Portfolio
-              </a>
+              </p>
             </li>
             <li
               className=""
               onClick={() => handleTabClick(2)}
               aria-hidden="true"
             >
-              <a
-                href="#tab2"
+              <p
+                // href="#tab2"
                 className={`${
                   activeTab === 2
                     ? 'flex justify-center bg-indigo-400  rounded-full shadow text-white py-2 transition-[.5s] '
@@ -167,7 +169,7 @@ const UserProfile = () => {
                 }`}
               >
                 Trades
-              </a>
+              </p>
             </li>
 
             <li
@@ -175,8 +177,8 @@ const UserProfile = () => {
               onClick={() => handleTabClick(3)}
               aria-hidden="true"
             >
-              <a
-                href="#tab3"
+              <p
+                // href="#tab3"
                 className={`${
                   activeTab === 3
                     ? 'flex justify-center bg-indigo-400  rounded-full shadow text-white py-2 transition-[.5s] '
@@ -184,7 +186,7 @@ const UserProfile = () => {
                 }`}
               >
                 Posts
-              </a>
+              </p>
             </li>
           </ul>
         </div>
@@ -209,7 +211,7 @@ const UserProfile = () => {
           
           </>}
           {activeTab === 2 && tradesdata?.length > 0 && tradesdata?.map((item)=>(<Trades data={item}/>))}
-          {activeTab === 3 && <p>hello 3</p>}
+          {activeTab === 3 && userpostdata?.length > 0 && userpostdata?.map((item)=>(<UserPost data={item}/>)) }
         </div>
       </section>
       

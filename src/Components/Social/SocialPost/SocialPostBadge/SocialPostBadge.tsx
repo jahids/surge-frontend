@@ -3,6 +3,7 @@ import { instance } from '../../../../lib/AxiosInstance';
 const defaultLogo =
   'https://s3.amazonaws.com/cdn.designcrowd.com/blog/100-Famous-Brand%20Logos-From-The-Most-Valuable-Companies-of-2020/apple-logo.png';
 const SocialPostBadge = ({
+  order_side,
   order_id,
   buyer_id,
   dbPrice,
@@ -38,7 +39,7 @@ const SocialPostBadge = ({
           <img className="w-7 h-7 rounded-full" src={logo} alt="" />
         </div>
         <div>
-          <p className="text-sm">Bought</p>
+          <p className="text-sm">{order_side == 'sell' ? 'sold' : 'Bought'}</p>
           <p className="text-sm">
             <span className="font-bold">{symbol}</span> at ${price}
           </p>
