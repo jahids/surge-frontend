@@ -16,8 +16,8 @@ export const userApiSlice = apiSlice.injectEndpoints({
 
     // get All news
     getAllStock: builder.query({
-      query: ({ limit, item }) => ({
-        url: `stock?limit=${limit}&item=${item}`,
+      query: ({ limit, start, item }) => ({
+        url: `stock?limit=${limit}&start=${start}&item=${item}`,
         // url: `stock?limit=${limit}`,
         method: 'GET',
         headers: {

@@ -10,6 +10,8 @@ import {
   getUserList,
 } from '../../Services/User.service';
 import { getdbId } from '../../Services/Cookie.service';
+import animationloader from '../../assets/img/skeletonloader.json';
+import Lottie from 'lottie-react';
 const defaultImg = `https://www.gravatar.com/avatar/00000000000000000000000000000000?d=retro&f=y`;
 const UserFriendCard = ({ dbId }: any) => {
   const [myPaca, setMyPaca] = useState('');
@@ -17,6 +19,7 @@ const UserFriendCard = ({ dbId }: any) => {
   const [name, setName] = useState('');
   const [pfp, setPfp] = useState(defaultImg);
   const [portfolioValue, setPortfolioValue] = useState(Math.random() * 10);
+  const [friendlistloader, setfriendlistloader] = useState(true)
 
 
 
@@ -29,10 +32,14 @@ const UserFriendCard = ({ dbId }: any) => {
       setName(identity.given_name + " " + identity.family_name);
       // console.log(`⚽`,myData);
       setPfp(db?.pfp || defaultImg);
+      setfriendlistloader(false)
     };
     dataCall();
   }, []);
   // console.log(`🎁`,data);
+  if(friendlistloader){
+    return <Lottie animationData={animationloader} loop={true} />
+  }
   return (
     <div className="mt-4">
       <div className="flex items-center justify-between mb-5">
