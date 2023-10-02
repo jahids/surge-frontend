@@ -12,15 +12,18 @@ import {
 import { getdbId } from '../../Services/Cookie.service';
 import animationloader from '../../assets/img/skeletonloader.json';
 import Lottie from 'lottie-react';
+import { Link, useNavigate } from 'react-router-dom';
 const defaultImg = `https://www.gravatar.com/avatar/00000000000000000000000000000000?d=retro&f=y`;
 const UserFriendCard = ({ dbId }: any) => {
   const [myPaca, setMyPaca] = useState('');
   const [followlist, setFollowList] = useState<[string]>();
   const [name, setName] = useState('');
   const [pfp, setPfp] = useState(defaultImg);
+  const [db, setDb] = useState();
   const [portfolioValue, setPortfolioValue] = useState(Math.random() * 10);
   const [friendlistloader, setfriendlistloader] = useState(true)
 
+  const navigate = useNavigate();
 
 
 
@@ -30,7 +33,8 @@ const UserFriendCard = ({ dbId }: any) => {
       const { data: myData } = await getSingleUser(dbId);
       const { alpaca: { identity }, db } = myData;
       setName(identity.given_name + " " + identity.family_name);
-      // console.log(`⚽`,myData);
+      setDb(db);
+      console.log(`⚽`, myData);
       setPfp(db?.pfp || defaultImg);
       setfriendlistloader(false)
     };
@@ -41,7 +45,10 @@ const UserFriendCard = ({ dbId }: any) => {
     return <Lottie animationData={animationloader} loop={true} />
   }
   return (
-    <div className="mt-4">
+
+    <div onClick={() => {
+      navigate(`/userprofile/${db?._id}`, { state: { from: 'main' } });
+    }} className="mt-4">
       <div className="flex items-center justify-between mb-5">
         <div className="flex items-center">
           <div>

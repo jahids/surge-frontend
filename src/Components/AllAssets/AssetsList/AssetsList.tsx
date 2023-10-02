@@ -9,6 +9,9 @@ const defaultlogo = `https://images2.imgbox.com/52/06/7xFpAH04_o.png`;
 import AssetActionButton from './AseetActionButton';
 import Watchlist from '../../Main/WatchList/WatchList';
 import Loader from '../../Loader/Loader';
+import TextImage from '../../TextImage/TextImage';
+
+
 
 function AssetsList({ data }: any) {
   const [extradata, setextradata] = useState(null);
@@ -51,14 +54,18 @@ function AssetsList({ data }: any) {
         >
           <div className="flex items-center">
             <div>
-              <img
-                className="w-12 h-12 p-1 rounded-full bg-gray-100 object-contain"
-                src={extradata?.logo || defaultlogo}
-                alt=""
-              />
+              {
+                extradata?.logo ? <img
+                  className="w-12 h-12 p-1 rounded-full bg-gray-100 object-contain"
+                  src={extradata?.logo}
+                  alt=""
+                /> : <TextImage text={data?.symbol} />
+              }
             </div>
             <div className="mx-5">
-              <p className="font-bold">{data?.symbol}</p>
+              <p className="font-bold">
+                {data?.symbol}
+              </p>
               <p className="text-gray-400 text-sm">
                 {truncateText(data?.name, 20)}
               </p>

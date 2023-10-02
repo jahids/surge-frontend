@@ -63,23 +63,25 @@ export const SingleWatchlistItem = ({ symbolName }: { symbolName: string }) => {
             </div>
           </div>
 
-          <div>
-            <div>
-              <button
-                className={
-                  marketparcentage! < 0
-                    ? 'bg-red-200 py-2 px-2 rounded-full text-red-800 text-xs font-semibold'
-                    : 'bg-green-200 py-2 px-2 rounded-full text-green-800 text-xs font-semibold'
-                }
-              >
-                {`${marketparcentage || '3.98'}%`}
-              </button>
-            </div>
-          </div>
-        </div>
-      </>
-    </>
-  );
-};
+                    <div>
+                        <div>
+                            <button
+                                className={
+                                    marketparcentage! < 0
+                                        ? 'bg-red-200 py-2 px-2 rounded-full text-red-800 text-xs font-semibold'
+                                        : 'bg-green-200 py-2 px-2 rounded-full text-green-800 text-xs font-semibold'
+                                }
+                            >
+                                {`${marketparcentage || '3.98'}%`}
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </>
+        </>
+    );
+}
+
 
 export default SingleWatchlistItem;

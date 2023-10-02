@@ -13,7 +13,7 @@ const AllAssets = () => {
     isLoading: isAllStockLoading,
     isSuccess: isAllStockSuccess,
     isError: isAllStockError,
-  } = useGetAllStockQuery({ limit: 30 });
+  } = useGetAllStockQuery({ limit: 10 });
 
   // Use the useGetSpecificStockQuery hook to fetch specific stock data
   // const {

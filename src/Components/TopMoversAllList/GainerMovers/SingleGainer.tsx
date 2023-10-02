@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState } from 'react';
 import { instance } from '../../../lib/AxiosInstance';
+import { useNavigate } from 'react-router-dom';
 
 const defaultlogo = `https://images2.imgbox.com/52/06/7xFpAH04_o.png`;
 
@@ -27,9 +28,10 @@ function SingleGainer({ data }: any) {
 
     findExtraDes();
   }, []);
+  const navigate = useNavigate();
 
   return (
-    <>
+    <div className="mouse-Pointer" onClick={() => navigate('/buy-stock', { state: data?.symbol })} >
       <>
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center">
@@ -52,20 +54,18 @@ function SingleGainer({ data }: any) {
             <div>
               {/* "bg-green-200 py-2 px-2 rounded-full text-green-500 text-xs font-semibold" */}
               <button
-                className={`  py-2 px-2 rounded-full ${
-                  data?.percent_change > 0 ? 'bg-green-300' : 'bg-red-300'
-                } text-xs font-semibold`}
+                className={`  py-2 px-2 rounded-full ${data?.percent_change > 0 ? 'bg-green-300' : 'bg-red-300'
+                  } text-xs font-semibold`}
               >
                 {/* {`${marketparcentage || '3.98'}%`} */}
-                {`${
-                  data?.percent_change.toFixed(2) || marketparcentage.toFixed(2)
-                }%`}
+                {`${data?.percent_change.toFixed(2) || marketparcentage.toFixed(2)
+                  }%`}
               </button>
             </div>
           </div>
         </div>
       </>
-    </>
+    </div>
   );
 }
 

@@ -48,10 +48,10 @@ function StockSell() {
   useEffect(() => {
     if (state?.data || state?.data?.data) {
       const stockData = state?.data || state?.data?.data;
-      console.log("stock buy tsx",stockData);
-      
+      console.log("stock buy tsx", stockData);
+
       setSingleSharePrice(stockData?.price?.price);
-      setAvailable(stockData?.price.volume);
+      setAvailable(stockData?.price?.volume);
       console.log('🎈', state);
     }
   }, []);
@@ -68,10 +68,10 @@ function StockSell() {
       post: post,
       type: selectedOption,
       _data: state?.data,
-      gif : gifSelected?.url
+      gif: gifSelected?.url
     };
     console.log(`🎗🎀🎁`, orderData);
-    navigate('/order-review', { state: {...orderData, sell : true} });
+    navigate('/order-review', { state: { ...orderData, sell: true } });
   };
   const handlePriceChange = (ev: any) => {
     const value = ev.target?.value ?? 0;
@@ -97,41 +97,40 @@ function StockSell() {
   // console.log(`🔥`,shar);
   return (
     <div className=''>
-    
+
 
       {/* top code added */}
       <div className="flex">
-  <div className="flex-1  p-4">
-  <div><Link onClick={() => navigate(-1)}>
-        <div className="py-4 w-[30px]">
-          <MdOutlineArrowBackIos className="text-[30px] text-gray-500" />
+        <div className="flex-1  p-4">
+          <div><Link onClick={() => navigate(-1)}>
+            <div className="py-4 w-[30px]">
+              <MdOutlineArrowBackIos className="text-[30px] text-gray-500" />
+            </div>
+          </Link></div>
         </div>
-      </Link></div>
-  </div>
-  <div className="flex-none justify-center items-center mt-5 p-4 text-xl font-bold">
-  {selectedOption === 'market' ? 'Market' : 'Limit'}
-  </div>
-  <div className="flex-1   p-4">
-  <div className='flex mt-5 justify-end items-end '>
-        <label
-                className={`toggle ${
-                  selectedOption === 'market'
-                    ? 'toggle-primary'
-                    : 'toggle-secondary'
+        <div className="flex-none justify-center items-center mt-5 p-4 text-xl font-bold">
+          {selectedOption === 'market' ? 'Market' : 'Limit'}
+        </div>
+        <div className="flex-1   p-4">
+          <div className='flex mt-5 justify-end items-end '>
+            <label
+              className={`toggle ${selectedOption === 'market'
+                  ? 'toggle-primary'
+                  : 'toggle-secondary'
                 }`}
-              >
-                <input
-                  type="checkbox"
-                  className="toggle"
-                  checked={selectedOption === 'limit'}
-                  onChange={handleToggle}
-                />
-                <span className="toggle-mark"></span>
-              
-              </label>
+            >
+              <input
+                type="checkbox"
+                className="toggle"
+                checked={selectedOption === 'limit'}
+                onChange={handleToggle}
+              />
+              <span className="toggle-mark"></span>
+
+            </label>
+          </div>
         </div>
-  </div>
-</div>
+      </div>
       {/* top code end */}
 
       <div className="p-5">
@@ -145,13 +144,13 @@ function StockSell() {
           </div>
           <div>
             <div className="flex space-x-2">
-            <div className="bg-gray-100 rounded-full">
-            <img
-              className="w-12 h-12 rounded-full object-contain"
-              src={state?.data?.logo}
-              alt="revance"
-            />
-          </div>
+              <div className="bg-gray-100 rounded-full">
+                <img
+                  className="w-12 h-12 rounded-full object-contain"
+                  src={state?.data?.logo}
+                  alt="revance"
+                />
+              </div>
             </div>
           </div>
         </div>
