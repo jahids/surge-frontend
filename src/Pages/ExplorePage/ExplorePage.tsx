@@ -22,6 +22,8 @@ import BackButton from '../../Components/globalBackButton/BackButton';
 import Categories from '../../Components/explore/Categories';
 import Investor from '../../Components/explore/Investor';
 import TopMovers from '../../Components/Main/TopMovers/TopMovers';
+import CustomLottie from '../../Utils/CustomLottie';
+import { investorcard } from '../../Utils/Skeleton';
 
 interface ICategories {
   category: string;
@@ -41,6 +43,9 @@ const ExplorePage = () => {
   const [isOpen, setOpen] = useState<boolean>(false);
   const [selectedNews, setSelectedNews] = useState<NewsItem | null>(null);
   const [getcategory, setcategory] = useState([]);
+  const [investorinfo, setinvestorinfo] = useState([]);
+  const [loader, setloader] = useState(true);
+  
   const navigate = useNavigate()
   
 
@@ -63,11 +68,14 @@ const premiumInvestor : Iinvestor[] = [
     const loaddata = async() => {
       try {
        const {data : requestData} = await  instance.get(`/categories-name/?limit=${26}`)
-        //const {data : requestData} = await  instance.get(`/categories/?name=${}`)
+        const {data : investordata} = await  instance.get(`/user/top-investors?limit=${5}`)
+        console.log("investor data", investordata?.data);
+        setinvestorinfo(investordata?.data)
         const apiresponse = requestData?.data
+        setloader(false)
         setcategory(apiresponse)
         console.log("categoried data", apiresponse);
-        
+        setloader(false)
       } catch (error) {
         console.log('error', error);
         
@@ -78,13 +86,17 @@ const premiumInvestor : Iinvestor[] = [
   
   
 
-
+ 
   const handleCardClick = (item : any) => {
     console.log("item", item?.symbols);
     navigate('/tinder', {state : item})
     // setSelectedNews(news);
     // setOpen(true);
   };
+  // if (isAllStockLoading) {
+  //   return <Loader />;
+  //   // return <CustomLottie animationData = {animationloader} />
+  // }
   return (
     //style={{height : "calc(80 dvh)", border : "5px solid red", overflow : "scroll"}}
     <div >
@@ -102,8 +114,10 @@ const premiumInvestor : Iinvestor[] = [
     <p className="text-sm text-gray-400 mb-5">
       Explore the latest categories
     </p>
-    <Investor Investordata={premiumInvestor} />
-
+    {
+      loader ? <Loader/>: 
+      <Investor Investordata={investorinfo} />
+    }
     <TopMovers/>
 
     <BottomNav/>

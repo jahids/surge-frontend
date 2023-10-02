@@ -30,15 +30,16 @@ export const SingleWatchlistItem = ({ symbolName }: { symbolName: string }) => {
         parseFloat(regularMarketChangePercent).toPrecision(3) ||
           Math.random() * 100
       );
-      setwatchlistloader(false)
+    //   setwatchlistloader(false)
       //name=AAPL
     };
     dbCall();
   }, [symbolName]);
 
-  if(watchlistloader){
-    return <Lottie animationData={watchlistLoader} loop={true} />
-  }
+//   if(watchlistloader){
+//     // return <Lottie animationData={watchlistLoader} loop={true} />
+//     return <p>loading..</p>
+//   }
   return (
     <>
       <>

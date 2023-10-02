@@ -4,6 +4,8 @@ import Loader from '../Loader/Loader';
 import AssetsList from './AssetsList/AssetsList';
 import AssetsSearch from './AssetsSearch/AssetsSearch';
 import DoneBtn from './DoneBtn/DoneBtn';
+import animationloader from '../../assets/img/skeletonloader.json';
+import CustomLottie from '../../Utils/CustomLottie';
 
 const AllAssets = () => {
   const {
@@ -12,7 +14,6 @@ const AllAssets = () => {
     isSuccess: isAllStockSuccess,
     isError: isAllStockError,
   } = useGetAllStockQuery({ limit: 30 });
-
 
   // Use the useGetSpecificStockQuery hook to fetch specific stock data
   // const {
@@ -24,21 +25,19 @@ const AllAssets = () => {
 
   if (isAllStockLoading) {
     return <Loader />;
+    // return <CustomLottie animationData = {animationloader} />
   }
   return (
     <div className="p-5">
       <section>
         <AssetsSearch />
       </section>
-      <section className='mt-4'>
+      <section className="mt-4">
         {allStockData?.data?.map((item: any) => (
           <div key={Math.random()}>
             {/* <SingleStockItem key={Math.random()} data={item} /> */}
-            <AssetsList
-              key={Math.random()}
-              data={item}
-            />
-          </ div>
+            <AssetsList key={Math.random()} data={item} />
+          </div>
         ))}
       </section>
       {/* <section className=""> <DoneBtn /> </section> */}

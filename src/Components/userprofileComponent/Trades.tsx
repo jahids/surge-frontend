@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 function Trades({ data }: any) {
   console.log('props reveve', data);
+
   const [extradata, setextradata] = useState(null);
   const navigate = useNavigate();
 
