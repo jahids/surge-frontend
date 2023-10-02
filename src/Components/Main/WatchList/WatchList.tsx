@@ -15,19 +15,19 @@ const Watchlist = () => {
       const { data } = await instance.get(`/watchlist?limit=3`);
       // console.log(`🙈👹👹👺`, data);
       if (data?.data) {
-
-        setWatchlistData(data.data.splice(0, 3));
+        setWatchlistData(data.data);
         setLoading(false);
       }
     };
     dbCall();
   }, []);
   const navigate = useNavigate();
+
   if (loading) {
     return <Loader />
   }
   return (
-    <div className="mt-10" >
+    watchlistData?.length ? <div className="mt-10" >
       <h1 className="text-xl font-bold">Watchlist</h1>
       <p className="mt-1 text-sm text-gray-400">
         Start tracking your next opportunity
@@ -51,7 +51,7 @@ const Watchlist = () => {
         ) : < NoDataWatchlist />
       }
 
-    </div>
+    </div> : null
   );
 };
 

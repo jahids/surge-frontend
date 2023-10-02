@@ -12,8 +12,9 @@ const MostTraded = () => {
 
   useEffect(() => {
     const dbCall = async () => {
-      const { data: { data } } = await instance.get(`watchlist?limit=3`);
-      setWatchList(data);
+      const { data: { data: { list } } } = await instance.get(`/surge-stats/top-movers?limit=3`);
+      setWatchList(list);
+      console.log(`🎨🧵🧶🧶`, list);
     };
     dbCall();
   }, [watchList.length]);
@@ -26,8 +27,8 @@ const MostTraded = () => {
 
       {
         watchList?.length ?
-          watchList.map((symbolName) => {
-            return <SingleMostTradedShare key={Math.random()} symbolName={symbolName} />
+          watchList.map((dt) => {
+            return <SingleMostTradedShare key={Math.random()} symbolName={dt?.symbol} data={dt} />
           })
           : null
       }
