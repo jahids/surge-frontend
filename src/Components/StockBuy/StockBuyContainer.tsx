@@ -96,8 +96,7 @@ const StockBuyContainer = () => {
           // disabled={isDisabled}
           onClick={() =>
             navigate(
-              `/sell/${
-                specificStockData?.data?.symbol || specificStockData?.symbol
+              `/sell/${specificStockData?.data?.symbol || specificStockData?.symbol
               }`,
               {
                 state: { data: specificStockData },
@@ -112,8 +111,7 @@ const StockBuyContainer = () => {
         <button
           onClick={() =>
             navigate(
-              `/buy/${
-                specificStockData?.data?.symbol || specificStockData?.symbol
+              `/buy/${specificStockData?.data?.symbol || specificStockData?.symbol
               }`,
               {
                 state: { data: specificStockData },
@@ -133,9 +131,9 @@ const StockBuyContainer = () => {
 
       {/* --- stock current price start --- */}
       <section>
-        <div className="mt-6">
+        {/* <div className="mt-6">
           <p className="text-xl font-bold">Current Price</p>
-        </div>
+        </div> */}
       </section>
       {/* --- stock current price end --- */}
 

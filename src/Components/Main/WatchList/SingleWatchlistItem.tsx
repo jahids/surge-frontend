@@ -22,10 +22,10 @@ export const SingleWatchlistItem = ({ symbolName }: { symbolName: string }) => {
         dbCall();
     }, [symbolName]);
     return (
-        <>
+        <div className="mouse-Pointer" onClick={() => navigate('/buy-stock', { state: symbolName })} >
             <>
                 <div
-                    onClick={() => navigate('/buy-stock', { state: data?.symbol })}
+
                     className="flex items-center justify-between mb-4"
                 >
                     <div className="flex items-center">
@@ -61,7 +61,7 @@ export const SingleWatchlistItem = ({ symbolName }: { symbolName: string }) => {
 
                 </div>
             </>
-        </>
+        </div>
     );
 }
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { BiPlus } from 'react-icons/bi';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { instance } from '../../../lib/AxiosInstance';
 import Loader from '../../Loader/Loader';
 import NoDataWatchlist from './NoDataWatchList';
@@ -22,11 +22,12 @@ const Watchlist = () => {
     };
     dbCall();
   }, []);
+  const navigate = useNavigate();
   if (loading) {
     return <Loader />
   }
   return (
-    <div className="mt-10">
+    <div className="mt-10" >
       <h1 className="text-xl font-bold">Watchlist</h1>
       <p className="mt-1 text-sm text-gray-400">
         Start tracking your next opportunity
