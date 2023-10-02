@@ -166,7 +166,8 @@ useEffect(() => {
           />
         </div>
       </div>) :
-(<div className="mt-5 bg-[#ECECEC] rounded-2xl flex items-center justify-between p-4 space-x-3 shadow">
+(
+<div className="mt-5 bg-[#ECECEC] rounded-2xl flex items-center justify-between p-4 space-x-3 shadow">
         <div className="">
           <div>
             <small>
@@ -178,8 +179,7 @@ useEffect(() => {
             </h1>
           </div>
           <div>
-            {/* <button
-              onClick={() => navigate('/plaid')} */}
+          
               <button onClick={()=>navigate('/portfolio')}
               className="bg-[#fff] mt-2 rounded-full px-3 py-2 text-xs font-bold"
             >
@@ -197,6 +197,7 @@ useEffect(() => {
       />
         </div>
   </div>
+
 )}
     </div>
   );

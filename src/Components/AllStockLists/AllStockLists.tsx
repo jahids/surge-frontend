@@ -19,9 +19,24 @@ const AllStockLists = () => {
     item: search?.length > 0 ? search : '',
   });
 
-  const handlesearch = (data: any) => {
+  const handlesearch = async (data: any) => {
     setsearch(data);
-    console.log('data', data);
+    setStart(0);
+
+    setLimit(pageSize);
+
+    const response = await axios.get(
+      `/api/stock?limit=${pageSize}&item=` + search,
+      {
+        // params: { start: 0, limit: 10, item: search },
+        withCredentials: true,
+      }
+    );
+
+    const newData = response.data.data; // Assuming your API response has a 'data' property
+
+    setItems(prevItems => [...newData]);
+    // console.log('data', data);
   };
 
   // Use the useGetSpecificStockQuery hook to fetch specific stock data

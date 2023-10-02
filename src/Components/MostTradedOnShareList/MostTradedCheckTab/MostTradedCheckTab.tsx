@@ -38,7 +38,7 @@ const MostTradedCheckTab = () => {
         </div>
       </div>
       {/* --- tab button start --- */}
-      <div className="my-8">
+      {/* <div className="my-8">
         <ul className="grid grid-flow-col text-center text-gray-500 bg-gray-100 rounded-full p-1">
           <li className="" onClick={() => handleTabClick(1)} aria-hidden="true">
             <a
@@ -77,13 +77,12 @@ const MostTradedCheckTab = () => {
             </a>
           </li>
         </ul>
-      </div>
+      </div> */}
       {/* --- tab button end --- */}
       {/* --- content area --- */}
-      <div>
-        {activeTab === 1 && <AllTrade />}
-        {activeTab === 2 && <GainerTrade />}
-        {activeTab === 3 && <LoserTrade />}
+      <div className='mt-6'>
+        {<AllTrade />}
+
       </div>
       {/* --- content area --- */}
     </div>

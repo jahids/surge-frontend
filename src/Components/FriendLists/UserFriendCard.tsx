@@ -12,7 +12,7 @@ import {
 import { getdbId } from '../../Services/Cookie.service';
 import animationloader from '../../assets/img/skeletonloader.json';
 import Lottie from 'lottie-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 const defaultImg = `https://www.gravatar.com/avatar/00000000000000000000000000000000?d=retro&f=y`;
 const UserFriendCard = ({ dbId }: any) => {
   const [myPaca, setMyPaca] = useState('');
@@ -23,8 +23,8 @@ const UserFriendCard = ({ dbId }: any) => {
   const [portfolioValue, setPortfolioValue] = useState(Math.random() * 10);
   const [friendlistloader, setfriendlistloader] = useState(true)
 
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
 
 
   //'65115b678407c2a27a906b33', '650be13378a5d532229f3b2e'
@@ -41,7 +41,7 @@ const UserFriendCard = ({ dbId }: any) => {
     dataCall();
   }, []);
   // console.log(`🎁`,data);
-  if(friendlistloader){
+  if (friendlistloader) {
     return <Lottie animationData={animationloader} loop={true} />
   }
   return (

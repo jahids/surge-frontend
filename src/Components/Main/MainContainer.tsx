@@ -14,20 +14,20 @@ import { getSelfData } from '../../Services/User.service';
 const MainContainer = () => {
   // Use the generated hooks to make API requests
   // 
- 
-  const [selfData,setSelfData] = useState();
 
- useEffect(()=>{
-  const dataCall  = async ()=>{
-      const {data : _data} = await getSelfData();
-      console.log(_data);
+  const [selfData, setSelfData] = useState();
+
+  useEffect(() => {
+    const dataCall = async () => {
+      const { data: _data } = await getSelfData();
+      // console.log(_data);
       setSelfData(_data);
-  };
-  dataCall();
- },[]);
+    };
+    dataCall();
+  }, []);
 
 
- 
+
   return (
     <div className="px-5 pb-[100px] min-h-screen">
       <section>
@@ -43,7 +43,7 @@ const MainContainer = () => {
         <WatchList />
       </section>
       <section>
-        <FriendList selfData = {selfData} />
+        <FriendList selfData={selfData} />
       </section>
       <section>
         <TopMovers />
