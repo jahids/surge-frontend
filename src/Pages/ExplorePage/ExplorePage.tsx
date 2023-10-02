@@ -100,9 +100,10 @@ const premiumInvestor : Iinvestor[] = [
   return (
     //style={{height : "calc(80 dvh)", border : "5px solid red", overflow : "scroll"}}
     <div >
-    <BackButton/>
+      <div className='px-5'><BackButton/></div>
+    
     {/* all category */}
-   <div className="mt-10 m-5">
+   <div className=" mt-2 m-5">
     <h1 className="text-2xl font-bold ">All Categories</h1>
     <p className="text-sm text-gray-400 mb-5">
       Explore the latest categories
