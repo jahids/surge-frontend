@@ -7,7 +7,7 @@ import Loader from '../../Loader/Loader';
 import GainerMovers from '../../TopMoversAllList/GainerMovers/GainerMovers';
 
 const TopMovers = () => {
-  console.log('helllo ');
+  // console.log('helllo ');
 
   // Use the generated hooks to make API requests
   const {
@@ -19,24 +19,24 @@ const TopMovers = () => {
   } = useGetTopMoversQuery({ length: 4 });
 
 
-    // Handle loading state or errors here
-    if (isLoadingtopmover) {
-      return <Loader/>;
-    }
-  
-    if (isErrortopmover) {
-      // Handle API error here
-      return <div>Error: {errortopmover?.message || errortopmover?.message}</div>;
-    }
-  
-    if (isSuccesstopmover) {
-      // Handle specific news success here
-      // Use specificNewsData
-    }
-  
-    console.log("topmoverData", topmoverData);
-    
-  
+  // Handle loading state or errors here
+  if (isLoadingtopmover) {
+    return <Loader />;
+  }
+
+  if (isErrortopmover) {
+    // Handle API error here
+    return <div>Error: {errortopmover?.message || errortopmover?.message}</div>;
+  }
+
+  if (isSuccesstopmover) {
+    // Handle specific news success here
+    // Use specificNewsData
+  }
+
+  // console.log("topmoverData", topmoverData);
+
+
 
   return (
     <div className="mt-10">
@@ -73,8 +73,8 @@ const TopMovers = () => {
 
       } */}
 
-        <GainerMovers gainers={topmoverData?.data?.gainers} />
-    
+      <GainerMovers gainers={topmoverData?.data?.gainers} />
+
       {/* --- top movers company --- */}
 
       {/* --- see all btn --- */}

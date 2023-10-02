@@ -2,7 +2,7 @@ import moment from 'moment';
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 export const truncateText = (_text_: string, maxLength: number) => {
-  let text = _text_.trim();
+  let text = _text_?.trim();
   if (text?.length <= maxLength) {
     return text;
   }
@@ -14,7 +14,7 @@ export const truncateText = (_text_: string, maxLength: number) => {
   //   return truncatedText?.substring(0, lastSpaceIndex) + '...';
   // }
   // If there are no spaces in the truncated text, simply add ellipsis
-  return truncatedText.trim() + '...';
+  return truncatedText?.trim() + '...';
 };
 
 //

@@ -10,7 +10,9 @@ import {
   getUserList,
 } from '../../Services/User.service';
 import { getdbId } from '../../Services/Cookie.service';
-import { Link, useNavigate } from 'react-router-dom';
+import animationloader from '../../assets/img/skeletonloader.json';
+import Lottie from 'lottie-react';
+import { useNavigate } from 'react-router-dom';
 const defaultImg = `https://www.gravatar.com/avatar/00000000000000000000000000000000?d=retro&f=y`;
 const UserFriendCard = ({ dbId }: any) => {
   const [myPaca, setMyPaca] = useState('');
@@ -19,8 +21,10 @@ const UserFriendCard = ({ dbId }: any) => {
   const [pfp, setPfp] = useState(defaultImg);
   const [db, setDb] = useState();
   const [portfolioValue, setPortfolioValue] = useState(Math.random() * 10);
-  const navigate = useNavigate();
+  const [friendlistloader, setfriendlistloader] = useState(true)
 
+
+  const navigate = useNavigate();
 
 
   //'65115b678407c2a27a906b33', '650be13378a5d532229f3b2e'
@@ -32,10 +36,14 @@ const UserFriendCard = ({ dbId }: any) => {
       setDb(db);
       console.log(`⚽`, myData);
       setPfp(db?.pfp || defaultImg);
+      setfriendlistloader(false)
     };
     dataCall();
   }, []);
   // console.log(`🎁`,data);
+  if (friendlistloader) {
+    return <Lottie animationData={animationloader} loop={true} />
+  }
   return (
 
     <div onClick={() => {

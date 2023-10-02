@@ -12,7 +12,7 @@ const Watchlist = () => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const dbCall = async () => {
-      const { data } = await instance.get(`/watchlist`);
+      const { data } = await instance.get(`/watchlist?limit=3`);
       // console.log(`🙈👹👹👺`, data);
       if (data?.data) {
 
