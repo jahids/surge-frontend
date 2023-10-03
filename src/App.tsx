@@ -12,6 +12,7 @@ import { PrivateRoute } from './Hooks/PrivateRoute';
 import Tindercard from './Components/explore/TinderCard';
 import PortfolioPage from './Pages/Portfolio/PortfolioPage';
 import UserProfile from './Pages/userProfile/UserProfile';
+import Activity from './Pages/activity/Activity';
 
 
 const App: React.FC = () => {
@@ -27,6 +28,7 @@ const App: React.FC = () => {
         <Route path="/tinder" element={<Tindercard />} />
         <Route path="/portfolio" element={<PortfolioPage />} />
         <Route path="/userprofile/:id" element={<UserProfile />} />
+        <Route path="/activity" element={<Activity />} />
 
         {/* <Route path="/multistep" element={<MultistepForm />}/> */}
          {/* <Route path="*" element={<NotFoundPage />} /> */}

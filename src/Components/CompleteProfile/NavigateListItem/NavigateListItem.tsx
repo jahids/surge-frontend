@@ -31,23 +31,33 @@ const NavigateListItem = () => {
       <hr />
       <div className="mt-8">
         <ul className="">
-          <li className="flex items-center mb-4">
+          {/* <li className="flex items-center mb-4">
             <BiSolidUser className="text-xl" />{' '}
-            <span className="mx-3 text-md font-bold">Profile</span>
-          </li>
+            <button
+              onClick={() => navigate('/profile')}
+              className="mx-3 text-md font-bold"
+            >
+              Profile
+            </button>
+          </li> */}
 
           <li className="flex items-center mb-4">
             <BiSolidUser className="text-xl" />{' '}
-            <span
+            <button
               className="mx-3 text-md font-bold"
               onClick={() => navigate('/addfund')}
             >
               Addfund
-            </span>
+            </button>
           </li>
           <li className="flex items-center mb-4">
             <ImClock2 className="text-xl" />
-            <span className="mx-3 text-md font-bold">Activity</span>
+            <button
+              onClick={() => navigate('/activity')}
+              className="mx-3 text-md font-bold"
+            >
+              Activity
+            </button>
           </li>
           <li className="flex items-center mb-4">
             <FaAddressBook className="text-xl" />
@@ -58,10 +68,10 @@ const NavigateListItem = () => {
               Statements
             </span>
           </li>
-          <li className="flex items-center mb-4">
+          {/* <li className="flex items-center mb-4">
             <MdDarkMode className="text-2xl" />
             <span className="mx-3 text-md font-bold">Appearance</span>
-          </li>
+          </li> */}
           <li className="flex items-center mb-8">
             <BsQuestionOctagonFill className="text-xl" />
             <span className="mx-3 text-md font-bold">Support</span>
@@ -69,7 +79,7 @@ const NavigateListItem = () => {
         </ul>
       </div>
       <hr />
-      <div className="mt-10">
+      <div className="mt-5">
         <ul>
           <li className="flex mb-4 items-center">
             <BiLogOutCircle className="text-3xl text-red-500" />{' '}
@@ -83,7 +93,7 @@ const NavigateListItem = () => {
         </ul>
       </div>
 
-      <div className="mt-10">
+      <div className="mt-4">
         <div className="text-xs text-center">
           <span className="text-indigo-600">Terms & Conditions</span>{' '}
           <span>and</span>{' '}

@@ -2,7 +2,7 @@ import handWriting from '../../../assets/img/handwriting.png';
 
 const EditProfile = () => {
   return (
-    <div className="mt-8">
+    <div className="mt-10">
       <div className="bg-gray-100 p-5 rounded-2xl">
         <div className="flex items-center">
           <h1 className="font-bold">Complete your profile</h1>
