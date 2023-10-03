@@ -55,7 +55,9 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://192.168.68.56:5678', // Your backend server URL
+        // host-url
+        target:'http://dono-01.danbot.host:1317',
+        //target: 'http://192.168.68.56:5678', // Your backend server URL
         //target: 'http://localhost:4500',
         changeOrigin: true,
         // You can add other proxy options here if needed

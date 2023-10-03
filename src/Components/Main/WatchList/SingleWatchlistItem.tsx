@@ -12,29 +12,37 @@ const defaultlogo = `https://images2.imgbox.com/52/06/7xFpAH04_o.png`;
 
 
 export const SingleWatchlistItem = ({ symbolName }: { symbolName: string }) => {
-    // console.log(`symbolName 🔥🔥`, symbolName);
+    console.log(`symbolName 🔥🔥`, symbolName);
     const navigate = useNavigate();
     const [symbolData, setSymbolData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [marketparcentage, setMarketParcentage] = useState<any>();
     useEffect(() => {
         const dbCall = async () => {
+          try {
             const { data: symbolInfo } = await instance.get(`symbol?name=${symbolName}`);
             const { price: { yahoo: { regularMarketChangePercent
             } } } = symbolInfo;
 
             setSymbolData(symbolInfo);
-            setLoading(false);
+          
             setMarketParcentage(round2Places(regularMarketChangePercent || Math.random() * 100))
             // setMarketParcentage(parseFloat(regularMarketChangePercent).toPrecision(3) || Math.random() * 100);
-
+            setLoading(false);
+          } catch (error) {
+            console.log("api error", error);
+            
+          }
+          
         };
         dbCall();
-    }, [symbolName, symbolData?.name]);
+    }, [symbolData?.price?.yahoo?.longName, symbolName]);
 
 
-    // console.log("🤦‍♀️🤦‍♀️",symbolData);
-    
+    console.log("🤦‍♀️🤦‍♀️",symbolData?.price?.yahoo?.longName);
+//     if(loading){
+// return <p>load data..</p>
+//     }
 
     return (
         <>
@@ -56,7 +64,7 @@ export const SingleWatchlistItem = ({ symbolName }: { symbolName: string }) => {
                         </div>
                         <div className="mx-5">
                             <p className="font-bold text-red-500">
-                                {truncateText(symbolData?.name, 20) || symbolData?.name}
+                                { symbolData?.price?.yahoo?.longName?.length > 0 ? symbolData?.price?.yahoo?.longName :  truncateText(symbolData?.name, 20)}
                             </p>
                             <p className="text-gray-400 text-sm">
                                 {symbolName }
