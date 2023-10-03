@@ -5,6 +5,8 @@ import StockSell from '../Components/sellbuy/StockSell';
 import Addfund from '../Pages/AddFund/Addfund';
 import AllAssetsPage from '../Pages/AllAssetsPage/AllAssetsPage';
 import AllStockPage from '../Pages/AllStockPage/AllStockPage';
+import AllUserPage from '../Pages/AllUserPage/AllUserPage';
+
 import CompleteProfilePage from '../Pages/CompleteProfilePage/CompleteProfilePage';
 import ExplorePage from '../Pages/ExplorePage/ExplorePage';
 import FriendListsPage from '../Pages/FriendListsPage/FriendListsPage';
@@ -16,7 +18,10 @@ import PostDetails from '../Pages/PostDetails/PostDetails';
 import SocialPage from '../Pages/SocialPage/SocialPage';
 import StockBuyPage from '../Pages/StockBuyPage/StockBuyPage';
 import TopMoversPage from '../Pages/TopMoversPage/TopMoversPage';
+import UserFullWatchList from '../Pages/UserFullWatchList/UserFullWatchList';
 import Statement from '../Pages/statement/Statement';
+
+
 
 export const allRoute = [
   {
@@ -51,6 +56,10 @@ export const allRoute = [
     path: '/assets',
     component: AllAssetsPage,
   },
+  {
+    path: '/user-watchlist',
+    component: UserFullWatchList,
+  },
   // {
   //   path: '/portfolio',
   //   component: () => <p>hello portfolio</p>, // If you need to render JSX with a function component
@@ -74,6 +83,10 @@ export const allRoute = [
   {
     path: '/friend-list',
     component: FriendListsPage,
+  },
+  {
+    path: '/all-user-list',
+    component: AllUserPage,
   },
   {
     path: '/top-movers',

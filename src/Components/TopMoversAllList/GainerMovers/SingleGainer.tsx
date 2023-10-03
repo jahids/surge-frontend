@@ -11,7 +11,7 @@ const defaultlogo = `https://images2.imgbox.com/52/06/7xFpAH04_o.png`;
 
 
 function SingleGainer({ data }: any) {
-  console.log('loser data', data);
+  // console.log('loser data', data);
 
   const [extradata, setextradata] = useState(null);
   const [marketparcentage, setmarketparcentage] = useState(null);

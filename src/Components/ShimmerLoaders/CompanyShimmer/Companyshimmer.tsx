@@ -31,20 +31,20 @@ const CompanyShimmerLoader: React.FC = () => {
     };
 
     return (
-        <div className="mouse-Pointer p-4">
+        <div className="">
             <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center">
+                < div className="flex items-center" >
                     <div className="w-12 h-12 p-1 rounded-full bg-gray-100 object-contain" style={shimmerStyle}></div>
                     <div className="mx-5">
                         <div className="w-20 h-4 bg-gray-100" style={shimmerStyle}></div>
                         <div className="w-16 h-3 mt-2 bg-gray-100 text-sm" style={shimmerStyle}></div>
                     </div>
-                </div>
+                </div >
                 <div>
                     <div className="w-16 h-6 bg-gray-100 rounded-full" style={shimmerStyle}></div>
                 </div>
-            </div>
-        </div>
+            </div >
+        </div >
     );
 }
 

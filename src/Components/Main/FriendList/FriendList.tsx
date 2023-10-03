@@ -1,33 +1,36 @@
 import { useEffect, useState } from 'react';
 import { BiPlus } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
-import { getSelfData } from '../../../Services/User.service';
+import { getSelfData, getUserFriendList } from '../../../Services/User.service';
 import UserFriendCard from '../../FriendLists/UserFriendCard';
+import { instance } from '../../../lib/AxiosInstance';
 
-const FriendList = ({ selfData }: any) => {
-  const [followList, setFollowList] = useState();
-  //get users watch list
+const FriendList = () => {
+  const [followList, setFollowList] = useState<null | any[]>();
+  //get users watch list top 3
 
-  // console.log(data,'🎇✨')
+
   useEffect(() => {
-    const dataCall = async () => {
-      // const {data : myData} = await getSelfData();
-      // const myData = data;
-      // setFollowList(data);
+
+    const dbCall = async () => {
+      const data = await getUserFriendList(3);
+      setFollowList(data);
     };
-    dataCall();
+    dbCall();
+
   }, []);
+
   return (
     <div className="mt-10">
       <h1 className="text-xl font-bold">Friend Lists</h1>
       <p className="mt-1 text-sm text-gray-400">
-        {/* Start tracking your next opportunity */}
+        Follow to see their moves & insights
       </p>
       {/* --- watchlist start --- */}
-      {selfData?.db?.following?.length ? (
+      {followList?.length ? (
         <div>
-          {selfData.db.following.slice(0, 3).map((v: any) => {
-            return <UserFriendCard key={Math.random()} dbId={v} />;
+          {followList?.map((v: any) => {
+            return <UserFriendCard key={Math.random()} profileData={v} />;
           })}
           <div className="text-center mt-2">
             <Link to="/friend-list">

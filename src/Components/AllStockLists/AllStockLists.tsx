@@ -21,9 +21,9 @@ const AllStockLists = () => {
 
   const handlesearch = async (data: any) => {
     setsearch(data);
-    setStart(0);
+    // setStart(0);
 
-    setLimit(pageSize);
+    // setLimit(pageSize);
 
     const response = await axios.get(
       `/api/stock?limit=${pageSize}&item=` + search,

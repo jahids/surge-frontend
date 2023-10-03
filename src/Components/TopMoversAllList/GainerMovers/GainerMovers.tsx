@@ -8,9 +8,9 @@ const GainerMovers = ({ gainers }: any) => {
     <div className="mt-8">
       {gainers?.length > 0 &&
         gainers?.map((item: any) => (
-          <>
-            <SingleGainer key={Math.random()} data={item} />
-          </>
+
+          <SingleGainer key={Math.random()} data={item} />
+
         ))}
     </div>
   );

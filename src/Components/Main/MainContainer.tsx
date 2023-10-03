@@ -10,6 +10,7 @@ import News from './News/News';
 import TopMovers from './TopMovers/TopMovers';
 import WatchList from './WatchList/WatchList';
 import { getSelfData } from '../../Services/User.service';
+import { instance } from '../../lib/AxiosInstance';
 
 const MainContainer = () => {
   // Use the generated hooks to make API requests
@@ -20,7 +21,9 @@ const MainContainer = () => {
   useEffect(() => {
     const dataCall = async () => {
       const { data: _data } = await getSelfData();
-      // console.log(_data);
+
+
+      console.log('👑👑👑', _data);
       setSelfData(_data);
     };
     dataCall();
@@ -43,7 +46,7 @@ const MainContainer = () => {
         <WatchList />
       </section>
       <section>
-        <FriendList selfData={selfData} />
+        <FriendList />
       </section>
       <section>
         <TopMovers />
