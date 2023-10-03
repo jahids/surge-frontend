@@ -7,6 +7,7 @@ import Lottie from 'lottie-react';
 import { round2Places, truncateText } from '../../../Utils/converter';
 import { watchlistLoader } from '../../../lib/AllLoder';
 import TextImage from '../../TextImage/TextImage';
+import CompanyShimmerLoader from '../../ShimmerLoaders/CompanyShimmer/Companyshimmer';
 const defaultlogo = `https://images2.imgbox.com/52/06/7xFpAH04_o.png`;
 
 
@@ -32,6 +33,9 @@ export const SingleWatchlistItem = ({ symbolName }: { symbolName: string }) => {
         dbCall();
     }, [symbolName]);
 
+    if (loading) {
+        return <CompanyShimmerLoader />
+    }
 
     return (
 

@@ -1,0 +1,43 @@
+.user-shimmer-container {
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    width: 300px;
+}
+
+.profile-shimmer,
+.company-name-shimmer,
+.company-ticker-shimmer {
+    background: #f6f7f8;
+    background-image: linear-gradient(90deg, #f6f7f8 25%, #edeef1 50%, #f6f7f8 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+.profile-shimmer {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.details-shimmer {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.company-name-shimmer,
+.company-ticker-shimmer {
+    width: 150px;
+    height: 20px;
+}

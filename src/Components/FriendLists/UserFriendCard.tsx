@@ -13,6 +13,7 @@ import { getdbId } from '../../Services/Cookie.service';
 import animationloader from '../../assets/img/skeletonloader.json';
 import Lottie from 'lottie-react';
 import { useNavigate } from 'react-router-dom';
+import UserShimmerLoader from '../ShimmerLoaders/UserShimmer/UserShimmer';
 const defaultImg = `https://www.gravatar.com/avatar/00000000000000000000000000000000?d=retro&f=y`;
 const UserFriendCard = ({ dbId }: any) => {
   const [myPaca, setMyPaca] = useState('');
@@ -42,7 +43,8 @@ const UserFriendCard = ({ dbId }: any) => {
   }, []);
   // console.log(`🎁`,data);
   if (friendlistloader) {
-    return <Lottie animationData={animationloader} loop={true} />
+    return <UserShimmerLoader height='h-8' />
+    // return <Lottie animationData={animationloader} loop={true} />
   }
   return (
 

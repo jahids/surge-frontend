@@ -23,9 +23,9 @@ const Watchlist = () => {
   }, []);
   const navigate = useNavigate();
 
-  if (loading) {
-    return <Loader />
-  }
+  // if (loading) {
+  //   return <Loader />
+  // }
   return (
     watchlistData?.length ? <div className="mt-10" >
       <h1 className="text-xl font-bold">Watchlist</h1>
