@@ -96,7 +96,7 @@ const UserProfile = () => {
   return (
     <div className="container">
       <BackButton nav="/social" />
-      <section className="stats flex py-4 px-4">
+      <section className="flex py-4 px-4">
         <div className="stats__img-holder w-20 h-20 rounded-full border border-gray-200">
           <img
             src={dbdata?.pfp || defaultimage}
@@ -120,7 +120,7 @@ const UserProfile = () => {
       <section className=" py-4 px-4 flex gap-4 justify-around">
         <button
           onClick={handleClickcion}
-          className="py-2 rounded-full text-xl font-extrabold bg-indigo-400 w-full text-white px-6 flex items-center justify-center"
+          className="py-2 rounded-full text-xl font-extrabold bg-indigo-700 w-full text-white px-6 flex items-center justify-center"
         >
           {isPlusIcon ? (
             <>
@@ -148,7 +148,7 @@ const UserProfile = () => {
                 // href="#tab1"
                 className={`${
                   activeTab === 1
-                    ? 'flex justify-center bg-indigo-400 rounded-full shadow text-white py-2 transition-[.5s]'
+                    ? 'flex justify-center bg-indigo-700 rounded-full shadow text-white py-2 transition-[.5s]'
                     : 'flex justify-center py-2 '
                 }`}
               >
@@ -164,7 +164,7 @@ const UserProfile = () => {
                 // href="#tab2"
                 className={`${
                   activeTab === 2
-                    ? 'flex justify-center bg-indigo-400  rounded-full shadow text-white py-2 transition-[.5s] '
+                    ? 'flex justify-center bg-indigo-700  rounded-full shadow text-white py-2 transition-[.5s] '
                     : 'flex justify-center py-2 '
                 }`}
               >
@@ -181,7 +181,7 @@ const UserProfile = () => {
                 // href="#tab3"
                 className={`${
                   activeTab === 3
-                    ? 'flex justify-center bg-indigo-400  rounded-full shadow text-white py-2 transition-[.5s] '
+                    ? 'flex justify-center bg-indigo-700  rounded-full shadow text-white py-2 transition-[.5s] '
                     : 'flex justify-center py-2 '
                 }`}
               >

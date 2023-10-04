@@ -447,7 +447,7 @@ function StockBuy() {
       
               <input
               value={limitPrice}
-              disabled = {selectedOption === "limit"}
+              disabled = {selectedOption === "market"}
               onChange={ev => setLimitPrice(ev.target.value)}
               placeholder="Limit Price"
             style={{boxShadow: 'rgb(199, 219, 232) 1px 1px 1px 0px inset, rgba(288, 255, 211, 0.5) 0px 1px 0px 1px inset'}}
