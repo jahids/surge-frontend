@@ -7,7 +7,7 @@ export interface IFriendListItem {
   city: string;
   email: string;
   dbId: string;
-  pfp : string;
+  pfp: string;
   following: [string];
 }
 const defaultImg = `https://www.gravatar.com/avatar/00000000000000000000000000000000?d=retro&f=y`;
@@ -17,7 +17,7 @@ export const getUserList = async () => {
     const {
       data: { data: result },
     } = await instance.get(`/social/people`);
-    console.log(`💎💍`,result);
+    console.log(`💎💍`, result);
     const filteredResult: [IFriendListItem] = result.map((v: any) => {
       const item: IFriendListItem = {
         alpaca_id: v.id as string,
@@ -28,7 +28,7 @@ export const getUserList = async () => {
         city: v?.contact.city as string,
         email: v?.contact.email_address as string,
         dbId: v.dbId,
-        pfp : v?.pfp || defaultImg,
+        pfp: v?.pfp || defaultImg,
         following: v.following,
       };
       return item;
@@ -51,6 +51,11 @@ export const getSelfData = async () => {
   }
 };
 
+export const getDbUserList = async (search: string) => {
+  const { data: { data } } = await instance(`/social/db-people?search=${search}`);
+  return data;
+}
+
 export const getSingleUser = async (userId: string) => {
   try {
     const { data } = await instance.get(`/accounts/combined/${userId}`);
@@ -59,3 +64,9 @@ export const getSingleUser = async (userId: string) => {
     return null;
   }
 };
+
+export const getUserFriendList = async (limit: number = 3) => {
+  const { data: { data: { following } } } = await instance.get(`/social/friend-list?limit=${limit}`);
+
+  return following;
+}

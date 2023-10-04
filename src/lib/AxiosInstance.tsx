@@ -8,7 +8,7 @@ import axios from 'axios';
 // Create an Axios instance
 export const instance = axios.create({
   baseURL: '/api',
-  timeout: 10000, // Adjust the timeout as needed
+  timeout: 15 * 1000, // Adjust the timeout as needed
   withCredentials: true,
   // headers: {
   //   'X-Custom-Header': 'foobar',

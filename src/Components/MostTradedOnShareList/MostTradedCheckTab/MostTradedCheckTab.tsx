@@ -1,90 +1,38 @@
-// const MostTradedCheckTab = () => {
-//   return (
-//     <div>
-//       <h1>tab</h1>
-//     </div>
-//   );
-// };
 
-// export default MostTradedCheckTab;
-
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { MdOutlineArrowBackIos } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import AllTrade from '../AllTrade/AllTrade';
-import GainerTrade from '../GainerTrade/GainerTrade';
-import LoserTrade from '../LoserTrade/LoserTrade';
-// import GainerMovers from '../GainerMovers/GainerMovers';
-// import LoserMovers from '../LoserMovers/LoserMovers';
+import SingleMostTradedShare from '../../Main/MostTraded/SingleMostTradedShare';
+import { instance } from '../../../lib/AxiosInstance';
+import BackButton from '../../globalBackButton/BackButton';
 
 const MostTradedCheckTab = () => {
-  const [activeTab, setActiveTab] = useState(1);
 
-  const handleTabClick = (tabNumber: number) => {
-    setActiveTab(tabNumber);
-  };
+
+  const [watchList, setWatchList] = useState([]);
+
+  useEffect(() => {
+    const dbCall = async () => {
+      const { data: { data: { list } } } = await instance.get(`/surge-stats/top-movers?limit=10`);
+      setWatchList(list);
+      console.log(`🎨🧵🧶🧶`, list);
+    };
+    dbCall();
+  }, [watchList.length]);
+
   return (
-    <div>
-      <div>
-        <Link to="/main">
-          <div>
-            <MdOutlineArrowBackIos className="text-2xl text-gray-500" />
-          </div>
-        </Link>
-        <div className="mt-8">
-          <h1 className="text-3xl font-bold">
-            Most traded on <br /> Shares
-          </h1>
-        </div>
-      </div>
-      {/* --- tab button start --- */}
-      {/* <div className="my-8">
-        <ul className="grid grid-flow-col text-center text-gray-500 bg-gray-100 rounded-full p-1">
-          <li className="" onClick={() => handleTabClick(1)} aria-hidden="true">
-            <a
-              href="#tab1"
-              className={`${
-                activeTab === 1
-                  ? 'flex justify-center bg-indigo-400 rounded-full shadow text-white py-2 transition-[.5s]'
-                  : 'flex justify-center py-2 '
-              }`}
-            >
-              All
-            </a>
-          </li>
-          <li className="" onClick={() => handleTabClick(2)} aria-hidden="true">
-            <a
-              href="#tab1"
-              className={`${
-                activeTab === 2
-                  ? 'flex justify-center bg-indigo-400 rounded-full shadow text-white py-2 transition-[.5s]'
-                  : 'flex justify-center py-2 '
-              }`}
-            >
-              Gain
-            </a>
-          </li>
-          <li className="" onClick={() => handleTabClick(3)} aria-hidden="true">
-            <a
-              href="#tab2"
-              className={`${
-                activeTab === 3
-                  ? 'flex justify-center bg-indigo-400  rounded-full shadow text-white py-2 transition-[.5s] '
-                  : 'flex justify-center py-2 '
-              }`}
-            >
-              Loser
-            </a>
-          </li>
-        </ul>
-      </div> */}
-      {/* --- tab button end --- */}
-      {/* --- content area --- */}
-      <div className='mt-6'>
-        {<AllTrade />}
-
-      </div>
-      {/* --- content area --- */}
+    <div className="mt-2">
+      <BackButton py={'py-0'} />
+      <h1 className="text-xl font-bold mt-4">Most traded on Surge</h1>
+      <p className="mt-1 text-sm text-gray-400 mb-7">By all time performance</p>
+      {
+        watchList?.length ?
+          watchList.map((dt) => {
+            return <SingleMostTradedShare key={Math.random()} symbolName={dt?.symbol} data={dt} />
+          })
+          : null
+      }
     </div>
   );
 };

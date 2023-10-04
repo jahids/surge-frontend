@@ -2,11 +2,13 @@ import { BiPlus, BiCheck } from 'react-icons/bi';
 import { useState } from 'react';
 import { calculateAccountAge } from '../../../Utils/converter';
 import { instance } from '../../../lib/AxiosInstance';
+import TextImage from '../../TextImage/TextImage';
 
 const defaultImg = `https://www.gravatar.com/avatar/00000000000000000000000000000000?d=retro&f=y`;
+
 export default function FriendListsItem({
   isFriend = false,
-  imgSrc = defaultImg,
+  imgSrc,
   name = 'First Last',
   platfromAge = '2021-01-02',
   id,
@@ -29,11 +31,14 @@ export default function FriendListsItem({
       <div className="flex items-center justify-between mb-5">
         <div className="flex items-center">
           <div>
-            <img
-              className="w-12 h-12 p-1 rounded-full bg-gray-100 object-contain"
-              src={imgSrc}
-              alt=""
-            />
+            {
+              imgSrc ? <img
+                className="w-12 h-12 p-1 rounded-full bg-gray-100 object-contain"
+                src={imgSrc}
+                alt=""
+              /> :
+                <TextImage text={name} />
+            }
           </div>
           <div className="mx-5">
             <p className="font-bold"> {name} </p>

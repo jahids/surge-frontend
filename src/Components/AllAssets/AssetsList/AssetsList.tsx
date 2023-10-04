@@ -10,6 +10,7 @@ import AssetActionButton from './AseetActionButton';
 import Watchlist from '../../Main/WatchList/WatchList';
 import Loader from '../../Loader/Loader';
 import TextImage from '../../TextImage/TextImage';
+import CompanyShimmerLoader from '../../ShimmerLoaders/CompanyShimmer/Companyshimmer';
 
 
 
@@ -18,8 +19,6 @@ function AssetsList({ data }: any) {
   const [marketparcentage, setmarketparcentage] = useState(null);
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
-
-
 
   useEffect(() => {
     const findExtraDes = async () => {
@@ -32,7 +31,7 @@ function AssetsList({ data }: any) {
         // console.log(`👩‍🚒🚒`, dbWatchList);
         setSelectedItems(dbWatchList);
         // setmarketparcentage(response2?.data?.data?.change);
-        console.log(response?.data);
+        // console.log(response?.data);
         setLoading(false);
       } catch (error) {
         console.log('error', error);
@@ -42,7 +41,7 @@ function AssetsList({ data }: any) {
   }, [data.id]);
 
   if (loading) {
-    return <Loader />
+    return <CompanyShimmerLoader />
   }
 
   return (
