@@ -20,7 +20,7 @@ function StockBuy() {
   const [buyingPrice, setBuyingPrice] = useState('');
   const [buyingQuantity, setBuyingQuantity] = useState('');
   const [limitPrice, setLimitPrice] = useState('');
-  const [balance, setBalance] = useState(1000);
+  const [balance, setBalance] = useState(50000);
   const [symbol, setSymbol] = useState(shareSymbol);
   const [post, setPost] = useState('');
   const [available, setAvailable] = useState(234234);
@@ -175,7 +175,7 @@ function StockBuy() {
             <input
               value={buyingPrice}
               onChange={handlePriceChange}
-              placeholder="Price"
+              placeholder="$Total"
               className="w-full text-5xl bg-gray-100 font-extrabold m-5 text-center rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-blue-200 transition duration-300 ease-in-out transform hover:scale-105"
               type="number"
             />

@@ -7,7 +7,11 @@ import { truncateText } from '../../../Utils/converter';
 const StockAbout = ({ allspecificdata }: any) => {
   // console.log(`🎗🎀🎗🎁🎗`, allspecificdata)
   const [isOpen, setOpen] = useState(false);
-  const description = allspecificdata?.data?.description ? allspecificdata?.data?.description : allspecificdata?.description;
+  const description = allspecificdata?.data?.description
+    ? allspecificdata?.data?.description
+    : allspecificdata?.description;
+  console.log('check 🍖', allspecificdata);
+
   return (
     <div className="my-6">
       <p className="text-xl font-bold">About</p>
@@ -45,7 +49,8 @@ const StockAbout = ({ allspecificdata }: any) => {
                     <li className="flex items-center justify-between my-4">
                       <p className="text-gray-400">Sector</p>
                       <p className="font-bold">
-                        {allspecificdata?.data?.ysector}
+                        {allspecificdata?.ysector ||
+                          allspecificdata?.data?.sector[0]}
                       </p>
                     </li>
                     <li className="flex items-center justify-between my-4">

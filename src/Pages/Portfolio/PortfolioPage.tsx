@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import { MdOutlineArrowBackIos } from 'react-icons/md';
 import { useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -9,7 +10,7 @@ import { instance } from '../../lib/AxiosInstance';
 import SingleStockItem from '../../Components/AllStockLists/AllStockItems/SingleStockItem';
 
 const defaultlogo = `https://images2.imgbox.com/52/06/7xFpAH04_o.png`;
-const PortfolioPage = () => {
+const PortfolioPage = ({ pagecheck }: any) => {
   const [isPlusIcon, setIsPlusIcon] = useState(true);
   const [isOpen, setOpen] = useState(false);
   const [portfoliodtaa, setportfoliodtaa] = useState([]);
@@ -45,9 +46,9 @@ const PortfolioPage = () => {
   }
 
   return (
-    <div className="px-5 pb-10 relative">
+    <div className={`${!pagecheck ? 'px-5 pb-10 relative' : ' relative'}`}>
       {/* -- top bar start --- */}
-      <BackButton />
+      {!pagecheck && <BackButton />}
       <section>
         <div className="flex items-center justify-between">
           <div className="space-y-2">
@@ -71,13 +72,13 @@ const PortfolioPage = () => {
         </div>
         <div className="flex justify-between items-center mt-3 m-2">
           <div>
-            <span className="text-xl text-gray-500">Total Invested</span>
+            <span className="text-xl text-gray-500">Funds Invested</span>
             <h1 className="text-xl font-bold">
               ${portfoliodtaa?.cost_basis?.toFixed(2)}
             </h1>
           </div>
           <div>
-            <span className="text-xl text-gray-500">Total Gain</span>
+            <span className="text-xl text-gray-500">Gain/Loss</span>
             <h1 className="text-xl font-bold">
               ${portfoliodtaa?.unrealized_pl?.toFixed(2)}
             </h1>
@@ -91,9 +92,23 @@ const PortfolioPage = () => {
             Keep track of you positions
           </p>
         </div>
-        {portfoliostock?.map((item, index) => (
-          <SingleStockItem data={item} />
-        ))}
+        {pagecheck
+          ? portfoliostock
+              ?.slice(0, 3)
+              .map((item, index) => <SingleStockItem key={index} data={item} />)
+          : portfoliostock?.map((item, index) => (
+              <SingleStockItem key={index} data={item} />
+            ))}
+
+        {pagecheck && (
+          <div className="text-center mt-2">
+            <Link to="/portfolio">
+              <button className="bg-gray-200 px-3 py-2 rounded-full text-[13px] font-bold">
+                See all
+              </button>
+            </Link>
+          </div>
+        )}
         {/* <div className="flex items-center justify-between mb-4 mt-5">
           <div className="flex items-center">
             <div>

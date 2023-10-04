@@ -44,9 +44,9 @@ const FriendList = ({ selfData }: any) => {
               <BiPlus className="text-2xl text-blue-800" />
             </div>
             <div className="mx-3">
-              <p className="font-bold text-sm">Build your Friend Lists</p>
+              <p className="font-bold text-sm">Build your Follow Lists</p>
               <p className="text-sm text-gray-400 mt-1">
-                Select which stocks to track
+                Select which person to track
               </p>
             </div>
           </div>

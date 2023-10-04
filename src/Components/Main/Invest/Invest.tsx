@@ -15,6 +15,7 @@ import { instance } from '../../../lib/AxiosInstance';
 import ReactApexChart from 'react-apexcharts';
 import { getSingleUser } from '../../../Services/User.service';
 import { getdbId } from '../../../Services/Cookie.service';
+import PortfolioPage from '../../../Pages/Portfolio/PortfolioPage';
 
 
 const Invest = () => {
@@ -23,19 +24,19 @@ const Invest = () => {
   const [achcheck, setachcheck] = useState('')
 
 
-  
-const dbId : string = getdbId()
-useEffect(() => {
-  const dataCall = async () => {
-    const { data: myData } = await getSingleUser(dbId);
-    const {
-      db : {ach},
-    } = myData;
-    // setName(identity.given_name + ' ' + identity.family_name);
-    console.log(`⚽`, ach);
-  };
-  dataCall();
-}, []);
+
+  const dbId: string = getdbId()
+  useEffect(() => {
+    const dataCall = async () => {
+      const { data: myData } = await getSingleUser(dbId);
+      const {
+        db: { ach },
+      } = myData;
+      // setName(identity.given_name + ' ' + identity.family_name);
+      console.log(`⚽`, ach);
+    };
+    dataCall();
+  }, []);
 
 
   // get a link_token from your API when component mounts
@@ -66,7 +67,7 @@ useEffect(() => {
           console.log(res.data);
         })
         .catch(er => console.log(er));
-    } catch (error) {}
+    } catch (error) { }
   }, []);
 
   const config: PlaidLinkOptions = {
@@ -120,9 +121,9 @@ useEffect(() => {
               </div>
             </div>
           </Link>
-          <div>
+          {/* <div>
             <p className="text-3xl font-bold">Invest</p>
-          </div>
+          </div> */}
         </div>
         {/* --- invest left part end --- */}
 
@@ -137,68 +138,69 @@ useEffect(() => {
         {/* --- invest right part end --- */}
       </div>
       {/* --- INVEST --- */}
-      
+
       {/* ---  ENABLE CARD --- */}
 
-      { achcheck?.length && achcheck?.length > 2 ?
-      (<div className="bg-[#ECECEC] rounded-2xl flex items-center justify-between p-4 space-x-3 shadow">
-        <div className="">
-          <div>
-            <small>
-              Help us know you <br /> better so you can start <br /> investing
-            </small>
-          </div>
-          <div>
-            {/* <button
+      {achcheck?.length && achcheck?.length > 2 ?
+        (<div className="bg-[#ECECEC] rounded-2xl flex items-center justify-between p-4 space-x-3 shadow">
+          <div className="">
+            <div>
+              <small>
+                Help us know you <br /> better so you can start <br /> investing
+              </small>
+            </div>
+            <div>
+              {/* <button
               onClick={() => navigate('/plaid')} */}
               <button onClick={() => open()} disabled={!ready}
-              className="bg-[#fff] mt-2 rounded-full px-3 py-2 text-xs font-bold"
-            >
-              Enable investing
-            </button>
+                className="bg-[#fff] mt-2 rounded-full px-3 py-2 text-xs font-bold"
+              >
+                Enable investing
+              </button>
+            </div>
           </div>
-        </div>
-        <div className="">
-          <img
-            className="w-[90px] h-auto"
-            src={circular_economy}
-            alt="circular_economy"
-          />
-        </div>
-      </div>) :
-(
-<div className="mt-5 bg-[#ECECEC] rounded-2xl flex items-center justify-between p-4 space-x-3 shadow">
-        <div className="">
-          <div>
-            <small>
-            Your total asset portfolio
-           
-            </small>
-            <h1 className='text-xl py-2'>
-            $ 2.240.559
-            </h1>
+          <div className="">
+            <img
+              className="w-[90px] h-auto"
+              src={circular_economy}
+              alt="circular_economy"
+            />
           </div>
-          <div>
-          
-              <button onClick={()=>navigate('/portfolio')}
-              className="bg-[#fff] mt-2 rounded-full px-3 py-2 text-xs font-bold"
-            >
-              Check your portfolio
-            </button>
-          </div>
-        </div>
-        <div className="">
-        <ReactApexChart
-        options={chartData.options}
-        series={chartData.series}
-        type="line"
-        width={150}
-        height={50}
-      />
-        </div>
-  </div>
+        </div>) :
+        // (<div className="mt-5 bg-[#ECECEC] rounded-2xl flex items-center justify-between p-4 space-x-3 shadow">
+        //   <div className="">
+        //     <div>
+        //       <small>
+        //         Your total asset portfolio
 
-)}
+        //       </small>
+        //       <h1 className='text-xl py-2'>
+        //         $ 2.240.559
+        //       </h1>
+        //     </div>
+        //     <div>
+
+        //       <button onClick={() => navigate('/portfolio')}
+        //         className="bg-[#fff] mt-2 rounded-full px-3 py-2 text-xs font-bold"
+        //       >
+        //         Check your portfolio
+        //       </button>
+        //     </div>
+        //   </div>
+        //   <div className="">
+        //     <ReactApexChart
+        //       options={chartData.options}
+        //       series={chartData.series}
+        //       type="line"
+        //       width={150}
+        //       height={50}
+        //     />
+        //   </div>
+        // </div>
+
+        // )
+        <PortfolioPage pagecheck={true}/>
+        }
     </div>
   );
 };
