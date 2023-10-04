@@ -1,9 +1,9 @@
-import AllStockLists from "../../Components/AllStockLists/AllStockLists";
+import AllStockLists from '../../Components/AllStockLists/AllStockLists';
 
 const AllStockPage = () => {
   return (
     <div>
-      <AllStockLists/>
+      <AllStockLists />
     </div>
   );
 };

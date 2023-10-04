@@ -37,7 +37,7 @@ const MainContainer = () => {
         <Invest />
       </section>
       <section>
-        <AllStocks />
+        {/* <AllStocks /> */}
       </section>
       <section>
         <News />
@@ -48,12 +48,12 @@ const MainContainer = () => {
       <section>
         <FriendList />
       </section>
-      <section>
+      {/* <section>
         <TopMovers />
-      </section>
-      <section>
+      </section> */}
+      {/* <section>
         <MostTraded />
-      </section>
+      </section> */}
     </div>
   );
 };

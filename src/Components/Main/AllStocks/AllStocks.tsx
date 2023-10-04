@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 
 const AllStocks = () => {
   return (
-    <div className="mt-10">
-      <h1 className="text-xl font-bold">All Stock</h1>
-      <p className="mt-1 text-sm text-gray-400">Explore the all stocks</p>
+    <div className="mt-5 mb-5">
+      <h1 className="text-2xl font-bold ">Discover Stock</h1>
+      <p className="mt-1 text-sm text-gray-400">Find your next big win</p>
       {/* ---  ENABLE CARD --- */}
       <div className="bg-[#ECECEC] mt-5 pb-5 rounded-2xl space-x-3 shadow">
         <div className="p-5 flex justify-center">

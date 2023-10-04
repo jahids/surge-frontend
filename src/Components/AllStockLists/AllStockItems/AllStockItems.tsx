@@ -1,6 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable */
 
-import SingleStockItem from './SingleStockItem';
+import SingleStockItem from "./SingleStockItem";
+
 
 const AllStockItems = ({ Stockdata }: any) => {
   return (
