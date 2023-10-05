@@ -8,10 +8,12 @@ import { BsQuestionOctagonFill } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 import { instance } from '../../../lib/AxiosInstance';
 import { useCookies } from 'react-cookie';
+import { getdbId } from '../../../Services/Cookie.service';
 
 const NavigateListItem = () => {
   const [, , removeCookie] = useCookies();
   const navigate = useNavigate();
+  const _dbId_ = getdbId();
 
   const handleLogout = async () => {
     try {
@@ -31,15 +33,15 @@ const NavigateListItem = () => {
       <hr />
       <div className="mt-8">
         <ul className="">
-          {/* <li className="flex items-center mb-4">
+          <li className="flex items-center mb-4">
             <BiSolidUser className="text-xl" />{' '}
             <button
-              onClick={() => navigate('/profile')}
+              onClick={() => navigate(`/userprofile/${_dbId_}`)}
               className="mx-3 text-md font-bold"
             >
               Profile
             </button>
-          </li> */}
+          </li>
 
           <li className="flex items-center mb-4">
             <BiSolidUser className="text-xl" />{' '}
@@ -47,7 +49,7 @@ const NavigateListItem = () => {
               className="mx-3 text-md font-bold"
               onClick={() => navigate('/addfund')}
             >
-              Addfund
+              Add Fund
             </button>
           </li>
           <li className="flex items-center mb-4">

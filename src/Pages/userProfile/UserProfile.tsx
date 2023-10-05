@@ -11,16 +11,17 @@ import BottomNav from '../../Components/BottomNav/BottomNav';
 // import { ShimmerText  } from "react-shimmer-effects";
 import Loader from '../../Components/Loader/Loader';
 import UserPost from '../../Components/userprofileComponent/UserPost';
+import TextImage from '../../Components/TextImage/TextImage';
 const defaultimage = "https://images.unsplash.com/photo-1621416894569-0f39ed31d247?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Yml0Y29pbnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
 
 const UserProfile = () => {
   const [activeTab, setActiveTab] = useState(1);
   const [isPlusIcon, setIsPlusIcon] = useState(true);
- const [dbdata, setdbdata] = useState([])
- const [alpacadata, setalpacadata] = useState([])
- const [tradesdata, settradesdata] = useState([])
- const [marketvalue, setmarketvalue] = useState('')
- const [porfoliodata, setporfoliodata] = useState([])
+  const [dbdata, setdbdata] = useState([])
+  const [alpacadata, setalpacadata] = useState([])
+  const [tradesdata, settradesdata] = useState([])
+  const [marketvalue, setmarketvalue] = useState('')
+  const [porfoliodata, setporfoliodata] = useState([])
   const { id } = useParams();
   console.log('id found', id);
   const [postiondataloader, setpostiondataloader] = useState(true)
@@ -30,8 +31,8 @@ const UserProfile = () => {
     const loadData = async () => {
       try {
         const { data } = await instance.get(`accounts/cached/${id}`);
-        const {data : portfoliodata} = await instance(`portfolio?dbId=${id}`)
-        const {data : positonsdata} = await instance(`portfolio/open-positions?dbId=${id}`)
+        const { data: portfoliodata } = await instance(`portfolio?dbId=${id}`)
+        const { data: positonsdata } = await instance(`portfolio/open-positions?dbId=${id}`)
         console.log('🍗🍖', portfoliodata?.data?.market_value);
         console.log('✔😒✔', positonsdata);
         setmarketvalue(portfoliodata?.data?.market_value)
@@ -52,32 +53,32 @@ const UserProfile = () => {
 
 
   const handleTabClick = (tabNumber: number) => {
-    if(tabNumber === 2){
-        const  trades =  async() => {
-            try {
-                const {data} = await instance(`portfolio/trade-activity?dbId=${id}`)
-                settradesdata(data?.data)
-                
-            } catch (error) {
-                console.log('🍗🍖', error);
-            }
+    if (tabNumber === 2) {
+      const trades = async () => {
+        try {
+          const { data } = await instance(`portfolio/trade-activity?dbId=${id}`)
+          settradesdata(data?.data)
+
+        } catch (error) {
+          console.log('🍗🍖', error);
         }
-        trades()
+      }
+      trades()
     }
 
-    if(tabNumber === 3){
-        const  trades =  async() => {
-            try {
-                const {data : postData} = await instance(`social/post/user/${id}`)
-               console.log('postdata', postData);
-               setuserpostdata(postData?.data)
-                // settradesdata(data?.data)
-                
-            } catch (error) {
-                console.log('🍗🍖', error);
-            }
+    if (tabNumber === 3) {
+      const trades = async () => {
+        try {
+          const { data: postData } = await instance(`social/post/user/${id}`)
+          console.log('postdata', postData);
+          setuserpostdata(postData?.data)
+          // settradesdata(data?.data)
+
+        } catch (error) {
+          console.log('🍗🍖', error);
         }
-        trades()
+      }
+      trades()
     }
     setActiveTab(tabNumber);
 
@@ -90,19 +91,22 @@ const UserProfile = () => {
 
   console.log('tradesdata', marketvalue);
 
-  if(postiondataloader){
-    return <Loader/>
+  if (postiondataloader) {
+    return <Loader />
   }
   return (
     <div className="container">
       <BackButton nav="/social" />
       <section className="stats flex py-4 px-4">
         <div className="stats__img-holder w-20 h-20 rounded-full border border-gray-200">
-          <img
-            src={dbdata?.pfp || defaultimage}
-            alt="User Profile"
-            className="w-full h-full rounded-full object-cover"
-          />
+          {
+            dbdata?.pfp ? <img
+              src={dbdata?.pfp || defaultimage}
+              alt="User Profile"
+              className="w-full h-full rounded-full object-cover"
+            /> :
+              <TextImage width={'80px'} height={'80px'} textSize={'2rem'} text={dbdata?.name} />
+          }
         </div>
         <div className="flex-row  ml-4 mt-3">
           <h1 className="text-xl font-bold ">{dbdata?.name}</h1>
@@ -146,11 +150,10 @@ const UserProfile = () => {
             >
               <p
                 // href="#tab1"
-                className={`${
-                  activeTab === 1
-                    ? 'flex justify-center bg-indigo-400 rounded-full shadow text-white py-2 transition-[.5s]'
-                    : 'flex justify-center py-2 '
-                }`}
+                className={`${activeTab === 1
+                  ? 'flex justify-center bg-indigo-400 rounded-full shadow text-white py-2 transition-[.5s]'
+                  : 'flex justify-center py-2 '
+                  }`}
               >
                 Portfolio
               </p>
@@ -162,11 +165,10 @@ const UserProfile = () => {
             >
               <p
                 // href="#tab2"
-                className={`${
-                  activeTab === 2
-                    ? 'flex justify-center bg-indigo-400  rounded-full shadow text-white py-2 transition-[.5s] '
-                    : 'flex justify-center py-2 '
-                }`}
+                className={`${activeTab === 2
+                  ? 'flex justify-center bg-indigo-400  rounded-full shadow text-white py-2 transition-[.5s] '
+                  : 'flex justify-center py-2 '
+                  }`}
               >
                 Trades
               </p>
@@ -179,11 +181,10 @@ const UserProfile = () => {
             >
               <p
                 // href="#tab3"
-                className={`${
-                  activeTab === 3
-                    ? 'flex justify-center bg-indigo-400  rounded-full shadow text-white py-2 transition-[.5s] '
-                    : 'flex justify-center py-2 '
-                }`}
+                className={`${activeTab === 3
+                  ? 'flex justify-center bg-indigo-400  rounded-full shadow text-white py-2 transition-[.5s] '
+                  : 'flex justify-center py-2 '
+                  }`}
               >
                 Posts
               </p>
@@ -192,29 +193,29 @@ const UserProfile = () => {
         </div>
         <div>
           {activeTab === 1 && <>
-          {/* <div>
+            {/* <div>
             <h1>Market value is {marketvalue}</h1>
           </div> */}
-          <div className="mt-8 m-2">
-      <div className="bg-gray-100 p-5 rounded-2xl">
-        <div className="flex text-2xl justify-center  items-center text-center font-bold">
-        Portfolio Value : <span className='font-bold text-2xl text-indigo-700 ml-2'>${ marketvalue?.toFixed(2)}</span> 
-        </div>
-        <p className="mt-3 text-sm">
-     
-        </p>
-      </div>
-    </div>
-          {
-            porfoliodata?.length > 0 && porfoliodata?.map((item)=>(<Trades data={item}/>))
-          }
-          
+            <div className="mt-8 m-2">
+              <div className="bg-gray-100 p-5 rounded-2xl">
+                <div className="flex text-2xl justify-center  items-center text-center font-bold">
+                  Portfolio Value : <span className='font-bold text-2xl text-indigo-700 ml-2'>${marketvalue?.toFixed(2)}</span>
+                </div>
+                <p className="mt-3 text-sm">
+
+                </p>
+              </div>
+            </div>
+            {
+              porfoliodata?.length > 0 && porfoliodata?.map((item) => (<Trades data={item} />))
+            }
+
           </>}
-          {activeTab === 2 && tradesdata?.length > 0 && tradesdata?.map((item)=>(<Trades data={item}/>))}
-          {activeTab === 3 && userpostdata?.length > 0 && userpostdata?.map((item)=>(<UserPost data={item}/>)) }
+          {activeTab === 2 && tradesdata?.length > 0 && tradesdata?.map((item) => (<Trades data={item} />))}
+          {activeTab === 3 && userpostdata?.length > 0 && userpostdata?.map((item) => (<UserPost data={item} />))}
         </div>
       </section>
-      
+
     </div>
   );
 };

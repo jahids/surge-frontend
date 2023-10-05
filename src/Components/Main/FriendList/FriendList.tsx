@@ -24,7 +24,7 @@ const FriendList = () => {
     <div className="mt-10">
       <h1 className="text-xl font-bold">Friend Lists</h1>
       <p className="mt-1 text-sm text-gray-400">
-        Follow to see their moves & insights
+        Follow to see their moves and insights
       </p>
       {/* --- watchlist start --- */}
       {followList?.length ? (
