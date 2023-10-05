@@ -13,7 +13,7 @@ const HistoricalChart = ({ Symbol }: any) => {
   const [highPriceData, setHighPriceData] = useState([]);
   const [closePriceData, setClosePriceData] = useState([]);
   const [lowPriceData, setLowPriceData] = useState([]);
-  const [selectedPeriod, setSelectedPeriod] = useState('365');
+  const [selectedPeriod, setSelectedPeriod] = useState('7');
   const [isLoading, setIsLoading] = useState(false);
 
   const fetchData = useCallback(async period => {
@@ -50,9 +50,9 @@ const HistoricalChart = ({ Symbol }: any) => {
       }));
 
       setStockData(stockPrices);
-      setHighPriceData(highPrices);
-      setClosePriceData(closePrices);
-      setLowPriceData(lowPrices);
+      // setHighPriceData(highPrices);
+      // setClosePriceData(closePrices);
+      // setLowPriceData(lowPrices);
 
       setIsLoading(false);
     } catch (error) {
@@ -125,6 +125,8 @@ const HistoricalChart = ({ Symbol }: any) => {
     setSelectedPeriod(period);
   };
 
+  const cssClasses = `badge py-3 focus:outline-none px-4 transition duration-300`;
+
   return (
     <div className="flex flex-col items-center mb-5">
       {isLoading ? (
@@ -138,59 +140,54 @@ const HistoricalChart = ({ Symbol }: any) => {
       <div className="space-x-2 mt-4">
         <button
           onClick={() => handlePeriodChange('7')}
-          className={`${
-            selectedPeriod === '7'
-              ? 'bg-blue-500 text-white'
-              : 'bg-gray-200 text-gray-800'
-          }  rounded focus:outline-none transition duration-300`}
+          className={`${selectedPeriod === '7'
+            ? 'bg-indigo-500 text-white'
+            : 'bg-gray-200 text-gray-800'
+            }  ${cssClasses} `}
           disabled={isLoading}
         >
           7 days
         </button>
         <button
           onClick={() => handlePeriodChange('30')}
-          className={`${
-            selectedPeriod === '30'
-              ? 'bg-blue-500 text-white'
-              : 'bg-gray-200 text-gray-800'
-          } px-1 rounded focus:outline-none transition duration-300`}
+          className={`${selectedPeriod === '30'
+            ? 'bg-indigo-500 text-white'
+            : 'bg-gray-200 text-gray-800'
+            }  ${cssClasses} `}
           disabled={isLoading}
         >
           1 month
         </button>
         <button
           onClick={() => handlePeriodChange('365')}
-          className={`${
-            selectedPeriod === '365'
-              ? 'bg-blue-500 text-white'
-              : 'bg-gray-200 text-gray-800'
-          } px-1 rounded focus:outline-none transition duration-300`}
+          className={`${selectedPeriod === '365'
+            ? 'bg-indigo-500 text-white'
+            : 'bg-gray-200 text-gray-800'
+            } ${cssClasses} `}
           disabled={isLoading}
         >
           1 year
         </button>
-        <button
+        {/* <button
           onClick={() => handlePeriodChange('182')}
-          className={`${
-            selectedPeriod === '182'
+          className={`${selectedPeriod === '182'
               ? 'bg-blue-500 text-white'
               : 'bg-gray-200 text-gray-800'
-          } px-1 rounded focus:outline-none transition duration-300`}
+            } px-1 rounded focus:outline-none transition duration-300`}
           disabled={isLoading}
         >
           6 months
         </button>
         <button
           onClick={() => handlePeriodChange('15')}
-          className={`${
-            selectedPeriod === '15'
+          className={`${selectedPeriod === '15'
               ? 'bg-blue-500 text-white'
               : 'bg-gray-200 text-gray-800'
-          }px-1  rounded focus:outline-none transition duration-300`}
+            }px-1  rounded focus:outline-none transition duration-300`}
           disabled={isLoading}
         >
           15 days
-        </button>
+        </button> */}
       </div>
     </div>
   );

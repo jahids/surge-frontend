@@ -57,7 +57,7 @@ export default defineConfig({
       '/api': {
         // host-url
         //  target:'http://dono-01.danbot.host:1317',
-         target: 'http://192.168.68.56:5678', 
+        target: 'http://192.168.68.56:4500',
         //target: 'http://localhost:4500',
         //target: 'http://localhost:5678',
         changeOrigin: true,

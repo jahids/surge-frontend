@@ -33,26 +33,17 @@ const Watchlist = () => {
         <p className="mt-1 text-sm text-gray-400">
           Start tracking your next opportunity
         </p>
-
-        {
-          watchlistData?.length ? (
-
-            <div >
-
-              {watchlistData.map((v: any) => (<SingleWatchlistItem key={Math.random()} symbolName={v} />))}
-              <div className="text-center mt-2">
-                <Link to="/user-watchlist">
-                  <button className="bg-gray-200 px-3 py-2 rounded-full text-[13px] font-bold">
-                    See all
-                  </button>
-                </Link>
-              </div>
-            </div>
-
-          ) : < NoDataWatchlist />
-        }
-
-      </div> : null
+        <div >
+          {watchlistData.map((v: any) => (<SingleWatchlistItem key={Math.random()} symbolName={v} />))}
+          <div className="text-center mt-2">
+            <Link to="/user-watchlist">
+              <button className="bg-gray-200 px-3 py-2 rounded-full text-[13px] font-bold">
+                See all
+              </button>
+            </Link>
+          </div>
+        </div>
+      </div> : < NoDataWatchlist />
   );
 };
 

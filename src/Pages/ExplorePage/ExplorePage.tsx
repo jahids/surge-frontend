@@ -106,8 +106,8 @@ const ExplorePage = () => {
 
       {/* all category */}
 
-  {/* <AllStocks/> */}
-  <section className=" mt-2 m-5">
+      {/* <AllStocks/> */}
+      <section className=" mt-2 m-5">
         <AllStocks />
       </section>
 
@@ -119,9 +119,9 @@ const ExplorePage = () => {
         <Categories categorie={categories} />
 
         {/* investment */}
-        <h1 className="text-2xl font-bold mt-5">Premium Investors</h1>
+        <h1 className="text-2xl font-bold mt-5">Top Investors</h1>
         <p className="text-sm text-gray-400 mb-5">
-          Explore the latest categories
+          Follow to see their moves and insights so you can learn from their approach
         </p>
         {
           loader ? <Loader /> :
@@ -130,10 +130,10 @@ const ExplorePage = () => {
         <TopMovers />
 
         <section >
-        <MostTraded />
-      </section>
+          <MostTraded />
+        </section>
         <BottomNav />
-      AllStocks</div>
+        AllStocks</div>
     </div>
 
   );

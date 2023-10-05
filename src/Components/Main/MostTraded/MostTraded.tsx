@@ -22,7 +22,7 @@ const MostTraded = () => {
   return (
     <div className="mt-10">
       <h1 className="text-xl font-bold">Most traded on Surge</h1>
-      <p className="mt-1 text-sm text-gray-400 mb-7">By all time performance</p>
+      <p className="mt-1 text-sm text-gray-400 mb-7">By users portfolio weights</p>
       {/* --- top movers company --- */}
 
       {

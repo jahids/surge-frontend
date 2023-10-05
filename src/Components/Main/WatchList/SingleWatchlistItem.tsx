@@ -20,21 +20,22 @@ export const SingleWatchlistItem = ({ symbolName }: { symbolName: string }) => {
     const [marketparcentage, setMarketParcentage] = useState<any>();
     useEffect(() => {
         const dbCall = async () => {
-          try {
-            const { data: symbolInfo } = await instance.get(`symbol?name=${symbolName}`);
-            const { price: { yahoo: { regularMarketChangePercent
-            } } } = symbolInfo;
+            try {
+                const { data: { data: symbolInfo } } = await instance.get(`symbol?name=${symbolName}`);
+                console.log(symbolInfo);
+                const { price: { yahoo: { regularMarketChangePercent
+                } } } = symbolInfo;
 
-            setSymbolData(symbolInfo);
-          
-            setMarketParcentage(round2Places(regularMarketChangePercent || Math.random() * 100))
-            // setMarketParcentage(parseFloat(regularMarketChangePercent).toPrecision(3) || Math.random() * 100);
-            setLoading(false);
-          } catch (error) {
-            console.log("api error", error);
-            
-          }
-          
+                setSymbolData(symbolInfo);
+
+                setMarketParcentage(round2Places(regularMarketChangePercent || Math.random() * 100))
+                // setMarketParcentage(parseFloat(regularMarketChangePercent).toPrecision(3) || Math.random() * 100);
+                setLoading(false);
+            } catch (error) {
+                console.log("api error" + symbolName, error);
+
+            }
+
         };
         dbCall();
     }, [symbolName]);

@@ -29,7 +29,7 @@ const UserFriendCardStats = ({ dbId }: any) => {
             >
                 {`${Number(portfolioChange) > 0 ? '+' : ''} ${Number(
                     portfolioChange
-                ).toFixed(2)}`}
+                ).toFixed(2)}`}%
             </button>
         </div> : <div
             className="shimmer-loader"

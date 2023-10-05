@@ -24,10 +24,10 @@ function SingleStockItem({ data }: any) {
         const response = await instance.get(`symbol?name=${data?.symbol}`);
         // const response2 = await instance.get(`movers-stats/${data?.symbol}`);
 
-        setextradata(response?.data);
+        setextradata(response?.data.data);
         // setmarketparcentage(response2?.data?.data?.change);
         const dt =
-          response?.data.data.price.yahoo.regularMarketChangePercent || '0.00';
+          response?.data?.data?.price?.yahoo?.regularMarketChangePercent || '0.00';
         console.log(`🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥`, round2Places(dt));
         setmarketparcentage(round2Places(dt));
 
