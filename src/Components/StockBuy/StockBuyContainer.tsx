@@ -122,7 +122,7 @@ const StockBuyContainer = () => {
               `/buy/${specificStockData?.data?.symbol || specificStockData?.symbol
               }`,
               {
-                state: { data: specificStockData },
+                state: { data: specificStockData.data },
               }
             )
           }

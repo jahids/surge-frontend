@@ -252,6 +252,7 @@ import GifPicker, { TenorImage } from 'gif-picker-react';
 import BackButton from '../globalBackButton/BackButton';
 import { instance } from '../../lib/AxiosInstance';
 import TextImage from '../TextImage/TextImage';
+import Loader from '../Loader/Loader';
 type FormData = {
   orderType: string;
   limitPrice: number;
@@ -274,7 +275,8 @@ function StockBuy() {
   const [available, setAvailable] = useState(234234);
   const [gifSelected, setGifSelected] = useState(null);
   const [isGifPickerVisible, setIsGifPickerVisible] = useState(false);
-  const [extradata, setextradata] = useState([])
+  const [extradata, setextradata] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const [stockData, setStockData] = useState();
 
@@ -291,19 +293,23 @@ function StockBuy() {
 
   const selected = watch('orderType', selectedOption);
   const { state } = useLocation();
-  // console.log('state ✔✔✔', state?.data);
+  console.log('state ✔✔✔', state);
 
   useEffect(() => {
     // if (state?.data || state?.data?.data) {
     let stockData = state?.data;
-    stockData = stockData.data;
+    if (state?.data?.data) {
+      stockData = state?.data?.data;
+      // stockData = stockData.data;
+    }
     console.log("stock buy tsx", stockData);
     setStockData(stockData);
     instance.get(`/symbol/history?name=${stockData?.symbol}`).then((res) => {
       const data = res.data?.data;
       // console.log(`extra data `, data);
+      setLoading(false);
       setextradata(data)
-    })
+    });
     setSingleSharePrice(stockData?.price?.price);
     setAvailable(stockData?.price.volume);
     // console.log('🎈', state);
@@ -351,6 +357,11 @@ function StockBuy() {
   };
 
   // console.log("extra data", extradata);
+
+
+  if (loading) {
+    return <Loader />
+  }
 
   return (
 
