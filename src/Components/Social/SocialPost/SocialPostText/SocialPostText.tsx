@@ -1,9 +1,7 @@
-const SocialPostText = ({text} : any) => {
+const SocialPostText = ({ text }: any) => {
   return (
     <div className="mt-5">
-      <p className="text-sm text-justify">
-        {text}
-      </p>
+      <p className="text-md text-justify">{text}</p>
     </div>
   );
 };

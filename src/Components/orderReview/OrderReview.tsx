@@ -50,12 +50,13 @@ import { BiImage } from 'react-icons/bi';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { instance } from '../../lib/AxiosInstance';
 import { notifyError, notifySuccess } from '../../lib/Toastify';
+import BackButton from '../globalBackButton/BackButton';
 
 function OrderReview() {
   const navigate = useNavigate();
 
   const { state } = useLocation();
-  console.log('state ->>', state);
+  console.log('state ->>🍖', state);
 
   const handleConfirm = () => {
     console.log(`firing order : `, state);
@@ -94,16 +95,11 @@ function OrderReview() {
   return (
     <div className=" h-screen p-4">
       <div className="flex items-center justify-between">
-        <button
-          onClick={() => navigate(-1)}
-          className="bg-blue-500 text-white px-4 py-2 rounded-lg shadow-md"
-        >
-          Back
-        </button>
+        <BackButton />
         <span className="text-lg font-bold">Order Review</span>
       </div>
 
-      <div className="mt-4 p-4 bg-white rounded-md shadow-md">
+      {/* <div className="mt-4 p-4 bg-white rounded-md shadow-md">
         <div className="flex justify-between items-center">
           <div>
             <h3 className="text-lg font-bold">Buy {state?._data?.name} </h3>
@@ -117,29 +113,58 @@ function OrderReview() {
             />
           </div>
         </div>
+      </div> */}
+
+      {/* added new one */}
+      <div className="mt-5 bg-gray-100 p-3 rounded-lg">
+        <div className="flex items-center space-x-2">
+          <div className="object-cover">
+            <img
+              className="w-7 h-7 rounded-full"
+              src={state?._data.logo}
+              alt=""
+            />
+          </div>
+          <div>
+            <p className="text-sm">{state?.sell === true ? 'Sell' : 'Buy'}</p>
+            <p className="text-sm">
+              <span className="font-bold">{state?._data?.symbol}</span> at $
+              {state?.totalPrice}
+            </p>
+          </div>
+        </div>
       </div>
 
-      <div className="mt-4 p-2 bg-white rounded-md shadow-md">
-        {/* <span className="text-white flex items-center"> */}
-        <textarea
+      <div style={{ width: '90%', margin: '0px auto', marginTop: '8px' }}>
+        <img style={{ borderRadius: '12px' }} src={state?.gif || ''} />
+      </div>
+
+      <div className="mt-5">
+        <p className="text-sm text-justify">{state.post}</p>
+      </div>
+      {/* added new end */}
+
+      {/* <div className="mt-4 p-2 bg-white rounded-md shadow-md"> */}
+      {/* <span className="text-white flex items-center"> */}
+      {/* <textarea
           className="textarea w-full text-lg font-bold"
           placeholder="Bio"
           value={state.post}
           disabled
-        ></textarea>
-        {/* <BiImage className="mr-2" /> */}
-        {/* Another Image */}
+        ></textarea> */}
+      {/* <BiImage className="mr-2" /> */}
+      {/* Another Image */}
 
-        {/* </span> */}
-      </div>
+      {/* </span> */}
+      {/* </div> */}
 
-      <div className="mt-4 p-2 bg-white rounded-md shadow-md">
+      {/* <div className="mt-4 p-2 bg-white rounded-md shadow-md">
         <img
           src={state?.gif || ''}
           className="gif-preview w-20 h-20 mx-auto rounded-md"
           alt="Selected GIF"
         />
-      </div>
+      </div> */}
 
       <div className="mt-4 p-4 bg-white rounded-md shadow-md">
         <div className="flex justify-between">

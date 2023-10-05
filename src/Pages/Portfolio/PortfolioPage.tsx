@@ -8,6 +8,8 @@ import BackButton from '../../Components/globalBackButton/BackButton';
 import PortfolioChart from '../../Components/portfolioComponent/PortfolioChart';
 import { instance } from '../../lib/AxiosInstance';
 import SingleStockItem from '../../Components/AllStockLists/AllStockItems/SingleStockItem';
+import { useDispatch } from 'react-redux';
+import { setBalance } from '../../features/globalBalance/balanceSlice';
 
 const defaultlogo = `https://images2.imgbox.com/52/06/7xFpAH04_o.png`;
 const PortfolioPage = ({ pagecheck }: any) => {
@@ -19,6 +21,7 @@ const PortfolioPage = ({ pagecheck }: any) => {
   // const { state } = useLocation();
   // const navigate = useNavigate();
 
+  const dispatch = useDispatch();
   useEffect(() => {
     const dataload = async () => {
       try {
@@ -28,6 +31,7 @@ const PortfolioPage = ({ pagecheck }: any) => {
         );
         // console.log('dataload', data);
         setportfoliostock(portfoliostockitem?.data);
+        dispatch(setBalance(data?.data));
         setportfoliodtaa(data?.data);
         setloader(false);
       } catch (error) {
@@ -80,11 +84,20 @@ const PortfolioPage = ({ pagecheck }: any) => {
               ${portfoliodtaa?.cost_basis?.toFixed(2)}
             </h1>
           </div>
+
           <div>
             <span className="text-xl text-gray-500">Gain/Loss ($)</span>
             <h1 className="text-xl font-bold">
               {portfoliodtaa?.unrealized_pl?.toFixed(2)}
             </h1>
+          </div>
+        </div>
+        <div className="bg-gray-200 py-3 mt-4 rounded-lg">
+          <div className="flex justify-between items-center">
+            <span className="font-bold ml-5 block">Available to Invest</span>
+            <span className="font-bold mr-5 text-right block">
+              {portfoliodtaa?.available_to_invest}
+            </span>
           </div>
         </div>
       </section>

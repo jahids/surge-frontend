@@ -376,8 +376,9 @@ function StockBuy() {
         <span className="text-red-600 text-xl font-bold">{state?.data?.price?.yahoo?.regularMarketChangePercent}%</span>
       </h1>
 
-      <section className="mt-5 ">
-        <hr style={{boxShadow: 'rgb(199, 219, 232) 1px 1px 1px 0px inset, rgba(288, 255, 211, 0.5) 0px 1px 0px 1px inset'}} className="bg-gray-100" />
+{/* requrment */}
+      <section className="mt-8 bg-gray-100 rounded-2xl p-3 py-3 ">
+        {/* <hr style={{boxShadow: 'rgb(199, 219, 232) 1px 1px 1px 0px inset, rgba(288, 255, 211, 0.5) 0px 1px 0px 1px inset'}} className="bg-gray-100" /> */}
         <div className="flex justify-between mx-5 mt-2 font-bold">
           <span>open</span>
           <span>High</span>
@@ -391,8 +392,23 @@ function StockBuy() {
           <span>{extradata?.LowPrice}</span>
           <span>{extradata?.Volume}</span>
         </div>
-        <hr style={{boxShadow: 'rgb(199, 219, 232) 1px 1px 1px 0px inset, rgba(288, 255, 211, 0.5) 0px 1px 0px 1px inset'}} className="bg-gray-100" />
+        {/* <hr style={{boxShadow: 'rgb(199, 219, 232) 1px 1px 1px 0px inset, rgba(288, 255, 211, 0.5) 0px 1px 0px 1px inset'}} className="bg-red-300" /> */}
       </section>
+      {/* requrment end */}
+
+      {/* <section className="mt-5 ">
+        <h2>Key Stats</h2>
+      <div className="mt-10 mb-5 flex justify-between items-center gap-5">
+          <div 
+              className="bg-gray-100 border py-4 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+           <span>hdf</span>
+          </div>
+          <div 
+              className="bg-gray-50 border py-6  border-gray-300 text-gray-900 text-sm rounded-3xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+           <span>hdf</span>
+          </div>
+          </div>
+      </section> */}
 
            <div className="App">
                   {isGifPickerVisible && (
@@ -410,7 +426,7 @@ function StockBuy() {
             <select
     //  checked={selectedOption === 'limit'}
               onChange={handleToggle}
-            style={{boxShadow: 'rgb(199, 219, 232) 1px 1px 1px 0px inset, rgba(288, 255, 211, 0.5) 0px 1px 0px 1px inset'}} className="bg-gray-100 border py-4 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  p-12    ">
+             className="bg-gray-100 border py-4 font-bold border-gray-100 text-center text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  p-12    ">
               <option selected>Choose option</option>
               <option value="limit">Limit</option>
               <option value="market">Market</option>
@@ -421,8 +437,8 @@ function StockBuy() {
               value={buyingQuantity}
               onChange={handleQuantityChange}
                placeholder="Quantity"
-            style={{boxShadow: 'rgb(199, 219, 232) 1px 1px 1px 0px inset, rgba(288, 255, 211, 0.5) 0px 1px 0px 1px inset'}}
-              className="bg-gray-100 border py-4 border-gray-100 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+           
+              className="bg-gray-100 border py-4 text-center border-gray 100 text-gray-900 text-sm rounded-lg block w-full p-2.5 "
               type="number"
             
             />
@@ -437,8 +453,8 @@ function StockBuy() {
               value={buyingPrice}
               onChange={handlePriceChange}
               placeholder="$Total"
-            style={{boxShadow: 'rgb(199, 219, 232) 1px 1px 1px 0px inset, rgba(288, 255, 211, 0.5) 0px 1px 0px 1px inset'}}
-              className="bg-gray-100 border py-4 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+       
+              className="bg-gray-100 border py-4 text-center border-gray-100 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
               type="number"
            
             />
@@ -450,8 +466,8 @@ function StockBuy() {
               disabled = {selectedOption === "market"}
               onChange={ev => setLimitPrice(ev.target.value)}
               placeholder="Limit Price"
-            style={{boxShadow: 'rgb(199, 219, 232) 1px 1px 1px 0px inset, rgba(288, 255, 211, 0.5) 0px 1px 0px 1px inset'}}
-              className="bg-gray-100 border py-4 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+       
+              className="bg-gray-100 border py-4 text-center border-gray-100 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               type="number"
             />
         
@@ -477,7 +493,7 @@ function StockBuy() {
             </div>
             ) : (
               <div onClick={e => toggleGifPicker(e)}  className='w-1/2' dir="rtl">
-              <div className="rounded-s-lg py-7 bg-gray-100 text-center gif-preview mx-auto rounded-md"  style={{boxShadow: 'rgb(199, 219, 232) 1px 1px 1px 0px inset, rgba(288, 255, 211, 0.5) 0px 1px 0px 1px inset'}} ><span className='font-bold'>Selected Gif</span></div>
+              <div className="rounded-s-lg py-7 bg-gray-100 text-center gif-preview mx-auto rounded-md"  style={{boxShadow: 'rgb(199, 219, 232) 1px 1px 1px 0px inset, rgba(288, 255, 211, 0.5) 0px 1px 0px 1px inset'}} ><span className='font-bold'>Selecte Gif</span></div>
             </div>
             )}
 
