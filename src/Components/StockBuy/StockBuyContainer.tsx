@@ -11,6 +11,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useGetSpecificStockQuery } from '../../features/stock/allStockApiSlice';
 import Loader from '../Loader/Loader';
 import BackButton from '../globalBackButton/BackButton';
+import TextImage from '../TextImage/TextImage';
 
 const StockBuyContainer = () => {
   const checkdtaa = ['TSLA', 'BTO', 'Esq'];
@@ -35,6 +36,8 @@ const StockBuyContainer = () => {
   //   return <p>Error</p>;
   // }
   console.log('specificStockData', specificStockData);
+
+  const name = specificStockData?.data?.name || specificStockData?.data?.price?.yahoo?.longName;
 
   const handleClick = () => {
     setIsPlusIcon(prevState => !prevState);
@@ -61,7 +64,7 @@ const StockBuyContainer = () => {
           <div className="space-y-2">
             <p className="text-3xl font-bold">
               {/* Revance <br /> Therapeutics */}
-              {specificStockData?.data?.name || specificStockData?.name}
+              {name}
             </p>
             <p className="text-sm font-semibold">
               {specificStockData?.data?.symbol || specificStockData?.symbol}
@@ -75,11 +78,15 @@ const StockBuyContainer = () => {
             </p>
           </div>
           <div className="bg-gray-100 rounded-full">
-            <img
-              className="w-12 h-12 rounded-full object-contain"
-              src={specificStockData?.data?.logo || specificStockData?.logo}
-              alt="revance"
-            />
+            {
+              specificStockData?.data?.logo ?
+                <img
+                  className="w-12 h-12 rounded-full object-contain"
+                  src={specificStockData?.data?.logo || specificStockData?.logo}
+                  alt="revance"
+                /> :
+                <TextImage text={state} />
+            }
           </div>
         </div>
       </section>
@@ -97,8 +104,7 @@ const StockBuyContainer = () => {
           // disabled={isDisabled}
           onClick={() =>
             navigate(
-              `/sell/${
-                specificStockData?.data?.symbol || specificStockData?.symbol
+              `/sell/${specificStockData?.data?.symbol || specificStockData?.symbol
               }`,
               {
                 state: { data: specificStockData },
@@ -113,8 +119,7 @@ const StockBuyContainer = () => {
         <button
           onClick={() =>
             navigate(
-              `/buy/${
-                specificStockData?.data?.symbol || specificStockData?.symbol
+              `/buy/${specificStockData?.data?.symbol || specificStockData?.symbol
               }`,
               {
                 state: { data: specificStockData },

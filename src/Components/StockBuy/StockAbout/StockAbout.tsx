@@ -12,8 +12,8 @@ const StockAbout = ({ allspecificdata }: any) => {
     : allspecificdata?.description;
   const sector = allspecificdata?.data?.ysector ||
     allspecificdata?.data?.sector?.shift() || "others";
-
-  console.log('check 🍖', allspecificdata);
+  const name = allspecificdata?.data?.name || allspecificdata?.data?.price?.yahoo?.longName;
+  console.log('check 🍖', name);
 
   return (
     <div className="my-6">
@@ -35,7 +35,7 @@ const StockAbout = ({ allspecificdata }: any) => {
           <Sheet.Content>
             <Sheet.Scroller>
               <div className="px-5 ">
-                <p className="text-xl font-bold">{allspecificdata?.name}</p>
+                <p className="text-xl font-bold">{name}</p>
                 <p className="mt-10 mb-8 ">{truncateText(description || 'N/A', 500)}</p>
                 <div>
                   <ul>

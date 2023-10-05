@@ -30,11 +30,11 @@ function SingleStockItem({ data }: any) {
           response?.data?.data?.price?.yahoo?.regularMarketChangePercent || '0.00';
         console.log(`🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥`, round2Places(dt));
         setmarketparcentage(round2Places(dt));
-
+        const name = response?.data?.data?.name || response?.data?.data?.data?.price?.yahoo?.longName;
         // setmarketparcentage();
 
         console.log(`✨Res 1🎊`, response?.data);
-        // console.log('🎁 Res 2🎎', response2?.data);
+        console.log('🎁 Res 2🎎', name);
         setmarketLoader(false);
       } catch (error) {
         console.log('error', error);
@@ -76,7 +76,7 @@ function SingleStockItem({ data }: any) {
             </div>
             <div className="mx-5">
               <p className="font-bold">
-                {truncateText(extradata?.name, 23) || extradata?.name}
+                {truncateText(extradata?.name, 23) || extradata?.data.name}
               </p>
               <p className="text-gray-400 text-sm">
                 {data?.symbol}
