@@ -29,7 +29,7 @@ export default function PostDetails() {
         setForceUpdate(Date.now() + Math.ceil(Math.random() * 1000));
     }
 
-    console.log(`state = `, state)
+    // console.log(`state = `, state)
     useEffect(() => {
         const dbCall = async () => {
 
@@ -55,8 +55,8 @@ export default function PostDetails() {
 
     return (
 
-        postData ? <div className="mt-3 mb-3 bg-white-500 p-2 rounded-md"  >
-            <BackButton/>
+        postData ? <div className="mt-3 mb-3 bg-white-500 px-4 rounded-md "  >
+            <BackButton />
             <div>
                 <SocialUserInfo name={postUserName} user={postData?.user[0]} postDate={postData?.createdAt} />
             </div>

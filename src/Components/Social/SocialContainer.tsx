@@ -31,12 +31,16 @@ const SocialContainer = () => {
         <SocialHeader />
       </section>
       <section>
-        {postList.length &&
-          postList?.map(v => {
-            return (
-              <SocialPost key={Math.random()} postData={v} links={v?.links} />
-            );
-          })}
+        {
+          postList.length ?
+            postList?.map(v => {
+              return (
+                <SocialPost key={Math.random()} postData={v} links={v?.links} />
+              );
+            })
+            :
+            null
+        }
       </section>
     </div>
   );

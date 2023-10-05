@@ -31,7 +31,7 @@ const SocialPost = ({ postData, links }: any) => {
   return (
     <div
       className="mt-3 mb-3 bg-white-500 p-2 rounded-md"
-      style={{ boxShadow: '1px 1px 1px 1px #EAF6F6' }}
+      style={{ boxShadow: 'rgba(0, 0, 0, 0.09) 1.95px 1.95px 2.6px' }}
     >
       <div>
         <SocialUserInfo
@@ -64,7 +64,7 @@ const SocialPost = ({ postData, links }: any) => {
         </div>
       </Link>
       <div>
-        <SocialLikeCommentsBtn postId={postId} data={postData} userdata={postData?.user[0]._id } />
+        <SocialLikeCommentsBtn postId={postId} data={postData} userdata={postData?.user[0]._id} />
       </div>
     </div>
   );

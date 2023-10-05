@@ -243,6 +243,7 @@
 
 // added new page
 
+
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { MdOutlineArrowBackIos } from 'react-icons/md';
@@ -266,7 +267,7 @@ function StockBuy() {
   const { symbol: shareSymbol } = useParams();
   const { handleSubmit, control, watch, setValue } = useForm<FormData>();
   const balancedata = useSelector((state: RootState) => state.balance)
-console.log("stockbuy balance😉😉😉", balancedata?.available_to_invest);
+  console.log("stockbuy balance😉😉😉", balancedata?.available_to_invest);
   const [selectedOption, setSelectedOption] = useState(''); // Default to 'Market'
   const [singleSharePrice, setSingleSharePrice] = useState(0);
   const [buyingPrice, setBuyingPrice] = useState('');
@@ -283,7 +284,7 @@ console.log("stockbuy balance😉😉😉", balancedata?.available_to_invest);
 
   const [stockData, setStockData] = useState();
 
-  
+
 
   const toggleGifPicker = e => {
     e.preventDefault();
@@ -357,7 +358,7 @@ console.log("stockbuy balance😉😉😉", balancedata?.available_to_invest);
   const handleToggle = (value) => {
     console.log("check option value", selectedOption)
     // setSelectedOption(selectedOption === 'market' ? 'limit' : 'market');
-    setSelectedOption((prev)=> value == 'limit' ? 'limit' : 'market' );
+    setSelectedOption((prev) => value == 'limit' ? 'limit' : 'market');
     setValue('limitPrice', 0);
     setValue('quantity', 0);
   };
@@ -464,7 +465,7 @@ console.log("stockbuy balance😉😉😉", balancedata?.available_to_invest);
               <div>
                 <select
                   //  checked={selectedOption === 'limit'}
-                  onChange={(e)=>handleToggle(e.target.value)}
+                  onChange={(e) => handleToggle(e.target.value)}
                   className="bg-gray-100 border py-4 font-bold border-gray-100 text-center text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  p-12    ">
                   <option selected>Choose option</option>
                   <option value="limit">Limit</option>

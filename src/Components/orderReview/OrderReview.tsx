@@ -47,10 +47,11 @@
 import React, { useEffect, useState } from 'react';
 // import { ArrowBack } from 'react-icons/ai';
 import { BiImage } from 'react-icons/bi';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { redirect, useLocation, useNavigate } from 'react-router-dom';
 import { instance } from '../../lib/AxiosInstance';
 import { notifyError, notifySuccess } from '../../lib/Toastify';
 import BackButton from '../globalBackButton/BackButton';
+import TextImage from '../TextImage/TextImage';
 
 function OrderReview() {
   const navigate = useNavigate();
@@ -58,8 +59,10 @@ function OrderReview() {
   const { state } = useLocation();
   console.log('state ->>🍖', state);
 
+  const logo = state?._data?.logo;
+
   const handleConfirm = () => {
-    console.log(`firing order : `, state);
+    // console.log(`firing order : `, state);
     const orderObj = {
       ...state,
       links: [state?.gif],
@@ -76,6 +79,7 @@ function OrderReview() {
             `Successfully placed sell order for ${state.symbol}`,
             3000
           );
+          navigate("/main");
         })
         .catch(er => {
           console.error('err', er);
@@ -91,6 +95,7 @@ function OrderReview() {
         .catch(er => console.log(er));
     }
   };
+
 
   return (
     <div className=" h-screen p-4">
@@ -119,11 +124,14 @@ function OrderReview() {
       <div className="mt-5 bg-gray-100 p-3 rounded-lg">
         <div className="flex items-center space-x-2">
           <div className="object-cover">
-            <img
-              className="w-7 h-7 rounded-full"
-              src={state?._data.logo}
-              alt=""
-            />
+            {
+              logo ? <img
+                className="w-7 h-7 rounded-full"
+                src={logo}
+                alt=""
+              /> : <TextImage width={'36px'} height={'36px'} textSize={'1rem'} text={state?.symbol} />
+            }
+
           </div>
           <div>
             <p className="text-sm">{state?.sell === true ? 'Sell' : 'Buy'}</p>
@@ -173,7 +181,7 @@ function OrderReview() {
             <h1 className="text-lg py-2 font-bold">Stock Price</h1>
             <h1 className="text-lg py-2 font-bold">Quantity</h1>
 
-            <h1 className="text-lg py-2 font-bold">Amount</h1>
+            <h1 className="text-lg py-2 font-bold">Total Amount</h1>
             {state?.type == 'limit' ? (
               <h1 className="text-lg py-2 font-bold">Limit Price</h1>
             ) : null}
@@ -183,7 +191,7 @@ function OrderReview() {
             {/* <h1 className="text-lg py-2 font-bold">Public</h1> */}
             <h1 className="text-lg py-2 font-bold"> {state.singlePrice} </h1>
             <h1 className="text-lg py-2 font-bold"> {state.quantity} </h1>
-            <h1 className="text-lg py-2 font-bold"> ${state.totalPrice} </h1>
+            <h1 className="text-lg py-2 font-bold"> ${Number(state.totalPrice).toLocaleString('en-US')} </h1>
             {state?.type == 'limit' ? (
               <h1 className="text-lg py-2 font-bold"> {state.limitPrice} </h1>
             ) : null}
