@@ -1,6 +1,7 @@
 /* eslint-disable  */
 import { useEffect } from 'react';
 import { useCookies } from 'react-cookie';
+import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
 
@@ -14,12 +15,17 @@ export const PrivateRoute: React.FC<Props> = ({
   const [cookies] = useCookies(['mytoken']);
 const isAuthenticated = !!cookies.mytoken;
 
+const balancedata = useSelector((state: RootState) => state.balance)
+console.log("bbdata--<>", balancedata);
+
 useEffect(() => {
   if (isAuthenticated) {
     console.log('persist data');
+   
   } else {
     console.log('no persist data');
   }
+
 }, [isAuthenticated]);
 
   if (isAuthenticated) {

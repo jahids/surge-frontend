@@ -41,7 +41,7 @@ const SocialPostBadge = ({
         <div>
           <p className="text-sm">{order_side == 'sell' ? 'sold' : 'Bought'}</p>
           <p className="text-sm">
-            <span className="font-bold">{symbol}</span> at ${price}
+            <span className="font-bold">{symbolData?.name}</span> at ${price}
           </p>
         </div>
       </div>

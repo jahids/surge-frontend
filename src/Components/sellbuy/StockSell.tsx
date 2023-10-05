@@ -566,7 +566,7 @@ function StockBuy() {
       gif : gifSelected?.url
     };
     console.log(`🎗🎀🎁`, orderData);
-    navigate('/order-review', { state: orderData });
+    navigate('/order-review', { state: { ...orderData, sell: true } });
   };
   const handlePriceChange = (ev: any) => {
     const value = ev.target?.value ?? 0;
