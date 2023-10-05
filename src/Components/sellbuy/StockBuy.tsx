@@ -253,6 +253,7 @@ import BackButton from '../globalBackButton/BackButton';
 import { instance } from '../../lib/AxiosInstance';
 import TextImage from '../TextImage/TextImage';
 import Loader from '../Loader/Loader';
+import { useSelector } from 'react-redux';
 type FormData = {
   orderType: string;
   limitPrice: number;
@@ -264,12 +265,14 @@ function StockBuy() {
   const navigate = useNavigate();
   const { symbol: shareSymbol } = useParams();
   const { handleSubmit, control, watch, setValue } = useForm<FormData>();
-  const [selectedOption, setSelectedOption] = useState('market'); // Default to 'Market'
+  const balancedata = useSelector((state: RootState) => state.balance)
+console.log("stockbuy balance😉😉😉", balancedata?.available_to_invest);
+  const [selectedOption, setSelectedOption] = useState(''); // Default to 'Market'
   const [singleSharePrice, setSingleSharePrice] = useState(0);
   const [buyingPrice, setBuyingPrice] = useState('');
   const [buyingQuantity, setBuyingQuantity] = useState('');
   const [limitPrice, setLimitPrice] = useState('');
-  const [balance, setBalance] = useState(50000);
+  const [balance, setBalance] = useState(balancedata?.available_to_invest);
   const [symbol, setSymbol] = useState(shareSymbol);
   const [post, setPost] = useState('');
   const [available, setAvailable] = useState(234234);
@@ -279,6 +282,8 @@ function StockBuy() {
   const [loading, setLoading] = useState(true);
 
   const [stockData, setStockData] = useState();
+
+  
 
   const toggleGifPicker = e => {
     e.preventDefault();
@@ -349,9 +354,10 @@ function StockBuy() {
     setBuyingQuantity(value);
     setBuyingPrice(notionalValue.toString());
   };
-  const handleToggle = () => {
+  const handleToggle = (value) => {
     console.log("check option value", selectedOption)
-    setSelectedOption(selectedOption === 'market' ? 'limit' : 'market');
+    // setSelectedOption(selectedOption === 'market' ? 'limit' : 'market');
+    setSelectedOption((prev)=> value == 'limit' ? 'limit' : 'market' );
     setValue('limitPrice', 0);
     setValue('quantity', 0);
   };
@@ -419,6 +425,14 @@ function StockBuy() {
           </div>
           {/* <hr style={{boxShadow: 'rgb(199, 219, 232) 1px 1px 1px 0px inset, rgba(288, 255, 211, 0.5) 0px 1px 0px 1px inset'}} className="bg-red-300" /> */}
         </section>
+        <div className="bg-gray-200 py-3 mt-4 rounded-lg">
+          <div className="flex justify-between items-center">
+            <span className="font-bold ml-5 block">Available to Invest</span>
+            <span className="font-bold mr-5 text-right block">
+              {balancedata?.available_to_invest}
+            </span>
+          </div>
+        </div>
         {/* requrment end */}
 
         {/* <section className="mt-5 ">
@@ -450,7 +464,7 @@ function StockBuy() {
               <div>
                 <select
                   //  checked={selectedOption === 'limit'}
-                  onChange={handleToggle}
+                  onChange={(e)=>handleToggle(e.target.value)}
                   className="bg-gray-100 border py-4 font-bold border-gray-100 text-center text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  p-12    ">
                   <option selected>Choose option</option>
                   <option value="limit">Limit</option>
@@ -476,6 +490,7 @@ function StockBuy() {
               <div>
                 <input
                   value={buyingPrice}
+                  max={balancedata?.available_to_invest}
                   onChange={handlePriceChange}
                   placeholder="$Total"
 
@@ -488,7 +503,7 @@ function StockBuy() {
 
                 <input
                   value={limitPrice}
-                  disabled={selectedOption === "market"}
+                  disabled={selectedOption == "market"}
                   onChange={ev => setLimitPrice(ev.target.value)}
                   placeholder="Limit Price"
 

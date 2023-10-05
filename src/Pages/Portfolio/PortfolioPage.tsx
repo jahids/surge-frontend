@@ -31,7 +31,7 @@ const PortfolioPage = ({ pagecheck }: any) => {
         );
         // console.log('dataload', data);
         setportfoliostock(portfoliostockitem?.data);
-        dispatch(setBalance(data?.data));
+        dispatch(setBalance({ ...data?.data, api: true }));
         setportfoliodtaa(data?.data);
         setloader(false);
       } catch (error) {
