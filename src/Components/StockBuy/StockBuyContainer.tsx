@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { MdOutlineArrowBackIos } from 'react-icons/md';
 import { useEffect, useState } from 'react';
 import News from '../Main/News/News';

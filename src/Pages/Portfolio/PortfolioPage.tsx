@@ -10,6 +10,7 @@ import { instance } from '../../lib/AxiosInstance';
 import SingleStockItem from '../../Components/AllStockLists/AllStockItems/SingleStockItem';
 import { useDispatch } from 'react-redux';
 import { setBalance } from '../../features/globalBalance/balanceSlice';
+import PortfolioLoader from '../../Components/ShimmerLoaders/portfolioLoader/PortfolioLoader';
 
 const defaultlogo = `https://images2.imgbox.com/52/06/7xFpAH04_o.png`;
 const PortfolioPage = ({ pagecheck }: any) => {
@@ -46,7 +47,14 @@ const PortfolioPage = ({ pagecheck }: any) => {
   console.log('--portfoliostock', portfoliostock);
 
   if (loader) {
-    return <Loader />;
+    return <PortfolioLoader />;
+    // return (
+    //   <div className="animate-pulse">
+    //     <div className="bg-gradient-to-r from-gray-300 to-gray-200 dark:from-gray-700 dark:to-gray-600 w-full h-12 my-4 rounded-md"></div>
+    //     <div className="bg-gradient-to-r from-gray-300 to-gray-200 dark:from-gray-700 dark:to-gray-600 w-4/5 h-10 my-2 rounded-md"></div>
+    //     <div className="bg-gradient-to-r from-gray-300 to-gray-200 dark:from-gray-700 dark:to-gray-600 w-3/4 h-8 my-2 rounded-md"></div>
+    //   </div>
+    // );
   }
 
   return (

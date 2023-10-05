@@ -14,8 +14,6 @@ import React from 'react';
 // }
 // ShimmerLoader.tsx
 
-
-
 const shimmerAnimation = `
   shimmer linear 1.5s infinite
 `;
@@ -25,28 +23,37 @@ const shimmerGradient = `
 `;
 
 const CompanyShimmerLoader: React.FC = () => {
-    const shimmerStyle = {
-        backgroundImage: shimmerGradient,
-        animation: shimmerAnimation
-    };
+  const shimmerStyle = {
+    backgroundImage: shimmerGradient,
+    animation: shimmerAnimation,
+  };
 
-    return (
-        <div className="">
-            <div className="flex items-center justify-between mb-4">
-                < div className="flex items-center" >
-                    <div className="w-12 h-12 p-1 rounded-full bg-gray-100 object-contain" style={shimmerStyle}></div>
-                    <div className="mx-5">
-                        <div className="w-20 h-4 bg-gray-100" style={shimmerStyle}></div>
-                        <div className="w-16 h-3 mt-2 bg-gray-100 text-sm" style={shimmerStyle}></div>
-                    </div>
-                </div >
-                <div>
-                    <div className="w-16 h-6 bg-gray-100 rounded-full" style={shimmerStyle}></div>
-                </div>
-            </div >
-        </div >
-    );
-}
+  return (
+    <div className="">
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center">
+          <div
+            className="w-12 h-12 p-1 rounded-full bg-gray-100 object-contain"
+            style={shimmerStyle}
+          ></div>
+          <div className="mx-5">
+            <div className="w-20 h-4 bg-gray-100" style={shimmerStyle}></div>
+            <div
+              className="w-16 h-3 mt-2 bg-gray-100 text-sm"
+              style={shimmerStyle}
+            ></div>
+          </div>
+        </div>
+        <div>
+          <div
+            className="w-16 h-6 bg-gray-100 rounded-full"
+            style={shimmerStyle}
+          ></div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 // export default ShimmerLoader;
 

@@ -50,12 +50,9 @@ const Otp = () => {
             password: location.state.password,
           });
           console.log('signupCall', signupCall);
-          setCookie('mytoken', signupCall?.data?.data?.token, {
-            path: '/',
-            secure: true,
-            sameSite: 'none',
-          });
-
+          setCookie('mytoken', signupCall?.data?.data?.token);
+          setCookie('email', signupCall?.data?.data?.email);
+          setCookie('dbid', signupCall?.data?.data?.dbId);
           navigate('/multistep', { state: signupCall?.data?.data?.email });
         } else {
           console.log('signup not working');
