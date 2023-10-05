@@ -449,10 +449,38 @@ import { getemail } from '../../Services/Cookie.service';
 const MAX_STEPS = 15;
 
 // Define your validation schema using yup
+// const schema = yup.object().shape({
+//   given_name: yup.string().required('First Name is required'),
+//   family_name: yup.string().required('Family Name is required'),
+//   date_of_birth: yup.date().required('Date of Birth is required').nullable(),
+//   phone_number: yup.string().required('Phone Number is required'),
+//   street_address: yup.string().required('Street Address is required'),
+//   city: yup.string().required('City is required'),
+//   state: yup.string().required('State is required'),
+//   postal_code: yup.string().required('Postal Code is required'),
+//   incomeSource: yup.array().min(1, 'At least one Income Source is required'),
+//   terms_conditions: yup.boolean().oneOf([true], 'You must accept Terms and Conditions'),
+//   privacy_policy: yup.boolean().oneOf([true], 'You must accept Privacy Policy'),
+// });
+
+// updated age
 const schema = yup.object().shape({
   given_name: yup.string().required('First Name is required'),
   family_name: yup.string().required('Family Name is required'),
-  date_of_birth: yup.date().required('Date of Birth is required').nullable(),
+  date_of_birth: yup
+    .date()
+    .required('Date of Birth is required')
+    .test(
+      'is-at-least-18',
+      'You must be at least 18 years old',
+      function (value) {
+        // Check if the date_of_birth is at least 18 years ago
+        const currentDate = new Date();
+        const minAgeDate = new Date(currentDate.getFullYear() - 18, currentDate.getMonth(), currentDate.getDate());
+        return value <= minAgeDate;
+      }
+    )
+    .nullable(),
   phone_number: yup.string().required('Phone Number is required'),
   street_address: yup.string().required('Street Address is required'),
   city: yup.string().required('City is required'),

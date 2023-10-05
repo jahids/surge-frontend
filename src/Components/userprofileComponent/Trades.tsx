@@ -7,7 +7,7 @@ import CompanyShimmerLoader from '../ShimmerLoaders/CompanyShimmer/Companyshimme
 import TextImage from '../TextImage/TextImage';
 import { truncateText } from '../../Utils/converter';
 
-function Trades({ data, type }: { data: any, type: "trade" | "portfolio" }) {
+function Trades({ data, type }: { data: any; type: 'trade' | 'portfolio' }) {
   // console.log('props reveve', data);
 
   const [extradata, setextradata] = useState(null);
@@ -19,7 +19,9 @@ function Trades({ data, type }: { data: any, type: "trade" | "portfolio" }) {
   useEffect(() => {
     const findExtraDes = async () => {
       try {
-        const { data: response } = await instance.get(`symbol?name=${data?.symbol}`);
+        const { data: response } = await instance.get(
+          `symbol?name=${data?.symbol}`
+        );
 
         let finalData = null;
         if (response?.data) {
@@ -31,7 +33,7 @@ function Trades({ data, type }: { data: any, type: "trade" | "portfolio" }) {
           if (type == 'trade') {
             setPrice((data?.qty * data?.price).toFixed(2));
           } else {
-            setPrice(parseFloat(data?.market_value).toFixed(2))
+            setPrice(parseFloat(data?.market_value).toFixed(2));
           }
         }
         setextradata(finalData);
@@ -45,7 +47,7 @@ function Trades({ data, type }: { data: any, type: "trade" | "portfolio" }) {
     findExtraDes();
   }, []);
   if (loading) {
-    return <CompanyShimmerLoader />
+    return <CompanyShimmerLoader />;
   }
 
   return (
@@ -54,32 +56,35 @@ function Trades({ data, type }: { data: any, type: "trade" | "portfolio" }) {
       className="relative rounded-lg border items-center  border-gray-200 shadow-sm m-3 "
     >
       <div className="flex items-center justify-between gap-2 p-4">
-        <div className='flex flex-row'>
-
-
-          {
-            (extradata?.logo || extradata?.data?.logo) ? <img
+        <div className="flex flex-row">
+          {extradata?.logo || extradata?.data?.logo ? (
+            <img
               alt="Women"
               src={extradata?.logo}
               className="h-12 w-12 rounded-full object-cover"
-            /> :
-              <TextImage width={'48px'} height={'48px'} textSize={'1.4rem'} text={data?.symbol} />
-          }
+            />
+          ) : (
+            <TextImage
+              width={'48px'}
+              height={'48px'}
+              textSize={'1.4rem'}
+              text={data?.symbol}
+            />
+          )}
 
-          <div className='ml-4'>
+          <div className="ml-4">
             <p className="font-medium text-gray-900">{extradata?.name}</p>
             <p className="line-clamp-1 text-sm text-gray-500">{data?.symbol}</p>
           </div>
         </div>
 
         <div>
-          <p className="font-medium text-gray-900">
-            $ {price || 322.12}
-          </p>
+          <p className="font-medium text-gray-900">$ {price || data?.price}</p>
           {!data?.asset_class && (
             <span
-              className={`${data?.side === 'buy' ? 'bg-green-400' : 'bg-red-400'
-                } text-xs font-medium mr-3 px-5 py-1 rounded-full`}
+              className={`${
+                data?.side === 'buy' ? 'bg-green-400' : 'bg-red-400'
+              } text-xs font-medium mr-3 px-5 py-1 rounded-full`}
             >
               {data?.side}
             </span>

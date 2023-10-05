@@ -17,7 +17,7 @@ function Activity() {
         const { data } = await instance(`portfolio/trade-activity`);
         settradesdata(data?.data);
         setactivityloader(false);
-        console.log('--->', data?.data);
+        console.log('--->activity', data?.data);
       } catch (error) {
         console.log('🍗🍖', error);
         setactivityloader(false);

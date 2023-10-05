@@ -22,7 +22,11 @@ const PortfolioChart = ({ Symbol, gainloss }: any) => {
 
   useEffect(() => {
     const dbCall = async () => {
-      const { data: { data: { values } } } = await instance.get(`/portfolio/history`);
+      const {
+        data: {
+          data: { values },
+        },
+      } = await instance.get(`/portfolio/history`);
       const finalData = values?.map((v: any) => v.value);
 
       // console.log(`🔥🔥`, values);
@@ -35,7 +39,7 @@ const PortfolioChart = ({ Symbol, gainloss }: any) => {
   const stockData = dummyData.map(item => item.close);
 
   // Define colors based on gainloss
-  const lineColor = gainloss > 0 ? '#4ac468' : '#FF0000';
+  const lineColor = gainloss >= 0 ? '#4ac468' : '#FF0000';
 
   const options = {
     chart: {
@@ -61,7 +65,11 @@ const PortfolioChart = ({ Symbol, gainloss }: any) => {
   return (
     <div>
       <div>
-        <Chart options={options} series={[{ data: portfolioHistoryData }]} type="line" />
+        <Chart
+          options={options}
+          series={[{ data: portfolioHistoryData }]}
+          type="line"
+        />
       </div>
     </div>
   );
