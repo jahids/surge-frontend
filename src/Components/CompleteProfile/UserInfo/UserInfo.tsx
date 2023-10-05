@@ -45,27 +45,29 @@ const UserInfo = ({ userdata }: any) => {
 
   return (
     <div className="mt-5">
-      <div style={{ position: 'relative' }}>
-        {
-          pfp && pfp?.length ?
-            <img
-              className="w-32 h-32 rounded-full bg-gray-300 flex items-center justify-center"
-              src={pfp}
-              alt=""
-            /> :
-            <TextImage width={'110px'} height={'110px'} textSize={'3rem'} text={userdata?.db?.name || "user name"} />
-        }
-        <input
-          type="file"
-          ref={fileInputRef}
-          style={{ display: 'none' }}
-          onChange={handleFileChange}
-        />
-        <button onClick={() => fileInputRef.current?.click()} style={{ position: 'absolute', bottom: '0px', left: '5.2rem', backgroundColor: '#f3f4f6', borderRadius: '50%', padding: '4px' }}>
+      <div style={{ position: 'relative' }} className="avatar">
+        <div className="w-28 rounded-full">
+          {
+            pfp && pfp?.length ?
+              <img
+                // className="w-32 h-32 rounded-full bg-gray-300 flex items-center justify-center"
+                src={pfp}
+                alt=""
+              /> :
+              <TextImage width={'110px'} height={'110px'} textSize={'3rem'} text={userdata?.db?.name || "user name"} />
+          }
+          <input
+            type="file"
+            ref={fileInputRef}
+            style={{ display: 'none' }}
+            onChange={handleFileChange}
+          />
+          <button onClick={() => fileInputRef.current?.click()} style={{ position: 'absolute', bottom: '0px', left: '5.2rem', backgroundColor: '#f3f4f6', borderRadius: '50%', padding: '4px' }}>
 
-          <MdCameraAlt size={28} color={"#540463"} />
-        </button>
+            <MdCameraAlt size={28} color={"#540463"} />
+          </button>
 
+        </div>
       </div>
       <div>
         {/* --- name start --- */}

@@ -57,20 +57,23 @@ const PortfolioPage = ({ pagecheck }: any) => {
             </p>
             <p className="text-3xl font-bold">
               {/* Revance <br /> Therapeutics */}
-              {'investing'}
+              {'My Portfolio'}
             </p>
             <p className="text-3xl font-bold"> ${portfoliodtaa?.value}</p>
           </div>
         </div>
       </section>
       <section>
-        <PortfolioChart Symbol="ORAN" />
+        <PortfolioChart
+          gainloss={portfoliodtaa?.unrealized_pl?.toFixed(2)}
+          Symbol="ORAN"
+        />
       </section>
       <section>
         <div className="mt-6">
           <p className="text-xl font-bold">Investments</p>
         </div>
-        <div className="flex justify-between items-center mt-3 m-2">
+        <div className="flex justify-between items-center mt-3 ">
           <div>
             <span className="text-xl text-gray-500">Funds Invested</span>
             <h1 className="text-xl font-bold">
@@ -78,9 +81,9 @@ const PortfolioPage = ({ pagecheck }: any) => {
             </h1>
           </div>
           <div>
-            <span className="text-xl text-gray-500">Gain/Loss</span>
+            <span className="text-xl text-gray-500">Gain/Loss ($)</span>
             <h1 className="text-xl font-bold">
-              ${portfoliodtaa?.unrealized_pl?.toFixed(2)}
+              {portfoliodtaa?.unrealized_pl?.toFixed(2)}
             </h1>
           </div>
         </div>

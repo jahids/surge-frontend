@@ -59,13 +59,14 @@ const StockBuyContainer = () => {
       <section>
         <div className="flex items-center justify-between">
           <div className="space-y-2">
-            <p className="text-sm font-semibold">
-              {specificStockData?.data?.symbol || specificStockData?.symbol}
-            </p>
             <p className="text-3xl font-bold">
               {/* Revance <br /> Therapeutics */}
               {specificStockData?.data?.name || specificStockData?.name}
             </p>
+            <p className="text-sm font-semibold">
+              {specificStockData?.data?.symbol || specificStockData?.symbol}
+            </p>
+
             <p className="text-3xl font-bold">
               {' '}
               $
@@ -96,7 +97,8 @@ const StockBuyContainer = () => {
           // disabled={isDisabled}
           onClick={() =>
             navigate(
-              `/sell/${specificStockData?.data?.symbol || specificStockData?.symbol
+              `/sell/${
+                specificStockData?.data?.symbol || specificStockData?.symbol
               }`,
               {
                 state: { data: specificStockData },
@@ -111,7 +113,8 @@ const StockBuyContainer = () => {
         <button
           onClick={() =>
             navigate(
-              `/buy/${specificStockData?.data?.symbol || specificStockData?.symbol
+              `/buy/${
+                specificStockData?.data?.symbol || specificStockData?.symbol
               }`,
               {
                 state: { data: specificStockData },

@@ -1,5 +1,6 @@
 import Lottie from 'lottie-react';
 import React from 'react';
+import { calculateAccountAge } from '../../Utils/converter';
 
 export interface Iinvestor {
   name: string;
@@ -9,13 +10,15 @@ export interface Iinvestor {
 }
 
 function Investor({ Investordata }: any) {
+
+  console.log(`💚💛💛💥`, Investordata);
   return (
     <div className="investor mt-5  flex overflow-x-auto">
       {Investordata?.map((item, index) => (
         <div
           key={index}
           className="p-5 rounded-3xl bg-[#F5F5F5] mr-[20px] shadow-sm cursor-pointer"
-          // onClick={() => handleCardClick(item)}
+        // onClick={() => handleCardClick(item)}
         >
           <div className="h-[200px] w-[300px] ">
             <img
@@ -24,12 +27,12 @@ function Investor({ Investordata }: any) {
               alt=""
             />
             <h1 className="font-bold text-xl text-center mt-2">{item?.name}</h1>
-            <h1 className="text-gray-400 text-xl text-center mb-3">
-              @{item?.name}
+            <h1 className="text-gray-400 text-sm text-center mb-3">
+              Joined {calculateAccountAge(item?.createdAt)} ago
             </h1>
             <div className="flex items-center justify-center">
               <button className=" bg-green-200  py-2 px-2 rounded-full text-green-500 text-xs font-semibold">
-                +60.00%
+                ${Number(item?.all_time_invest).toLocaleString('en-US') || 0}
               </button>
             </div>
           </div>

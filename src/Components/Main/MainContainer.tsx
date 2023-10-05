@@ -22,22 +22,19 @@ const MainContainer = () => {
     const dataCall = async () => {
       const { data: _data } = await getSelfData();
 
-
       console.log('👑👑👑', _data);
       setSelfData(_data);
     };
     dataCall();
   }, []);
 
-
-
   return (
     <div className="px-5 pb-[100px] min-h-screen">
       <section>
-        <Invest />
+        <Invest selfData={selfData} />
       </section>
       <section>
-        <AllStocks />
+        {/* <AllStocks /> */}
       </section>
       <section>
         <News />
@@ -48,12 +45,12 @@ const MainContainer = () => {
       <section>
         <FriendList />
       </section>
-      <section>
+      {/* <section>
         <TopMovers />
-      </section>
-      <section>
+      </section> */}
+      {/* <section>
         <MostTraded />
-      </section>
+      </section> */}
     </div>
   );
 };

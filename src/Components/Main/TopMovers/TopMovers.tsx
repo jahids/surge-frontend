@@ -40,8 +40,8 @@ const TopMovers = () => {
 
   return (
     <div className="mt-10">
-      <h1 className="text-xl font-bold">Top movers</h1>
-      <p className="mt-1 text-sm text-gray-400 mb-7">By weekly </p>
+      <h1 className="text-xl font-bold">Top Movers</h1>
+      <p className="mt-1 text-sm text-gray-400 mb-7">By Daily </p>
       {/* --- top movers company --- */}
       {
         /* {topmoverData?.data?.gainers.map((item)=>(

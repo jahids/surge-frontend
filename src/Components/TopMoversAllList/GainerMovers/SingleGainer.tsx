@@ -23,11 +23,11 @@ function SingleGainer({ data }: any) {
         const response = await instance.get(`symbol?name=${data?.symbol}`);
         const response2 = await instance.get(`movers-stats/${data?.symbol}`);
 
-        setextradata(response?.data);
+        setextradata(response?.data?.data);
         setmarketparcentage(response2?.data?.data?.change);
         setLoading(false);
-        console.log('resp 1', response?.data);
-        console.log('resp 2', response2?.data?.data?.change);
+        // console.log('resp 1', response?.data);
+        // console.log('resp 2', response2?.data?.data?.change);
       } catch (error) {
         console.log('error', error);
       }
@@ -73,8 +73,8 @@ function SingleGainer({ data }: any) {
             <div>
               {/* "bg-green-200 py-2 px-2 rounded-full text-green-500 text-xs font-semibold" */}
               <button
-                className={`  py-2 px-2 rounded-full ${data?.percent_change > 0 ? 'bg-green-300' : 'bg-red-300'
-                  } text-xs font-semibold`}
+                className={`  py-2 px-2 rounded-full ${data?.percent_change > 0 ? 'bg-green-200 text-green-500' : 'bg-red-200 text-red-500'
+                  } text-xs font-semibold text-green-600`}
               >
                 {/* {`${marketparcentage || '3.98'}%`} */}
                 {`${data?.percent_change.toFixed(2) || marketparcentage.toFixed(2)

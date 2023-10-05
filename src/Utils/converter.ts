@@ -2,7 +2,7 @@ import moment from 'moment';
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
 export const truncateText = (_text_: string, maxLength: number) => {
-  let text = _text_?.trim();
+  const text = _text_?.trim();
   if (text?.length <= maxLength) {
     return text;
   }
@@ -62,20 +62,24 @@ export function calculateAccountAge(
     result += `${years} ${years === 1 ? 'year' : 'years'}`;
   }
   if (months > 0) {
-    result += `${result.length > 0 ? ' ' : ''}${months} ${months === 1 ? 'month' : 'months'
-      }`;
+    result += `${result.length > 0 ? ' ' : ''}${months} ${
+      months === 1 ? 'month' : 'months'
+    }`;
   }
   if (days > 0 && !months && !years) {
-    result += `${result.length > 0 ? ' ' : ''}${days} ${days === 1 ? 'day' : 'days'
-      }`;
+    result += `${result.length > 0 ? ' ' : ''}${days} ${
+      days === 1 ? 'day' : 'days'
+    }`;
   }
   if (!days) {
-    result = `${result.length > 0 ? ' ' : ''}${hours} ${hours === 1 ? 'hour' : 'hours'
-      }`;
+    result = `${result.length > 0 ? ' ' : ''}${hours} ${
+      hours === 1 ? 'hour' : 'hours'
+    }`;
   }
   if (!hours) {
-    result = `${result.length > 0 ? ' ' : ''}${mins} ${mins === 1 ? 'minute' : 'minutes'
-      }`;
+    result = `${result.length > 0 ? ' ' : ''}${mins} ${
+      mins === 1 ? 'minute' : 'minutes'
+    }`;
   }
 
   return result;
@@ -92,19 +96,18 @@ export function getRandomColorCombo() {
     { textColor: '#7D3C98', background: '#F5EEF8' }, // Plum on Lilac
     { textColor: '#515A5A', background: '#F2FCFA' }, // Charcoal on Off-White
     { textColor: '#1B4F72', background: '#D4E6F1' }, // Deep Blue on Pale Blue
-    { textColor: '#7E5109', background: '#FCF3CF' }  // Dark Brown on Buttercream
+    { textColor: '#7E5109', background: '#FCF3CF' }, // Dark Brown on Buttercream
   ];
 
   const randomIndex = Math.floor(Math.random() * colorCombos.length);
   return colorCombos[randomIndex];
 }
 
-
 export function round2Places(input: any) {
   const num = parseFloat(input);
 
   if (isNaN(num)) {
-    return 0.00;
+    return 0.0;
   }
 
   return parseFloat(num.toFixed(2));

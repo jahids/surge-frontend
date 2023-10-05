@@ -25,6 +25,7 @@ import TopMovers from '../../Components/Main/TopMovers/TopMovers';
 import CustomLottie from '../../Utils/CustomLottie';
 import { investorcard } from '../../Utils/Skeleton';
 import AllStocks from '../../Components/Main/AllStocks/AllStocks';
+import MostTraded from '../../Components/Main/MostTraded/MostTraded';
 
 interface ICategories {
   category: string;
@@ -105,7 +106,10 @@ const ExplorePage = () => {
 
       {/* all category */}
 
-  {/* <AllStocks/> */}
+      {/* <AllStocks/> */}
+      <section className=" mt-2 m-5">
+        <AllStocks />
+      </section>
 
       <div className=" mt-2 m-5">
         <h1 className="text-2xl font-bold ">All Categories</h1>
@@ -115,9 +119,9 @@ const ExplorePage = () => {
         <Categories categorie={categories} />
 
         {/* investment */}
-        <h1 className="text-2xl font-bold mt-5">Premium Investors</h1>
+        <h1 className="text-2xl font-bold mt-5">Top Investors</h1>
         <p className="text-sm text-gray-400 mb-5">
-          Explore the latest categories
+          Follow to see their moves and insights so you can learn from their approach
         </p>
         {
           loader ? <Loader /> :
@@ -125,8 +129,11 @@ const ExplorePage = () => {
         }
         <TopMovers />
 
+        <section >
+          <MostTraded />
+        </section>
         <BottomNav />
-      AllStocks</div>
+        AllStocks</div>
     </div>
 
   );

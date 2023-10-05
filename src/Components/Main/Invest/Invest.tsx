@@ -16,13 +16,18 @@ import ReactApexChart from 'react-apexcharts';
 import { getSingleUser } from '../../../Services/User.service';
 import { getdbId } from '../../../Services/Cookie.service';
 import PortfolioPage from '../../../Pages/Portfolio/PortfolioPage';
+import TextImage from '../../TextImage/TextImage';
 
 
-const Invest = () => {
+const Invest = ({ selfData }: any) => {
   const [token, setToken] = useState<string | null>(null);
   const navigate = useNavigate();
-  const [achcheck, setachcheck] = useState('')
+  // const [achcheck, setachcheck] = useState('')
 
+  const pfp = selfData?.db?.pfp;
+
+  console.log(`💚💛💚 : `, selfData?.db)
+  const achcheck = selfData?.db?.ach;
 
 
   const dbId: string = getdbId()
@@ -34,6 +39,7 @@ const Invest = () => {
       } = myData;
       // setName(identity.given_name + ' ' + identity.family_name);
       console.log(`⚽`, ach);
+      // setachcheck(ach)
     };
     dataCall();
   }, []);
@@ -65,6 +71,7 @@ const Invest = () => {
         })
         .then(res => {
           console.log(res.data);
+          window.location.reload();
         })
         .catch(er => console.log(er));
     } catch (error) { }
@@ -107,17 +114,24 @@ const Invest = () => {
     },
   };
 
+  console.log("achcheck", achcheck);
+
 
   return (
     <div>
       {/* --- INVEST --- */}
       <div className="flex items-center justify-between py-8">
         {/* --- invest left part start --- */}
-        <div className="flex items-center space-x-4">
+        <div className="">
           <Link to="/profile">
-            <div className="w-8 h-8 bg-[#dfe0e2] flex items-center justify-center rounded-full">
+            {/* <div className="w-8 h-8 bg-[#dfe0e2] flex items-center justify-center rounded-full">
               <div>
                 <small className="font-bold">PH</small>
+              </div>
+            </div> */}
+            <div className="avatar">
+              <div className="w-8 rounded-full">
+                {pfp ? <img src={pfp} /> : <TextImage width={'32px'} height={'32px'} textSize={'0.9rem'} text={selfData?.db?.name || "Test User"} />}
               </div>
             </div>
           </Link>
@@ -141,7 +155,9 @@ const Invest = () => {
 
       {/* ---  ENABLE CARD --- */}
 
-      {achcheck?.length && achcheck?.length > 2 ?
+      {achcheck ?
+        (<><PortfolioPage pagecheck={true} /></>)
+        :
         (<div className="bg-[#ECECEC] rounded-2xl flex items-center justify-between p-4 space-x-3 shadow">
           <div className="">
             <div>
@@ -151,7 +167,7 @@ const Invest = () => {
             </div>
             <div>
               {/* <button
-              onClick={() => navigate('/plaid')} */}
+             onClick={() => navigate('/plaid')} */}
               <button onClick={() => open()} disabled={!ready}
                 className="bg-[#fff] mt-2 rounded-full px-3 py-2 text-xs font-bold"
               >
@@ -166,41 +182,9 @@ const Invest = () => {
               alt="circular_economy"
             />
           </div>
-        </div>) :
-        // (<div className="mt-5 bg-[#ECECEC] rounded-2xl flex items-center justify-between p-4 space-x-3 shadow">
-        //   <div className="">
-        //     <div>
-        //       <small>
-        //         Your total asset portfolio
+        </div>)
 
-        //       </small>
-        //       <h1 className='text-xl py-2'>
-        //         $ 2.240.559
-        //       </h1>
-        //     </div>
-        //     <div>
-
-        //       <button onClick={() => navigate('/portfolio')}
-        //         className="bg-[#fff] mt-2 rounded-full px-3 py-2 text-xs font-bold"
-        //       >
-        //         Check your portfolio
-        //       </button>
-        //     </div>
-        //   </div>
-        //   <div className="">
-        //     <ReactApexChart
-        //       options={chartData.options}
-        //       series={chartData.series}
-        //       type="line"
-        //       width={150}
-        //       height={50}
-        //     />
-        //   </div>
-        // </div>
-
-        // )
-        <PortfolioPage pagecheck={true}/>
-        }
+      }
     </div>
   );
 };
