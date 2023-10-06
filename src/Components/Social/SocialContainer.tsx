@@ -4,6 +4,7 @@ import SocialPost from './SocialPost/SocialPost';
 import { instance } from '../../lib/AxiosInstance';
 import Loader from '../Loader/Loader';
 
+
 const SocialContainer = () => {
   const [postList, setPostList] = useState([]);
   const [loading, setloading] = useState(true);
@@ -33,7 +34,7 @@ const SocialContainer = () => {
       <section>
         {
           postList.length ?
-            postList?.map(v => {
+            postList?.map((v: any) => {
               return (
                 <SocialPost key={Math.random()} postData={v} links={v?.links} />
               );
