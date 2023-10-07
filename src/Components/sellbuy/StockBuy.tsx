@@ -298,8 +298,27 @@ function StockBuy() {
   // console.log('--->', gifSelected?.url);
 
   const selected = watch('orderType', selectedOption);
-  const { state } = useLocation();
+  const { state } = useLocation();//old data
   console.log('state ✔✔✔', state);
+
+  let priceChange: string | number = Math.random() * 10;
+  let priceChangePerchantage: string | number = Math.random() * 10;
+
+  if (stockData?.price?.yahoo) {
+    priceChange = parseFloat(stockData?.price?.yahoo?.regularMarketChange).toFixed(2);
+    priceChangePerchantage = parseFloat(stockData?.price?.yahoo?.regularMarketChangePercent).toFixed(2);
+  }
+  else if (stockData?.price?.change) {
+    priceChange = parseFloat(stockData?.price?.change).toFixed(2);
+    priceChangePerchantage = parseFloat(stockData?.price?.percent.replace('%', '')).toFixed(2);
+  }
+
+  // let priceChangePerchantage = parseFloat(stockData?.price?.yahoo?.regularMarketChangePercent).toFixed(2);
+
+
+
+  // stockData?.price?.yahoo?.regularMarketChange
+  // parseFloat().toFixed(2) || parseFloat(stockData?.price?.change).toFixed(2);
 
   useEffect(() => {
     // if (state?.data || state?.data?.data) {
@@ -365,6 +384,8 @@ function StockBuy() {
 
   // console.log("extra data", extradata);
 
+  console.log(`🔥🚒👩‍🚒👨‍🚒🧨🚒`, parseFloat(stockData?.price?.change).toFixed(2));
+
 
   if (loading) {
     return <Loader />
@@ -404,8 +425,8 @@ function StockBuy() {
 
         <h1 className="text-3xl font-bold mt-5 ml-2">
           ${singleSharePrice}
-          <span className="text-red-600 text-base font-bold"> {parseFloat(stockData?.price?.yahoo?.regularMarketChange).toFixed(2)}</span>
-          <span className="text-red-600 text-base font-bold">( {parseFloat(stockData?.price?.yahoo?.regularMarketChangePercent).toFixed(2)}%)</span>
+          <span className="text-red-600 text-base font-bold"> {priceChange}</span>
+          <span className="text-red-600 text-base font-bold"> ({priceChangePerchantage})%</span>
         </h1>
 
         {/* requrment */}
@@ -430,7 +451,7 @@ function StockBuy() {
           <div className="flex justify-between items-center">
             <span className="font-bold ml-5 block">Available to Invest</span>
             <span className="font-bold mr-5 text-right block">
-              {balancedata?.available_to_invest}
+              {Number(balancedata?.available_to_invest).toLocaleString('en-US')}
             </span>
           </div>
         </div>
