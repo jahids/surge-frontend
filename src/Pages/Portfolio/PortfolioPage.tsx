@@ -71,7 +71,7 @@ const PortfolioPage = ({ pagecheck }: any) => {
               {/* Revance <br /> Therapeutics */}
               {'My Portfolio'}
             </p>
-            <p className="text-3xl font-bold"> ${portfoliodtaa?.value}</p>
+            <p className="text-3xl font-bold"> ${Number(portfoliodtaa?.value).toLocaleString('en-Us')}</p>
           </div>
         </div>
       </section>
@@ -87,30 +87,30 @@ const PortfolioPage = ({ pagecheck }: any) => {
         </div>
         <div className="flex justify-between items-center mt-3 ">
           <div>
-            <span className="text-xl text-gray-500">Funds Invested</span>
+            <span className="text-base text-gray-500">Funds Invested</span>
             <h1 className="text-xl font-bold">
-              ${portfoliodtaa?.cost_basis?.toFixed(2)}
+              ${Number(portfoliodtaa?.cost_basis?.toFixed(2)).toLocaleString('en-US')}
             </h1>
           </div>
 
           <div>
-            <span className="text-xl text-gray-500">Gain/Loss ($)</span>
+            <span className="text-base text-gray-500">Gain/Loss ($)</span>
             <h1 className="text-xl font-bold">
-              {portfoliodtaa?.unrealized_pl?.toFixed(2)}
+              {Number(portfoliodtaa?.unrealized_pl?.toFixed(2)).toLocaleString('en-US')}
             </h1>
           </div>
         </div>
-        <div className="bg-gray-200 py-3 mt-4 rounded-lg">
-          <div className="flex justify-between items-center">
-            <span className="font-bold ml-5 block">Available to Invest</span>
-            <span className="font-bold mr-5 text-right block">
-              {portfoliodtaa?.available_to_invest}
+        <div className="py-3 mt-4 rounded-lg">
+          <div className="flex justify-between text-gray-500 items-center">
+            <span className="font-bold block">Available to Invest</span>
+            <span className="font-bold mr-2 text-right block">
+              {Number(portfoliodtaa?.available_to_invest).toLocaleString('en-US')}
             </span>
           </div>
         </div>
       </section>
       <section>
-        <div className="mt-10 ">
+        <div className="mt-6">
           <h1 className="text-2xl font-bold">Portfolio</h1>
           <p className="mt-1 text-sm text-gray-400 mb-5">
             Keep track of you positions
@@ -118,11 +118,11 @@ const PortfolioPage = ({ pagecheck }: any) => {
         </div>
         {pagecheck
           ? portfoliostock
-              ?.slice(0, 3)
-              .map((item, index) => <SingleStockItem key={index} data={item} />)
+            ?.slice(0, 3)
+            .map((item, index) => <SingleStockItem key={index} data={item} />)
           : portfoliostock?.map((item, index) => (
-              <SingleStockItem key={index} data={item} />
-            ))}
+            <SingleStockItem key={index} data={item} />
+          ))}
 
         {pagecheck && (
           <div className="text-center mt-2">

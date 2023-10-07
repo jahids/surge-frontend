@@ -44,7 +44,7 @@ const CompleteProfile = () => {
         <UserInfo userdata={response?.data?.data} />
       </section>
       <section>
-        <EditProfile />
+        <EditProfile dbData={response?.data?.data} />
       </section>
       <section>
         <NavigateListItem />

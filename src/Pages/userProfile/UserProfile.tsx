@@ -130,7 +130,7 @@ const UserProfile = () => {
       <section className="description py-4 px-4">
         <h2 className="description__title text-xl font-semibold">About</h2>
         <p className="text-gray-600">
-          Bringing you closer to the people and things you love. ❤️
+          {dbdata?.about_me || '💕'}
         </p>
       </section>
       <section className=" py-4 px-4 flex gap-4 justify-around">
@@ -210,7 +210,7 @@ const UserProfile = () => {
           </div> */}
             <div className="mt-8 m-2">
               <div className="bg-gray-100 p-5 rounded-2xl">
-                <div className="flex text-2xl justify-center  items-center text-center font-bold">
+                <div className="flex text-xl justify-center  items-center text-center font-bold">
                   Portfolio Value : <span className='font-bold text-2xl text-indigo-700 ml-2'>${marketvalue?.toFixed(2)}</span>
                 </div>
                 <p className="mt-3 text-sm">

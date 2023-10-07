@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { MdOutlineArrowBackIos } from 'react-icons/md';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import News from '../Main/News/News';
 import StockAbout from './StockAbout/StockAbout';
 import StockBuyChart from './StockBuyChart/StockBuyChart';
@@ -13,12 +13,19 @@ import { useGetSpecificStockQuery } from '../../features/stock/allStockApiSlice'
 import Loader from '../Loader/Loader';
 import BackButton from '../globalBackButton/BackButton';
 import TextImage from '../TextImage/TextImage';
+import { instance } from '../../lib/AxiosInstance';
 
 const StockBuyContainer = () => {
   const checkdtaa = ['TSLA', 'BTO', 'Esq'];
   const [isPlusIcon, setIsPlusIcon] = useState(true);
   const [isOpen, setOpen] = useState(false);
   const { state } = useLocation();
+
+  const [sellQuantity, setSellQuantity] = useState(0);
+
+  const [loading, setLoading] = useState(true);
+
+
   const navigate = useNavigate();
   console.log('state lcoation', state);
 
@@ -30,13 +37,29 @@ const StockBuyContainer = () => {
     // isError: isSpecificStockError,
   } = useGetSpecificStockQuery({ symbolname: state });
 
-  if (isSpecificStockLoading) {
-    return <Loader />;
-  }
   // if (isSpecificStockError) {
   //   return <p>Error</p>;
   // }
-  console.log('specificStockData', specificStockData);
+  useEffect(() => {
+    const dbCall = async () => {
+      try {
+        const { data: { data: positionResult } } = await instance.get(`/portfolio/open-positions/symbol?name=${state}`);
+        console.log(`result 💚💙💚💛💛💙 : `, positionResult);
+        if (positionResult?.qty) {
+          setSellQuantity(Number(positionResult.qty).valueOf());
+        }
+        setLoading(false);
+      } catch (error) {
+        console.log(`🌐 ${!!sellQuantity} 🌐`, error);
+        setLoading(false);
+      }
+    };
+    dbCall();
+  }, [state]);
+  // console.log('specificStockData', specificStockData);
+  if (isSpecificStockLoading || loading) {
+    return <Loader />;
+  }
 
   const name = specificStockData?.data?.name || specificStockData?.data?.price?.yahoo?.longName;
 
@@ -100,19 +123,19 @@ const StockBuyContainer = () => {
         />
       </section>
       {/* --- stock chart end --- */}
-      <div className="flex justify-between gap-2 mt-2 mb-5">
+      <div className="flex justify-between gap-6 mt-2 mb-5">
         <button
-          // disabled={isDisabled}
+          disabled={!!!sellQuantity}
           onClick={() =>
             navigate(
               `/sell/${specificStockData?.data?.symbol || specificStockData?.symbol
               }`,
               {
-                state: { data: specificStockData },
+                state: { data: specificStockData.data, quantity: sellQuantity },
               }
             )
           }
-          className="bg-indigo-600 px-14 py-3 text-white rounded-full"
+          className={` ${!!!sellQuantity ? 'bg-gray-400' : 'bg-indigo-600'}  px-14 py-3 text-white rounded-full`}
         >
           Sell
         </button>

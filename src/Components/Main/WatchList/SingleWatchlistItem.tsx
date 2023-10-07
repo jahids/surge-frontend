@@ -23,12 +23,19 @@ export const SingleWatchlistItem = ({ symbolName }: { symbolName: string }) => {
             try {
                 const { data: { data: symbolInfo } } = await instance.get(`symbol?name=${symbolName}`);
                 console.log(symbolInfo);
-                const { price: { yahoo: { regularMarketChangePercent
-                } } } = symbolInfo;
+
+
+                if (symbolInfo?.price?.change) {
+                    setMarketParcentage(parseFloat(symbolInfo?.price?.change).toPrecision(3));
+                } else {
+
+                    const { price: { yahoo: { regularMarketChangePercent
+                    } } } = symbolInfo;
+                    setMarketParcentage(round2Places(regularMarketChangePercent))
+                }
 
                 setSymbolData(symbolInfo);
 
-                setMarketParcentage(round2Places(regularMarketChangePercent || Math.random() * 100))
                 // setMarketParcentage(parseFloat(regularMarketChangePercent).toPrecision(3) || Math.random() * 100);
                 setLoading(false);
             } catch (error) {

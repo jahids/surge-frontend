@@ -46,7 +46,7 @@ function Statement() {
             <div>
               <h2 className="text-xl font-semibold">{transaction?.status}</h2>
               <p className="text-gray-600 text-lg">
-                {new Date(transaction?.created_at).toLocaleString()}
+                {new Date(transaction?.created_at).toLocaleDateString()}
               </p>
               <p className="text-gray-600 text-lg">
                 ID: {truncateText(transaction.id, 8)}
@@ -58,7 +58,7 @@ function Statement() {
               transaction.amount < 0 ? 'text-red-500' : 'text-green-500'
             }
           >
-            {transaction.amount < 0 ? '-' : '+'}${Math.abs(transaction.amount)}
+            {transaction.amount < 0 ? '-' : '+'}${Math.abs(transaction.amount).toLocaleString("en-US")}
           </div>
         </div>
       ))}

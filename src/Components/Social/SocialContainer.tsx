@@ -3,10 +3,13 @@ import SocialHeader from './SocialHeader/SocialHeader';
 import SocialPost from './SocialPost/SocialPost';
 import { instance } from '../../lib/AxiosInstance';
 import Loader from '../Loader/Loader';
+import { getDbData } from '../../Services/User.service';
 
 const SocialContainer = () => {
   const [postList, setPostList] = useState([]);
   const [loading, setloading] = useState(true);
+  const owndb = getDbData();
+  console.log('db data', owndb);
 
   useEffect(() => {
     const dataCall = async () => {
@@ -31,12 +34,13 @@ const SocialContainer = () => {
         <SocialHeader />
       </section>
       <section>
-        {postList.length &&
-          postList?.map(v => {
+        {postList.length
+          ? postList?.map((v: any) => {
             return (
               <SocialPost key={Math.random()} postData={v} links={v?.links} />
             );
-          })}
+          })
+          : null}
       </section>
     </div>
   );

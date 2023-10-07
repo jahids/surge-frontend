@@ -1,4 +1,9 @@
-const NotificationsBody = () => {
+import { useState } from "react";
+
+const EmptyNotificationsBody = () => {
+
+
+
   return (
     <div>
       <h1 className="text-3xl font-bold">Notifications</h1>
@@ -14,4 +19,4 @@ const NotificationsBody = () => {
   );
 };
 
-export default NotificationsBody;
+export default EmptyNotificationsBody;

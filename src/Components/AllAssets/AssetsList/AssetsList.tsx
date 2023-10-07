@@ -62,11 +62,11 @@ function AssetsList({ data }: any) {
               }
             </div>
             <div className="mx-5">
-              <p className="font-bold">
-                {data?.symbol}
-              </p>
-              <p className="text-gray-400 text-sm">
+              <p className="font-bold  text-sm">
                 {truncateText(data?.name, 20)}
+              </p>
+              <p className="text-gray-400">
+                {data?.symbol}
               </p>
             </div>
           </div>

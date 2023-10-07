@@ -243,6 +243,7 @@
 
 // added new page
 
+
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { MdOutlineArrowBackIos } from 'react-icons/md';
@@ -266,7 +267,7 @@ function StockBuy() {
   const { symbol: shareSymbol } = useParams();
   const { handleSubmit, control, watch, setValue } = useForm<FormData>();
   const balancedata = useSelector((state: RootState) => state.balance)
-console.log("stockbuy balance😉😉😉", balancedata?.available_to_invest);
+  console.log("stockbuy balance😉😉😉", balancedata?.available_to_invest);
   const [selectedOption, setSelectedOption] = useState(''); // Default to 'Market'
   const [singleSharePrice, setSingleSharePrice] = useState(0);
   const [buyingPrice, setBuyingPrice] = useState('');
@@ -283,7 +284,7 @@ console.log("stockbuy balance😉😉😉", balancedata?.available_to_invest);
 
   const [stockData, setStockData] = useState();
 
-  
+
 
   const toggleGifPicker = e => {
     e.preventDefault();
@@ -297,8 +298,27 @@ console.log("stockbuy balance😉😉😉", balancedata?.available_to_invest);
   // console.log('--->', gifSelected?.url);
 
   const selected = watch('orderType', selectedOption);
-  const { state } = useLocation();
+  const { state } = useLocation();//old data
   console.log('state ✔✔✔', state);
+
+  let priceChange: string | number = Math.random() * 10;
+  let priceChangePerchantage: string | number = Math.random() * 10;
+
+  if (stockData?.price?.yahoo) {
+    priceChange = parseFloat(stockData?.price?.yahoo?.regularMarketChange).toFixed(2);
+    priceChangePerchantage = parseFloat(stockData?.price?.yahoo?.regularMarketChangePercent).toFixed(2);
+  }
+  else if (stockData?.price?.change) {
+    priceChange = parseFloat(stockData?.price?.change).toFixed(2);
+    priceChangePerchantage = parseFloat(stockData?.price?.percent.replace('%', '')).toFixed(2);
+  }
+
+  // let priceChangePerchantage = parseFloat(stockData?.price?.yahoo?.regularMarketChangePercent).toFixed(2);
+
+
+
+  // stockData?.price?.yahoo?.regularMarketChange
+  // parseFloat().toFixed(2) || parseFloat(stockData?.price?.change).toFixed(2);
 
   useEffect(() => {
     // if (state?.data || state?.data?.data) {
@@ -357,12 +377,14 @@ console.log("stockbuy balance😉😉😉", balancedata?.available_to_invest);
   const handleToggle = (value) => {
     console.log("check option value", selectedOption)
     // setSelectedOption(selectedOption === 'market' ? 'limit' : 'market');
-    setSelectedOption((prev)=> value == 'limit' ? 'limit' : 'market' );
+    setSelectedOption((prev) => value == 'limit' ? 'limit' : 'market');
     setValue('limitPrice', 0);
     setValue('quantity', 0);
   };
 
   // console.log("extra data", extradata);
+
+  console.log(`🔥🚒👩‍🚒👨‍🚒🧨🚒`, parseFloat(stockData?.price?.change).toFixed(2));
 
 
   if (loading) {
@@ -403,8 +425,8 @@ console.log("stockbuy balance😉😉😉", balancedata?.available_to_invest);
 
         <h1 className="text-3xl font-bold mt-5 ml-2">
           ${singleSharePrice}
-          <span className="text-red-600 text-base font-bold"> {parseFloat(stockData?.price?.yahoo?.regularMarketChange).toFixed(2)}</span>
-          <span className="text-red-600 text-base font-bold">( {parseFloat(stockData?.price?.yahoo?.regularMarketChangePercent).toFixed(2)}%)</span>
+          <span className="text-red-600 text-base font-bold"> {priceChange}</span>
+          <span className="text-red-600 text-base font-bold"> ({priceChangePerchantage})%</span>
         </h1>
 
         {/* requrment */}
@@ -429,7 +451,7 @@ console.log("stockbuy balance😉😉😉", balancedata?.available_to_invest);
           <div className="flex justify-between items-center">
             <span className="font-bold ml-5 block">Available to Invest</span>
             <span className="font-bold mr-5 text-right block">
-              {balancedata?.available_to_invest}
+              {Number(balancedata?.available_to_invest).toLocaleString('en-US')}
             </span>
           </div>
         </div>
@@ -464,7 +486,7 @@ console.log("stockbuy balance😉😉😉", balancedata?.available_to_invest);
               <div>
                 <select
                   //  checked={selectedOption === 'limit'}
-                  onChange={(e)=>handleToggle(e.target.value)}
+                  onChange={(e) => handleToggle(e.target.value)}
                   className="bg-gray-100 border py-4 font-bold border-gray-100 text-center text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  p-12    ">
                   <option selected>Choose option</option>
                   <option value="limit">Limit</option>

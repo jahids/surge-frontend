@@ -31,6 +31,7 @@ function Trades({ data, type }: { data: any; type: 'trade' | 'portfolio' }) {
         }
         if (finalData) {
           if (type == 'trade') {
+            // console.log(`📂📂📂📂📂`, data?.qty * data?.price);
             setPrice((data?.qty * data?.price).toFixed(2));
           } else {
             setPrice(parseFloat(data?.market_value).toFixed(2));
@@ -38,7 +39,7 @@ function Trades({ data, type }: { data: any; type: 'trade' | 'portfolio' }) {
         }
         setextradata(finalData);
         setLoading(false);
-        console.log('💥💗symbol info💞💕', response, '🔥🔥prop data->🔥', data);
+        // console.log(`💥 Type= ${type} 💗symbol info💞💕`, finalData, '🔥🔥prop data->🔥', data);
       } catch (error) {
         console.log('error', error);
       }
@@ -82,9 +83,8 @@ function Trades({ data, type }: { data: any; type: 'trade' | 'portfolio' }) {
           <p className="font-medium text-gray-900">$ {price || data?.price}</p>
           {!data?.asset_class && (
             <span
-              className={`${
-                data?.side === 'buy' ? 'bg-green-400' : 'bg-red-400'
-              } text-xs font-medium mr-3 px-5 py-1 rounded-full`}
+              className={`${data?.side === 'buy' ? 'bg-green-400' : 'bg-red-400'
+                } text-xs font-medium mr-3 px-5 py-1 rounded-full`}
             >
               {data?.side}
             </span>

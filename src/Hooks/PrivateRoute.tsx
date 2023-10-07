@@ -5,6 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import { setBalance } from '../features/globalBalance/balanceSlice';
 import { instance } from '../lib/AxiosInstance';
+import { setDb } from '../features/globaldb/dbSlice';
+import { getSingleUser } from '../Services/User.service';
+import { getdbId } from '../Services/Cookie.service';
 
 
 interface Props {
@@ -20,12 +23,15 @@ const dispatch = useDispatch();
 
 const balancedata = useSelector((state: RootState) => state.balance)
 console.log("bbdata--<>", balancedata);
-
+const dbId: string = getdbId()
 useEffect(() => {
   const dataload = async () => {
     try {
       const { data } = await instance.get(`portfolio`);
+      const { data: myData } = await getSingleUser(dbId);
       dispatch(setBalance({ ...data?.data, api: true }));
+      dispatch(setDb({...myData?.db, api : true}));
+
     } catch (error) {
       console.log('private routte api error', error);
     }

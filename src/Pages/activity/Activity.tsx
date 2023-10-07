@@ -17,7 +17,7 @@ function Activity() {
         const { data } = await instance(`portfolio/trade-activity`);
         settradesdata(data?.data);
         setactivityloader(false);
-        console.log('--->activity', data?.data);
+        // console.log('--->activity', data?.data);
       } catch (error) {
         console.log('🍗🍖', error);
         setactivityloader(false);
@@ -43,7 +43,7 @@ function Activity() {
       </div>
 
       {tradesdata?.length > 0 &&
-        tradesdata?.map(item => <Trades data={item} />)}
+        tradesdata?.map(item => <Trades type='trade' data={item} />)}
     </div>
   );
 }

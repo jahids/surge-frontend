@@ -62,24 +62,20 @@ export function calculateAccountAge(
     result += `${years} ${years === 1 ? 'year' : 'years'}`;
   }
   if (months > 0) {
-    result += `${result.length > 0 ? ' ' : ''}${months} ${
-      months === 1 ? 'month' : 'months'
-    }`;
+    result += `${result.length > 0 ? ' ' : ''}${months} ${months === 1 ? 'month' : 'months'
+      }`;
   }
   if (days > 0 && !months && !years) {
-    result += `${result.length > 0 ? ' ' : ''}${days} ${
-      days === 1 ? 'day' : 'days'
-    }`;
+    result += `${result.length > 0 ? ' ' : ''}${days} ${days === 1 ? 'day' : 'days'
+      }`;
   }
   if (!days) {
-    result = `${result.length > 0 ? ' ' : ''}${hours} ${
-      hours === 1 ? 'hour' : 'hours'
-    }`;
+    result = `${result.length > 0 ? ' ' : ''}${hours} ${hours === 1 ? 'hour' : 'hours'
+      }`;
   }
   if (!hours) {
-    result = `${result.length > 0 ? ' ' : ''}${mins} ${
-      mins === 1 ? 'minute' : 'minutes'
-    }`;
+    result = `${result.length > 0 ? ' ' : ''}${mins} ${mins === 1 ? 'minute' : 'minutes'
+      }`;
   }
 
   return result;
@@ -103,11 +99,15 @@ export function getRandomColorCombo() {
   return colorCombos[randomIndex];
 }
 
-export function round2Places(input: any) {
+export function round2Places(input: any, local = false) {
   const num = parseFloat(input);
 
   if (isNaN(num)) {
     return 0.0;
+  }
+
+  if (local) {
+    return parseFloat(num.toFixed(2)).toLocaleString('en-US');
   }
 
   return parseFloat(num.toFixed(2));
