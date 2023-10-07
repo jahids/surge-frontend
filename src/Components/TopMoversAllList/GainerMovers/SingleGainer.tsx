@@ -8,8 +8,6 @@ import CompanyShimmerLoader from '../../ShimmerLoaders/CompanyShimmer/Companyshi
 
 const defaultlogo = `https://images2.imgbox.com/52/06/7xFpAH04_o.png`;
 
-
-
 function SingleGainer({ data }: any) {
   // console.log('loser data', data);
 
@@ -37,13 +35,15 @@ function SingleGainer({ data }: any) {
   }, []);
   const navigate = useNavigate();
 
-
   if (loading) {
     return <CompanyShimmerLoader />;
   }
 
   return (
-    <div className="mouse-Pointer" onClick={() => navigate('/buy-stock', { state: data?.symbol })} >
+    <div
+      className="mouse-Pointer"
+      onClick={() => navigate('/buy-stock', { state: data?.symbol })}
+    >
       <>
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center">
@@ -53,13 +53,15 @@ function SingleGainer({ data }: any) {
                 src={extradata?.logo || defaultlogo}
                 alt=""
               /> */}
-              {
-                extradata?.logo ? <img
+              {extradata?.logo ? (
+                <img
                   className="w-12 h-12 p-1 rounded-full bg-gray-100 object-contain"
                   src={extradata?.logo}
                   alt=""
-                /> : <TextImage text={data?.symbol} />
-              }
+                />
+              ) : (
+                <TextImage text={data?.symbol} />
+              )}
             </div>
             <div className="mx-5">
               <p className="font-bold">{data?.symbol || 'no data'}</p>
@@ -73,12 +75,16 @@ function SingleGainer({ data }: any) {
             <div>
               {/* "bg-green-200 py-2 px-2 rounded-full text-green-500 text-xs font-semibold" */}
               <button
-                className={`  py-2 px-2 rounded-full ${data?.percent_change > 0 ? 'bg-green-200 text-green-500' : 'bg-red-200 text-red-500'
-                  } text-xs font-semibold text-green-600`}
+                className={`  py-2 px-2 rounded-full ${
+                  data?.percent_change > 0
+                    ? 'bg-green-200 text-green-500'
+                    : 'bg-red-200 text-red-500'
+                } text-xs font-semibold text-green-600`}
               >
                 {/* {`${marketparcentage || '3.98'}%`} */}
-                {`${data?.percent_change.toFixed(2) || marketparcentage.toFixed(2)
-                  }%`}
+                {`${
+                  data?.percent_change.toFixed(2) || marketparcentage.toFixed(2)
+                }%`}
               </button>
             </div>
           </div>

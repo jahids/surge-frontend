@@ -1,6 +1,7 @@
 /* eslint-disable  */
 import { BsArrowLeft } from 'react-icons/bs';
 import companyLogo from '../../assets/img/logo.svg';
+import surgelogo from '../../assets/img/surge.png';
 import { useNavigate } from 'react-router';
 import { useState } from 'react';
 import { instance } from '../../lib/AxiosInstance';
@@ -62,7 +63,7 @@ const LoginFrom = () => {
 
         {/* --- company logo start ---  */}
         <div className="mt-10">
-          <img className="w-[150px]" src={companyLogo} alt="company_logo" />
+          <img style={{marginLeft : "-19px"}} className="w-[150px] " src={surgelogo} alt="company_logo" />
         </div>
         {/* --- company logo end ---  */}
         {/* --- getting start --- */}

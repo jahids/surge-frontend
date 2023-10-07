@@ -1,6 +1,7 @@
 /* eslint-disable  */
 import { BsArrowLeft } from 'react-icons/bs';
 import companyLogo from '../../assets/img/logo.svg';
+import surgelogo from '../../assets/img/surge.png';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -79,8 +80,9 @@ const RegistrationFrom = () => {
         {/* --- company logo start ---  */}
         <div className="mt-10">
           <img
+          style={{marginLeft : "-19px"}}
             className="w-[150px] h-auto"
-            src={companyLogo}
+            src={surgelogo}
             alt="company_logo"
           />
         </div>

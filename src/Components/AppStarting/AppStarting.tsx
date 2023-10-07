@@ -23,8 +23,8 @@ const AppStarting = () => {
           }}
           className="line-clamp-3 mt-8 text-center"
         >
-          Explore all the existing job roles based on your interest and study
-          major
+          {/* win socially Trade win / lose fund have fun */}
+          Win socially. Trade smartly. Have fun!
         </p>
       </section>
       <div className="flex items-center justify-center mt-20 ">
