@@ -113,11 +113,11 @@ const ExplorePage = () => {
       </section>
 
       <div className=" mt-2 m-5">
-        <h1 className="text-2xl font-bold ">All Categories</h1>
+        {/* <h1 className="text-2xl font-bold ">All Categories</h1>
         <p className="text-sm text-gray-400 mb-5">
           Explore the latest categories
-        </p>
-        <Categories categorie={categories} />
+        </p> */}
+        {/* <Categories categorie={categories} /> */}
 
         {/* investment */}
         <h1 className="text-2xl font-bold mt-5">Top Investors</h1>
