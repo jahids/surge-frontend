@@ -74,6 +74,35 @@ export function getDbData() {
   return dbData;
 }
 
+const stockSymbols = [
+  'AAPL',
+  'MSFT',
+  'AMZN',
+  'GOOGL',
+  'FB',
+  'TSLA',
+  'BRK.B',
+  'JPM',
+  'JNJ',
+  'V',
+  'PG',
+  'KO',
+  'PFE',
+  'WMT',
+  'DIS',
+  'NFLX',
+  'NVDA',
+  'IBM',
+  'MCD',
+  'ORAN',
+];
+
+// Function to get a random stock symbol
+export function getRandomStockSymbol() {
+  const randomIndex = Math.floor(Math.random() * stockSymbols.length);
+  return stockSymbols[randomIndex];
+}
+
 export const getUserFriendList = async (limit = 3) => {
   const {
     data: {

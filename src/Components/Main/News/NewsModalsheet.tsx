@@ -74,6 +74,8 @@ import Sheet from 'react-modal-sheet';
 import earthIcon from '../../../assets/img/earth.png';
 import { useGetSpecificNewsQuery } from '../../../features/news/newsApiSlice';
 import Loader from '../../Loader/Loader';
+import { getRandomStockSymbol } from '../../../Services/User.service';
+import TopinvestorShimmer from '../../ShimmerLoaders/investorShimmer/TopinvestorShimmer';
 
 const tempUrl = `https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dHJhZGluZ3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60`;
 
@@ -83,29 +85,35 @@ interface NewsModalsheetProps {
 }
 
 const NewsModalsheet: React.FC<NewsModalsheetProps> = ({ onClose, news }) => {
+  console.log('news pros', news);
+  const randomSymbol = getRandomStockSymbol();
   const {
     data: specificNewsData,
     isLoading: isLoadingSpecificNews,
     isSuccess: isSuccessSpecificNews,
     isError: isErrorSpecificNews,
     error: errorSpecificNews,
-  } = useGetSpecificNewsQuery({ symbolname: news?.symbols });
+  } = useGetSpecificNewsQuery({
+    symbolname:
+      news?.symbols.length > 0 ? news?.symbols : 'AMD' || randomSymbol,
+  });
 
   if (isLoadingSpecificNews) {
     return <Loader />;
+    // return <TopinvestorShimmer />;
   }
 
   console.log('any type 🎁', specificNewsData?.data);
 
   const {
-    author = '',
+    author = 'Ananya Gairola',
     headline,
     source,
     symbols,
     images,
     url,
     summary,
-  } = specificNewsData?.data?.news[0];
+  } = specificNewsData?.data?.news[0] || {};
 
   const handleCloseModal = () => {
     onClose();
@@ -128,7 +136,7 @@ const NewsModalsheet: React.FC<NewsModalsheetProps> = ({ onClose, news }) => {
                       {headline}
                     </h1>
                     <p className="text-sm font-semibold text-gray-500">
-                      {author || 'hello'}
+                      {author}
                     </p>
                   </div>
                   <div className="my-5 flex items-center">
