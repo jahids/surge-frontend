@@ -384,7 +384,7 @@ function StockBuy() {
 
   // console.log("extra data", extradata);
 
-  console.log(`🔥🚒👩‍🚒👨‍🚒🧨🚒`, parseFloat(stockData?.price?.change).toFixed(2));
+  // console.log(`🔥🚒👩‍🚒👨‍🚒🧨🚒`, parseFloat(stockData?.price?.change).toFixed(2));
 
 
   if (loading) {
@@ -425,8 +425,12 @@ function StockBuy() {
 
         <h1 className="text-3xl font-bold mt-5 ml-2">
           ${singleSharePrice}
-          <span className="text-red-600 text-base font-bold"> {priceChange}</span>
-          <span className="text-red-600 text-base font-bold"> ({priceChangePerchantage})%</span>
+
+          <span className={priceChange?.startsWith('-') ? "text-red-600 " : "text-green-600"}>
+            <span className="text-base font-bold"> {priceChange}</span>
+            <span className="text-base font-bold"> ({priceChangePerchantage})%</span>
+          </span>
+
         </h1>
 
         {/* requrment */}

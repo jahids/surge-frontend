@@ -32,10 +32,7 @@ function SingleStockItem({ data }: any) {
         setmarketparcentage(round2Places(data?.unrealized_plpc));
         // setmarketparcentage(round2Places(dt));
         const name = response?.data?.data?.name || response?.data?.data?.data?.price?.yahoo?.longName;
-        // setmarketparcentage();
 
-        // console.log(`✨Res 1🎊`, response?.data);
-        // console.log('🎁 Res 2🎎', name);
         setmarketLoader(false);
       } catch (error) {
         console.log('error', error);
