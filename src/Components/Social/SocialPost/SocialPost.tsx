@@ -10,9 +10,16 @@ import { instance } from '../../../lib/AxiosInstance';
 const SocialPost = ({ postData, links }: any) => {
   console.log(`🎪🎭🎑post data`, postData);
   console.log(`link props`, links);
+
   const [postUserName, setPosterName] = useState('');
   useEffect(() => {
     const dbCall = async () => {
+      const dbName = postData.user[0]?.name;
+
+      if (dbName) {
+        setPosterName(dbName);
+        return;
+      }
       const {
         data: {
           data: { alpaca: auser, db },

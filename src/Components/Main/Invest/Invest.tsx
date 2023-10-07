@@ -31,18 +31,18 @@ const Invest = ({ selfData }: any) => {
 
 
   const dbId: string = getdbId()
-  useEffect(() => {
-    const dataCall = async () => {
-      const { data: myData } = await getSingleUser(dbId);
-      const {
-        db: { ach },
-      } = myData;
-      // setName(identity.given_name + ' ' + identity.family_name);
-      console.log(`⚽`, ach);
-      // setachcheck(ach)
-    };
-    dataCall();
-  }, []);
+  // useEffect(() => {
+  //   const dataCall = async () => {
+  //     const { data: myData } = await getSingleUser(dbId);
+  //     const {
+  //       db: { ach },
+  //     } = myData;
+  //     // setName(identity.given_name + ' ' + identity.family_name);
+  //     console.log(`⚽`, ach);
+  //     // setachcheck(ach)
+  //   };
+  //   dataCall();
+  // }, []);
 
 
   // get a link_token from your API when component mounts
@@ -114,9 +114,11 @@ const Invest = ({ selfData }: any) => {
     },
   };
 
-  console.log("achcheck", achcheck);
+  // console.log("🔥🔥🔥🔥🔥🔥🔥achcheck", achcheck);
 
-
+  // if (achcheck) {
+  //   return <PortfolioPage pagecheck={true} />;
+  // }
   return (
     <div>
       {/* --- INVEST --- */}
@@ -156,33 +158,39 @@ const Invest = ({ selfData }: any) => {
       {/* ---  ENABLE CARD --- */}
 
       {achcheck ?
-        (<><PortfolioPage pagecheck={true} /></>)
+        (
+          <>
+            <PortfolioPage pagecheck={true} />
+          </>
+        )
         :
-        (<div className="bg-[#ECECEC] rounded-2xl flex items-center justify-between p-4 space-x-3 shadow">
-          <div className="">
-            <div>
-              <small>
-                Help us know you <br /> better so you can start <br /> investing
-              </small>
-            </div>
-            <div>
-              {/* <button
+        (
+          <div className="bg-[#ECECEC] rounded-2xl flex items-center justify-between p-4 space-x-3 shadow">
+            <div className="">
+              <div>
+                <small>
+                  Help us know you <br /> better so you can start <br /> investing
+                </small>
+              </div>
+              <div>
+                {/* <button
              onClick={() => navigate('/plaid')} */}
-              <button onClick={() => open()} disabled={!ready}
-                className="bg-[#fff] mt-2 rounded-full px-3 py-2 text-xs font-bold"
-              >
-                Enable investing
-              </button>
+                <button onClick={() => open()} disabled={!ready}
+                  className="bg-[#fff] mt-2 rounded-full px-3 py-2 text-xs font-bold"
+                >
+                  Enable investing
+                </button>
+              </div>
+            </div>
+            <div className="">
+              <img
+                className="w-[90px] h-auto"
+                src={circular_economy}
+                alt="circular_economy"
+              />
             </div>
           </div>
-          <div className="">
-            <img
-              className="w-[90px] h-auto"
-              src={circular_economy}
-              alt="circular_economy"
-            />
-          </div>
-        </div>)
+        )
 
       }
     </div>

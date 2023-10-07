@@ -8,6 +8,8 @@ import './portfolioLoader.css';
 // export default PortfolioLoader;
 
 const PortfolioLoader: React.FC = () => {
+
+
   return (
     <div className="w-full flex items-center flex-col bg-white">
       <div className="flex flex-col w-full bg-white  rounded-md ">

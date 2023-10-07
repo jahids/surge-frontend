@@ -9,6 +9,7 @@ import { instance } from "../../lib/AxiosInstance";
 import CommentBox from "./CommentBox";
 import CommentContainer from "./CommentContainer";
 import BackButton from "../../Components/globalBackButton/BackButton";
+import PortfolioLoader from "../../Components/ShimmerLoaders/portfolioLoader/PortfolioLoader";
 
 
 type DetailsProps = {
@@ -25,6 +26,8 @@ export default function PostDetails() {
     const postId = pathname.split('/').pop();
     const [forceUpdate, setForceUpdate] = useState(Date.now());
 
+    const [loading, setLoading] = useState(true);
+
     const updatePostPage = () => {
         setForceUpdate(Date.now() + Math.ceil(Math.random() * 1000));
     }
@@ -32,26 +35,29 @@ export default function PostDetails() {
     // console.log(`state = `, state)
     useEffect(() => {
         const dbCall = async () => {
-
             const { data: { data: reqPost } } = await instance.get(`/social/post/${postId}`);
-            const { data: { data: { alpaca: auser, db } } } = await instance.get(`/accounts/cached/${state.userId}`);
-            if (auser['trusted_contact']) {
+            let trialName = reqPost[0]?.user[0]?.name;
+            if (!trialName) {
 
-                setPosterName(`${auser['trusted_contact']['given_name']} ${auser['trusted_contact']['family_name']}`);
+                const { data: { data: { alpaca: auser, db } } } = await instance.get(`/accounts/cached/${state.userId}`);
+                if (auser['trusted_contact']) {
+
+                    trialName = (`${auser['trusted_contact']['given_name']} ${auser['trusted_contact']['family_name']}`);
+                }
             }
-
-            if (auser['trusted_contact']) {
-
-                setPosterName(`${auser['trusted_contact']['given_name']} ${auser['trusted_contact']['family_name']}`);
-            }
-
             // const realPost = reqPost[0].comments.sort
             setPostData(reqPost[0]);
+            setPosterName(trialName);
+            setLoading(false);
             console.log(`🎇🎇🔥🚒👨‍🚒👨‍🚒👨‍🚒👨‍🚒🔥 🔥🚒🚒👩‍🚒`, reqPost[0]);
         };
         dbCall();
     }, [forceUpdate])
     // const postId = postData._id;
+
+    if (loading) {
+        return <PortfolioLoader />
+    }
 
     return (
 

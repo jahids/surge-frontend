@@ -1,6 +1,7 @@
 /* eslint-disable  */
 import { BsArrowLeft } from 'react-icons/bs';
 import companyLogo from '../../assets/img/logo.svg';
+import surgelogo from '../../assets/img/surge.png';
 import { useNavigate } from 'react-router';
 import { useState } from 'react';
 import { instance } from '../../lib/AxiosInstance';
@@ -9,12 +10,12 @@ import { useCookies } from 'react-cookie';
 
 const LoginFrom = () => {
   const [, setCookie] = useCookies();
-  
+
   const navigate = useNavigate();
   const [email, setemail] = useState('');
   const [password, setpassword] = useState('');
 
-  const handlelogin = async (e : any) => {
+  const handlelogin = async (e: any) => {
     e.preventDefault()
     const payload = {
       email,
@@ -26,7 +27,7 @@ const LoginFrom = () => {
       });
 
       console.log("data api", data?.data);
-     
+
       console.log('data', data?.data?.data?.multiStepCompleted);
       setCookie('mytoken', data?.data?.data?.token, {
         secure: false,
@@ -37,14 +38,14 @@ const LoginFrom = () => {
       setCookie('dbid', data?.data?.data?.dbId, {
         secure: false,
       });
-      if(data?.data?.data?.multiStepCompleted === true){
+      if (data?.data?.data?.multiStepCompleted === true) {
         navigate('/main')
-      }else {
+      } else {
         navigate('/multistep')
       }
-      
 
-    
+
+
     } catch (error) {
       console.log('error', error);
       notifyError(error?.response?.data?.error)
@@ -52,7 +53,7 @@ const LoginFrom = () => {
   };
 
   return (
-    <div className="p-5">
+    <div className="p-4">
       <div>
         {/* -- back btn start --- */}
         {/* <div className="w-10 h-10 bg-white border-2 rounded-full  flex items-center justify-center">
@@ -61,8 +62,8 @@ const LoginFrom = () => {
         {/* -- back btn end --- */}
 
         {/* --- company logo start ---  */}
-        <div className="mt-10">
-          <img className="w-[150px]" src={companyLogo} alt="company_logo" />
+        <div className="mt-6 ml-6">
+          <img style={{ marginLeft: "-19px" }} className="w-[120px] " src={surgelogo} alt="company_logo" />
         </div>
         {/* --- company logo end ---  */}
         {/* --- getting start --- */}
@@ -97,7 +98,7 @@ const LoginFrom = () => {
 
           <div className="mt-16">
             <button
-              onClick={(e)=>handlelogin(e)}
+              onClick={(e) => handlelogin(e)}
               className="btn btn-active btn-primary w-full mt-5 rounded-[21px]"
             >
               Login

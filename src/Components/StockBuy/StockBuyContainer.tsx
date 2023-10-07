@@ -176,12 +176,12 @@ const StockBuyContainer = () => {
       {/* --- news end --- */}
 
       {/* --- feature start  */}
-      <section>
+      {/* <section>
         <div className="my-10">
           <p className="text-xl font-bold">Featured in</p>
-          <p className="text-sm text-gray-400">Discover Other assets like -</p>
-          {/* --- featured card start --- */}
-          <div className="card_wrapper mt-5 max-h-full flex overflow-x-auto">
+          <p className="text-sm text-gray-400">Discover Other assets like -</p> */}
+      {/* --- featured card start --- */}
+      {/* <div className="card_wrapper mt-5 max-h-full flex overflow-x-auto">
             <div className="card_item flex-col items-baseline p-5 rounded-3xl bg-[#F5F5F5] mr-[20px] shadow-sm">
               <img
                 className="w-[80px] h-auto mx-auto"
@@ -200,10 +200,10 @@ const StockBuyContainer = () => {
                 Virtual Reality
               </p>
             </div>
-          </div>
-          {/* --- featured card end --- */}
-        </div>
-      </section>
+          </div> */}
+      {/* --- featured card end --- */}
+      {/* </div>
+      </section> */}
       {/* --- feature end --- */}
 
       {/* --- buy button start --- */}

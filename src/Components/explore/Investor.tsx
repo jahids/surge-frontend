@@ -1,6 +1,7 @@
 import Lottie from 'lottie-react';
 import React from 'react';
 import { calculateAccountAge } from '../../Utils/converter';
+import TextImage from '../TextImage/TextImage';
 
 export interface Iinvestor {
   name: string;
@@ -10,7 +11,6 @@ export interface Iinvestor {
 }
 
 function Investor({ Investordata }: any) {
-
   console.log(`💚💛💛💥`, Investordata);
   return (
     <div className="investor mt-5  flex overflow-x-auto">
@@ -18,14 +18,21 @@ function Investor({ Investordata }: any) {
         <div
           key={index}
           className="p-5 rounded-3xl bg-[#F5F5F5] mr-[20px] shadow-sm cursor-pointer"
-        // onClick={() => handleCardClick(item)}
+          // onClick={() => handleCardClick(item)}
         >
-          <div className="h-[200px] w-[300px] ">
-            <img
-              className="mx-auto rounded-full w-[100px] h-[100px]"
-              src={item?.pfp}
-              alt=""
-            />
+          <div className="h-[200px] w-[300px] mx-auto">
+            {item?.pfp ? (
+              <img
+                className=" mx-auto rounded-full w-[100px] h-[100px]"
+                src={item?.pfp}
+                alt=""
+              />
+            ) : (
+              <div className="flex justify-center items-center">
+                <TextImage width="100px" height="100px" text={item?.name} />
+              </div>
+            )}
+
             <h1 className="font-bold text-xl text-center mt-2">{item?.name}</h1>
             <h1 className="text-gray-400 text-sm text-center mb-3">
               Joined {calculateAccountAge(item?.createdAt)} ago

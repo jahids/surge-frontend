@@ -3,16 +3,23 @@ import Lottie from 'lottie-react';
 import stockgif from '../../assets/img/stockgif.json';
 import phonestock from '../../assets/img/phonestock.json';
 import { Link } from 'react-router-dom';
+import surgelogo from '../../assets/img/surge.png';
 
 const AppStarting = () => {
+
   return (
     <div>
+      <Link to='/'>
+        <div className="mt-6 ml-10">
+          <img style={{ marginLeft: "-19px" }} className="w-[120px] " src={surgelogo} alt="company_logo" />
+        </div>
+      </Link>
       <section>
         <h1
           // style={{ lineHeight: '1.5', color: 'rgb(33 206 153)' }}
-          className=" mt-20 text-4xl text-center font-bold text-indigo-600 "
+          className="ml-10 mt-8 text-4xl text-center font-bold text-indigo-600 "
         >
-          Discover Your <br /> Stock here
+          Search Socially Your <br /> Stocks here
         </h1>
 
         <p
@@ -23,11 +30,11 @@ const AppStarting = () => {
           }}
           className="line-clamp-3 mt-8 text-center"
         >
-          Explore all the existing job roles based on your interest and study
-          major
+          {/* win socially Trade win / lose fund have fun */}
+          Win socially. Trade smartly. Have fun!
         </p>
       </section>
-      <div className="flex items-center justify-center mt-20 ">
+      <div className="flex items-center justify-center mt-10 ">
         <div>
           <Lottie animationData={phonestock} loop={true} />
         </div>

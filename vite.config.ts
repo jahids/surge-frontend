@@ -56,7 +56,7 @@ export default defineConfig({
     proxy: {
       '/api': {
         // host-url
-        //  target:'http://dono-01.danbot.host:1317',
+        // target:'http://dono-01.danbot.host:1317',
         target: 'http://192.168.68.52:5678',
         //target: 'http://localhost:4500',
         //target: 'http://localhost:5678',

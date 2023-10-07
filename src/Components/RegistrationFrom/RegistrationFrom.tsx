@@ -1,6 +1,7 @@
 /* eslint-disable  */
 import { BsArrowLeft } from 'react-icons/bs';
 import companyLogo from '../../assets/img/logo.svg';
+import surgelogo from '../../assets/img/surge.png';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -22,7 +23,7 @@ const RegistrationFrom = () => {
       .oneOf([yup.ref('password'), null], 'Passwords must match'),
     agreement: yup.boolean().oneOf([true], 'You must agree to the terms'),
   });
-  
+
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
@@ -37,15 +38,15 @@ const RegistrationFrom = () => {
     resolver: yupResolver(schema),
   });
 
-  const navigate= useNavigate()
+  const navigate = useNavigate()
   // const [registerUser, { isLoading,isError,isSuccess}]= useRegisterUserMutation();
 
   // console.log(responsedata)
-  const onSubmit = async (data : any) => {
+  const onSubmit = async (data: any) => {
     const payload = {
-      email : data?.email,
-      password : data?.password
-     }
+      email: data?.email,
+      password: data?.password
+    }
     try {
 
       const response = await instance.post(`/signup/exist`, {
@@ -55,12 +56,12 @@ const RegistrationFrom = () => {
       notifyError(response?.data?.message)
     } catch (error) {
       console.error(error?.response?.data);
-     
-      if(error?.response?.data?.success === false){
+
+      if (error?.response?.data?.success === false) {
         //notifySuccess("Группа успешно создана!");
-         navigate('/otp', {state : payload} )
-        
-        
+        navigate('/otp', { state: payload })
+
+
       }
     }
   };
@@ -77,10 +78,11 @@ const RegistrationFrom = () => {
         {/* -- back btn end --- */}
 
         {/* --- company logo start ---  */}
-        <div className="mt-10">
+        <div className="mt-2 ml-6">
           <img
-            className="w-[150px] h-auto"
-            src={companyLogo}
+            style={{ marginLeft: "-19px" }}
+            className="w-[120px] h-auto"
+            src={surgelogo}
             alt="company_logo"
           />
         </div>
@@ -117,7 +119,7 @@ const RegistrationFrom = () => {
           {/* ...Other input fields and error messages... */}
 
           <div className="form-control max-w-lg mb-5">
-          <Controller
+            <Controller
               name="password"
               control={control}
               defaultValue=""
@@ -138,7 +140,7 @@ const RegistrationFrom = () => {
                 </div>
               )}
             />
-             
+
             <p className="text-red-500 text-sm">{errors.password?.message}</p>
           </div>
 
@@ -156,7 +158,7 @@ const RegistrationFrom = () => {
                 />
               )}
             />
-         
+
             <p className="text-red-500 text-sm">
               {errors.confirmPassword?.message}
             </p>
@@ -203,7 +205,7 @@ const RegistrationFrom = () => {
         <div className="mt-10 text-center">
           <p className="text-[#03314B]">
             Already have an account ?{' '}
-            <span onClick={()=>navigate('/login')} className="text-[#3500D4]">Sign in</span>
+            <span onClick={() => navigate('/login')} className="text-[#3500D4]">Sign in</span>
           </p>
         </div>
       </div>

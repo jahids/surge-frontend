@@ -11,19 +11,22 @@ import TopMovers from './TopMovers/TopMovers';
 import WatchList from './WatchList/WatchList';
 import { getSelfData } from '../../Services/User.service';
 import { instance } from '../../lib/AxiosInstance';
+import PortfolioLoader from '../ShimmerLoaders/portfolioLoader/PortfolioLoader';
 
 const MainContainer = () => {
   // Use the generated hooks to make API requests
   // 
 
   const [selfData, setSelfData] = useState();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const dataCall = async () => {
       const { data: _data } = await getSelfData();
 
-      console.log('👑👑👑', _data);
+      // console.log('👑👑👑', _data);
       setSelfData(_data);
+      setLoading(false);
     };
     dataCall();
   }, []);
@@ -31,11 +34,17 @@ const MainContainer = () => {
   return (
     <div className="px-5 pb-[100px] min-h-screen">
       <section>
-        <Invest selfData={selfData} />
+        {
+          loading ?
+            <div className={'m-4'}>
+
+              <PortfolioLoader />
+            </div>
+            :
+            <Invest selfData={selfData} />
+        }
       </section>
-      <section>
-        {/* <AllStocks /> */}
-      </section>
+
       <section>
         <News />
       </section>
@@ -45,12 +54,6 @@ const MainContainer = () => {
       <section>
         <FriendList />
       </section>
-      {/* <section>
-        <TopMovers />
-      </section> */}
-      {/* <section>
-        <MostTraded />
-      </section> */}
     </div>
   );
 };

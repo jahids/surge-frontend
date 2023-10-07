@@ -48,13 +48,6 @@ const PortfolioPage = ({ pagecheck }: any) => {
 
   if (loader) {
     return <PortfolioLoader />;
-    // return (
-    //   <div className="animate-pulse">
-    //     <div className="bg-gradient-to-r from-gray-300 to-gray-200 dark:from-gray-700 dark:to-gray-600 w-full h-12 my-4 rounded-md"></div>
-    //     <div className="bg-gradient-to-r from-gray-300 to-gray-200 dark:from-gray-700 dark:to-gray-600 w-4/5 h-10 my-2 rounded-md"></div>
-    //     <div className="bg-gradient-to-r from-gray-300 to-gray-200 dark:from-gray-700 dark:to-gray-600 w-3/4 h-8 my-2 rounded-md"></div>
-    //   </div>
-    // );
   }
 
   return (

@@ -26,6 +26,7 @@ import CustomLottie from '../../Utils/CustomLottie';
 import { investorcard } from '../../Utils/Skeleton';
 import AllStocks from '../../Components/Main/AllStocks/AllStocks';
 import MostTraded from '../../Components/Main/MostTraded/MostTraded';
+import TopinvestorShimmer from '../../Components/ShimmerLoaders/investorShimmer/TopinvestorShimmer';
 
 interface ICategories {
   category: string;
@@ -112,11 +113,11 @@ const ExplorePage = () => {
       </section>
 
       <div className=" mt-2 m-5">
-        <h1 className="text-2xl font-bold ">All Categories</h1>
+        {/* <h1 className="text-2xl font-bold ">All Categories</h1>
         <p className="text-sm text-gray-400 mb-5">
           Explore the latest categories
-        </p>
-        <Categories categorie={categories} />
+        </p> */}
+        {/* <Categories categorie={categories} /> */}
 
         {/* investment */}
         <h1 className="text-2xl font-bold mt-5">Top Investors</h1>
@@ -124,7 +125,7 @@ const ExplorePage = () => {
           Follow to see their moves and insights so you can learn from their approach
         </p>
         {
-          loader ? <Loader /> :
+          loader ? <TopinvestorShimmer/>:
             <Investor Investordata={investorinfo} />
         }
         <TopMovers />
