@@ -20,6 +20,7 @@ import StockBuyPage from '../Pages/StockBuyPage/StockBuyPage';
 import TopMoversPage from '../Pages/TopMoversPage/TopMoversPage';
 import UserFullWatchList from '../Pages/UserFullWatchList/UserFullWatchList';
 import Statement from '../Pages/statement/Statement';
+import UserProfile from '../Pages/userProfile/UserProfile';
 
 
 
@@ -112,4 +113,9 @@ export const allRoute = [
     path: '/notification',
     component: NotificationPage,
   },
+  {
+    path: "/userprofile/:id",
+    component: UserProfile,
+
+  }
 ];

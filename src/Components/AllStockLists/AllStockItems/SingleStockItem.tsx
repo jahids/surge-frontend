@@ -9,32 +9,33 @@ import CompanyShimmerLoader from '../../ShimmerLoaders/CompanyShimmer/Companyshi
 const defaultlogo = `https://images2.imgbox.com/52/06/7xFpAH04_o.png`;
 
 function SingleStockItem({ data }: any) {
-  console.log('user protfolio', data);
+  console.log('user 🔥🥇 protfolio', data);
 
   const [extradata, setextradata] = useState(null);
   const [marketparcentage, setmarketparcentage] = useState<any>(null);
   const [marketLoader, setmarketLoader] = useState(true);
-  console.log('data', data);
+  // console.log('data', data);
 
   const navigate = useNavigate();
 
   useEffect(() => {
     const findExtraDes = async () => {
       try {
-        const response = await instance.get(`symbol?name=${data?.symbol}`);
+        const response = await instance.get(`/symbol?name=${data?.symbol}`);
         // const response2 = await instance.get(`movers-stats/${data?.symbol}`);
 
         setextradata(response?.data.data);
         // setmarketparcentage(response2?.data?.data?.change);
         const dt =
           response?.data?.data?.price?.yahoo?.regularMarketChangePercent || '0.00';
-        console.log(`🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥`, round2Places(dt));
-        setmarketparcentage(round2Places(dt));
+        console.log(`🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥`, round2Places(dt), round2Places(data?.unrealized_plpc));
+        setmarketparcentage(round2Places(data?.unrealized_plpc));
+        // setmarketparcentage(round2Places(dt));
         const name = response?.data?.data?.name || response?.data?.data?.data?.price?.yahoo?.longName;
         // setmarketparcentage();
 
-        console.log(`✨Res 1🎊`, response?.data);
-        console.log('🎁 Res 2🎎', name);
+        // console.log(`✨Res 1🎊`, response?.data);
+        // console.log('🎁 Res 2🎎', name);
         setmarketLoader(false);
       } catch (error) {
         console.log('error', error);
@@ -45,7 +46,7 @@ function SingleStockItem({ data }: any) {
     findExtraDes();
   }, []);
 
-  console.log('extradta', extradata);
+  // console.log('extradta', extradata);
   const marketparcent = extradata?.price?.yahoo?.regularMarketChangePercent;
   if (marketLoader) {
     return <CompanyShimmerLoader />;
@@ -89,12 +90,12 @@ function SingleStockItem({ data }: any) {
             <div>
               <button
                 className={
-                  marketparcent! < 0
+                  marketparcentage! < 0
                     ? 'bg-red-200 py-2 px-2 rounded-full text-red-800 text-xs font-semibold'
                     : 'bg-green-200 py-2 px-2 rounded-full text-green-800 text-xs font-semibold'
                 }
               >
-                {`${marketparcent?.toFixed(2) || '0.00'}%`}
+                {`${marketparcentage?.toFixed(2) || '0.00'}%`}
               </button>
             </div>
           </div>

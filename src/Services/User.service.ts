@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+import { useSelector } from 'react-redux';
 import { instance } from '../lib/AxiosInstance';
 
 export interface IFriendListItem {
@@ -52,9 +54,11 @@ export const getSelfData = async () => {
 };
 
 export const getDbUserList = async (search: string) => {
-  const { data: { data } } = await instance(`/social/db-people?search=${search}`);
+  const {
+    data: { data },
+  } = await instance(`/social/db-people?search=${search}`);
   return data;
-}
+};
 
 export const getSingleUser = async (userId: string) => {
   try {
@@ -65,8 +69,17 @@ export const getSingleUser = async (userId: string) => {
   }
 };
 
-export const getUserFriendList = async (limit: number = 3) => {
-  const { data: { data: { following } } } = await instance.get(`/social/friend-list?limit=${limit}`);
+export function getDbData() {
+  const dbData = useSelector(state => state.db);
+  return dbData;
+}
+
+export const getUserFriendList = async (limit = 3) => {
+  const {
+    data: {
+      data: { following },
+    },
+  } = await instance.get(`/social/friend-list?limit=${limit}`);
 
   return following;
-}
+};

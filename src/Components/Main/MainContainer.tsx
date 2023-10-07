@@ -12,11 +12,14 @@ import WatchList from './WatchList/WatchList';
 import { getSelfData } from '../../Services/User.service';
 import { instance } from '../../lib/AxiosInstance';
 import PortfolioLoader from '../ShimmerLoaders/portfolioLoader/PortfolioLoader';
+import { useDispatch } from 'react-redux';
+import { setDb } from '../../features/globaldb/dbSlice';
+
 
 const MainContainer = () => {
   // Use the generated hooks to make API requests
   // 
-
+  const dispatch = useDispatch();
   const [selfData, setSelfData] = useState();
   const [loading, setLoading] = useState(true);
 
@@ -24,7 +27,8 @@ const MainContainer = () => {
     const dataCall = async () => {
       const { data: _data } = await getSelfData();
 
-      // console.log('👑👑👑', _data);
+      console.log('👑👑👑', _data);
+      dispatch(setDb({ ..._data?.db, api: true }));
       setSelfData(_data);
       setLoading(false);
     };

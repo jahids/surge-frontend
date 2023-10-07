@@ -17,11 +17,14 @@ import { getSingleUser } from '../../../Services/User.service';
 import { getdbId } from '../../../Services/Cookie.service';
 import PortfolioPage from '../../../Pages/Portfolio/PortfolioPage';
 import TextImage from '../../TextImage/TextImage';
+import { useDispatch } from 'react-redux';
+import { setDb } from '../../../features/globaldb/dbSlice';
 
 
 const Invest = ({ selfData }: any) => {
   const [token, setToken] = useState<string | null>(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   // const [achcheck, setachcheck] = useState('')
 
   const pfp = selfData?.db?.pfp;
@@ -43,6 +46,19 @@ const Invest = ({ selfData }: any) => {
   //   };
   //   dataCall();
   // }, []);
+  useEffect(() => {
+    const dataCall = async () => {
+      const { data: myData } = await getSingleUser(dbId);
+      const {
+        db: { ach },
+      } = myData;
+      // setName(identity.given_name + ' ' + identity.family_name);
+      // console.log(`⚽`, ach);
+      dispatch(setDb({ ...myData?.db, api: true }));
+      // setachcheck(ach)
+    };
+    // dataCall();
+  }, []);
 
 
   // get a link_token from your API when component mounts

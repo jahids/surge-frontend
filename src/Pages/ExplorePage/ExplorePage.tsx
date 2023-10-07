@@ -27,6 +27,8 @@ import { investorcard } from '../../Utils/Skeleton';
 import AllStocks from '../../Components/Main/AllStocks/AllStocks';
 import MostTraded from '../../Components/Main/MostTraded/MostTraded';
 import TopinvestorShimmer from '../../Components/ShimmerLoaders/investorShimmer/TopinvestorShimmer';
+import { getDbData } from '../../Services/User.service';
+import TextImage from '../../Components/TextImage/TextImage';
 
 interface ICategories {
   category: string;
@@ -43,6 +45,7 @@ interface Iinvestor {
 
 
 const ExplorePage = () => {
+  const userDbData = getDbData();
   const [isOpen, setOpen] = useState<boolean>(false);
   const [selectedNews, setSelectedNews] = useState<NewsItem | null>(null);
   const [getcategory, setcategory] = useState([]);
@@ -103,7 +106,30 @@ const ExplorePage = () => {
   return (
     //style={{height : "calc(80 dvh)", border : "5px solid red", overflow : "scroll"}}
     <div >
-      <div className='px-5'><BackButton /></div>
+      {/* <div className='px-5'><BackButton /></div>
+       */}
+      <div className="ml-5 mt-8">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-5">
+            <div
+              onClick={() => navigate('/profile')}
+              className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center"
+            >
+              {
+                userDbData?.pfp ? <img className='rounded-full h-8 w-8' src={userDbData?.pfp} /> : <TextImage text={userDbData?.name} />
+              }
+            </div>
+            <div>
+              <p className="text-3xl font-bold">Explore</p>
+            </div>
+          </div>
+          <div>
+            {/* <div className="flex items-center justify-center w-10 h-10 bg-gray-200 rounded-full">
+            <BiSolidMessageRounded className="text-2xl" />
+          </div> */}
+          </div>
+        </div>
+      </div>
 
       {/* all category */}
 
@@ -125,7 +151,7 @@ const ExplorePage = () => {
           Follow to see their moves and insights so you can learn from their approach
         </p>
         {
-          loader ? <TopinvestorShimmer/>:
+          loader ? <TopinvestorShimmer /> :
             <Investor Investordata={investorinfo} />
         }
         <TopMovers />

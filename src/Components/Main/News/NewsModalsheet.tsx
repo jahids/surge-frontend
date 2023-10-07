@@ -95,7 +95,7 @@ const NewsModalsheet: React.FC<NewsModalsheetProps> = ({ onClose, news }) => {
     return <Loader />;
   }
 
-  console.log('any type 🎁', specificNewsData?.data?.news[0]);
+  console.log('any type 🎁', specificNewsData?.data);
 
   const {
     author = '',

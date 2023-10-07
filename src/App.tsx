@@ -16,10 +16,10 @@ import Activity from './Pages/activity/Activity';
 
 
 const App: React.FC = () => {
-  
+
 
   return (
-  <>
+    <>
       <Routes >
         <Route path="/" element={<AppStartingPage />} />
         <Route path="/login" element={<LoginPage />} />
@@ -27,23 +27,23 @@ const App: React.FC = () => {
         <Route path="/otp" element={<OtpPage />} />
         <Route path="/tinder" element={<Tindercard />} />
         <Route path="/portfolio" element={<PortfolioPage />} />
-        <Route path="/userprofile/:id" element={<UserProfile />} />
+
         <Route path="/activity" element={<Activity />} />
 
         {/* <Route path="/multistep" element={<MultistepForm />}/> */}
-         {/* <Route path="*" element={<NotFoundPage />} /> */}
-{/* 🔏🔏🔏🔏 private route */}
-{allRoute.map((route, index) => (
-						<Route
-							key={index}
-							path={route.path}
-							element={
-								<PrivateRoute
-									component={route.component}
-								/>
-							}
-						/>
-					))}
+        {/* <Route path="*" element={<NotFoundPage />} /> */}
+        {/* 🔏🔏🔏🔏 private route */}
+        {allRoute.map((route, index) => (
+          <Route
+            key={index}
+            path={route.path}
+            element={
+              <PrivateRoute
+                component={route.component}
+              />
+            }
+          />
+        ))}
         {/* <Route path="/multistep" element={<MultistepForm />} />
         <Route path="/plaid" element={<PlaidInit />} />
         <Route path="/main" element={<MainPage />} />
@@ -63,14 +63,14 @@ const App: React.FC = () => {
         <Route path="/most-traded-share" element={<MostTradedOnSharesPage />} />
         <Route path="/order-review" element={<OrderReview />} />
         <Route path="/notification" element={<NotificationPage />} /> */}
-        
-        
+
+
       </Routes>
 
 
-				
-         
-		
+
+
+
 
       <ToastContainer />
     </>

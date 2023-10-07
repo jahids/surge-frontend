@@ -9,6 +9,8 @@ const SocialContainer = () => {
   const [postList, setPostList] = useState([]);
   const [loading, setloading] = useState(true);
 
+
+
   useEffect(() => {
     const dataCall = async () => {
       const {
@@ -32,16 +34,13 @@ const SocialContainer = () => {
         <SocialHeader />
       </section>
       <section>
-        {
-          postList.length ?
-            postList?.map((v: any) => {
-              return (
-                <SocialPost key={Math.random()} postData={v} links={v?.links} />
-              );
-            })
-            :
-            null
-        }
+        {postList.length
+          ? postList?.map((v: any) => {
+            return (
+              <SocialPost key={Math.random()} postData={v} links={v?.links} />
+            );
+          })
+          : null}
       </section>
     </div>
   );

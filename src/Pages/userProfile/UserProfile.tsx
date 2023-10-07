@@ -13,6 +13,7 @@ import Loader from '../../Components/Loader/Loader';
 import UserPost from '../../Components/userprofileComponent/UserPost';
 import TextImage from '../../Components/TextImage/TextImage';
 import { date } from 'yup';
+import { getDbData } from '../../Services/User.service';
 const defaultimage = "https://images.unsplash.com/photo-1621416894569-0f39ed31d247?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Yml0Y29pbnxlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80"
 
 const UserProfile = () => {
@@ -26,11 +27,15 @@ const UserProfile = () => {
   const { id } = useParams();
   console.log('id found', id);
   const [postiondataloader, setpostiondataloader] = useState(true)
-  const [userpostdata, setuserpostdata] = useState([])
+  const [userpostdata, setuserpostdata] = useState([]);
 
+  const [isFollowing, setIsFollowing] = useState(false);
+
+  const _dbData = getDbData();
   useEffect(() => {
     const loadData = async () => {
       try {
+
         const { data } = await instance.get(`accounts/cached/${id}`);
         const { data: portfoliodata } = await instance(`portfolio?dbId=${id}`)
         const { data: positonsdata } = await instance(`portfolio/open-positions?dbId=${id}`)
@@ -40,7 +45,15 @@ const UserProfile = () => {
         setporfoliodata(positonsdata?.data)
         const OwnData = data?.data?.db;
         const apiData = data?.data?.alpaca;
-        setdbdata(OwnData)
+        // setdbdata(_dbData);
+        console.log(`👩‍💻👩‍💻👩‍💻👨‍💻🏜`, OwnData);
+        console.log(`🥭🥭🥭🥭🥭`, _dbData);
+
+        const searchId = OwnData?.following?.includes(id);
+        setIsPlusIcon(searchId);
+
+
+        setdbdata(OwnData);
         setalpacadata(apiData)
         setpostiondataloader(false)
         // console.log('user proifle data', data);
@@ -70,7 +83,7 @@ const UserProfile = () => {
     if (tabNumber === 3) {
       const trades = async () => {
         try {
-          const { data: postData } = await instance(`social/post/user/${id}`)
+          const { data: postData } = await instance.get(`social/post/user/${id}`)
           console.log('postdata', postData);
           setuserpostdata(postData?.data)
           // settradesdata(data?.data)
@@ -88,6 +101,10 @@ const UserProfile = () => {
 
   const handleClickcion = () => {
     setIsPlusIcon(prevState => !prevState);
+    instance.get(`/social/new-following/${id}`).catch(er => {
+      console.log(er);
+      setIsPlusIcon(prevState => !prevState);
+    });
   };
 
   console.log('tradesdata', marketvalue);
