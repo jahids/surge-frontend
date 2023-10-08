@@ -69,13 +69,14 @@
 
 // export default NewsModalsheet;
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Sheet from 'react-modal-sheet';
 import earthIcon from '../../../assets/img/earth.png';
 import { useGetSpecificNewsQuery } from '../../../features/news/newsApiSlice';
 import Loader from '../../Loader/Loader';
 import { getRandomStockSymbol } from '../../../Services/User.service';
 import TopinvestorShimmer from '../../ShimmerLoaders/investorShimmer/TopinvestorShimmer';
+import { instance } from '../../../lib/AxiosInstance';
 
 const tempUrl = `https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dHJhZGluZ3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60`;
 
@@ -85,25 +86,56 @@ interface NewsModalsheetProps {
 }
 
 const NewsModalsheet: React.FC<NewsModalsheetProps> = ({ onClose, news }) => {
+  const [newsloader, setnewsloader] = useState(true);
+  const [specificnewsdata, setspecificnewsdata] = useState([]);
   console.log('news pros', news);
   const randomSymbol = getRandomStockSymbol();
-  const {
-    data: specificNewsData,
-    isLoading: isLoadingSpecificNews,
-    isSuccess: isSuccessSpecificNews,
-    isError: isErrorSpecificNews,
-    error: errorSpecificNews,
-  } = useGetSpecificNewsQuery({
-    symbolname:
-      news?.symbols.length > 0 ? news?.symbols : 'AMD' || randomSymbol,
-  });
+  const symbolName =
+    news?.symbols.length > 0 ? news?.symbols : randomSymbol || 'AMD';
+  // const symbolName =
+  //   news?.symbols.length > 0 ? news?.symbols : randomSymbol || 'AMD';
+  // const {
+  //   data: specificNewsData,
+  //   isLoading: isLoadingSpecificNews,
+  //   isSuccess: isSuccessSpecificNews,
+  //   isError: isErrorSpecificNews,
+  //   error: errorSpecificNews,
+  // } = useGetSpecificNewsQuery({
+  //   symbolname:symbolName
+  // });
 
-  if (isLoadingSpecificNews) {
-    return <Loader />;
-    // return <TopinvestorShimmer />;
+  useEffect(() => {
+    const dataload = async () => {
+      try {
+        const { data: newsdata } = await instance.get(`/news/${symbolName}/1`);
+        console.log('axios call', newsdata);
+        setspecificnewsdata(newsdata?.data);
+        setnewsloader(false);
+      } catch (error) {
+        console.log('new api error', error);
+        setnewsloader(false);
+      }
+    };
+
+    dataload();
+  }, []);
+
+  // if (isLoadingSpecificNews) {
+  //   return <Loader />;
+  //   // return <TopinvestorShimmer />;
+  // }
+
+  if (newsloader) {
+    return (
+      <div className="flex items-center justify-center mt-4">
+        <div className="w-8 h-8 border-t-4 border-r-4 border-b-4 border-indigo-300 rounded-full animate-spin"></div>
+      </div>
+    );
   }
 
-  console.log('any type 🎁', specificNewsData?.data);
+  console.log('---> news axios', specificnewsdata);
+
+  console.log('any type 🎁', specificnewsdata?.news[0]);
 
   const {
     author = 'Ananya Gairola',
@@ -113,7 +145,7 @@ const NewsModalsheet: React.FC<NewsModalsheetProps> = ({ onClose, news }) => {
     images,
     url,
     summary,
-  } = specificNewsData?.data?.news[0] || {};
+  } = specificnewsdata?.news[0] || {};
 
   const handleCloseModal = () => {
     onClose();

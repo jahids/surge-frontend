@@ -82,18 +82,9 @@ const stockSymbols = [
   'FB',
   'TSLA',
   'BRK.B',
-  'JPM',
-  'JNJ',
-  'V',
-  'PG',
-  'KO',
-  'PFE',
-  'WMT',
-  'DIS',
-  'NFLX',
-  'NVDA',
+
   'IBM',
-  'MCD',
+
   'ORAN',
 ];
 
