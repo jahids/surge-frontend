@@ -33,6 +33,7 @@ import TextImage from '../../Components/TextImage/TextImage';
 interface ICategories {
   category: string;
   lottie: any;
+  value : string;
 }
 
 interface Iinvestor {
@@ -56,11 +57,11 @@ const ExplorePage = () => {
 
 
   const categories: ICategories[] = [
-    { category: "Bio Technology", lottie: Biotechnologygif },
-    { category: "Banks Regional", lottie: BanksRegionalgif },
-    { category: "Asset Management", lottie: AssetManagementgif },
-    { category: "Shell Companies", lottie: ShellCompaniesgif },
-    { category: "Medical Devices", lottie: MedicalDevicesgif },
+    { category: "Bio Technology", value : "Biotechnology",  lottie: Biotechnologygif },
+    { category: "Banks Regional", value : "Banks—Regional",  lottie: BanksRegionalgif },
+    { category: "Asset Management", value : "Asset Management",  lottie: AssetManagementgif },
+    { category: "Shell Companies", value : "Shell Companies",  lottie: ShellCompaniesgif },
+    { category: "Medical Devices", value : "Medical Devices",  lottie: MedicalDevicesgif },
   ]
 
   const premiumInvestor: Iinvestor[] = [
@@ -139,11 +140,11 @@ const ExplorePage = () => {
       </section>
 
       <div className=" mt-2 m-5">
-        {/* <h1 className="text-2xl font-bold ">All Categories</h1>
+        <h1 className="text-2xl font-bold ">All Categories</h1>
         <p className="text-sm text-gray-400 mb-5">
           Explore the latest categories
-        </p> */}
-        {/* <Categories categorie={categories} /> */}
+        </p>
+        <Categories categorie={categories} />
 
         {/* investment */}
         <h1 className="text-2xl font-bold mt-5">Top Investors</h1>
