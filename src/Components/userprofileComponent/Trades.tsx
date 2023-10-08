@@ -83,8 +83,9 @@ function Trades({ data, type }: { data: any; type: 'trade' | 'portfolio' }) {
           <p className="font-medium text-gray-900">$ {price || data?.price}</p>
           {!data?.asset_class && (
             <span
-              className={`${data?.side === 'buy' ? 'bg-green-400' : 'bg-red-400'
-                } text-xs font-medium mr-3 px-5 py-1 rounded-full`}
+              className={`${
+                data?.side === 'buy' ? 'bg-green-400' : 'bg-red-400'
+              } text-xs font-medium mr-3 px-5 py-1 rounded-full`}
             >
               {data?.side}
             </span>

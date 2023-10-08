@@ -1,3 +1,4 @@
+import SingleCategories from '../Components/explore/SingleCategories';
 import OrderReview from '../Components/orderReview/OrderReview';
 import PlaidInit from '../Components/plaid/plaidinit';
 import StockBuy from '../Components/sellbuy/StockBuy';
@@ -20,8 +21,6 @@ import StockBuyPage from '../Pages/StockBuyPage/StockBuyPage';
 import TopMoversPage from '../Pages/TopMoversPage/TopMoversPage';
 import UserFullWatchList from '../Pages/UserFullWatchList/UserFullWatchList';
 import Statement from '../Pages/statement/Statement';
-
-
 
 export const allRoute = [
   {
@@ -111,5 +110,9 @@ export const allRoute = [
   {
     path: '/notification',
     component: NotificationPage,
+  },
+  {
+    path: '/individualCategorie',
+    component: SingleCategories,
   },
 ];
