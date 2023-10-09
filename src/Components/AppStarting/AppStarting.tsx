@@ -6,12 +6,16 @@ import { Link } from 'react-router-dom';
 import surgelogo from '../../assets/img/surge.png';
 
 const AppStarting = () => {
-
   return (
     <div>
-      <Link to='/'>
+      <Link to="/">
         <div className="mt-6 ml-10">
-          <img style={{ marginLeft: "-19px" }} className="w-[120px] " src={surgelogo} alt="company_logo" />
+          <img
+            style={{ marginLeft: '-19px' }}
+            className="w-[120px] "
+            src={surgelogo}
+            alt="company_logo"
+          />
         </div>
       </Link>
       <section>

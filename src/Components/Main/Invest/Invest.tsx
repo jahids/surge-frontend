@@ -138,7 +138,7 @@ const Invest = ({ selfData }: any) => {
   return (
     <div>
       {/* --- INVEST --- */}
-      <div className="flex items-center justify-between py-8">
+      <div className="flex items-center justify-between pt-6">
         {/* --- invest left part start --- */}
         <div className="">
           <Link to="/profile">
