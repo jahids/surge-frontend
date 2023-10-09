@@ -64,7 +64,13 @@ const PortfolioPage = ({ pagecheck }: any) => {
               {/* Revance <br /> Therapeutics */}
               {'My Portfolio'}
             </p>
-            <p className="text-3xl font-bold"> ${Number(portfoliodtaa?.value).toLocaleString('en-Us')}</p>
+            <p className="text-3xl font-bold">
+              {' '}
+              $
+              {Number(Number(portfoliodtaa?.value).toFixed(1)).toLocaleString(
+                'en-Us'
+              )}
+            </p>
           </div>
         </div>
       </section>
@@ -82,14 +88,19 @@ const PortfolioPage = ({ pagecheck }: any) => {
           <div>
             <span className="text-base text-gray-500">Funds Invested</span>
             <h1 className="text-xl font-bold">
-              ${Number(portfoliodtaa?.cost_basis?.toFixed(2)).toLocaleString('en-US')}
+              $
+              {Number(portfoliodtaa?.cost_basis?.toFixed(2)).toLocaleString(
+                'en-US'
+              )}
             </h1>
           </div>
 
           <div>
             <span className="text-base text-gray-500">Gain/Loss ($)</span>
             <h1 className="text-xl font-bold">
-              {Number(portfoliodtaa?.unrealized_pl?.toFixed(2)).toLocaleString('en-US')}
+              {Number(portfoliodtaa?.unrealized_pl?.toFixed(2)).toLocaleString(
+                'en-US'
+              )}
             </h1>
           </div>
         </div>
@@ -97,7 +108,10 @@ const PortfolioPage = ({ pagecheck }: any) => {
           <div className="flex justify-between text-gray-500 items-center">
             <span className="font-bold block">Available to Invest</span>
             <span className="font-bold mr-2 text-right block">
-              {Number(portfoliodtaa?.available_to_invest).toLocaleString('en-US')}
+              ${' '}
+              {Number(
+                Number(portfoliodtaa?.available_to_invest).toFixed(1)
+              ).toLocaleString('en-US')}
             </span>
           </div>
         </div>
@@ -111,11 +125,11 @@ const PortfolioPage = ({ pagecheck }: any) => {
         </div>
         {pagecheck
           ? portfoliostock
-            ?.slice(0, 3)
-            .map((item, index) => <SingleStockItem key={index} data={item} />)
+              ?.slice(0, 3)
+              .map((item, index) => <SingleStockItem key={index} data={item} />)
           : portfoliostock?.map((item, index) => (
-            <SingleStockItem key={index} data={item} />
-          ))}
+              <SingleStockItem key={index} data={item} />
+            ))}
 
         {pagecheck && (
           <div className="text-center mt-2">

@@ -437,7 +437,7 @@ function StockBuy() {
         <section className="mt-8 bg-gray-100 rounded-2xl p-3 py-3 ">
           {/* <hr style={{boxShadow: 'rgb(199, 219, 232) 1px 1px 1px 0px inset, rgba(288, 255, 211, 0.5) 0px 1px 0px 1px inset'}} className="bg-gray-100" /> */}
           <div className="flex justify-between mx-5 mt-2 font-bold">
-            <span>open</span>
+            <span>Open</span>
             <span>High</span>
             <span>Low</span>
             <span>Vol</span>
@@ -546,6 +546,7 @@ function StockBuy() {
             <div className="flex items-center justify-center  ">
               <div className='w-full' dir="ltr">
                 <input
+                placeholder='Share your thought'
                   value={post}
                   onChange={ev => setPost(ev.target.value)}
                   style={{ boxShadow: 'rgb(199, 219, 232) 1px 1px 1px 0px inset, rgba(288, 255, 211, 0.5) 0px 1px 0px 1px inset' }} className="rounded-s-lg py-7 w-full  bg-gray-100 text-center" />
