@@ -140,30 +140,33 @@ const HistoricalChart = ({ Symbol }: any) => {
       <div className="space-x-2 mt-4">
         <button
           onClick={() => handlePeriodChange('7')}
-          className={`${selectedPeriod === '7'
-            ? 'bg-indigo-500 text-white'
-            : 'bg-gray-200 text-gray-800'
-            }  ${cssClasses} `}
+          className={`${
+            selectedPeriod === '7'
+              ? 'bg-indigo-500 text-white'
+              : 'bg-gray-200 text-gray-800'
+          }  ${cssClasses} `}
           disabled={isLoading}
         >
           7 days
         </button>
         <button
           onClick={() => handlePeriodChange('30')}
-          className={`${selectedPeriod === '30'
-            ? 'bg-indigo-500 text-white'
-            : 'bg-gray-200 text-gray-800'
-            }  ${cssClasses} `}
+          className={`${
+            selectedPeriod === '30'
+              ? 'bg-indigo-500 text-white'
+              : 'bg-gray-200 text-gray-800'
+          }  ${cssClasses} `}
           disabled={isLoading}
         >
           1 month
         </button>
         <button
           onClick={() => handlePeriodChange('365')}
-          className={`${selectedPeriod === '365'
-            ? 'bg-indigo-500 text-white'
-            : 'bg-gray-200 text-gray-800'
-            } ${cssClasses} `}
+          className={`${
+            selectedPeriod === '365'
+              ? 'bg-indigo-500 text-white'
+              : 'bg-gray-200 text-gray-800'
+          } ${cssClasses} `}
           disabled={isLoading}
         >
           1 year

@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import { BiSolidMessageRounded } from 'react-icons/bi';
 import { useNavigate } from 'react-router';
 import { getDbData } from '../../../Services/User.service';
@@ -15,9 +17,15 @@ const SocialHeader = () => {
             onClick={() => navigate('/profile')}
             className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center"
           >
-            {
-              userDbData?.pfp ? <img className='rounded-full h-8 w-8' src={userDbData?.pfp} /> : <TextImage text={userDbData?.name} />
-            }
+            {userDbData?.pfp ? (
+              <img className="rounded-full h-8 w-8" src={userDbData?.pfp} />
+            ) : (
+              <TextImage
+                width={'32px'}
+                height={'32px'}
+                text={userDbData?.name}
+              />
+            )}
           </div>
           <div>
             <p className="text-3xl font-bold">Social</p>

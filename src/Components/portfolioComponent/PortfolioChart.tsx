@@ -3,11 +3,13 @@ import Chart from 'react-apexcharts';
 import moment from 'moment';
 import { instance } from '../../lib/AxiosInstance';
 import Loader from '../Loader/Loader';
+import Moment from 'react-moment';
 
 const PortfolioChart = ({ Symbol, gainloss }: any) => {
   const [isLoading, setIsLoading] = useState(false);
 
-  const [portfolioHistoryData, setPortfolioHistoryData] = useState();
+  const [portfolioHistoryData, setPortfolioHistoryData] = useState([]);
+  const [portfolioAllData, setportfolioAllData] = useState([]);
 
   // Dummy JSON data for stock prices
   const dummyData = [
@@ -29,8 +31,10 @@ const PortfolioChart = ({ Symbol, gainloss }: any) => {
       } = await instance.get(`/portfolio/history`);
       const finalData = values?.map((v: any) => v.value);
 
-      // console.log(`🔥🔥`, values);
+      console.log(`🔥🔥`, values);
+      console.log(`🔥🔥data`, values);
       setPortfolioHistoryData(finalData);
+      setportfolioAllData(values);
     };
     dbCall();
   }, []);
@@ -58,7 +62,9 @@ const PortfolioChart = ({ Symbol, gainloss }: any) => {
       colors: [lineColor], // Set the line color based on gainloss
     },
     xaxis: {
-      categories: dummyData.map(item => item.date),
+      categories: portfolioAllData.map(item =>
+        moment(item?.date).format('YY-MM-DD')
+      ),
     },
   };
 

@@ -117,7 +117,8 @@ const ExplorePage = () => {
               className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center"
             >
               {
-                userDbData?.pfp ? <img className='rounded-full h-8 w-8' src={userDbData?.pfp} /> : <TextImage text={userDbData?.name} />
+                userDbData?.pfp ? <img className='rounded-full h-8 w-8' src={userDbData?.pfp} /> : <TextImage width={'32px'}
+                height={'32px'} text={userDbData?.name} />
               }
             </div>
             <div>
