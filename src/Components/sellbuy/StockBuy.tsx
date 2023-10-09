@@ -556,7 +556,10 @@ function StockBuy() {
               {/* gif */}
               {gifSelected ? (
                 <div onClick={e => toggleGifPicker(e)} dir="rtl">
-                  <img className="rounded-s-lg py-7 bg-gray-100 text-center gif-preview w-40 h-20 mx-auto rounded-md" src={gifSelected?.url} style={{ boxShadow: 'rgb(199, 219, 232) 1px 1px 1px 0px inset, rgba(288, 255, 211, 0.5) 0px 1px 0px 1px inset' }} />
+                  <div className='rounded-s-lg py-7 bg-gray-100 text-center gif-preview w-40 h-20 mx-auto rounded-md' style={{backgroundImage : `url(${gifSelected?.url})`, backgroundSize : "contain"}}>
+
+                  </div>
+                  {/* <img className="rounded-s-lg py-7 bg-gray-100 text-center gif-preview w-40 h-20 mx-auto rounded-md" src={gifSelected?.url} style={{ boxShadow: 'rgb(199, 219, 232) 1px 1px 1px 0px inset, rgba(288, 255, 211, 0.5) 0px 1px 0px 1px inset' }} /> */}
                 </div>
               ) : (
                 <div onClick={e => toggleGifPicker(e)} className='w-1/2' dir="rtl">

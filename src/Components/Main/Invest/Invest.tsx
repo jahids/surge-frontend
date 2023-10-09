@@ -75,9 +75,6 @@ const Invest = ({ selfData }: any) => {
     createLinkToken();
   }, []);
 
-
-
-
   const onSuccess = useCallback<PlaidLinkOnSuccess>((publicToken, metadata) => {
     try {
       instance

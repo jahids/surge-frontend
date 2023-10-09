@@ -1,49 +1,4 @@
-/* eslint-disable jsx-a11y/img-redundant-alt */
-// import React from 'react';
-
-// function OrderReview() {
-//   return (
-//     <div>
-//       <button>back</button>
-//       <div className="flex justify-between m-2">
-//         <div>
-//           <h1 className="text-lg text-bold">Order review</h1>
-//           <span>Buy 0.4323423</span>
-//         </div>
-//         <div>
-//           <span>image</span>
-//           <img src="" alt="" />
-//         </div>
-//       </div>
-
-//       <div className="bg-orange-500 py-10 mt-[20px] rounded-md m-2">
-//         <span>another image</span>
-//       </div>
-
-//       <div className="py-8 m-5 flex justify-between">
-//         <div>
-//           <h1>privacy</h1>
-//           <h1>stock</h1>
-//           <h1>amount</h1>
-//           <h1>platrom cost</h1>
-//         </div>
-//         <div>
-//           <h1>public</h1>
-//           <h1>345</h1>
-//           <h1>34534</h1>
-//           <h1>34534</h1>
-//         </div>
-//       </div>
-
-//       <div className="flex items-center justify-center">
-//         <button className="">confirm</button>
-//       </div>
-//     </div>
-//   );
-// }
-
-// export default OrderReview;
-
+/* eslint-disable  */
 import React, { useEffect, useState } from 'react';
 // import { ArrowBack } from 'react-icons/ai';
 import { BiImage } from 'react-icons/bi';
@@ -52,6 +7,8 @@ import { instance } from '../../lib/AxiosInstance';
 import { notifyError, notifySuccess } from '../../lib/Toastify';
 import BackButton from '../globalBackButton/BackButton';
 import TextImage from '../TextImage/TextImage';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function OrderReview() {
   const navigate = useNavigate();
@@ -75,11 +32,30 @@ function OrderReview() {
         .post(`/order/sell`, orderObj)
         .then(res => {
           console.log(res);
-          notifySuccess(
-            `Successfully placed sell order for ${state.symbol}`,
-            3000
+          // notifySuccess(
+          //   `Successfully placed sell order for ${state.symbol}`,
+          //   3000
+          // );
+          // navigate('/main');
+          const { name } = state?._data;
+          toast(
+            `Successfully placed sell order for ${name || state.symbol}`,
+            {
+              position: 'top-right',
+
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: 'light',
+              autoClose: 3000,
+              onClose: () => {
+                // Navigate to the home page after the toaster notification is closed
+                navigate('/main');
+              },
+            }
           );
-          navigate("/main");
         })
         .catch(er => {
           console.error('err', er);
@@ -90,12 +66,30 @@ function OrderReview() {
         .post(`/order/`, orderObj)
         .then(res => {
           console.log(res);
-          notifySuccess(`Successfully placed order for ${state.symbol}`, 3000);
+          const { name } = state?._data;
+          // notifySuccess(`Successfully placed order for ${state.symbol}`, 3000);
+          toast(
+            `Successfully placed order for ${name || state.symbol}`,
+            {
+              position: 'top-right',
+
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: 'light',
+              autoClose: 3000,
+              onClose: () => {
+                // Navigate to the home page after the toaster notification is closed
+                navigate('/main');
+              },
+            }
+          );
         })
         .catch(er => console.log(er));
     }
   };
-
 
   return (
     <div className=" h-screen p-4">
@@ -124,14 +118,16 @@ function OrderReview() {
       <div className="mt-5 bg-gray-100 p-3 rounded-lg">
         <div className="flex items-center space-x-2">
           <div className="object-cover">
-            {
-              logo ? <img
-                className="w-7 h-7 rounded-full"
-                src={logo}
-                alt=""
-              /> : <TextImage width={'36px'} height={'36px'} textSize={'1rem'} text={state?.symbol} />
-            }
-
+            {logo ? (
+              <img className="w-7 h-7 rounded-full" src={logo} alt="" />
+            ) : (
+              <TextImage
+                width={'36px'}
+                height={'36px'}
+                textSize={'1rem'}
+                text={state?.symbol}
+              />
+            )}
           </div>
           <div>
             <p className="text-sm">{state?.sell === true ? 'Sell' : 'Buy'}</p>
@@ -191,7 +187,10 @@ function OrderReview() {
             {/* <h1 className="text-lg py-2 font-bold">Public</h1> */}
             <h1 className="text-lg py-2 font-bold"> {state.singlePrice} </h1>
             <h1 className="text-lg py-2 font-bold"> {state.quantity} </h1>
-            <h1 className="text-lg py-2 font-bold"> ${Number(state.totalPrice).toLocaleString('en-US')} </h1>
+            <h1 className="text-lg py-2 font-bold">
+              {' '}
+              ${Number(state.totalPrice).toLocaleString('en-US')}{' '}
+            </h1>
             {state?.type == 'limit' ? (
               <h1 className="text-lg py-2 font-bold"> {state.limitPrice} </h1>
             ) : null}
